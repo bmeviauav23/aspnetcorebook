@@ -1,9 +1,9 @@
-site_name: COURSE CODE - COURSE NAME
-site_author: Tóth Tibor
+site_name: BMEVIAUAV23 - Szoftverfejlesztés .NET platformra
+site_author: Tóth Tibor, Simon Gábor, Albert István, Szabó Gábor
 copyright: Copyright &copy; BME VIK AUT
-repo_name: bmeaut/mkdocs-course-materials-template
-repo_url: https://github.com/bmeaut/mkdocs-course-materials-template
-site_url: https://bmeaut.github.io/mkdocs-course-materials-template/
+repo_name: bmeviauav23/aspnetcorebook
+repo_url: https://github.com/bmeviauav23/aspnetcorebook
+site_url: https://bmeviauav23.github.io/aspnetcorebook/
 
 theme:
   name: material
@@ -88,7 +88,7 @@ plugins:
       # not a vanilla yaml syntax, only works with mkdocs.yaml because of pyyaml_env_tag
       enabled: !ENV [IsAuthorsPluginEnabled, false]
       github_token: !ENV [GITHUB_TOKEN, '']
-      repository: bmeaut/mkdocs-course-materials-template
+      repository: bmeviauav23/aspnetcorebook
       branch: master
 
 nav:
