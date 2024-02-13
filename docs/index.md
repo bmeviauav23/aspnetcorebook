@@ -1,6 +1,6 @@
-# COURSE NAME
+# Szoftverfejlesztés .NET platformra
 
-Jegyzetek, gyakorlati anyagok és házi feladatok a COURSE NAME c. tárgyhoz.
+Jegyzetek, gyakorlati anyagok és házi feladatok a Szoftverfejlesztés .NET platformra c. tárgyhoz.
 
 !!! note "Javítás az anyagban"
     A tárgy hallgatóinak a jegyzet anyagában történő javításért, kiegészítésért plusz pontot adunk! Ha hibát találsz a jegyzet bármely részében, vagy kiegészítenéd azt, nyiss egy _pull request_-et! A repository linkjét a jobb felső sarokban találod.
@@ -9,3 +9,5 @@ Jegyzetek, gyakorlati anyagok és házi feladatok a COURSE NAME c. tárgyhoz.
     Az itt található oktatási segédanyagok a BMEVIAUAC01 tárgy hallgatóinak készültek. Az anyagok oly módú felhasználása, amely a tárgy oktatásához nem szorosan kapcsolódik, csak a szerző(k) és a forrás megjelölésével történhet.
 
     Az anyagok a tárgy keretében oktatott kontextusban értelmezhetőek. Az anyagokért egyéb felhasználás esetén a szerző(k) felelősséget nem vállalnak.
+
+A felhasználási feltételekről bővebben a repository [LICENSE.md](https://github.com/bmeviauav23/aspnetcorebook/blob/master/LICENSE.md) fájljában olvashatsz.

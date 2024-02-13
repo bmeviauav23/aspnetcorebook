@@ -92,12 +92,11 @@ plugins:
       branch: master
 
 nav:
-  - index.md
   - "Tudnivalók":
+      - index.md
+      - information/preface.md
       - information/contributing.md
   - "Laborok":
-      - seminar/01-test/index.md
-  - "Házi feladatok":
-      - homework/01-hw/index.md
-  - "Jegyzetek":
-      - lecture-notes/01-topic/index.md
+      - seminar/01-csharp1/chapter1.md
+  - "Házi feladat":
+      - homework/index.md

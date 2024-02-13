@@ -1,0 +1,3 @@
+# Házi feladat tudnivalók
+
+TBD
