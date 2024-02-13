@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://bmeviauav23.github.io/aspnetcorebook/</loc>
+         <lastmod>2024-02-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://bmeviauav23.github.io/aspnetcorebook/homework/</loc>
+         <lastmod>2024-02-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://bmeviauav23.github.io/aspnetcorebook/information/contributing/</loc>
+         <lastmod>2024-02-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://bmeviauav23.github.io/aspnetcorebook/information/preface/</loc>
+         <lastmod>2024-02-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://bmeviauav23.github.io/aspnetcorebook/seminar/01-csharp1/chapter1/</loc>
+         <lastmod>2024-02-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+</urlset>

@@ -1,0 +1,1135 @@
+
+<!doctype html>
+<html lang="hu" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="kszicsillag,tibitoth">
+      
+      
+        <link rel="canonical" href="https://bmeviauav23.github.io/aspnetcorebook/seminar/01-csharp1/chapter1/">
+      
+      
+        <link rel="prev" href="../../../information/contributing/">
+      
+      
+        <link rel="next" href="../../../homework/">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
+    
+    
+      
+        <title>C# alapok, szintaxis - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+      <link rel="stylesheet" href="../../../extra-material-theme.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="aut" data-md-color-primary="aut" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c-alapok-szintaxis" class="md-skip">
+          Kihagyás
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Élőfej">
+    <a href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-header__button md-logo" aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" data-md-component="logo">
+      
+  <img src="../../../logo-bme-aut.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BMEVIAUAV23 - Szoftverfejlesztés .NET platformra
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C# alapok, szintaxis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="aut" data-md-color-primary="aut" data-md-color-accent="red"  aria-label="Váltás sötét témára"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Váltás sötét témára" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Váltás világos témára"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Váltás világos témára" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Keresés">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Törlés" aria-label="Törlés" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Keresés inicializálása
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav23/aspnetcorebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Lapok" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+  Tudnivalók
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  Laborok
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../homework/" class="md-tabs__link">
+          
+  
+  Házi feladat
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigáció" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-nav__button md-logo" aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" data-md-component="logo">
+      
+  <img src="../../../logo-bme-aut.png" alt="logo">
+
+    </a>
+    BMEVIAUAV23 - Szoftverfejlesztés .NET platformra
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav23/aspnetcorebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tudnivalók
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Tudnivalók
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Szoftverfejlesztés .NET platformra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../information/preface/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tudnivalók
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../information/contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hozzájárulás az anyaghoz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Laborok
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Laborok
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    C# alapok, szintaxis
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    C# alapok, szintaxis
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hello-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hello C#!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debug
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tulajdonsagok-property-k" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tulajdonságok (Property-k)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generikus-kollekcio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generikus kollekció
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leszarmazas-string-interpolacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leszármazás, string interpoláció
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objektum-inicializalok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objektum inicializálók
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kollekcio-inicializacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kollekció inicializáció
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Házi feladat
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Házi feladat
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../homework/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Házi feladat tudnivalók
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hello-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hello C#!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debug
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tulajdonsagok-property-k" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tulajdonságok (Property-k)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generikus-kollekcio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generikus kollekció
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leszarmazas-string-interpolacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leszármazás, string interpoláció
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objektum-inicializalok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objektum inicializálók
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kollekcio-inicializacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kollekció inicializáció
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/bmeviauav23/aspnetcorebook/edit/master/docs/seminar/01-csharp1/chapter1.md" title="Oldal szerkesztése" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="c-alapok-szintaxis">C# alapok, szintaxis<a class="headerlink" href="#c-alapok-szintaxis" title="Permanent link">&para;</a></h1>
+<p>Célunk, hogy a hallgatók legalább részben megértsék és ráérezzenek a C# szintaktikájára, megismerkedjenek alapvető nyelvi elemekkel és konstrukciókkal.</p>
+<h2 id="hello-c">Hello C#!<a class="headerlink" href="#hello-c" title="Permanent link">&para;</a></h2>
+<p>A Visual Studio indítóablakában válasszuk a <code>Create a new project</code> opciót. Magyarázzuk el, hogy van lehetőségünk előre gyártott sablonokból létrehozni projekteket, illetve hogy</p>
+<ul>
+<li>egy C# projekt egy szerelvénnyé fordul (.dll, .exe).</li>
+<li>a <em>Solution</em> dolga, hogy logikailag összefogja a <em>Project</em>-eket (több-többes kapcsolatban vannak).</li>
+<li>a projektek között referenciákat adhatunk másik projektekre úgy, hogy a fordítási mechanizmus figyelembe veszi a referenciákat és szükség esetén újrafordítja a szerelvényeket.</li>
+<li>a projektek hivatkozhatnak külső forrásból származó szerelvényekre is NuGet csomagok formájában. A NuGet egy egységes módszer szerelvényeink terjesztésére.</li>
+</ul>
+<p>Hozzunk létre egy új C# Console Application-t! Ehhez keressük ki a sablonok közül a Console App nevűt (ne a .NET Framework-öset). A neve legyen <em>HelloCSharp</em>.</p>
+<div class="admonition tip">
+<p class="admonition-title">New Project dialogusablak kereső</p>
+<p>A kikereséshez használhatjuk felül a szövegdobozos szűrőt, illetve a legördülő listás szűrőket is (Nyelv: C#, Platform: Windows, Projekttípus: Console)</p>
+</div>
+<p>A sablon konfigurációjánál adjunk meg egy olyan helyet, ahová van írási jogunk. A <em>Place solution and project in the same directory</em> opciót kapcsoljuk be, így nem fog létrejönni egy felesleges mappa a könyvtárszerkezetben. A .NET verziót állítsuk .NET 8-ra.</p>
+<p>Észrevehetjük, hogy az alkalmazás sablonok között sima és (.NET Framework) jelölésűek is vannak. A simák alapvetően a modernebb .NET Core/.NET 5-8 platformot célozzák, a <em>.NET Framework</em> ezekhez képest egy régebbi platform.</p>
+<ul>
+<li><strong>.NET Core</strong>: a .NET Framework modularizált, modernizált, cross-platform és nyílt forráskódú megvalósítása. Kisebb NuGet csomagokban érhető el a teljes .NET Framework funkcionalitása (Collections, Reflection, XML feldolgozás, stb.).</li>
+<li><strong>.NET Framework</strong>: a „klasszikus”, teljesértékű .NET keretrendszer, out-of-the-box támogatja a legelterjedtebb alkalmazásfejlesztési lehetőségeket. A .NET Core megjelenését követően is támogatott, enterprise környezetekben használatos, ugyanis néhány enterprise technológia elsődlegesen csak ebben támogatott (pl. szerver oldali WCF). Csak Windows-ra telepíthető.</li>
+<li><strong>.NET 5 és fölötte</strong>: A .NET Core 3.1 utáni fő verziói. Már elnevezésében is jelzi, hogy ez egyben a korábbi .NET Core és .NET Framework verzióknak is utódja.</li>
+</ul>
+<p>Az alábbi elemeket ismertethetjük, mielőtt a kódírásba belekezdünk:</p>
+<ul>
+<li>Rövid áttekintés az IDE-ről: menüsáv, Solution Explorer, Properties, Output, Error List ablakok, ablakozórendszer. Mutassuk meg, hogy drag-n-drop műveletekkel testreszabható a felület, pl. helyezzük a Solution Explorert a képernyő bal oldalára. Ha valaki véletlenül átrendezi az alapértelmezett elrendezést, a menu:Window[Reset Window Layout] lehetőséggel visszaállíthatja.</li>
+<li>A projekt tulajdonságok (menu:jobb klikk[Properties]) oldalán az Application fülön megnézhetjük, hogy az Output type értéke határozza meg, hogy milyen jellegű (konzolos, Windows, osztálykönyvtár) alkalmazást készítünk.</li>
+<li>Mutassuk meg, hogy milyen alapvető szerelvényekre adunk referenciát a projektben!</li>
+<li>Nézzük meg a <code>Program.cs</code> fájl tartalmát és fussuk át a látható elemeket!</li>
+<li>Magyarázzuk el a <code>using</code> és <code>namespace</code> kulcsszavak jelentését, egymáshoz képesti viszonyukat! A névtér értéke egy újonnan létrehozott fájlnál alapértelmezetten Projektnév.Mappaszerkezet alakú, érdemes konvencionálisan ezt követni. Sok hallgatónál nem tiszta, hogy hogyan viszonyul egymáshoz a névtér és a szerelvény fogalma, ezért próbáljuk meg ezt tisztázni!</li>
+<li>Utaljunk arra, hogy alapvetően kizárólag objektumorientáltan tudunk kódot írni, így a <code>Program</code> egy osztály, a <code>Main</code> belépési pont pedig egy statikus metódus.</li>
+<li>Beszéljünk röviden a C# elnevezési konvenciókról! A publikus elemeket (pl. Java-val és JavaScripttel ellentétben) és minden metódust ökölszabályként PascalCasing elnevezési konvenció követ, a nem publikus elemeknél camelCasing (ezek közül vannak kivételek és más konvenciók, de ez egy gyakori megközelítés).</li>
+</ul>
+<p>Egészítsük ki a <code>Main</code> metódust az alábbi kódrészlettel, közben hívjuk fel a figyelmet az IntelliSense használatára:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
+</code></pre></div>
+<p>Az IntelliSense-t demonstrálhatjuk az alábbi módon:</p>
+<ul>
+<li>A kódban bármely logikus helyen használható az IntelliSense a <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Space</kbd></span> billentyűkombinációval, ezen kívül alapértelmezetten felugrik kódírás közben is.</li>
+<li>Írjuk be a <code>Console</code> és a <code>.WriteLine()</code> elemeket úgy, hogy gépelés közben az IntelliSense legördülőből válasszuk ki az elemet, majd <span class="keys"><kbd class="key-tab">Tab</kbd></span> billentyűvel véglegesítsük a választást.</li>
+<li>Használjuk a <code>cw</code> code snippetet, amit az IntelliSense is jelez, azaz írjuk be: <code>cw</code> majd nyomjunk kétszer <span class="keys"><kbd class="key-tab">Tab</kbd></span>-ot.</li>
+<li>Ha a <code>Console.ReadLine()</code> helyett <code>Console.Readline()</code>-t írunk, elsőként az IDE azonnal javítja a hibát. Ha ezt a javítást visszavonjuk <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-z">Z</kbd></span>), lehetőségünk van a javításra a <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-period">.</kbd></span> használatával: a fejlesztőeszköz észreveszi, hogy hibát vétettünk, és felkínálja a gyakori megoldásokat.</li>
+<li><em>Overload</em>-ok: jelöljük ki a <code>WriteLine</code> hívás nyitó zárójelét, és írjuk be ismét a nyitó zárójelet. Így előjön az overload-ok listája, amik közül a megfelelőt a föl/le iránybillentyűkkel választhatjuk ki. Az overload listát megnyithatjuk úgy is, hogy a zárójelben bárhova írunk egy vessző karaktert. Az overload azt jelenti, hogy ugyanazzal a függvénynévvel több, különböző szignatúrájú metódust is felvehetünk, a megfelelő függvény kiválasztása a megadott paraméterek száma és típusa alapján történik.</li>
+</ul>
+<p>Indítsuk el az alkalmazást! Ehhez a fent található Start lehetőséget használhatjuk, de mondjuk el, hogy ez a menü menu:Debug[Start Debugging] (<span class="keys"><kbd class="key-f5">F5</kbd></span>) lehetőséggel ekvivalens.</p>
+<p>Mutassuk be a <code>for</code> és <code>foreach</code> vezérlési szerkezeteket! A projekt <em>Properties</em> oldalán (kbd:[Alt+Enter] a projekt kijelölése után) adjunk meg a <em>Debug</em> fülön a <em>Start Options</em> blokknál legalább öt tetszőleges parancssori argumentumot (szóközzel elválasztva), pl. kutya alma béka banán ló.</p>
+<figure>
+<p><a class="glightbox" href="../images/csharp1-cmdargs.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt=".NET projektbeállítások - parancssor" src="../images/csharp1-cmdargs.png" /></a>
+<figurecaption>.NET projektbeállítások</figurecaption></p>
+</figure>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">args</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">arg</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">args</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
+</code></pre></div>
+<p>Indítsuk el, és gyönyörködjünk.</p>
+<h2 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h2>
+<p>Rakjunk egy breakpointot (<span class="keys"><kbd class="key-f9">F9</kbd></span>), vagy klikkeljünk baloldalon a függőleges sávon a kód sorszáma mellett) a <code>Console.WriteLine(args[i]);</code> sorra, majd indítsuk újra az alkalmazást!
+Amikor a breakpointon megáll az alkalmazás futása, a sor sárga színű lesz.
+Ekkor vigyük az egeret az <code>i</code>, az <code>args</code> és az <code>args.Length</code> elemek felé, és mutassuk meg, hogy láthatjuk az aktuális értékeiket, komplexebb objektumok esetén be tudjuk járni az objektumgráfot.
+A <em>Watch</em> ablakba is írhatunk kifejezéseket, és megmutathatjuk a <em>Locals</em> ablakot is. <span class="keys"><kbd class="key-f10">F10</kbd></span>-zel (vagy a menüsoron a <em>Step Over</em> elemmel) lépjünk tovább, nézzük meg, milyen sorrendben értékelődik ki a <code>for</code> ciklus. Az <span class="keys"><kbd class="key-f5">F5</kbd></span>-tel továbbengedhetjük az alkalmazás futását, majd zárjuk is be.</p>
+<p>Mutassuk meg a Conditional Breakpoint használatát is. Tegyünk még egy breakpointot a másik <code>Console.WriteLine</code>-ra is. menu:Jobb egér gomb az első breakpointon[Conditions…], majd adjuk meg az alábbiakat: <em>Conditional Expression Is true</em> <code>(i == 3)</code>. A másik breakpointon is adjunk meg feltételt: <em>Hit Count = 4</em>. Mindkét alkalommal a 4. elemen (banán) állunk meg. Megjegyezhetjük, hogy a Conditional Breakpoint használatával nem érdemes mellékhatást okozó műveleteket megadni, illetve hogy jelentősen le tudja csökkenteni a debuggolás sebességét.</p>
+<h2 id="tulajdonsagok-property-k">Tulajdonságok (Property-k)<a class="headerlink" href="#tulajdonsagok-property-k" title="Permanent link">&para;</a></h2>
+<p>Hozzuk létre a <code>Person</code> adatosztályt! Ehhez menu: jobb katt a projekten[Add &gt; Class], a fájl neve legyen <code>Person</code> (a kiterjesztést automatikusan hozzábiggyeszti a Visual Studio, ha nem adjuk meg).
+.NET-ben nincs megkötés arra, hogy a kódokat tartalmazó fájlok és az egyes típusok számossága hogyan viszonyul egymáshoz: lehetséges egy kódfájlba is írnunk a teljes alkalmazás-kódot, illetve egy osztályt is szétdarabolhatunk több fájlra (ehhez a <code>partial</code> kulcsszót használjuk).</p>
+<p>A C# tulajdonság (<em>property</em>) egy szintaktikai édesítőszer, amely egy objektumpéldány (vagy osztály) egy explicit (memóriabeli) vagy implicit (származtatott vagy indirekt) jellemzőjét írja le.
+Egy tulajdonsággal két művelet végezhető: lekérdezés (<em>get</em>) és értékadás (<em>set</em>); ezeknek megadható külön a láthatósága, és a kettő közül elegendő egy implementálása.
+A legtöbb C# szintaktikai édesítőszer a boilerplate kódok írásának elkerülése végett készült, így kevesebb kódolással érjük el ugyanazt az eredményt (sokszor az IL kód nem is változik, gyakorlatilag hasonló a kódgeneráláshoz).</p>
+<p>A <code>Person</code> osztályban hozzuk létre a <code>string Name</code> property-t, <code>name</code> osztályváltozóval (field). Ehhez használjuk a <code>propfull</code> code snippetet (<code>propf</code>, majd <span class="keys"><kbd class="key-tab">Tab</kbd><span>+</span><kbd class="key-tab">Tab</kbd></span>, ezután <span class="keys"><kbd class="key-tab">Tab</kbd></span>-bal lehet lépkedni a módosítandó elemek között):</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Láthatóság</p>
+<p>Figyeljünk az osztály láthatóságára is, alapból nem publikusként generálódik!</p>
+</div>
+<p>Igazából csak két további (kódban nem látható) metódust hozunk létre, mintha egy-egy <code>GetName</code> és <code>SetName</code> metódust készítenénk, viszont használat szempontjából ugyanolyannak tűnik, mintha egy sima mező lenne.
+A settert privát láthatóságúra tesszük, ezért csak egy <code>Person</code> példányon belülről tudjuk állítani a <code>Name</code> property értékét.
+Jegyezzük meg, hogy a getterben és setterben teljesen más jellegű műveleteket is végezhetünk (pl. elsüthetünk egy eseményt, hogy megváltozott a felhasználó neve, naplózhatjuk, hányszor kérték le a nevét, stb.).
+A property egyik nagy erénye, hogy osztályon kívülről az osztályváltozóknál megszokott szintaxissal használhatjuk.</p>
+<p>A <code>Main</code> függvénybe írhatjuk például:</p>
+<div class="highlight"><span class="filename">Program.cs</span><pre><span></span><code><span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Eric Lippert&quot;</span><span class="p">);</span>
+<span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mads Torgersen&quot;</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+</code></pre></div>
+<p>Debuggerrel figyeljük meg, hogy az első sor a konstruktort, míg a második a property setterét, végül a harmadik sor ugyanazon property getterét hívja.</p>
+<p>Mivel a backing field állításán kívül nem csinálunk semmit a property kódban, ezért használhatjuk a <code>propg</code> code snippetet is:</p>
+<div class="highlight"><span class="filename">Person.cs</span><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Ez az ún. auto-implementált property szintaxis. A property által lekérdezhető-beállítható field generálódik, arra a kódban nem is tudunk hivatkozni - ez az egységbe zárás miatt előnyös.</p>
+<p>A láthatóság miatt a <code>Main</code> függvényünkben a setter hívás már nem fordul, kommentezzük ki.</p>
+<div class="highlight"><span class="filename">Person.cs</span><pre><span></span><code><span class="c1">//p.Name = &quot;Mads Torgersen&quot;;</span>
+</code></pre></div>
+<p>Létezik még a <code>prop</code> code snippet is, ami mindkét módosítószót publikusan hagyja.
+Láthatósági módosítószót a <code>get</code> és <code>set</code> közül csak az egyik elé tehetünk ki, és az is csak szigoríthat a külső láthatóságon (ekkor a másik a külsőt kapja meg).</p>
+<p>Ez a megoldás az előzővel teljes mértékben ekvivalens (csak nem látjuk a generált backing fieldet, de valójában ott van).
+Ha van időnk, akkor vizsgáljuk meg decompilerben (pl. <a href="https://www.telerik.com/products/decompiler.aspx">Telerik JustDecompile</a>), hogy valóban így van.</p>
+<p>Az előzőhöz hasonlóan vegyük fel a születési dátumot is.
+A születési dátum nem változhat, gyakorlatilag <code>readonly</code> mezőről van szó.
+Ha egy tulajdonság értékét az objektum is csak a konstruktorban tudja megadni, akkor a setter teljes mértékben elhagyható:</p>
+<div class="highlight"><span class="filename">Person.cs</span><pre><span></span><code><span class="hll"><span class="k">public</span><span class="w"> </span><span class="n">DateTime</span><span class="w"> </span><span class="n">DateOfBirth</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span>
+<span class="hll"><span class="k">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="w"> </span><span class="n">dateOfBirth</span><span class="p">)</span>
+</span><span class="p">{</span>
+<span class="w">    </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="n">DateOfBirth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dateOfBirth</span><span class="p">;</span>
+</span><span class="p">}</span>
+</code></pre></div>
+<p>Ez a szintaktika megegyezik azzal, mintha egy <code>readonly</code> mezőt használnánk, azaz a mező értéke legkésőbb a konstruktorban inicializálandó.</p>
+<p>Vegyünk fel neki egy azonosítót, ami egy <code>Guid</code> struktúra típusú legyen:</p>
+<div class="highlight"><span class="filename">Person.cs</span><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">Guid</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+</code></pre></div>
+<p>Ez egy csak lekérdezhető tulajdonság, ami konstruáláskor inicializálódik egy új véletlenszerű azonosító értékre.</p>
+<p>Megadhatjuk a kort, mint implicit/számított tulajdonságot:</p>
+<div class="highlight"><span class="filename">Person.cs</span><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">Subtract</span><span class="p">(</span><span class="n">DateOfBirth</span><span class="p">).</span><span class="n">Days</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">365</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Mivel a függvényünk törzse egyetlen kifejezéssel megadható, ezért elhagyva a sallangot (<code>return</code>, kapcsos zárójelek, stb.) <em>expression bodied property</em> szintaxissal is írhatjuk:</p>
+<div class="highlight"><span class="filename">Person.cs</span><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">Subtract</span><span class="p">(</span><span class="n">DateOfBirth</span><span class="p">).</span><span class="n">Days</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">365</span><span class="p">;</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Alkalmazások fejlesztésekor a legfontosabb első lépések egyike, hogy az objektummodellünk átlátható, karbantartható és egyértelmű legyen. A C# változatos szintaxisa nagyon sokat segít ezen célok elérésében.</p>
+</div>
+<h2 id="generikus-kollekcio">Generikus kollekció<a class="headerlink" href="#generikus-kollekcio" title="Permanent link">&para;</a></h2>
+<p>A <code>Main</code> metódusban vegyünk fel néhány <code>Person</code> objektumot, és listázzuk ki a releváns tulajdonságaikat!
+Ehhez egy <code>Person</code> listában tároljuk a személyeket.
+A <code>List</code> generikus kollekció, azaz típusparamétert vár, típusokkal paraméterezhető.
+A <code>List</code> típusparamétere jelzi, hogy milyen típusú objektumokat tárol. Metódusok, tulajdonságok, típusok lehetnek generikusak.
+A genericitás fontos a kódunk újrafelhasználhatósága és karbantarthatósága érdekében.</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">people</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">people</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Horváth Aladár&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">1991</span><span class="p">,</span><span class="w"> </span><span class="m">06</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)));</span>
+<span class="w">    </span><span class="n">people</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Kovács István&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">1994</span><span class="p">,</span><span class="w"> </span><span class="m">04</span><span class="p">,</span><span class="w"> </span><span class="m">22</span><span class="p">)));</span>
+<span class="w">    </span><span class="n">people</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Kovács Géza&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">1998</span><span class="p">,</span><span class="w"> </span><span class="m">03</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">)));</span>
+
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Person</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">people</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">person</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Indítsuk el az alkalmazást, és nézzük meg, mi történik!
+Annyiszor íródik ki a <code>Person</code> osztályunk teljes neve (<em>fully qualified type name</em>), ahány elem van a listában.</p>
+<h2 id="leszarmazas-string-interpolacio">Leszármazás, string interpoláció<a class="headerlink" href="#leszarmazas-string-interpolacio" title="Permanent link">&para;</a></h2>
+<p>Ha a <code>WriteLine</code> fölé visszük az egeret, látható, hogy az overload-ok közül az hívódik meg, amelyik objektumot vár paraméterül.
+Ebben az esetben a paraméter <code>ToString</code> metódusát hívja meg a <code>WriteLine</code>, ami alapértelmezés szerint az objektum típusának teljes nevét adják vissza.
+Tegyük szebbé a kiírást, definiáljuk felül az alapértelmezett <code>ToString</code> implementációt a <code>Person</code> osztályban:</p>
+<div class="highlight"><span class="filename">Person.cs</span><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">ToString</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0} ({1}) [ID: {2}]&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Name</span><span class="p">,</span><span class="w"> </span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">Id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A <code>Person</code> osztálynak nincs explicit megadva ősosztálya, mégis van felüldefiniálható függvénye.
+Ezeket az <code>Object</code> osztály definiálja.
+Ha egy referencia típusnak nincs megadva ősosztálya, akkor az <code>Object</code> lesz az.</p>
+<p>A <code>ToString</code> implementációjára más szintaktikai édesítőszereket is használhatunk:</p>
+<div class="highlight"><span class="filename">Person.cs</span><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">ToString</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">$&quot;{Name} ({Age}) [ID: {Id}]&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>A két implementáció ekvivalens, a második implementáció az ún. <em>expression bodied method</em> és a <em>string interpoláció</em> kombinálásából adódik.</p>
+<p>Próbáljuk ki az alkalmazást!</p>
+<p>Hozzuk létre a <code>Student</code> osztályt, ami származik a <code>Person</code> osztályból!</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Person</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Neptun</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Student</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="w"> </span><span class="n">dateOfBirth</span><span class="p">)</span>
+<span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">dateOfBirth</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">ToString</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">$&quot;{base.ToString()} Neptun: {Neptun} Major: {Major}&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ez az osztály más megközelítéssel készült, mint a szülője, az állapota nem a konstruktor meghívásakor töltődik fel, utólag lehet megadni setter hívásokkal.
+Ez egyrészt kényelmes, mert nem kell sokparaméteres konstruktorokkal küzdeni, másrészt fel kell készülnünk arra, hogy bizonyos adatokat nem töltenek ki.</p>
+<div class="admonition warining">
+<p class="admonition-title">Ős konstruktora</p>
+<p>Ha az ősosztálynak nincs paraméter nélküli konstruktora (a <code>Person</code> osztálynak nincs), akkor kötelesek vagyunk a gyerek konstruktorban az ősosztály valamelyik konstruktorát meghívni a <code>base</code> kulcsszóval.</p>
+</div>
+<h2 id="objektum-inicializalok">Objektum inicializálók<a class="headerlink" href="#objektum-inicializalok" title="Permanent link">&para;</a></h2>
+<p>Az <em>object initializer</em> segítségével az objektum létrehozását (konstruktor hívás) és a property setterek meghívásával történő inicializálását intézhetjük egy füst alatt. 
+Az objektum inicializáló csak konstruktorhívás esetén használható, így pl. factory metódus által gyártott objektumpéldány esetén nem.</p>
+<p>A <code>Main</code> metódusban írhatjuk az alábbi példát:</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/*...*/</span>
+<span class="w">    </span><span class="n">people</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Kovács Géza&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">1998</span><span class="p">,</span><span class="w"> </span><span class="m">03</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">)));</span>
+<span class="hll"><span class="w">    </span><span class="n">Student</span><span class="w"> </span><span class="n">elek</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">(</span><span class="s">&quot;Fel Elek&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">2002</span><span class="p">,</span><span class="w"> </span><span class="m">06</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">))</span>
+</span><span class="hll"><span class="w">    </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="n">Neptun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ABC123&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="n">Major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Info BSc&quot;</span>
+</span><span class="hll"><span class="w">    </span><span class="p">};</span>
+</span><span class="w">    </span><span class="cm">/*...*/</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Konstruktor szintaktikák</p>
+<p>Objektum inicializálás során, paraméter nélküli konstruktor esetén a <code>()</code> is elhagyható.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Több sorba tördelés</p>
+<p>Általában 1-2 tulajdonság esetén lehet egy sorba is írni az inicializációt, több esetén viszont általában több sorba érdemes tördelni az olvashatóság érdekében.</p>
+</div>
+<p>Láthatjuk, hogy csak az aktuális kontextusban egyébként is látható és beállítható tulajdonságokat állíthatjuk be, egyik így beállított tulajdonság sem kötelező jellegű.</p>
+<p>Az object initializer valóban csak az egyes tulajdonságokat állítja be, tehát csak szintaktikailag különbözik az első definíció az alábbitól:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Nem kell beírni, csak szemléltetés.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="n">Student</span><span class="w"> </span><span class="n">_elek</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">(</span><span class="s">&quot;Fel Elek&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">2002</span><span class="p">,</span><span class="w"> </span><span class="m">06</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">));</span>
+<span class="n">_elek</span><span class="p">.</span><span class="n">Neptun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ABC123&quot;</span><span class="p">;</span>
+<span class="n">_elek</span><span class="p">.</span><span class="n">Major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Info BSc&quot;</span><span class="p">;</span>
+<span class="n">Student</span><span class="w"> </span><span class="n">elek</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_elek</span><span class="p">;</span>
+</code></pre></div>
+<p>A háttérben tényleg egy (számunkra nem látható) temporális változóban fog történni az inicializáció, ugyanis, ha az object initializer kivételt dob (az egyik setter által), az objektumunk nem veszi fel a kívánt értéket.</p>
+<div class="admonition tip">
+<p class="admonition-title">Objektum inicializáló haszna</p>
+<p>Ebből látszik az objektum inicializáló elsődleges haszna, mégpedig, hogy nem kell állandóan kiírogatni, hogy melyik példányra gondolunk (így elrontani sem tudjuk).</p>
+</div>
+<h2 id="kollekcio-inicializacio">Kollekció inicializáció<a class="headerlink" href="#kollekcio-inicializacio" title="Permanent link">&para;</a></h2>
+<p>Az egyszerűsített kollekció inicializáció szintaxissal a lista teljes feltöltése jóval kevesebb kóddal és jóval olvashatóbban megadható.
+Ráadásul a kollekció elemeit létrehozhatjuk az objektum inicializációs szintaxissal is.
+A teljes lista létrehozást és -feltöltés részt cseréljük le az alábbira.</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">people</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="s">&quot;Horváth Aladár&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">1991</span><span class="p">,</span><span class="w"> </span><span class="m">06</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="s">&quot;Kovács István&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">1994</span><span class="p">,</span><span class="w"> </span><span class="m">04</span><span class="p">,</span><span class="w"> </span><span class="m">22</span><span class="p">)),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="s">&quot;Kovács Géza&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">1998</span><span class="p">,</span><span class="w"> </span><span class="m">03</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">)),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Student</span><span class="p">(</span><span class="s">&quot;Fel Elek&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">2002</span><span class="p">,</span><span class="w"> </span><span class="m">06</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Neptun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ABC123&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Major</span><span class="o">=</span><span class="s">&quot;Info BSc&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Student</span><span class="p">(</span><span class="s">&quot;Hiány Áron&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span><span class="w"> </span><span class="m">02</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">))</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>Nem kell az <code>Add</code> függvényhívást és a lista referenciát kiírni, egyértelmű, hogy melyik listához adunk hozzá.</p>
+<div class="admonition tip">
+<p class="admonition-title">Add</p>
+<p>Ez a forma is ugyanolyan <code>Add</code> függvényhívásokra fordul, mint az eredeti változatban.</p>
+</div>
+<p>Próbáljuk ki az alkalmazást! Láthatjuk, hogy a konstruktoron keresztül teljesen inicializálható <code>Person</code> példányok esetében a kiírás teljes, viszont vannak olyan <code>Student</code> példányok, ahol a kiírás üres értékeket talál. Ezzel a jelenséggel a következő gyakorlatokon tovább foglalkozunk.</p>
+  <hr>
+  <div class="md-source-file">
+    <span class="md-source-file__fact"> <span class="md-icon" title="Utolsó frissítés"> <svg
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z">
+          </path>
+        </svg>
+      </span>
+      <span title="2024. február 13. 13:28:30">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-13T13:28:30+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-13</span>
+      </span>
+    </span>
+
+    
+
+    <span class="md-source-file__fact">
+      <span class="md-icon" title="Szerzők">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z">
+          </path>
+        </svg>
+      </span>
+      <span>Szerzők</span>
+      <nav><a href="https://github.com/tibitoth" target="_blank" rel="noopener noreferrer" class="md-author" title="@Tibor Tóth">
+          <img src="https://avatars.githubusercontent.com/u/8333960?u=d26653213d265ecdceeaf20a896d74f479d35450&v=4?size=72" alt="@Tibor Tóth">
+        </a></nav>      
+    </span>
+  </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Vissza a tetejére
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; BME VIK AUT
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "content.action.edit", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.term.missing": "\u00dcres", "select.version": "Verzi\u00f3v\u00e1lt\u00e1s"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
