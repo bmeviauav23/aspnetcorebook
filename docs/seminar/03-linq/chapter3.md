@@ -1,5 +1,5 @@
 ---
-authors:kszicsillag, tibitoth
+authors: kszicsillag,tibitoth
 ---
 
 # LINQ
@@ -61,7 +61,8 @@ Ehhez az szükséges, hogy a kollekciónk egyes elemein kiértékelhessünk egy,
 Készítsük el az általánosabb változatot, ehhez felhasználhatjuk a `ListDogsByNamePrefix` kódját.
 
 ``` csharp hl_lines="1 6"
-static List<Dog> ListDogsByPredicate(IEnumerable<Dog> dogs, Predicate<Dog> predicate)
+static List<Dog> ListDogsByPredicate(
+    IEnumerable<Dog> dogs, Predicate<Dog> predicate)
 {
     var result = new List<Dog>();
     foreach (var dog in dogs)
@@ -80,8 +81,7 @@ A legfelső szintű kódban így hívhatjuk meg (felhasználhatjuk az eredeti ci
 ``` csharp
 foreach(var dog in ListDogsByPredicate(Dogs, delegate (Dog d) 
     {
-        return d.Name.StartsWith(searchText,
-                                StringComparison.OrdinalIgnoreCase);
+        return d.Name.StartsWith(searchText, StringComparison.OrdinalIgnoreCase);
     })
 )
 {
@@ -106,10 +106,11 @@ A lambda kifejezések egy lehetséges módja a delegátok leírásának. A deleg
 
 Próbáljuk meg a delegátunkat kivenni egy implicit típusú változóba a ciklus előtt:
 
-``` csharp hl_lines="1 2"
+``` csharp hl_lines="1-4"
 // fordítási hiba!
-var predicate = d => d.Name.StartsWith(searchText, StringComparison.OrdinalIgnoreCase);
-foreach (var dog in ListDogsByPredicate(Dogs, predicate)) //<- predicate-ra írjuk át
+var predicate = 
+    d => d.Name.StartsWith(searchText, StringComparison.OrdinalIgnoreCase);
+foreach (var dog in ListDogsByPredicate(Dogs, predicate))
 {
     Console.WriteLine(dog);
 }
@@ -127,7 +128,7 @@ Ezután fordul és fut is az alkalmazásunk.
 !!! tip "Predicate beépített deleagate típus"
     Ehhez tudnunk kellett, hogy a `Predicate<T>` megfelelő szignatúrájú. Mutassuk meg ezen típus dokumentációját vagy tegyük a kurzort a típusra és nyomjunk ++f12++-t.
 
-## Func\<\>, Action\<\>
+## `Func<>`, `Action<>`
 
 Ismerkedjünk meg a `Func` és `Action` általános delegáttípusokkal.
 Ezzel a két generikus típussal (pontosabban a változataikkal) gyakorlatilag az összes gyakorlatban előforduló függvényszignatúrát le lehet fedni.
@@ -195,7 +196,7 @@ public static class EnumerableExtensions
 
 Hívjuk meg a legfelső szintű kódból.
 
-``` csharp hl_lines="1 4-9"
+``` csharp hl_lines="1 4-11"
 using HelloLinq.Extensions.Enumerable;
 
 IEnumerable<Dog> Dogs = Dog.Repository.Values;
@@ -204,7 +205,9 @@ foreach (var dog in Dogs)
     Console.WriteLine(dog);
 }
 
-Console.WriteLine("Életkorok összege: " + $"{EnumerableExtensions.Sum(Dogs, d => d.Age ?? 0)}");
+Console.WriteLine(
+    "Életkorok összege: " 
+    + $"{EnumerableExtensions.Sum(Dogs, d => d.Age ?? 0)}");
 
 string searchText;
 ```
@@ -345,36 +348,33 @@ Cseréljük le a `Program.cs`-ben a `using HelloLinq.Extensions.Enumerable` hiva
 
 ## Anonim típusok
 
-Lekérdezéseknél gyakran használatosak az anonim típusok, amelyeket jellemzően lekérdezések eredményének ideiglenes, típusos tárolására használunk. Az anonim típusokkal lehetőségünk van *inline* definiálni olyan osztályokat, amelyek jellemzően csak dobozolásra és adattovábbításra használtak. Vegyük az alábbi példákat a legfelső szintű kód elején:
+Lekérdezéseknél gyakran használatosak az anonim típusok, amelyeket jellemzően lekérdezések eredményének ideiglenes, típusos tárolására használunk.
+Az anonim típusokkal lehetőségünk van *inline* definiálni olyan osztályokat, amelyek jellemzően csak dobozolásra és adattovábbításra használtak.
+Vegyük az alábbi példákat a legfelső szintű kód elején:
 
 ``` csharp
 var dolog1 = new { Name = "Alma", Weight = 100, Size = 10 };
 var dolog2 = new { Name = "Körte", Weight = 90 };
 ```
 
-Korábban már említettük a `var` kulcsszót, amellyel implicit típusú, lokális változók definiálhatók. Az értékadás jobb oldalán definiálunk egy-egy anonim típust, amelynek felveszünk néhány tulajdonságot. A tulajdonságok mind típusosak maradnak, a típusrendszerünk továbbra is sértetlen. Az implicit statikus típusosság nem csak a `var` kulcsszóban jelenik meg tehát, hanem az egyes tulajdonságok típusában is.
+Korábban már említettük a `var` kulcsszót, amellyel implicit típusú, lokális változók definiálhatók.
+Az értékadás jobb oldalán definiálunk egy-egy anonim típust, amelynek felveszünk néhány tulajdonságot.
+A tulajdonságok mind típusosak maradnak, a típusrendszerünk továbbra is sértetlen.
+Az implicit statikus típusosság nem csak a `var` kulcsszóban jelenik meg tehát, hanem az egyes tulajdonságok típusában is.
 
 Az anonim típusok:
 
 * csak referencia típusúak lehetnek (objektumok, nem pedig struktúrák),
-
 * csak publikusan látható, csak olvasható tulajdonságokat tartalmazhatnak,
-
 * eseményeket és metódusokat nem tartalmazhatnak (delegate példányokat tulajdonságban viszont igen),
-
 * szerelvényen belül láthatók (`internal`) és nem származhat belőlük másik típus (`sealed`)
-
 * típusnevét nem ismerjük, így hivatkozni sem tudunk rá, csak a `var`-t tudjuk használni
-
 * nem használhatók ott, ahol a `var` típus se használható, többek között nem adhatjuk át függvénynek és nem lehet visszatérési érték sem
 
 Ha az egeret a `var` kulcsszavak vagy egyes tulajdonságnevek fölé visszük, láthatjuk, hogy valóban fordítási idejű típusokról van szó.
 
-<div class="tip">
-
-Figyeljük meg, hogy az **IntelliSense** is működik ezekre a típusokra, felkínálja a típus property-jeit.
-
-</div>
+!!! tip "IntelliSense"
+    Figyeljük meg, hogy az **IntelliSense** is működik ezekre a típusokra, felkínálja a típus property-jeit.
 
 A fordító újra is hasznosítja az egyes típusokat:
 
@@ -382,58 +382,56 @@ A fordító újra is hasznosítja az egyes típusokat:
 var dolgok = new { Name = "Gyümölcsök", Contents = new[] { dolog1, dolog2 } };
 ```
 
-A `Contents` tulajdonság típusa a fenti anonim objektumaink tömbje, ezért nem is adhatnánk meg másképpen (nem tudjuk a nevét, amivel hivatkozhatunk rá). A fordító most panaszkodik, ugyanis a két dolog típusa nem implicit következtethető. Ha felvesszük a `Size` tulajdonságot a `dolog2` definíciójába, máris fordul.
+A `Contents` tulajdonság típusa a fenti anonim objektumaink tömbje, ezért nem is adhatnánk meg másképpen (nem tudjuk a nevét, amivel hivatkozhatunk rá).
+A fordító most panaszkodik, ugyanis a két dolog típusa nem implicit következtethető.
+Ha felvesszük a `Size` tulajdonságot a `dolog2` definíciójába, máris fordul.
 
 ``` csharp
 var dolog2 = new { Name = "Körte", Weight = 90, Size = 12 };
 ```
 
-<div class="tip">
-
 Ha végeztünk az anonim típusokkal való ismerkedéssel, az ezekkel kapcsolatos kódsorokat kikommentezhetjük.
-
-</div>
 
 ## LINQ szintaxisok
 
-Az előző részben ismertetett jellegű lekérdezések nagyban hasonlítanak azokhoz, amiket adatbázis-lekérdezésekben alkalmazunk. A különbség itt az, hogy imperatív szintaxist használunk, szemben pl. az SQL-lel, ami deklaratívat. Ezért is van jelen a C# nyelvben az ún. *query syntax*, amely jóval hasonlatosabb az SQL szintaxisához, így az adatbázisokban jártas fejlesztők is könnyebben írhatnak lekérdezéseket. Ugyanakkor nem minden lekérdezést tudunk query syntax-szal leírni.
+Az előző részben ismertetett jellegű lekérdezések nagyban hasonlítanak azokhoz, amiket adatbázis-lekérdezésekben alkalmazunk.
+A különbség itt az, hogy imperatív szintaxist használunk, szemben pl. az SQL-lel, ami deklaratívat.
+Ezért is van jelen a C# nyelvben az ún. *query syntax*, amely jóval hasonlatosabb az SQL szintaxisához, így az adatbázisokban jártas fejlesztők is könnyebben írhatnak lekérdezéseket.
+Ugyanakkor nem minden lekérdezést tudunk query syntax-szal leírni.
 
-<div class="note">
-
-Ennek oka, hogy az operátorok bevezetése egy nyelvben elég drága - le kell péládul foglalni az operátor nevét, amit utána korlátozottan lehet csak használni másra. Ezért sem csinálták meg minden LINQ függvénynek az operátor párját, csak az SQL-ben gyakrabban használatosabbaknak.
-
-</div>
+!!! note "Miért nem lehet mindent megírni query syntaxban?"
+    Ennek oka, hogy az operátorok bevezetése egy nyelvben elég drága - le kell péládul foglalni az operátor nevét, amit utána korlátozottan lehet csak használni másra. Ezért sem csinálták meg minden LINQ függvénynek az operátor párját, csak az SQL-ben gyakrabban használatosabbaknak.
 
 Az előzőhöz hasonló lekérdezést megírhatunk az alábbi módon query syntax használatával:
 
 ``` csharp
 using HelloLinq.Extensions;
-//...
 
-/**/IEnumerable<Dog> Dogs = Dog.Repository.Values;
-    var query = from d in Dogs
-                where d.DateOfBirth?.Year < 2010
-                select new
-                {
-                    Dog = d,
-                    AverageSiblingAge = d.Siblings.Average(s => s.Age ?? 0)
-                };
-    foreach (var meta in query)
-    {
-        Console.WriteLine(
-            $"{meta.Dog.Name} - {meta.AverageSiblingAge}");
-    }
+//...
+IEnumerable<Dog> Dogs = Dog.Repository.Values;
+
+var query = from d in Dogs
+            where d.DateOfBirth?.Year < 2010
+            select new
+            {
+                Dog = d,
+                AverageSiblingAge = d.Siblings.Average(s => s.Age ?? 0)
+            };
+foreach (var meta in query)
+{
+    Console.WriteLine(
+        $"{meta.Dog.Name} - {meta.AverageSiblingAge}");
+}
 ```
 
-A query szintaxis végül a korábban is használt, ún. *fluent szintaxis*sá fordul. Ennek igazolására nézzük meg kbd:\[F12\]-vel, hogy hol vannak definiálva az újonnan megismert operátorok (`select`, `where`). A két szintaxist szokás ötvözni is, jellemzően akkor, ha query szintaxisban írjuk a lekérdezést, és a hiányzó funkcionalitást fluent szintaxissal pótoljuk.
+A query szintaxis végül a korábban is használt, ún. *fluent szintaxis*sá fordul. Ennek igazolására nézzük meg ++f12++-vel, hogy hol vannak definiálva az újonnan megismert operátorok (`select`, `where`).
+A két szintaxist szokás ötvözni is, jellemzően akkor, ha query szintaxisban írjuk a lekérdezést, és a hiányzó funkcionalitást fluent szintaxissal pótoljuk.
 
-<div class="note">
+!!! note "Fluent szintaxis"
+    A fluent szintaxist olyan kialakítású API-knál alkalmazhatjuk, ahol a függvények a tartalmazó típust várják (egyik) bemenetként és azonos (vagy leszármazott) típust adnak vissza. A LINQ-nél ez a típus az `IEnumerable<>`.
 
-A fluent szintaxist olyan kialakítású API-knál alkalmazhatjuk, ahol a függvények a tartalmazó típust várják (egyik) bemenetként és azonos (vagy leszármazott) típust adnak vissza. A LINQ-nél ez a típus az `IEnumerable<>`.
-
-</div>
-
-Ezen az órán memóriabeli adatforrásokkal dolgoztunk (konkrétan a `Dogs` nevű `Dictionary<,>` típusú változóval), a LINQ operátorok közül a memóriabeli listákon dolgozókat használtuk, melyeket az `IEnumerable<>` interfészre biggyesztettek rá bővítő metódusként. Ezt a LINQ API-t teljes nevén *LINQ-to-Objects*nek hívják, de gyakran csak LINQ-ként hivatkozzák.
+Ezen az órán memóriabeli adatforrásokkal dolgoztunk (konkrétan a `Dogs` nevű `Dictionary<,>` típusú változóval), a LINQ operátorok közül a memóriabeli listákon dolgozókat használtuk, melyeket az `IEnumerable<>` interfészre biggyesztettek rá bővítő metódusként.
+Ezt a LINQ API-t teljes nevén *LINQ-to-Objects*nek hívják, de gyakran csak LINQ-ként hivatkozzák.
 
 ## Kitekintő: Expression\<\>, LINQ providerek
 
@@ -458,7 +456,7 @@ A nem memóriabeli adatokon, hanem például külső adatbázisból dolgozó LIN
 
 ### A LINQ providerek általános működése
 
-Bemenetük: query függvényeknek (`IQ<>` vagy `IE<>` függvényei vagy pl. `XDocument`) paraméterül adott lambdák (`Func<>` vagy `Expression<>`)
+Bemenetük: query függvényeknek (`IQueryable<>` vagy `IEnumerable<>` függvényei vagy pl. `XDocument`) paraméterül adott lambdák (`Func<>` vagy `Expression<>`)
 
 Kimenetük: az adatforrásnak megfelelő nyelvű, a query-t végrehajtó kód (.NET kód vagy SQL).
 
