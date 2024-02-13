@@ -13,6 +13,10 @@
         <link rel="canonical" href="https://bmeviauav23.github.io/aspnetcorebook/seminar/03-linq/chapter3/">
       
       
+        <link rel="prev" href="../../02-csharp2/chapter2/">
+      
+      
+        <link rel="next" href="../../../homework/">
       
       
       <link rel="icon" href="../../../favicon.ico">
@@ -20,7 +24,7 @@
     
     
       
-        <title>Chapter3 - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
+        <title>LINQ - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
       
     
     
@@ -85,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#authorskszicsillag-tibitoth" class="md-skip">
+        <a href="#linq" class="md-skip">
           Kihagyás
         </a>
       
@@ -118,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Chapter3
+              LINQ
             
           </span>
         </div>
@@ -243,10 +247,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../../01-csharp1/chapter1/" class="md-tabs__link">
           
   
@@ -432,23 +438,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -459,7 +470,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Laborok
@@ -503,6 +514,154 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    LINQ
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    LINQ
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#elokeszites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Előkészítés
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambda-kifejezesek-delegatok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lambda kifejezések, delegátok
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#func-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Func&lt;&gt;, Action&lt;&gt;
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ienumerablet-bovito-metodusok" class="md-nav__link">
+    <span class="md-ellipsis">
+      IEnumerable\&lt;T> bővítő metódusok
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gyakori-lekerdezo-muveletek-yield-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gyakori lekérdező műveletek, yield return
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anonim-tipusok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anonim típusok
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linq-szintaxisok" class="md-nav__link">
+    <span class="md-ellipsis">
+      LINQ szintaxisok
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kitekinto-expression-linq-providerek" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kitekintő: Expression\&lt;>, LINQ providerek
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kitekintő: Expression\<>, LINQ providerek">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-linq-providerek-altalanos-mukodese" class="md-nav__link">
+    <span class="md-ellipsis">
+      A LINQ providerek általános működése
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -598,6 +757,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -606,25 +767,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#authorskszicsillag-tibitoth" class="md-nav__link">
-    <span class="md-ellipsis">
-      authors:kszicsillag, tibitoth
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#linq" class="md-nav__link">
-    <span class="md-ellipsis">
-      LINQ
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="LINQ">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#elokeszites" class="md-nav__link">
     <span class="md-ellipsis">
       Előkészítés
@@ -632,8 +774,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#lambda-kifejezesek-delegatok" class="md-nav__link">
     <span class="md-ellipsis">
       Lambda kifejezések, delegátok
@@ -641,17 +783,17 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#func-action" class="md-nav__link">
     <span class="md-ellipsis">
-      Func\&lt;>, Action\&lt;>
+      Func&lt;&gt;, Action&lt;&gt;
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#ienumerablet-bovito-metodusok" class="md-nav__link">
     <span class="md-ellipsis">
       IEnumerable\&lt;T> bővítő metódusok
@@ -659,8 +801,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#gyakori-lekerdezo-muveletek-yield-return" class="md-nav__link">
     <span class="md-ellipsis">
       Gyakori lekérdező műveletek, yield return
@@ -668,8 +810,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#anonim-tipusok" class="md-nav__link">
     <span class="md-ellipsis">
       Anonim típusok
@@ -677,8 +819,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#linq-szintaxisok" class="md-nav__link">
     <span class="md-ellipsis">
       LINQ szintaxisok
@@ -686,8 +828,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#kitekinto-expression-linq-providerek" class="md-nav__link">
     <span class="md-ellipsis">
       Kitekintő: Expression\&lt;>, LINQ providerek
@@ -703,11 +845,6 @@
       A LINQ providerek általános működése
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -739,8 +876,6 @@
   
 
 
-<hr />
-<h2 id="authorskszicsillag-tibitoth">authors:kszicsillag, tibitoth<a class="headerlink" href="#authorskszicsillag-tibitoth" title="Permanent link">&para;</a></h2>
 <h1 id="linq">LINQ<a class="headerlink" href="#linq" title="Permanent link">&para;</a></h1>
 <h2 id="elokeszites">Előkészítés<a class="headerlink" href="#elokeszites" title="Permanent link">&para;</a></h2>
 <p>A gyakorlat kezdetén klónozzuk le a <a href="https://github.com/bmeviauav23/Linq-lab">kiinduló projektet</a> az alábbi paranccsal:</p>
@@ -784,13 +919,14 @@ Ha bármi más alapján szeretnénk keresni a kutyák között (pl. a neve tarta
 <p>Oldjuk meg úgy, hogy az általános problémát is megoldjuk!
 Ehhez az szükséges, hogy a kollekciónk egyes elemein kiértékelhessünk egy, a hívó által megadott predikátumot.
 Készítsük el az általánosabb változatot, ehhez felhasználhatjuk a <code>ListDogsByNamePrefix</code> kódját.</p>
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="k">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ListDogsByPredicate</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dogs</span><span class="p">,</span><span class="w"> </span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">predicate</span><span class="p">)</span>
-</span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="k">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ListDogsByPredicate</span><span class="p">(</span>
+</span><span class="w">    </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dogs</span><span class="p">,</span><span class="w"> </span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">predicate</span><span class="p">)</span>
+<span class="p">{</span>
 <span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">dogs</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">predicate</span><span class="p">(</span><span class="n">dog</span><span class="p">))</span>
-</span><span class="w">        </span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="p">{</span>
+</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">predicate</span><span class="p">(</span><span class="n">dog</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="n">result</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">dog</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
@@ -800,8 +936,7 @@ Készítsük el az általánosabb változatot, ehhez felhasználhatjuk a <code>L
 <p>A legfelső szintű kódban így hívhatjuk meg (felhasználhatjuk az eredeti ciklust):</p>
 <div class="highlight"><pre><span></span><code><span class="k">foreach</span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ListDogsByPredicate</span><span class="p">(</span><span class="n">Dogs</span><span class="p">,</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="p">(</span><span class="n">Dog</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="n">searchText</span><span class="p">,</span>
-<span class="w">                                </span><span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="n">searchText</span><span class="p">,</span><span class="w"> </span><span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">);</span>
 <span class="w">    </span><span class="p">})</span>
 <span class="p">)</span>
 <span class="p">{</span>
@@ -821,9 +956,10 @@ Ezt a fordító statikus kódanalízis alapján el tudja dönteni: a <code>d</co
 <p>A lambda kifejezések egy lehetséges módja a delegátok leírásának. A delegát kódot reprezentál, viszont a kódot kezelhetjük adatként is.</p>
 <p>Próbáljuk meg a delegátunkat kivenni egy implicit típusú változóba a ciklus előtt:</p>
 <div class="highlight"><pre><span></span><code><span class="hll"><span class="c1">// fordítási hiba!</span>
-</span><span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">predicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="n">searchText</span><span class="p">,</span><span class="w"> </span><span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">);</span>
-</span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ListDogsByPredicate</span><span class="p">(</span><span class="n">Dogs</span><span class="p">,</span><span class="w"> </span><span class="n">predicate</span><span class="p">))</span><span class="w"> </span><span class="c1">//&lt;- predicate-ra írjuk át</span>
-<span class="p">{</span>
+</span><span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">predicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="n">d</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="n">searchText</span><span class="p">,</span><span class="w"> </span><span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">);</span>
+</span><span class="hll"><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ListDogsByPredicate</span><span class="p">(</span><span class="n">Dogs</span><span class="p">,</span><span class="w"> </span><span class="n">predicate</span><span class="p">))</span>
+</span><span class="p">{</span>
 <span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">dog</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -836,7 +972,7 @@ Ezt a fordító statikus kódanalízis alapján el tudja dönteni: a <code>d</co
 <p class="admonition-title">Predicate beépített deleagate típus</p>
 <p>Ehhez tudnunk kellett, hogy a <code>Predicate&lt;T&gt;</code> megfelelő szignatúrájú. Mutassuk meg ezen típus dokumentációját vagy tegyük a kurzort a típusra és nyomjunk <span class="keys"><kbd class="key-f12">F12</kbd></span>-t.</p>
 </div>
-<h2 id="func-action">Func\&lt;&gt;, Action\&lt;&gt;<a class="headerlink" href="#func-action" title="Permanent link">&para;</a></h2>
+<h2 id="func-action"><code>Func&lt;&gt;</code>, <code>Action&lt;&gt;</code><a class="headerlink" href="#func-action" title="Permanent link">&para;</a></h2>
 <p>Ismerkedjünk meg a <code>Func</code> és <code>Action</code> általános delegáttípusokkal.
 Ezzel a két generikus típussal (pontosabban a változataikkal) gyakorlatilag az összes gyakorlatban előforduló függvényszignatúrát le lehet fedni.
 Például a fenti szűrőlogikát is átírhatnánk erre:</p>
@@ -895,7 +1031,9 @@ Elsőként valósítsuk meg az összegző logikát.</p>
 </span><span class="hll"><span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">dog</span><span class="p">);</span>
 </span><span class="hll"><span class="p">}</span>
 </span><span class="hll">
-</span><span class="hll"><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Életkorok összege: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">$&quot;{EnumerableExtensions.Sum(Dogs, d =&gt; d.Age ?? 0)}&quot;</span><span class="p">);</span>
+</span><span class="hll"><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
+</span><span class="hll"><span class="w">    </span><span class="s">&quot;Életkorok összege: &quot;</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="o">+</span><span class="w"> </span><span class="s">$&quot;{EnumerableExtensions.Sum(Dogs, d =&gt; d.Age ?? 0)}&quot;</span><span class="p">);</span>
 </span>
 <span class="kt">string</span><span class="w"> </span><span class="n">searchText</span><span class="p">;</span>
 </code></pre></div>
@@ -1018,85 +1156,75 @@ Egy próba erejéig kommentezzük ki a <code>using HelloLinq.Extensions.Enumerab
 <p>A névtércsere helyett bekapcsolhatjuk a globális implicit névtér funkciót, mert a <code>System.Linq</code> névtér is egy implicit hivatkozott névtér. Ehhez a projektfájlban az <code>&lt;ImplicitUsings&gt;disable&lt;/ImplicitUsings&gt;</code> beállítást írjuk át <code>enable</code>-re, majd a <code>using HelloLinq</code> -en kívül minden névtérhivatkozást töröljünk a <code>Program.cs</code>-ből.</p>
 </div>
 <h2 id="anonim-tipusok">Anonim típusok<a class="headerlink" href="#anonim-tipusok" title="Permanent link">&para;</a></h2>
-<p>Lekérdezéseknél gyakran használatosak az anonim típusok, amelyeket jellemzően lekérdezések eredményének ideiglenes, típusos tárolására használunk. Az anonim típusokkal lehetőségünk van <em>inline</em> definiálni olyan osztályokat, amelyek jellemzően csak dobozolásra és adattovábbításra használtak. Vegyük az alábbi példákat a legfelső szintű kód elején:</p>
+<p>Lekérdezéseknél gyakran használatosak az anonim típusok, amelyeket jellemzően lekérdezések eredményének ideiglenes, típusos tárolására használunk.
+Az anonim típusokkal lehetőségünk van <em>inline</em> definiálni olyan osztályokat, amelyek jellemzően csak dobozolásra és adattovábbításra használtak.
+Vegyük az alábbi példákat a legfelső szintű kód elején:</p>
 <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">dolog1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Alma&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">Size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">};</span>
 <span class="kt">var</span><span class="w"> </span><span class="n">dolog2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Körte&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="p">};</span>
 </code></pre></div>
-<p>Korábban már említettük a <code>var</code> kulcsszót, amellyel implicit típusú, lokális változók definiálhatók. Az értékadás jobb oldalán definiálunk egy-egy anonim típust, amelynek felveszünk néhány tulajdonságot. A tulajdonságok mind típusosak maradnak, a típusrendszerünk továbbra is sértetlen. Az implicit statikus típusosság nem csak a <code>var</code> kulcsszóban jelenik meg tehát, hanem az egyes tulajdonságok típusában is.</p>
+<p>Korábban már említettük a <code>var</code> kulcsszót, amellyel implicit típusú, lokális változók definiálhatók.
+Az értékadás jobb oldalán definiálunk egy-egy anonim típust, amelynek felveszünk néhány tulajdonságot.
+A tulajdonságok mind típusosak maradnak, a típusrendszerünk továbbra is sértetlen.
+Az implicit statikus típusosság nem csak a <code>var</code> kulcsszóban jelenik meg tehát, hanem az egyes tulajdonságok típusában is.</p>
 <p>Az anonim típusok:</p>
 <ul>
-<li>
-<p>csak referencia típusúak lehetnek (objektumok, nem pedig struktúrák),</p>
-</li>
-<li>
-<p>csak publikusan látható, csak olvasható tulajdonságokat tartalmazhatnak,</p>
-</li>
-<li>
-<p>eseményeket és metódusokat nem tartalmazhatnak (delegate példányokat tulajdonságban viszont igen),</p>
-</li>
-<li>
-<p>szerelvényen belül láthatók (<code>internal</code>) és nem származhat belőlük másik típus (<code>sealed</code>)</p>
-</li>
-<li>
-<p>típusnevét nem ismerjük, így hivatkozni sem tudunk rá, csak a <code>var</code>-t tudjuk használni</p>
-</li>
-<li>
-<p>nem használhatók ott, ahol a <code>var</code> típus se használható, többek között nem adhatjuk át függvénynek és nem lehet visszatérési érték sem</p>
-</li>
+<li>csak referencia típusúak lehetnek (objektumok, nem pedig struktúrák),</li>
+<li>csak publikusan látható, csak olvasható tulajdonságokat tartalmazhatnak,</li>
+<li>eseményeket és metódusokat nem tartalmazhatnak (delegate példányokat tulajdonságban viszont igen),</li>
+<li>szerelvényen belül láthatók (<code>internal</code>) és nem származhat belőlük másik típus (<code>sealed</code>)</li>
+<li>típusnevét nem ismerjük, így hivatkozni sem tudunk rá, csak a <code>var</code>-t tudjuk használni</li>
+<li>nem használhatók ott, ahol a <code>var</code> típus se használható, többek között nem adhatjuk át függvénynek és nem lehet visszatérési érték sem</li>
 </ul>
 <p>Ha az egeret a <code>var</code> kulcsszavak vagy egyes tulajdonságnevek fölé visszük, láthatjuk, hogy valóban fordítási idejű típusokról van szó.</p>
-<div class="tip">
-
-Figyeljük meg, hogy az **IntelliSense** is működik ezekre a típusokra, felkínálja a típus property-jeit.
-
+<div class="admonition tip">
+<p class="admonition-title">IntelliSense</p>
+<p>Figyeljük meg, hogy az <strong>IntelliSense</strong> is működik ezekre a típusokra, felkínálja a típus property-jeit.</p>
 </div>
-
 <p>A fordító újra is hasznosítja az egyes típusokat:</p>
 <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">dolgok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Gyümölcsök&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Contents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">dolog1</span><span class="p">,</span><span class="w"> </span><span class="n">dolog2</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
 </code></pre></div>
-<p>A <code>Contents</code> tulajdonság típusa a fenti anonim objektumaink tömbje, ezért nem is adhatnánk meg másképpen (nem tudjuk a nevét, amivel hivatkozhatunk rá). A fordító most panaszkodik, ugyanis a két dolog típusa nem implicit következtethető. Ha felvesszük a <code>Size</code> tulajdonságot a <code>dolog2</code> definíciójába, máris fordul.</p>
+<p>A <code>Contents</code> tulajdonság típusa a fenti anonim objektumaink tömbje, ezért nem is adhatnánk meg másképpen (nem tudjuk a nevét, amivel hivatkozhatunk rá).
+A fordító most panaszkodik, ugyanis a két dolog típusa nem implicit következtethető.
+Ha felvesszük a <code>Size</code> tulajdonságot a <code>dolog2</code> definíciójába, máris fordul.</p>
 <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">dolog2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Körte&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">Size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="p">};</span>
 </code></pre></div>
-<div class="tip">
-
-Ha végeztünk az anonim típusokkal való ismerkedéssel, az ezekkel kapcsolatos kódsorokat kikommentezhetjük.
-
-</div>
-
+<p>Ha végeztünk az anonim típusokkal való ismerkedéssel, az ezekkel kapcsolatos kódsorokat kikommentezhetjük.</p>
 <h2 id="linq-szintaxisok">LINQ szintaxisok<a class="headerlink" href="#linq-szintaxisok" title="Permanent link">&para;</a></h2>
-<p>Az előző részben ismertetett jellegű lekérdezések nagyban hasonlítanak azokhoz, amiket adatbázis-lekérdezésekben alkalmazunk. A különbség itt az, hogy imperatív szintaxist használunk, szemben pl. az SQL-lel, ami deklaratívat. Ezért is van jelen a C# nyelvben az ún. <em>query syntax</em>, amely jóval hasonlatosabb az SQL szintaxisához, így az adatbázisokban jártas fejlesztők is könnyebben írhatnak lekérdezéseket. Ugyanakkor nem minden lekérdezést tudunk query syntax-szal leírni.</p>
-<div class="note">
-
-Ennek oka, hogy az operátorok bevezetése egy nyelvben elég drága - le kell péládul foglalni az operátor nevét, amit utána korlátozottan lehet csak használni másra. Ezért sem csinálták meg minden LINQ függvénynek az operátor párját, csak az SQL-ben gyakrabban használatosabbaknak.
-
+<p>Az előző részben ismertetett jellegű lekérdezések nagyban hasonlítanak azokhoz, amiket adatbázis-lekérdezésekben alkalmazunk.
+A különbség itt az, hogy imperatív szintaxist használunk, szemben pl. az SQL-lel, ami deklaratívat.
+Ezért is van jelen a C# nyelvben az ún. <em>query syntax</em>, amely jóval hasonlatosabb az SQL szintaxisához, így az adatbázisokban jártas fejlesztők is könnyebben írhatnak lekérdezéseket.
+Ugyanakkor nem minden lekérdezést tudunk query syntax-szal leírni.</p>
+<div class="admonition note">
+<p class="admonition-title">Miért nem lehet mindent megírni query syntaxban?</p>
+<p>Ennek oka, hogy az operátorok bevezetése egy nyelvben elég drága - le kell péládul foglalni az operátor nevét, amit utána korlátozottan lehet csak használni másra. Ezért sem csinálták meg minden LINQ függvénynek az operátor párját, csak az SQL-ben gyakrabban használatosabbaknak.</p>
 </div>
-
 <p>Az előzőhöz hasonló lekérdezést megírhatunk az alábbi módon query syntax használatával:</p>
 <div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">HelloLinq.Extensions</span><span class="p">;</span>
+
 <span class="c1">//...</span>
+<span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Dogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Dog</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
 
-<span class="cm">/**/</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Dogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Dog</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Dogs</span>
-<span class="w">                </span><span class="k">where</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">DateOfBirth</span><span class="o">?.</span><span class="n">Year</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2010</span>
-<span class="w">                </span><span class="k">select</span><span class="w"> </span><span class="k">new</span>
-<span class="w">                </span><span class="p">{</span>
-<span class="w">                    </span><span class="n">Dog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">,</span>
-<span class="w">                    </span><span class="n">AverageSiblingAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">Siblings</span><span class="p">.</span><span class="n">Average</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Age</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
-<span class="w">                </span><span class="p">};</span>
-<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
-<span class="w">            </span><span class="s">$&quot;{meta.Dog.Name} - {meta.AverageSiblingAge}&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Dogs</span>
+<span class="w">            </span><span class="k">where</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">DateOfBirth</span><span class="o">?.</span><span class="n">Year</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2010</span>
+<span class="w">            </span><span class="k">select</span><span class="w"> </span><span class="k">new</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Dog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">,</span>
+<span class="w">                </span><span class="n">AverageSiblingAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">Siblings</span><span class="p">.</span><span class="n">Average</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Age</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="p">};</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
+<span class="w">        </span><span class="s">$&quot;{meta.Dog.Name} - {meta.AverageSiblingAge}&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>A query szintaxis végül a korábban is használt, ún. *fluent szintaxis*sá fordul. Ennek igazolására nézzük meg kbd:[F12]-vel, hogy hol vannak definiálva az újonnan megismert operátorok (<code>select</code>, <code>where</code>). A két szintaxist szokás ötvözni is, jellemzően akkor, ha query szintaxisban írjuk a lekérdezést, és a hiányzó funkcionalitást fluent szintaxissal pótoljuk.</p>
-<div class="note">
-
-A fluent szintaxist olyan kialakítású API-knál alkalmazhatjuk, ahol a függvények a tartalmazó típust várják (egyik) bemenetként és azonos (vagy leszármazott) típust adnak vissza. A LINQ-nél ez a típus az `IEnumerable<>`.
-
+<p>A query szintaxis végül a korábban is használt, ún. *fluent szintaxis*sá fordul. Ennek igazolására nézzük meg <span class="keys"><kbd class="key-f12">F12</kbd></span>-vel, hogy hol vannak definiálva az újonnan megismert operátorok (<code>select</code>, <code>where</code>).
+A két szintaxist szokás ötvözni is, jellemzően akkor, ha query szintaxisban írjuk a lekérdezést, és a hiányzó funkcionalitást fluent szintaxissal pótoljuk.</p>
+<div class="admonition note">
+<p class="admonition-title">Fluent szintaxis</p>
+<p>A fluent szintaxist olyan kialakítású API-knál alkalmazhatjuk, ahol a függvények a tartalmazó típust várják (egyik) bemenetként és azonos (vagy leszármazott) típust adnak vissza. A LINQ-nél ez a típus az <code>IEnumerable&lt;&gt;</code>.</p>
 </div>
-
-<p>Ezen az órán memóriabeli adatforrásokkal dolgoztunk (konkrétan a <code>Dogs</code> nevű <code>Dictionary&lt;,&gt;</code> típusú változóval), a LINQ operátorok közül a memóriabeli listákon dolgozókat használtuk, melyeket az <code>IEnumerable&lt;&gt;</code> interfészre biggyesztettek rá bővítő metódusként. Ezt a LINQ API-t teljes nevén *LINQ-to-Objects*nek hívják, de gyakran csak LINQ-ként hivatkozzák.</p>
+<p>Ezen az órán memóriabeli adatforrásokkal dolgoztunk (konkrétan a <code>Dogs</code> nevű <code>Dictionary&lt;,&gt;</code> típusú változóval), a LINQ operátorok közül a memóriabeli listákon dolgozókat használtuk, melyeket az <code>IEnumerable&lt;&gt;</code> interfészre biggyesztettek rá bővítő metódusként.
+Ezt a LINQ API-t teljes nevén *LINQ-to-Objects*nek hívják, de gyakran csak LINQ-ként hivatkozzák.</p>
 <h2 id="kitekinto-expression-linq-providerek">Kitekintő: Expression\&lt;&gt;, LINQ providerek<a class="headerlink" href="#kitekinto-expression-linq-providerek" title="Permanent link">&para;</a></h2>
 <p>Vegyük az alábbi nagyon egyszerű delegate-et és ennek <code>Expression&lt;&gt;</code>-ös párját.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w">  </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
@@ -1109,7 +1237,7 @@ A fluent szintaxist olyan kialakítású API-knál alkalmazhatjuk, ahol a függv
 <p>Bár az <code>Expression&lt;&gt;</code> emiatt okosabb választásnak tűnik, ám a LINQ-to-Objects alapinterfészének (ami a lekérdezőfüggvényeket biztosítja) függvényei <code>Func&lt;&gt;</code> / <code>Action&lt;&gt;</code> delegátokat várnak. Ami nem csoda, hiszen memóriabeli listákat általában sima programkóddal dolgozunk fel, nincs értelme felépíteni kifejezésfát csak azért, hogy utána egyből kóddá fordítsuk. Emellett más, memóriabeli adatokon dolgozó LINQ technológia is létezik, pl. LINQ-to-XML saját API-val (nem <code>IEnumerable&lt;&gt;</code> alaptípussal).</p>
 <p>A nem memóriabeli adatokon, hanem például külső adatbázisból dolgozó LINQ provider-ek viszont <code>IQueryable&lt;&gt;</code>-t valósítanak meg. Az <code>IQueryable&lt;&gt;</code> az <code>IEnumerable&lt;&gt;</code>-ból származik, így neki is vannak <code>Func&lt;&gt;</code> / <code>Action&lt;&gt;</code>-ös függvényei, de emellett <code>Expression&lt;&gt;</code>-ösek is. Ez utóbbiak teszik lehetővé, hogy ne csak .NET kódot generáljanak a lambda kifejezésekből, hanem helyette pl. SQL kifejezést - hiszen egy relációs adatbázis adatfeldolgozó nyelve nem .NET, hanem valamilyen SQL dialektus.</p>
 <h3 id="a-linq-providerek-altalanos-mukodese">A LINQ providerek általános működése<a class="headerlink" href="#a-linq-providerek-altalanos-mukodese" title="Permanent link">&para;</a></h3>
-<p>Bemenetük: query függvényeknek (<code>IQ&lt;&gt;</code> vagy <code>IE&lt;&gt;</code> függvényei vagy pl. <code>XDocument</code>) paraméterül adott lambdák (<code>Func&lt;&gt;</code> vagy <code>Expression&lt;&gt;</code>)</p>
+<p>Bemenetük: query függvényeknek (<code>IQueryable&lt;&gt;</code> vagy <code>IEnumerable&lt;&gt;</code> függvényei vagy pl. <code>XDocument</code>) paraméterül adott lambdák (<code>Func&lt;&gt;</code> vagy <code>Expression&lt;&gt;</code>)</p>
 <p>Kimenetük: az adatforrásnak megfelelő nyelvű, a query-t végrehajtó kód (.NET kód vagy SQL).</p>
 <p>LINQ-to-Objects esetén nincs valódi LINQ provider (a provider az <code>IQueryable.Provider</code>-en keresztül érhető el, de a <code>List&lt;&gt;</code> nem <code>IQueryable</code>!), hiszen nincs feladata: kódot kap bemenetül, ugyanazt kellene kimenetül adnia. A <em>LINQ-to-XML</em> is hasonló elven működik.</p>
 <p>Valódi LINQ providert valósít meg például az <em>Entity Framework</em>, de ezt a technológiát később tárgyaljuk.</p>
@@ -1122,8 +1250,8 @@ A fluent szintaxist olyan kialakítású API-knál alkalmazhatjuk, ahol a függv
           </path>
         </svg>
       </span>
-      <span title="2024. február 13. 16:53:27">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-13T16:53:27+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-13</span>
+      <span title="2024. február 13. 20:09:52">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-13T20:09:52+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-13</span>
       </span>
     </span>
 
@@ -1138,8 +1266,10 @@ A fluent szintaxist olyan kialakítású API-knál alkalmazhatjuk, ahol a függv
         </svg>
       </span>
       <span>Szerzők</span>
-      <nav><a href="https://github.com/tibitoth" target="_blank" rel="noopener noreferrer" class="md-author" title="@Tibor Tóth">
-          <img src="https://avatars.githubusercontent.com/u/8333960?u=d26653213d265ecdceeaf20a896d74f479d35450&v=4?size=72" alt="@Tibor Tóth">
+      <nav><a href="https://github.com/kszicsillag" target="_blank" rel="noopener noreferrer" class="md-author" title="@kszicsillag">
+          <img src="https://avatars.githubusercontent.com/kszicsillag?size=72" alt="@kszicsillag">
+        </a><a href="https://github.com/tibitoth" target="_blank" rel="noopener noreferrer" class="md-author" title="@tibitoth">
+          <img src="https://avatars.githubusercontent.com/tibitoth?size=72" alt="@tibitoth">
         </a></nav>      
     </span>
   </div>
