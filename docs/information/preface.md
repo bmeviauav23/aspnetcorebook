@@ -1,5 +1,5 @@
 ---
-author: kszicsillag,tibitoth
+authors: kszicsillag,tibitoth
 ---
 
 # Tudnivalók
