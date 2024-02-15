@@ -1,6 +1,6 @@
 # BMEVIAUAV23 - Szoftverfejlesztés .NET platformra
 
-![Build docs](https://github.com/bmeviauav23/aspnetcorebook/workflows/Build%20docs/badge.svg?branch=main)
+![Build docs](https://github.com/bmeviauav23/aspnetcorebook/workflows/Build%20docs/badge.svg?branch=master)
 
 [BMEVIAUAV23 - Szoftverfejlesztés .NET platformra](https://www.aut.bme.hu/Course/dotnet/) tárgy jegyzetei, labor anyagai, házi feladatai.
 
