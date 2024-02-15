@@ -4,7 +4,7 @@
 
 [BMEVIAUAV23 - Szoftverfejlesztés .NET platformra](https://www.aut.bme.hu/Course/dotnet/) tárgy jegyzetei, labor anyagai, házi feladatai.
 
-A jegyzetek [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) segítségével készülnek és GitHub Pages-en kerülnek publikálásra: <https://bmeaut.github.io/mkdocs-course-materials-template/>
+A jegyzetek [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) segítségével készülnek és GitHub Pages-en kerülnek publikálásra: <https://bmeviauav23.github.io/aspnetcorebook/>
 
 ## MKDocs tesztelése (Docker-rel)
 
