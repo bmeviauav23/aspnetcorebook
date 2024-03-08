@@ -1141,48 +1141,46 @@ Adjunk konstruktort a típusnak:</p>
 </div>
 <p>Mennyire okos a fordító a <code>null</code> érték detektálásában?Nézzünk pár példát!
 Az alábbi statikus függvényt tegyük bele a <code>Person</code> osztályunkba és vegyük fel a <code>using static System.Console;</code> névtérhivatkozást is.</p>
-<p>``` csharp annotate
-static void M(string? ns)
-{
-    WriteLine(ns.Length);        # (1)!
-    if (ns != null)
-    {
-        WriteLine(ns.Length);    # (2)!
-    }
-    if (ns == null)
-    {
-        return;
-    }
-    WriteLine(ns.Length);        # (3)!
-    ns = null;
-    WriteLine(ns.Length);        # (4)!
-    string s = default(string);  # (5)!
-    string[] a = new string[10]; # (6)!
-}
-<div class="highlight"><pre><span></span><code>1. Figyelmeztetés lehetséges `null` értékre, mert a típusa szerint nullozható.
-2. Ha egy egyszerű `if`-fel levizsgáljuk, akkor máris ok. Pedig pl. többszálú környezetben az `if` kiértékelése és ezen sor végrehajtása között a változó akár `null` értékre is beíródhat.
-3. Az előtte lévő rövidzár is megnyugtatja a fordítót, így itt sincs figyelmeztetés.
-4. Ezt az előző sor alapján figyelmeztetéssel jutalmazza.
-5. Ez is figyelmeztetés, a `default` operátor által adott értékkel (`null`) nem inicializálhatunk.
-6. Ez viszont nem figyelmeztetés, pedig egy csomó `null` jön létre. Ha ez figyelmeztetés lenne, az aránytalanul megnehezítené a tömbök kezelését.
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">M</span><span class="p">(</span><span class="kt">string?</span><span class="w"> </span><span class="n">ns</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ns</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span><span class="w"> </span><span class="c1">// (1)!</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ns</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ns</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span><span class="w"> </span><span class="c1">// (2)!</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ns</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ns</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span><span class="w"> </span><span class="c1">// (3)!</span>
+<span class="w">    </span><span class="n">ns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+<span class="w">    </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ns</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span><span class="w"> </span><span class="c1">// (4)!</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">(</span><span class="kt">string</span><span class="p">);</span><span class="w"> </span><span class="c1">// (5)!</span>
+<span class="w">    </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="m">10</span><span class="p">];</span><span class="w"> </span><span class="c1">// (6)!</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>Figyelmeztetés lehetséges <code>null</code> értékre, mert a típusa szerint nullozható.</li>
+<li>Ha egy egyszerű <code>if</code>-fel levizsgáljuk, akkor máris ok. Pedig pl. többszálú környezetben az <code>if</code> kiértékelése és ezen sor végrehajtása között a változó akár <code>null</code> értékre is beíródhat.</li>
+<li>Az előtte lévő rövidzár is megnyugtatja a fordítót, így itt sincs figyelmeztetés.</li>
+<li>Ezt az előző sor alapján figyelmeztetéssel jutalmazza.</li>
+<li>Ez is figyelmeztetés, a <code>default</code> operátor által adott értékkel (<code>null</code>) nem inicializálhatunk.</li>
+<li>Ez viszont nem figyelmeztetés, pedig egy csomó <code>null</code> jön létre. Ha ez figyelmeztetés lenne, az aránytalanul megnehezítené a tömbök kezelését.</li>
+</ol>
+<p>Látható, hogy az egyszerűbb eseteket jól kezeli a fordító, de korántsem mindenható, illetve nem mindig szól akkor sem, amikor egyébként szólhatna.</p>
+<p>A további példákhoz vegyünk fel pár segédfüggvényt a <code>Person</code> osztályba:</p>
+<div class="highlight"><pre><span></span><code><span class="k">private</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="nf">GetAnotherPerson</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="n">LastName</span><span class="p">,</span><span class="w"> </span><span class="n">FirstName</span><span class="p">,</span><span class="w"> </span><span class="n">MiddleName</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">);</span>
+<span class="p">}</span>
 
-Látható, hogy az egyszerűbb eseteket jól kezeli a fordító, de korántsem mindenható, illetve nem mindig szól akkor sem, amikor egyébként szólhatna.
-
-A további példákhoz vegyünk fel pár segédfüggvényt a `Person` osztályba:
-
-``` csharp
-private Person GetAnotherPerson()
-{
-    return new Person(LastName, FirstName, MiddleName ?? string.Empty);
-}
-
-private void ResetFields()
-{
-    FirstName = default!;
-    LastName = null!;
-    MiddleName = null;
-}
-</code></pre></div></p>
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ResetFields</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">FirstName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="o">!</span><span class="p">;</span>
+<span class="w">    </span><span class="n">LastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="o">!</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MiddleName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>Látható, hogy vannak megkerülő megoldások arra, hogy ráerőszakoljuk a fordítóra az akaratunkat, a felkiáltójel használatával beírhatunk <code>null</code> értékeket nem nullozható változókba (ez az ún. <strong>null forgiving operator</strong> ).
 Illetve <code>string</code> esetén null helyett használhatjuk az üres <code>string</code> értéket - ami nem biztos, hogy sokkal jobb a <code>null</code> értéknél.
 Mindenesetre ezek a függvények nem okoznak újabb figyelmeztetéseket.</p>
@@ -1193,13 +1191,13 @@ Vegyünk fel ennek tesztelésére egy újabb függvényt a <code>Person</code> o
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">MiddleName</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">ResetFields</span><span class="p">();</span>
-<span class="w">        </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">MiddleName</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="o">!</span>
+<span class="w">        </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">MiddleName</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span><span class="w"> </span><span class="c1">// (1)!</span>
 
 <span class="w">        </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetAnotherPerson</span><span class="p">();</span>
-<span class="w">        </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">MiddleName</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="o">!</span>
+<span class="w">        </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">MiddleName</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span><span class="w"> </span><span class="c1">// (2)!</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">FirstName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w">          </span><span class="err">#</span><span class="w"> </span><span class="p">(</span><span class="m">3</span><span class="p">)</span><span class="o">!</span>
-<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">LastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">MiddleName</span><span class="p">;</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="p">(</span><span class="m">4</span><span class="p">)</span><span class="o">!</span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">FirstName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w">          </span><span class="c1">// (3)!</span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">LastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">MiddleName</span><span class="p">;</span><span class="w">   </span><span class="c1">// (4)!</span>
 <span class="p">}</span>
 </code></pre></div>
 <ol>
@@ -1353,8 +1351,8 @@ Készítsük el az időmérő mechanizmust!</p>
           </path>
         </svg>
       </span>
-      <span title="2024. március 4. 10:54:13">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-04T10:54:13+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-04</span>
+      <span title="2024. március 8. 08:36:08">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-08T08:36:08+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-08</span>
       </span>
     </span>
 
@@ -1417,7 +1415,7 @@ Készítsük el az időmérő mechanizmust!</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "content.action.edit", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.term.missing": "\u00dcres", "select.version": "Verzi\u00f3v\u00e1lt\u00e1s"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "content.action.edit", "content.code.annotate", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.term.missing": "\u00dcres", "select.version": "Verzi\u00f3v\u00e1lt\u00e1s"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
