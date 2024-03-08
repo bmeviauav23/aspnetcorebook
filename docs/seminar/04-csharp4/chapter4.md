@@ -239,23 +239,23 @@ Ezzel meg is oldottunk minden figyelmeztetést.
 Mennyire okos a fordító a `null` érték detektálásában?Nézzünk pár példát!
 Az alábbi statikus függvényt tegyük bele a `Person` osztályunkba és vegyük fel a `using static System.Console;` névtérhivatkozást is.
 
-``` csharp annotate
+``` csharp
 static void M(string? ns)
 {
-    WriteLine(ns.Length);        # (1)!
+    WriteLine(ns.Length); // (1)!
     if (ns != null)
     {
-        WriteLine(ns.Length);    # (2)!
+        WriteLine(ns.Length); // (2)!
     }
     if (ns == null)
     {
         return;
     }
-    WriteLine(ns.Length);        # (3)!
+    WriteLine(ns.Length); // (3)!
     ns = null;
-    WriteLine(ns.Length);        # (4)!
-    string s = default(string);  # (5)!
-    string[] a = new string[10]; # (6)!
+    WriteLine(ns.Length); // (4)!
+    string s = default(string); // (5)!
+    string[] a = new string[10]; // (6)!
 }
 ```
 
@@ -297,13 +297,13 @@ void M(Person p)
     if (p.MiddleName != null)
     {
         p.ResetFields();
-        WriteLine(p.MiddleName.Length); # (1)!
+        WriteLine(p.MiddleName.Length); // (1)!
 
         p = GetAnotherPerson();
-        WriteLine(p.MiddleName.Length); # (2)!
+        WriteLine(p.MiddleName.Length); // (2)!
     }
-    p.FirstName = null;          # (3)!
-    p.LastName = p.MiddleName;   # (4)!
+    p.FirstName = null;          // (3)!
+    p.LastName = p.MiddleName;   // (4)!
 }
 ```
 
