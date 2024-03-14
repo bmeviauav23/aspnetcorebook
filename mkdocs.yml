@@ -107,3 +107,4 @@ nav:
   - "Házi feladat":
       - homework/index.md
       - homework/example-spec.md
+      - homework/hw-points.md
