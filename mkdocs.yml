@@ -102,5 +102,6 @@ nav:
       - seminar/03-linq/chapter3.md
       - seminar/04-csharp4/chapter4.md
       - seminar/05-aspnetcore1/chapter5.md
+      - seminar/06-efcore/chapter6.md
   - "Házi feladat":
       - homework/index.md
