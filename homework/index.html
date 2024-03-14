@@ -16,6 +16,8 @@
         <link rel="prev" href="../seminar/06-efcore/chapter6/">
       
       
+        <link rel="next" href="example-spec/">
+      
       
       <link rel="icon" href="../favicon.ico">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
@@ -662,6 +664,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Házi feladat tudnivalók
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -672,6 +685,55 @@
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kovetelmenyek" class="md-nav__link">
+    <span class="md-ellipsis">
+      Követelmények
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="example-spec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Példa kisHF specifikáció
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -704,6 +766,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kovetelmenyek" class="md-nav__link">
+    <span class="md-ellipsis">
+      Követelmények
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -726,7 +805,31 @@
 
 
 <h1 id="hazi-feladat-tudnivalok">Házi feladat tudnivalók<a class="headerlink" href="#hazi-feladat-tudnivalok" title="Permanent link">&para;</a></h1>
-<p>TBD</p>
+<p>Az itteni szerkezetet kövessétek: <a href="example-spec/">példa specifikáció</a></p>
+<h2 id="kovetelmenyek">Követelmények<a class="headerlink" href="#kovetelmenyek" title="Permanent link">&para;</a></h2>
+<p>Az alábbiak közül mindegyiknek teljesülnie kell az aláíráshoz:</p>
+<ul>
+<li>Két fő részből áll<ul>
+<li>szerver oldali HTTP alapú szolgáltatás</li>
+<li>egy vastag vagy vékony kliens (szerveroldali renderelés nélkül) alkalmazás, ami a szolgáltatást hívja<ul>
+<li>elfogadható (példák): WPF, WinForms, MAUI, Swing, JavaFX, Blazor WebAssembly, Angular, React, Vue, Android (kotlin, java), iOS (swift, obj-c), stb.</li>
+<li>nem elfogadható: ASP.NET Core MVC Razor generált weboldalakból álló webalkalmazás, JSP, PHP, Blazor Server, vagy Blazor Static Render, sima HTML+JS+CSS</li>
+<li>kivétel: a felhasználókezeléshez szorosan kapcsolódó felületek (belépés, regisztráció, stb.) bármilyen felületi technológiával készülhetnek</li>
+</ul>
+</li>
+<li>a vastag/vékony kliens kiváltható Postman klienssel</li>
+</ul>
+</li>
+<li>A kliens nem éri el közvetlenül az adatbázist</li>
+<li>A kliens nem csak egymástól független hívásokat csinál, hanem ténylegesen végre is lehet hajtani a felhasználói folyamatokat. Pl. Postman kliens esetében, nem csak különálló teszthívások vannak, hanem kollekciókba rendezve hívási sorozatok, ahol ez egyes hívások között változókban állapotot is tárolunk.</li>
+<li>Adatelérés: Entity Framework Core v8.x</li>
+<li>Kommunikáció: ASP.NET Core v8.x<ul>
+<li>Az előbb megadott verziókhoz képest későbbi verziók használhatók - saját felelősségre</li>
+</ul>
+</li>
+<li>Minimum 3 összefüggő tábla használata, nem számolva a felhasználókezeléssel kapcsolatos táblákat</li>
+<li>A leadott specifikációnak megfelelő funkcionalitás</li>
+</ul>
   <hr>
   <div class="md-source-file">
     <span class="md-source-file__fact"> <span class="md-icon" title="Utolsó frissítés"> <svg
@@ -736,8 +839,8 @@
           </path>
         </svg>
       </span>
-      <span title="2024. február 13. 13:28:30">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-13T13:28:30+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-13</span>
+      <span title="2024. március 14. 12:09:20">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-14T12:09:20+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-14</span>
       </span>
     </span>
 
