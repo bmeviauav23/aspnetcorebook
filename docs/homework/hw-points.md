@@ -54,13 +54,14 @@
     * egyszerű REST API, SDK használat nélkül, egyszerű API kulcs alapú authentikáció **7**
     * SDK-val / REST API-val, authentikációt (pl. OIDC) végrehajtva **10**
 * SignalR Core alkalmazása valós idejű, szerver felől érkező push jellegű kommunikációra **7**
-* teljes szerveroldal hosztolása külső szolgáltatónál **\[5-7\]**
+* teljes szerveroldal hosztolása külső szolgáltatónál **\[5-15\]**
     * Azure (ingyenes [App Services - WebApp szolgáltatás](https://docs.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore)) **7**
     * egyéb szolgáltató **5**
+    * Automatizált telepítés (pl. GitHub Actions, Azure DevOps) **+3**
+* Publikálás docker konténerbe és futtatás konténerből **5**
 * hosztolás service-ben (Windows Service, Linux systemd) **\[3-5\]**
     * Windows service **3**
     * Linux systemd **5**
-* Publikálás docker konténerbe és futtatás konténerből **5**
 * OpenAPI leíró (swagger) alapú dokumentáció **\[3-12\]**
     * minden végpont kliens szempontjából releváns működése dokumentált, minden lehetséges válaszkóddal együtt **3**
     * az API-nak egyidejűleg több támogatott verziója van, mindegyik dokumentált és mindegyik támogatott verzió dokumentációja elérhető  **+4**
@@ -148,6 +149,10 @@
     * nem beépített, külső háttérfolyamat komponenssel, pl. Quartz.NET, Hangfire **\[7\]**
 * nem nullozható referencia típusok (NRT) kényszerítése a _nullable context_ bekapcsolásával minden szerveroldali projektre **és** minden nullable context sértés figyelmeztetés hibaként kezelése. Nullable context kikapcsolása projekten belül csak indokolt esetekben. **\[3\]**
 * Entitás specifikus elsődleges kulcs típusok használata (`entityA.Id = entityB.Id` fordítási hiba, ha a két entiás típusa eltér). A kliens oldalon, illetve a kontroller függvények fejlécében (pl. bemenetként) nem kell, hogy megjelenjenek ezek a típusok, csak a kontroller rétegtől lefelé (EF szinten is). [Segédkönyvtár](https://github.com/andrewlock/StronglyTypedId). **\[10\]**
+* Szoftver funkcióinak ki/bekapcsolhatósága FeatureFlagek kezelésével **\[5-8\]** pl.: <https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/feature-flags>
+    * config alapú **5**
+    * felhasználói felületről állítható **+3**
+* Szerver oldalon előforduló szöveges erőforrások lokalizálása, amik a kliensre eljuthatnak (pl.: hibaüzenetek) **\[5\]**
 
 ## Kiegészítő, kapcsolódó technológiák alkalmazása
 
@@ -164,7 +169,3 @@
     * Commandok és Queryk szétválasztása és lazán csatolása mediátorral **5**
     * Domain események használata **+3**
     * MediatR behavior pipeline kiterjesztése  **+3**
-* Szoftver funkcióinak ki/bekapcsolhatósága FeatureFlagek kezelésével **\[5-8\]** pl.: <https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/feature-flags>
-    * config alapú **5**
-    * felhasználói felületről állítható **+3**
-* Szerver oldalon előforduló szöveges erőforrások lokalizálása, amik a kliensre eljuthatnak (pl.: hibaüzenetek) **\[5\]**
