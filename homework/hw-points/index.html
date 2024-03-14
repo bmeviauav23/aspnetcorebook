@@ -1000,17 +1000,18 @@
 </ul>
 </li>
 <li>SignalR Core alkalmazása valós idejű, szerver felől érkező push jellegű kommunikációra <strong>7</strong></li>
-<li>teljes szerveroldal hosztolása külső szolgáltatónál <strong>[5-7]</strong><ul>
+<li>teljes szerveroldal hosztolása külső szolgáltatónál <strong>[5-15]</strong><ul>
 <li>Azure (ingyenes <a href="https://docs.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore">App Services - WebApp szolgáltatás</a>) <strong>7</strong></li>
 <li>egyéb szolgáltató <strong>5</strong></li>
+<li>Automatizált telepítés (pl. GitHub Actions, Azure DevOps) <strong>+3</strong></li>
 </ul>
 </li>
+<li>Publikálás docker konténerbe és futtatás konténerből <strong>5</strong></li>
 <li>hosztolás service-ben (Windows Service, Linux systemd) <strong>[3-5]</strong><ul>
 <li>Windows service <strong>3</strong></li>
 <li>Linux systemd <strong>5</strong></li>
 </ul>
 </li>
-<li>Publikálás docker konténerbe és futtatás konténerből <strong>5</strong></li>
 <li>OpenAPI leíró (swagger) alapú dokumentáció <strong>[3-12]</strong><ul>
 <li>minden végpont kliens szempontjából releváns működése dokumentált, minden lehetséges válaszkóddal együtt <strong>3</strong></li>
 <li>az API-nak egyidejűleg több támogatott verziója van, mindegyik dokumentált és mindegyik támogatott verzió dokumentációja elérhető  <strong>+4</strong></li>
@@ -1128,6 +1129,12 @@
 </li>
 <li>nem nullozható referencia típusok (NRT) kényszerítése a <em>nullable context</em> bekapcsolásával minden szerveroldali projektre <strong>és</strong> minden nullable context sértés figyelmeztetés hibaként kezelése. Nullable context kikapcsolása projekten belül csak indokolt esetekben. <strong>[3]</strong></li>
 <li>Entitás specifikus elsődleges kulcs típusok használata (<code>entityA.Id = entityB.Id</code> fordítási hiba, ha a két entiás típusa eltér). A kliens oldalon, illetve a kontroller függvények fejlécében (pl. bemenetként) nem kell, hogy megjelenjenek ezek a típusok, csak a kontroller rétegtől lefelé (EF szinten is). <a href="https://github.com/andrewlock/StronglyTypedId">Segédkönyvtár</a>. <strong>[10]</strong></li>
+<li>Szoftver funkcióinak ki/bekapcsolhatósága FeatureFlagek kezelésével <strong>[5-8]</strong> pl.: <a href="https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/feature-flags">https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/feature-flags</a><ul>
+<li>config alapú <strong>5</strong></li>
+<li>felhasználói felületről állítható <strong>+3</strong></li>
+</ul>
+</li>
+<li>Szerver oldalon előforduló szöveges erőforrások lokalizálása, amik a kliensre eljuthatnak (pl.: hibaüzenetek) <strong>[5]</strong></li>
 </ul>
 <h2 id="kiegeszito-kapcsolodo-technologiak-alkalmazasa">Kiegészítő, kapcsolódó technológiák alkalmazása<a class="headerlink" href="#kiegeszito-kapcsolodo-technologiak-alkalmazasa" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1150,12 +1157,6 @@
 <li>MediatR behavior pipeline kiterjesztése  <strong>+3</strong></li>
 </ul>
 </li>
-<li>Szoftver funkcióinak ki/bekapcsolhatósága FeatureFlagek kezelésével <strong>[5-8]</strong> pl.: <a href="https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/feature-flags">https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/feature-flags</a><ul>
-<li>config alapú <strong>5</strong></li>
-<li>felhasználói felületről állítható <strong>+3</strong></li>
-</ul>
-</li>
-<li>Szerver oldalon előforduló szöveges erőforrások lokalizálása, amik a kliensre eljuthatnak (pl.: hibaüzenetek) <strong>[5]</strong></li>
 </ul>
   <hr>
   <div class="md-source-file">
@@ -1166,8 +1167,8 @@
           </path>
         </svg>
       </span>
-      <span title="2024. március 14. 14:54:01">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-14T14:54:01+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-14</span>
+      <span title="2024. március 14. 14:57:38">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-14T14:57:38+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-14</span>
       </span>
     </span>
 
