@@ -32,22 +32,22 @@ Készítsünk egy .NET 8 konzolos alkalmazást (csak [**ne** EF legyen a neve](h
 Az osztályok legyenek publikusak, az attribútumok pedig egyszerű auto-implementált propertyk (*prop* snippet).
 
 A `string` típusú property-k esetén figyelmeztet a fordító, hogy nem nullozható referencia típusú property inicializáció után is `null` értékű lehet.
-Ennek kivédésére az ajánlott módszer olyan konstruktor írása, ami az ilyen propertyk kezdeti értékét paraméterben megkapja és beállítja.
+Ennek kivédésére az ajánlott módszer a `required` kulcsszó használata a property előtt, ezzel kiválthatóak a felesleges konstruktorok, amelyben csak a kötelezőség miatt várunk el paramétereket és állítjuk be a propertyk értékét.
 
-!!! warning "EF Core és konstruktorok"
-    A konstruktort az EF is fogja hívni, neki automatikusan tudnia kell, hogy melyik paraméter melyik tulajdonságot állítja - pedig ez a konstruktor szignatúrájából alapesetben nem kikövetkeztethető. Emiatt önkéntesen tartanunk kell magunkat ahhoz, hogy a konstruktorparaméter nevének és a property nevének egyeznie kell, kivéve, hogy a paramétere neve kezdődhet kisbetűvel is (**camel casing**).
+??? warning "EF Core és konstruktorok required nélkül"
+    A fenti megoldás nem működött még C# 11-ben, így ott konstruktort kellett készítenünk. Ezt a konstruktort az EF is fogja hívni, így neki automatikusan tudnia kell, hogy melyik paraméter melyik tulajdonságot állítja - pedig ez a konstruktor szignatúrájából alapesetben nem kikövetkeztethető. Emiatt önkéntesen tartanunk kell magunkat ahhoz, hogy a konstruktorparaméter nevének és a property nevének egyeznie kell, kivéve, hogy a paramétere neve kezdődhet kisbetűvel is (**camel casing**).
 
-Példaként így néz ki a `Product` konstruktor:
+    Példaként így néz ki a `Product` konstruktor:
 
-``` csharp
-public Product(string name)
-{
-    Name = name;
-}
-```
+    ``` csharp
+    public Product(string name)
+    {
+        Name = name;
+    }
+    ```
 
-!!! tip "Quick Action"
-    A Visual Studio **Quick Action**-ként fel szokta ajánlani a **Generate constructor \[konstruktorfejléc\]** vagy **Add parameter to \[konstruktorfejléc\]** gyors kódgenerálási lehetőségeket, amivel létrehozhatjuk vagy bővíthetjük a szükséges konstruktort.
+    !!! tip "Quick Action"
+        A Visual Studio **Quick Action**-ként fel szokta ajánlani a **Generate constructor \[konstruktorfejléc\]** vagy **Add parameter to \[konstruktorfejléc\]** gyors kódgenerálási lehetőségeket, amivel létrehozhatjuk vagy bővíthetjük a szükséges konstruktort.
 
 ### Mapping és egyéb metaadatok megadása I.
 
@@ -100,7 +100,7 @@ Az `Order`-`Product` több-többes kapcsolatokhoz hozzuk létre a kapcsolótábl
     Nem kötelező létrehozni osztályt a kapcsolótáblának, [konfigurációval is lehet érni](https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key#many-to-many), hogy a kapcsolótábla létrejöjjön és az EF megfelelően használja.
     Ezt a módszert akkor érdemes követni, ha a kapcsolótábla csupán technikai tehertétel, de ha például extra adatot is tárol, esetünkben a rendelt mennyiséget (`Quantity`), akkor jobban követhető kódot eredményez, ha explicit létrehozzuk a kapcsolótáblának megfelelő entitástípust.
 
-Az így kialakult modell (konstruktorok nélkül):
+Az így kialakult modell:
 
 <figure markdown>
 ![EF Core model](images/efcore-model.png)
@@ -112,45 +112,45 @@ Kódként:
 public class Category
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public ICollection<Product> Products { get; } = new List<Product>();
 
-    public Category(string name)
-    {
-        Name = name;
-    }
+    public required string Name { get; set; }
+
+    public ICollection<Product> Products { get; } = new List<Product>();
 }
 
 public class Order
 {
     public int Id { get; set; }
+
     public DateTime OrderDate { get; set; }
+
     public ICollection<OrderItem> OrderItems { get; } = new List<OrderItem>();
 }
 
 public class Product
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+
+    public required string Name { get; set; }
     public int UnitPrice { get; set; }
+
     public int CategoryId { get; set; }
     public Category Category { get; set; } = null!;
-    public ICollection<OrderItem> ProductOrders { get; } = new List<OrderItem>();
 
-    public Product(string name)
-    {
-        Name = name;
-    }
+    public ICollection<OrderItem> ProductOrders { get; } = new List<OrderItem>();
 }
 
 public class OrderItem
 {
     public int Id { get; set; }
+
+    public int Quantity { get; set; }
+
     public int ProductId { get; set; }
     public Product Product { get; set; } = null!;
+
     public int OrderId { get; set; }
     public Order Order { get; set; } = null!;
-    public int Quantity { get; set; }
 }
 ```
 
@@ -185,7 +185,7 @@ A Visual Studio az *SQL Server Object Explorer* ablak megnyitásakor automatikus
 !!! note "Localdb"
     A LocalDB külön is letölthető, illetve a vele együtt települő `sqllocaldb` parancs segítségével egyszerűen kezelhető. Minderről bővebb információ a dokumentációban [olvasható](https://docs.microsoft.com/en-us/sql/tools/sqllocaldb-utility?view=sql-server-ver15).
 
-Adjunk hozzá új osztályt a projekthez `NorthwindContext` néven, ebben definiáljuk majd, hogy milyen entitáskollekciókon lehet műveleteket végezni.
+Adjunk hozzá új osztályt a projekthez `LabDbContext` néven, ebben definiáljuk majd, hogy milyen entitáskollekciókon lehet műveleteket végezni.
 
 Az automatikusan létrejövő MSSQLLocalDB nevű LocalDB példány connection stringjét adjuk meg, pontosabban az *SQL Server Object Explorer* ablak segítésével másoljuk ki: menu:SQL Server-t kibontva\[*(localdb)\MSSQLLocalDB*-n jobbklikk \> Properties \> Connection String\].
 A kimásolt stringben az *Initial Catalog* értékét (a DB nevét) a **master**-ről változtassuk meg valamilyen más névre, például a Neptun kódunkra.
@@ -200,7 +200,7 @@ Ha nincs a stringben *Initial Catalog* rész, akkor írjuk a string végére, ho
     A connection stringben különleges karakterek (pl. *\\*) vannak. Ha a kimásolt connection két " közé illesztjük be, a VS automatikusan escape-eli a különleges karaktereket. Ellenkező esetben (ha pl. a két " a beillesztés után kerül elhelyezésre a szöveg köré) az automatikus escape-elés nem történik meg, ilyenkor ne felejtsük el a @-ot a string elé írni, vagy manuálisan escape-elni a szükséges karaktereket!
 
 ``` csharp
-public class NorthwindContext : DbContext
+public class LabDbContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -346,22 +346,22 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 Írjunk egy egyszerű beszúró kódot a `Program.cs`-be. Várjunk paraméterül egy kontext-et, és csak akkor szúrjunk be az adatbázisba bármit, ha még üres.
 
 ``` csharp
-static void SeedDatabase(NorthwindContext ctx)
+static void SeedDatabase(LabDbContext ctx)
 {
     if (ctx.Products.Any())
     {
         return;
     }
-    
-    var drink = new Category("Ital");
-    var food = new Category("Étel");
-    
+
+    var drink = new Category() { Name = "Ital" };
+    var food = new Category() { Name = "Étel" };
+
     ctx.Categories.Add(drink);
     ctx.Categories.Add(food);
 
-    ctx.Products.Add(new Product("Sör") { UnitPrice = 50, Category = drink });
-    ctx.Products.Add(new Product("Bor") { Name = "Bor", Category = drink });
-    ctx.Products.Add(new Product("Tej") { Name = "Tej", CategoryId = drink.Id });
+    ctx.Products.Add(new Product() { Name = "Sör", UnitPrice = 50, Category = drink });
+    ctx.Products.Add(new Product() { Name = "Bor", Category = drink });
+    ctx.Products.Add(new Product() { Name = "Tej", CategoryId = drink.Id });
 
     ctx.SaveChanges();
 }
@@ -372,7 +372,7 @@ Figyeljük meg, hogy kevertük a kapcsolatok beállításánál a navigációs p
 Hívjuk meg a legfelső szintű kódból és próbáljuk meg lekérdezni az első terméket. Rakjunk a kód végére egy `Console.ReadKey`-t, hogy legyen időnk megnézni a naplót.
 
 ``` csharp
-using var ctx = new NorthwindContext();
+using var ctx = new LabDbContext();
 SeedDatabase(ctx);
 var p = ctx.Products.FirstOrDefault();
 
@@ -423,13 +423,13 @@ A kontextuskonfiguráció részeként megadhatjuk, hogy milyen adattartalmat sze
 
 ``` csharp
 modelBuilder.Entity<Category>().HasData(
-    new Category ("Ital") { Id = 1 }
+    new Category() { Name = "Ital", Id = 1 }
 );
 
 modelBuilder.Entity<Product>().HasData(
-    new Product("Sör") { Id = 1, UnitPrice = 50, CategoryId = 1 },
-    new Product("Bor") { Id = 2, UnitPrice = 550, CategoryId = 1 },
-    new Product("Tej") { Id = 3, UnitPrice = 260, CategoryId = 1 }
+    new Product() { Name = "Sör", Id = 1, UnitPrice = 50, CategoryId = 1 },
+    new Product() { Name = "Bor", Id = 2, UnitPrice = 550, CategoryId = 1 },
+    new Product() { Name = "Tej", Id = 3, UnitPrice = 260, CategoryId = 1 }
 );
 ```
 
@@ -856,27 +856,30 @@ public ShipmentRegion? ShipmentRegion { get; set; }
 
 Módosítsuk és bővítsük a kezdeti `Product`-ok listáját szállítási információkkal:
 
-``` csharp hl_lines="7 11-24"
+``` csharp hl_lines="8 18-27"
 modelBuilder.Entity<Product>().HasData(
-    new Product("Sör")
+    new Product()
     {
         Id = 1,
+        Name = "Sör",
         UnitPrice = 50,
         CategoryId = 1,
         ShipmentRegion = ShipmentRegion.Asia
     },
-    new Product("Bor") { Id = 2, UnitPrice = 550, CategoryId = 1 },
-    new Product("Tej") { Id = 3, UnitPrice = 260, CategoryId = 1 },
-    new Product("Whiskey")
+    new Product() { Id = 2, Name = "Bor", UnitPrice = 550, CategoryId = 1 },
+    new Product() { Id = 3, Name = "Tej", UnitPrice = 260, CategoryId = 1 },
+    new Product()
     {
         Id = 4,
+        Name = "Whiskey",
         UnitPrice = 960,
         CategoryId = 1,
         ShipmentRegion = ShipmentRegion.Australia
     },
-    new Product("Rum")
+    new Product()
     {
         Id = 5,
+        Name = "Rum"
         UnitPrice = 960,
         CategoryId = 1,
         ShipmentRegion = ShipmentRegion.EU | ShipmentRegion.NorthAmerica
@@ -940,15 +943,17 @@ try
 {
     using (var transaction = ctx.Database.BeginTransaction())
     {
-        ctx.Products.Add(new Product("Coca Cola")
+        ctx.Products.Add(new Product()
         {
             CategoryId = cid,
+            Name = "Coca Cola",
         });
         ctx.SaveChanges();
 
-        ctx.Products.Add(new Product("Pepsi")
+        ctx.Products.Add(new Product()
         {
             CategoryId = cid,
+            Name = "Pepsi",
         });
         ctx.SaveChanges();
 
@@ -973,16 +978,18 @@ Próbáljuk ki! Ezesetben helyesen fut le a beszúrásunk. Figyeljük meg a konz
 
 Teszteljük a hibás ágat is azáltal, hogy a második terméket egy nem létező kategóriába próbáljuk meg beszúrni.
 
-``` csharp hl_lines="3 8 10"
+``` csharp hl_lines="5 11 12"
 using (var transaction = ctx.Database.BeginTransaction())
 {
-    ctx.Products.Add(new Product("Cider") //új név
+    ctx.Products.Add(new Product()
     {
+        Name = "Cider", // új név
         CategoryId = cid,
     });
     ctx.SaveChanges();
-    ctx.Products.Add(new Product("Kőműves KUBU") //új név
+    ctx.Products.Add(new Product()
     {
+        Name = "Kőműves Actimel", //új név
         CategoryId = 100, //nem létező CategoryId
     });
     ctx.SaveChanges();
