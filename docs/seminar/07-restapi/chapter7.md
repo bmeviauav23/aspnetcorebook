@@ -179,7 +179,7 @@ public class ProductService : IProductService
         _context = context;
     }
 
-    public IEnumerable<Product> GetProducts()
+    public List<Product> GetProducts()
     {
         var products = _context.Products
             .Include(p => p.Category)
@@ -325,11 +325,11 @@ using WebApiLab.Bll.Dtos;
 Írjuk át a lekérdezést a `ProductService`-ben a leképzőt alkalmazva:
 
 ``` csharp hl_lines="3-5"
-public IEnumerable<Product> GetProducts()
+public List<Product> GetProducts()
 {
     var products = _context.Products
         .ProjectTo<Product>(_mapper.ConfigurationProvider)
-        .AsEnumerable();
+        .ToList();
     return products;
 }
 ```
@@ -358,147 +358,161 @@ A `ProjectTo` metódust felfoghatjuk a továbbiakban egy LINQ-s `Select()` oper�
 
 Valósítsunk meg további interfész által előírt funkciókat a `ProductService` osztályban:
 
-``` csharp
-/**/public Product GetProduct(int productId)
-/**/{
-        return _context.Products
-            .ProjectTo<Product>(_mapper.ConfigurationProvider)
-            .SingleOrDefault(p => p.Id == productId)
-            ?? throw new EntityNotFoundException("Nem található a termék");
-/**/}
+``` csharp hl_lines="3-6"
+public Product GetProduct(int productId)
+{
+    return _context.Products
+        .ProjectTo<Product>(_mapper.ConfigurationProvider)
+        .SingleOrDefault(p => p.Id == productId)
+        ?? throw new EntityNotFoundException("Nem található a termék");
+}
 ```
+
+Szintén a `ProjectTo`-t használva, de most a `SingleOrDefault` LINQ operátorral kérdezzük le az egyetlen elemet, aminek az `Id` mezője egyezik a paraméterben kapott `productId`-val.
+Ha nem találjuk meg az elemet, akkor egy saját kivételt dobunk, ami majd a későbbiekben lekezelünk.
+
+!!! tip "SingleOrDefault vagy FirstOrDefault"
+    Ha biztosak vagyunk benne, hogy csak egy elemet találhatunk, akkor a `SingleOrDefault` használata javasolt, mert ha több elemet talál, akkor kivételt dob.
+    Ha több elemet is várható egy lekérdezés eredményeként, de biztosak vagyunk benne a követelményeink alapján, hogy az első elem az, amit keresünk, akkor a `FirstOrDefault` használata javasolt.
 
 ### Beszúrás
 
-Ez hasonló az EF gyakorlaton látottakhoz, csak itt nem kell legyártanunk az új `Product` példányt, paraméterként kapjuk és memóriában leképezzük az enititásra. A `SaveChanges` hívás után a kulcs értéke már ki lesz töltve (adatbázis osztja ki a kulcsot).
+Ez hasonló az EF gyakorlaton látottakhoz, csak itt nem kell legyártanunk az új `Product` példányt, paraméterként kapjuk és memóriában leképezzük az enititásra.
+A `SaveChanges` hívás után a kulcs értéke már ki lesz töltve (adatbázis osztja ki a kulcsot).
 
-``` csharp
-/**/public Product InsertProduct(Product newProduct)
-/**/{
-        var efProduct = _mapper.Map<Dal.Entities.Product>(newProduct);
-        _context.Products.Add(efProduct);
-        _context.SaveChanges();
-        return GetProduct(efProduct.Id);
-/**/}
+``` csharp hl_lines="3-6"
+public Product InsertProduct(Product newProduct)
+{
+    var efProduct = _mapper.Map<Dal.Entities.Product>(newProduct);
+    _context.Products.Add(efProduct);
+    _context.SaveChanges();
+    return GetProduct(efProduct.Id);
+}
 ```
 
 ### Módosítás
 
-Konvenció szerint külön paraméterként szokták átadni a módosítandó elem azonosítóját és az új értékeket összefogó példányt. Leképezés után összeállítunk egy olyan entitás példányt, mint amilyet az adatbázisból kérdeztünk volna le - viszont ez a példány nem lesz a kontext látókörében. Az `Attach` függvény hasonló az `Add`-hoz, hozzáadja a kontext nyilvántartásához a példányt, de az `Attach` alapesetben nem jelöli meg a státuszt, marad változatlan (*Unchanged*). Explicit megjelöljük változottként, a változást végül a `SaveChanges` érvényesíti.
+Módosításhoz lekérdezzük az adott elemet, majd a `Map` függvénnyel a DTO-ból az entitásba mappeljük az új adatokat.
+Mentés után pedig visszaadjuk a módosított elemet.
 
-``` csharp
-/**/public void UpdateProduct(int productId, Product updatedProduct)
-/**/{
-        var efProduct = _mapper.Map<Dal.Entities.Product>(updatedProduct);
-        efProduct.Id = productId;
-        _context.Attach(efProduct).State = EntityState.Modified;
-        _context.SaveChanges();
-/**/}
+``` csharp hl_lines="
+public Product UpdateProduct(int productId, Product updatedProduct)
+{
+    var efProduct = _context.Products.SingleOrDefault(p => p.Id == productId)
+        ?? throw new EntityNotFoundException("Nem található a termék");
+    _mapper.Map(updatedProduct, efProduct);
+    _context.SaveChanges();
+    return GetProduct(efProduct.Id);
+}        
 ```
 
-<div class="tip">
-
-Alternatíva lehetne még ennél a függvénynél, hogy lekérdezzük azonosító (`Id`) alapján az entitást és AutoMapperrel a lekérdezett objektumba mappeljük a DTO-t. Ebben az esetben nincs szükség `Attach`-ra és állapotkezelésre sem, viszont extra lekérdezéssel jár.
-
-</div>
+!!! tip "Alternatív módosítás"
+    Alternatíva, hogy a `Map` helyett a `Attach` függvényt használjuk, amivel az EF kontextusba visszatöltjük az entitást, majd a `Entry` függvénnyel jelöljük módosítottként.
+    Ilyenkor spórolunk egy lekérdezést, de a SaveChanges hibával térhet vissza ha nem létező elemet próbálunk módosítani.
 
 ### Törlés
 
-Egy trükkel elkerülhetjük, hogy le kelljen kérdezni a törlendő terméket. Az azonosító alapján előállítunk memóriában egy példányt a megfelelő kulccsal, majd `Remove` függvénnyel hozzáadjuk a kontexthez. A `Remove` törlendőnek jelöli a példányt.
+Hasonlóan az előzőekhez, csak itt a `Remove` függvényt hívjuk meg a kontextuson.
 
-``` csharp
-/**/public void DeleteProduct(int productId)
-/**/{
+``` csharp hl_lines="3-6"
+public void DeleteProduct(int productId)
+{
+    var efProduct = _context.Products.SingleOrDefault(p => p.Id == productId)
+        ?? throw new EntityNotFoundException("Nem található a termék");
+    _context.Products.Remove(efProduct);
+    _context.SaveChanges();
+}
+```
+
+!!! tip "Törlés lekérdezés nélkül"
+    Egy trükkel elkerülhetjük, hogy le kelljen kérdezni a törlendő terméket. Az azonosító alapján előállítunk memóriában egy példányt a megfelelő kulccsal, majd `Remove` függvénnyel hozzáadjuk a kontexthez. A `Remove` törlendőnek jelöli a példányt, de itt is hibaágakra kell készülni, ha nem létező elemet próbálunk törölni.
+
+    ``` csharp
+    public void DeleteProduct(int productId)
+    {
         _context.Products.Remove(new Dal.Entities.Product(null!) { Id = productId });
         _context.SaveChanges();
-/**/}
-```
+    }
+    ```
 
 ## REST konvenciók alkalmazása
 
 A REST megközelítés nem csak átviteli közegnek tekinti a HTTP-t, hanem a protokoll részeit felhasználja, hogy kiegészítő információkat vigyen át. Emiatt előnyös lenne, ha nagyobb ellenőrzésünk lenne a HTTP válasz felett - szerencsére az ASP.NET Core biztosítja ehhez a megfelelő API-kat.
 
+### GET - 200 OK
+
 Egyik legegyszerűbb ilyen irányelv, hogy a lekérdezések eredményeként, ha megtaláltuk és visszaadtuk a kért adatokat, akkor **200 (OK)** HTTP válaszkódot adjunk.
 
-<div class="tip">
-
-A HTTP kérést érintő irányelvekről egy jó összefoglaló elérhető [itt](https://www.restapitutorial.com/lessons/httpmethods.html).
-
-</div>
+!!! tip "HTTP és REST irányelvek"
+    A HTTP kérést érintő irányelvekről egy jó összefoglaló elérhető [itt](https://www.restapitutorial.com/lessons/httpmethods.html).
 
 Az eddig megírt `Get()` függvényünk most is **200 (OK)**-ot ad, ezt le is ellenőrizhetjük a böngészőnk hálózati monitorozó eszközében.
 
-<div class="tip">
+!!! tip "HTTP monitorozás"
+    A HTTP kommunikáció megfigyelésére használhatjuk a böngészők beépített eszközeit, mint amilyen a [Firefox Developer Tools](https://developer.mozilla.org/en-US/docs/Tools), illetve [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/).
+    Általában az ++f12++ billentyűvel aktiválhatók.
+    Emellett, ha egy teljesértékű HTTP kliensre van szükségünk, amivel például könnyen tudunk nem csak GET kéréseket küldeni, akkor a [Postman](https://www.getpostman.com/) és a [Fiddler Classic](https://www.telerik.com/download/fiddler) külön telepítendő eszközök ajánlhatók.
+    A Fiddler mint proxy megoldás egy Windows gépen folyó HTTP kommunikáció megfigyelésére is alkalmas.
 
-A HTTP kommunikáció megfigyelésére használhatjuk a böngészők beépített eszközeit, mint amilyen a [Firefox Developer Tools](https://developer.mozilla.org/en-US/docs/Tools), illetve [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/). Általában az kbd:\[F12\] billentyűvel aktiválhatók. Emellett, ha egy teljesértékű HTTP kliensre van szükségünk, amivel például könnyen tudunk nem csak GET kéréseket küldeni, akkor a [Postman](https://www.getpostman.com/) és a [Fiddler Classic](https://www.telerik.com/download/fiddler) külön telepítendő eszközök ajánlhatók. A Fiddler mint proxy megoldás egy Windows gépen folyó HTTP kommunikáció megfigyelésére is alkalmas.
+Első körben a két lekérdező függvényt írjuk át úgy, hogy a HTTP válaszkódokat explicit megadjuk.
+A jelenlegi ajánlás ehhez az `ActionResult<>` használata. Elég `T`-t visszaadnunk a függvényben, automatikusan `ActionResult<T>` típussá konvertálódik.
 
-</div>
-
-Első körben a két lekérdező függvényt írjuk át úgy, hogy a HTTP válaszkódokat explicit megadjuk. A jelenlegi legmodernebb mód ehhez az `ActionResult<>` használata. Elég `T`-t visszaadnunk a függvényben, automatikusan `ActionResult<T>` típussá konvertálódik. Tehát elvileg írhatnánk ezt:
-
-``` csharp
-//NEM FORDUL!
-/**/[HttpGet]
-    public ActionResult<IEnumerable<Product>> Get()
-        //ActionResult<T> visszatérési érték
-/**/{
-/**/    return _productService.GetProducts();
-/**/}
-```
-
-Azonban ez nem fordul, mert interfész típus esetén nem működik a konverzió. Konkrét típust, pl. egy listát kell megadnunk.
-
-``` csharp
-/**/[HttpGet]
-/**/public ActionResult<IEnumerable<Product>> Get()
-/**/{
-        return _productService.GetProducts().ToList(); //ToList bekerült
-/**/}
+``` csharp hl_lines="2"
+[HttpGet]
+public ActionResult<IEnumerable<Product>> Get()
+{
+    return _productService.GetProducts(); 
+}
 ```
 
 Írjuk meg ugyanígy a másik `Get` függvényt is:
 
-``` csharp
-/**/[HttpGet("{id}")]
-    public ActionResult<Product> Get(int id)
-        //ActionResult<Product> visszatérési érték
-/**/{
-        return _productService.GetProduct(id);
-/**/}
+``` csharp hl_lines="2 4"
+[HttpGet("{id}")]
+public ActionResult<Product> Get(int id)
+{
+    return _productService.GetProduct(id);
+}
 ```
 
 Próbáljuk ki mindkét kontroller függvényt (*api/products*, *api/products/1*), ellenőrizzük a státuszkódokat is.
 
-Ami fura, hogy még mindig nem állítottunk explicit státuszkódokat. A logikánk most még nagyon egyszerű, csak a hibamentes ágat kezeltük, így eddig az `ActionResult` alapértelmezései megoldották, hogy **200 (OK)**-ot kapjunk.
+Ami fura, hogy még mindig nem állítottunk explicit státuszkódokat.
+A logikánk most még nagyon egyszerű, csak a hibamentes ágat kezeltük, így eddig az `ActionResult` alapértelmezései megoldották, hogy **200 (OK)**-ot kapjunk.
+
+### POST - 201 Created
 
 Most viszont következzen egy létrehozó művelet:
 
-``` csharp
-/**/[HttpPost]
-    public ActionResult<Product> Post([FromBody] Product product)
-        //ActionResult<T> visszatérési érték + Product paraméter
-/**/{
-        var created = _productService.InsertProduct(product);
-        return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
-/**/}
+``` csharp hl_lines="2 4-5"
+[HttpPost]
+public ActionResult<Product> Post([FromBody] Product product)
+{
+    var created = _productService.InsertProduct(product);
+    return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
+}
 ```
 
-Itt már látszik az `ActionResult` haszna. A konvenciónak megfelelően 201-es kódot akarunk visszaadni. Ehhez a `ControllerBase` ősosztály biztosít segédfüggvényt. A segédfüggvény olyan `ActionResult` leszármazottat ad vissza, ami 201-es kódot szolgáltat a kliensnek. Másik konvenció, hogy a *Location* HTTP fejlécben legyen egy URL az új termék lekérdező műveletének meghívásához. Ezt az URL-t rakjuk össze a `CreatedAtAction` paraméterei révén.
+Itt már látszik az `ActionResult` haszna.
+A konvenciónak megfelelően 201-es kódot akarunk visszaadni.
+Ehhez a `ControllerBase` ősosztály biztosít segédfüggvényt.
+A segédfüggvény olyan `ActionResult` leszármazottat ad vissza, ami 201-es kódot szolgáltat a kliensnek.
+Másik konvenció, hogy a *Location* HTTP fejlécben legyen egy URL az új termék lekérdező műveletének meghívásához.
+Ezt az URL-t rakjuk össze a `CreatedAtAction` paraméterei révén.
 
-Gyakori, hogy a lefele irányú kommunikáció során (kliens felé) bővebb adathalmaz kerül leküldésre, mint amit egy létrehozáskor vagy módosításkor várunk. Esetünkben is az `Orders` és a `Category` propertyk létrehozáskor feleslegesek. Erre a célra jobb egy külön DTO-t létrehozni, ami csak a megfelelő adatokat tartalmazza. Most ideiglenesen tegyük nullozhatóvá ezt a két propertyt.
+Gyakori, hogy a lefele irányú kommunikáció során (kliens felé) bővebb adathalmaz kerül leküldésre, mint amit egy létrehozáskor vagy módosításkor várunk.
+Esetünkben is az `Orders` és a `Category` propertyk létrehozáskor feleslegesek.
+Erre a célra jobb egy külön DTO-t létrehozni, ami csak a megfelelő adatokat tartalmazza.
+Most ideiglenesen tegyük nullozhatóvá ezt a két propertyt.
 
-``` csharp
-public record Product
-{
-    /*többi property*/
-    public Category? Category { get; init; } //? módosító bekerült
-    public List<Order>? Orders { get; init; } //? módosító bekerült
-}
+``` csharp title="Product.cs"
+public Category? Category { get; init; } //? módosító bekerült
+public List<Order>? Orders { get; init; } //? módosító bekerült
 ```
 
 Próbáljuk ki a műveletet Swagger felületről. Egy `Product`-ot kell felküldenünk. Erre egy példa érték:
 
-``` javascript
+``` json
 {
     "Name" : "Pálinka",
     "UnitPrice" : 4000,
@@ -507,51 +521,53 @@ Próbáljuk ki a műveletet Swagger felületről. Egy `Product`-ot kell felküld
 }
 ```
 
-<div class="warning">
-
-Ha Fiddlerből vagy Postmanből tesztelünk, ne felejtsük el a *Content-Type* fejlécet **application/json**-re állítani! Figyeljük meg a kapott választ. A válaszból másoljuk ki a *Location* fejlécből az URL-t és hívjuk meg böngészőből.
-
-</div>
+!!! warning "Content-Type"
+    Ha Fiddlerből vagy Postmanből tesztelünk, ne felejtsük el a *Content-Type* fejlécet **application/json**-re állítani!
+    
+Figyeljük meg a kapott választ. A válaszból másoljuk ki a *Location* fejlécből az URL-t és hívjuk meg böngészőből.
 
 Fiddler Classic példa POST hívásra:
 
-<figure>
-<img src="images/aspnetcorerest-fiddlerpost.png" alt="Fiddler - POST küldése" />
+<figure markdown>
+![Fiddler - POST küldése](images/aspnetcorerest-fiddlerpost.png)
 </figure>
 
-A módosító, törlő műveleteknél a konvenció megengedi, hogy üres törzsű (body) választ adjunk, ilyenkor a válaszkód **204 (No Content)**. Ilyesfajta válasz előállításához is van segédfüggvény, illetve elég csak az `ActionResult` típust megadni visszatérési típusnak:
+### PUT - 200 OK
 
-``` csharp
-/**/[HttpPut("{id}")]
-    public ActionResult Put(int id, [FromBody] Product product)
-         //ActionResult visszatérési érték + Product paraméter
-/**/{
-        _productService.UpdateProduct(id, product);
-        return NoContent();
-/**/}
+A módosítás a konvenció szerint **200 (OK)** választ ad, mert a kliens a módosított erőforrást kapja vissza.
 
-/**/[HttpDelete("{id}")]
+``` csharp hl_lines="2 4"
+[HttpPut("{id}")]
+public ActionResult<Product> Put(int id, [FromBody] Product product)
+{
+    return _productService.UpdateProduct(id, product);
+}
+
+!!! tip "PUT és PATCH"
+    PUT mellett a módosításhoz használatos a PATCH is.
+    A PUT konvenció szerint teljes, míg a PATCH részleges felülírásnál használatos.
+    PATCH esetén általában valamilyen patch formátumú adatot küld a kliens, pl. [RFC 6902 - JSON Patch](https://tools.ietf.org/html/rfc6902).
+    A JSON Patch formátumot jelenleg csak a JSON korábbi sorosító (*Newtonsoft.Json*) [támogatja](https://docs.microsoft.com/en-us/aspnet/core/web-api/jsonpatch).
+
+!!! tip "204 No Content"
+    Módosítás esetében a konvenció megengedi, hogy üres törzsű (body) választ adjunk, ilyenkor a válaszkód **204 (No Content)**.
+
+### DELETE - 204 No Content
+
+A törlő műveleteknél a konvenció megengedi, hogy üres törzsű (body) választ adjunk, ilyenkor a válaszkód **204 (No Content)**.
+Ilyesfajta válasz előállításához is van segédfüggvény, illetve elég csak az `ActionResult` típust megadni visszatérési típusnak:
+
+``` csharp hl_lines="2 4-5"
+[HttpDelete("{id}")]
 public ActionResult Delete(int id)
-     //ActionResult visszatérési érték
-/**/{
-        _productService.DeleteProduct(id);
-        return NoContent();
-/**/}
+{
+    _productService.DeleteProduct(id);
+    return NoContent();
+}
 ```
 
-<div class="tip">
-
-PUT mellett a módosításhoz használatos a PATCH is. A PUT konvenció szerint teljes, míg a PATCH részleges felülírásnál használatos. PATCH esetén általában valamilyen patch formátumú adatot küld a kliens, pl. [RFC 6902 - JSON Patch](https://tools.ietf.org/html/rfc6902). A JSON Patch formátumot jelenleg csak a JSON korábbi sorosító (*Newtonsoft.Json*) [támogatja](https://docs.microsoft.com/en-us/aspnet/core/web-api/jsonpatch).
-
-</div>
-
-<div class="tip">
-
-Gyakori, hogy a PUT művelet esetében nem 204 No Content válasszal térünk vissza, hanem 200 OK státuszkóddal és a módosított erőforrással, hogy a kliens a tényleges érvényre jutott értékekkel befrissíthesse a saját adatait.
-
-</div>
-
-Próbáljuk kitörölni az újonnan felvett terméket Swaggerből/Fiddler-ből/Postman-ből (*DELETE* igés kérés az `api/products/<új id>` címre, üres törzzsel). Sikerülnie kell, mert még nincs rá idegen kulcs hivatkozás.
+Próbáljuk kitörölni az újonnan felvett terméket Swaggerből/Fiddler-ből/Postman-ből (*DELETE* igés kérés az `api/products/<új id>` címre, üres törzzsel).
+Sikerülnie kell, mert még nincs rá idegen kulcs hivatkozás.
 
 ## Hibakezelés
 
