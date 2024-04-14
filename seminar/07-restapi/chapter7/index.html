@@ -1,0 +1,1722 @@
+
+<!doctype html>
+<html lang="hu" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Tóth Tibor, Simon Gábor, Albert István, Szabó Gábor">
+      
+      
+        <link rel="canonical" href="https://bmeviauav23.github.io/aspnetcorebook/seminar/07-restapi/chapter7/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
+    
+    
+      
+        <title>ASP.NET Core webszolgáltatások I.-II. - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+      <link rel="stylesheet" href="../../../extra-material-theme.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="aut" data-md-color-primary="aut" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aspnet-core-webszolgaltatasok-i-ii" class="md-skip">
+          Kihagyás
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Élőfej">
+    <a href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-header__button md-logo" aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" data-md-component="logo">
+      
+  <img src="../../../logo-bme-aut.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BMEVIAUAV23 - Szoftverfejlesztés .NET platformra
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ASP.NET Core webszolgáltatások I.-II.
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="aut" data-md-color-primary="aut" data-md-color-accent="red"  aria-label="Váltás sötét témára"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Váltás sötét témára" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Váltás világos témára"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Váltás világos témára" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Keresés">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Törlés" aria-label="Törlés" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Keresés inicializálása
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav23/aspnetcorebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Lapok" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+  Tudnivalók
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../01-csharp1/chapter1/" class="md-tabs__link">
+          
+  
+  Laborok
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../homework/" class="md-tabs__link">
+          
+  
+  Házi feladat
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigáció" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-nav__button md-logo" aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" data-md-component="logo">
+      
+  <img src="../../../logo-bme-aut.png" alt="logo">
+
+    </a>
+    BMEVIAUAV23 - Szoftverfejlesztés .NET platformra
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav23/aspnetcorebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tudnivalók
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Tudnivalók
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Szoftverfejlesztés .NET platformra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../information/preface/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tudnivalók
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../information/contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hozzájárulás az anyaghoz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Laborok
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Laborok
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-csharp1/chapter1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C# alapok, szintaxis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-csharp2/chapter2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C# alapok II.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-linq/chapter3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LINQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-csharp4/chapter4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C# alapok IV.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-aspnetcore1/chapter5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ASP.NET Core alapszolgáltatások
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-efcore/chapter6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entity Framework Core I-II.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Házi feladat
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Házi feladat
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../homework/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Házi feladat tudnivalók
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../homework/example-spec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Példa kisHF specifikáció
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../homework/hw-points/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NagyHF pontrendszer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kiegeszito-anyagok-segedeszkozok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kiegészítő anyagok, segédeszközök
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiindulo-projektek-beuzemelese" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kiinduló projektek beüzemelése
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#az-ef-bekotese-az-aspnet-core-di-naplozo-konfiguralo-rendszereibe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Az EF bekötése az ASP.NET Core DI, naplózó, konfiguráló rendszereibe
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Az EF bekötése az ASP.NET Core DI, naplózó, konfiguráló rendszereibe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adatbazis-inicializalasa-code-first-migracioval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adatbázis inicializálása Code-First migrációval
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ef-entitasok-hasznalata-az-api-feluleten" class="md-nav__link">
+    <span class="md-ellipsis">
+      EF entitások használata az API felületen
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#koztes-reteg-alkalmazasa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Köztes réteg alkalmazása
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dto-osztalyok" class="md-nav__link">
+    <span class="md-ellipsis">
+      DTO osztályok
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bll-funkciok-implementacioja" class="md-nav__link">
+    <span class="md-ellipsis">
+      BLL funkciók implementációja
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BLL funkciók implementációja">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#egy-elem-lekerdezese" class="md-nav__link">
+    <span class="md-ellipsis">
+      Egy elem lekérdezése
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beszuras" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beszúrás
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modositas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Módosítás
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#torles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Törlés
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rest-konvenciok-alkalmazasa" class="md-nav__link">
+    <span class="md-ellipsis">
+      REST konvenciók alkalmazása
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hibakezeles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hibakezelés
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hibakezelés">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#400-bad-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      400 Bad Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#404-not-found-kontroller-szinten" class="md-nav__link">
+    <span class="md-ellipsis">
+      404 Not Found - kontroller szinten
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#404-not-found-globalis-kivetellekepezessel" class="md-nav__link">
+    <span class="md-ellipsis">
+      404 Not Found - globális kivételleképezéssel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#500-internal-server-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      500 Internal Server Error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azonositok-ellenorzese" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azonosítók ellenőrzése
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sajat-hibauzenet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saját hibaüzenet
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aszinkron-muveletek" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aszinkron műveletek
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vegallapot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Végállapot
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/bmeviauav23/aspnetcorebook/edit/master/docs/seminar/07-restapi/chapter7.md" title="Oldal szerkesztése" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="aspnet-core-webszolgaltatasok-i-ii">ASP.NET Core webszolgáltatások I.-II.<a class="headerlink" href="#aspnet-core-webszolgaltatasok-i-ii" title="Permanent link">&para;</a></h1>
+<h2 id="kiegeszito-anyagok-segedeszkozok">Kiegészítő anyagok, segédeszközök<a class="headerlink" href="#kiegeszito-anyagok-segedeszkozok" title="Permanent link">&para;</a></h2>
+<ul>
+<li>kapcsolódó GitHub repo: <a href="https://github.com/bmeviauav23/WebApiLab-kiindulo">https://github.com/bmeviauav23/WebApiLab-kiindulo</a></li>
+<li><a href="https://www.getpostman.com/">Postman</a> vagy <a href="https://www.telerik.com/download/fiddler">Fiddler Classic</a> HTTP kérések küldéséhez</li>
+</ul>
+<h2 id="kiindulo-projektek-beuzemelese">Kiinduló projektek beüzemelése<a class="headerlink" href="#kiindulo-projektek-beuzemelese" title="Permanent link">&para;</a></h2>
+<p>Klónozzuk le a publikus kiinduló projektet a GitHub-ról az alábbi paranccsal:</p>
+<div class="highlight"><pre><span></span><code>git clone https://github.com/bmeviauav23/WebApiLab-kiindulo.git
+</code></pre></div>
+<p>A kiinduló solution két .NET 8 osztálykönyvtárat foglal magába, melyek egy N-rétegű architektúra egy-egy rétegét valósítják meg:</p>
+<ul>
+<li><strong>WebApiLab.Dal</strong>: lényegében az Entity Framework gyakorlatok anyagát tartalmazza, ez az adatelérési rétegünk.<ul>
+<li>entitásdefiníciók</li>
+<li>kontext, modellkonfigurációval, kezdeti adatokkal</li>
+<li>connection string kezelés és SQL naplózás a korábbi gyakorlatok alapján</li>
+<li>migráció (még) nincs</li>
+</ul>
+</li>
+<li><strong>WebApiLab.Bll</strong>: ezt szánjuk az üzleti logikai rétegnek. Fő feladata, hogy a DAL-ra építve végrehajtsa az <code>Interfaces</code> mappában definiált műveleteket.<ul>
+<li>Interfaces - ez a BLL réteg specifikációja</li>
+<li>Services - ide kerülnek majd az üzleti logikát, ill. az interfészeket megvalósító osztály(ok)</li>
+<li>Dtos - csak később lesz szerepük, egyelőre nincsenek használva</li>
+<li>Exceptions - saját kivétel osztály, egyelőre nincs használva</li>
+</ul>
+</li>
+</ul>
+<p>Adjunk hozzá a solution-höz egy új C# nyelvű web API projektet (ASP.NET Core Web <strong>API</strong>, nem pedig Web App), a neve legyen <code>WebApiLab.Api</code>.</p>
+<p>A következő dialógusablakban válasszuk ki a <em>.NET 8</em> opciót. Az extrák közül <strong>ne</strong> kérjük ezeket: HTTPS, Docker, authentikáció. Viszont hagyjuk bepipálva a Controller és az OpenAPI támogatást. A generált projektből törölhetjük a minta API fájljait, azaz a <code>Weather</code> kezdetű fájlokat a projekt gyökeréből és a <code>Controllers</code> mappából.</p>
+<p>Adjuk hozzá függőségként:</p>
+<ul>
+<li>a <em>BLL</em> projektet (menu:projekten jobbklikk[Dependencies &gt; Add Project Reference…])</li>
+<li>a <em>Microsoft.EntityFrameworkCore.Tools</em> NuGet csomagot. Válasszunk olyan verziót, ami egyezik a DAL projekt Entity Framework Core függőségének verziójával.</li>
+</ul>
+<div class="admonition warning microsoft csomagok verziózása">
+<p class="admonition-title">Warning</p>
+<p>Olyan csomagoknál, ahol a verziószámozás követi az alap keretrendszer verziószámozását, törekedjünk arra, hogy a csomagok verziói konzisztensek legyenek egymással és a keretrendszer verziójával is - akkor is, ha egyébként a függőségi szabályok engednék a verziók keverését.
+Ha a projektünk például .NET 8-os keretrendszert használ, akkor az Entity Framework Core és egyéb extra ASP.NET Core csomagok közül is olyan verziót válasszunk, ahol legalább a főverzió egyezik, tehát valamilyen 8.x verziót. Ez nem azt jelenti, hogy az inkonzisztens verziók mindig hibát eredményeznek, inkább a projekt általában stabilabb, ha a főverziók közötti váltást egyszerre, külön migrációs folyamat (<a href="https://learn.microsoft.com/en-us/aspnet/core/migration/31-to-60">példa</a>) keretében végezzük.</p>
+</div>
+<h2 id="az-ef-bekotese-az-aspnet-core-di-naplozo-konfiguralo-rendszereibe">Az EF bekötése az ASP.NET Core DI, naplózó, konfiguráló rendszereibe<a class="headerlink" href="#az-ef-bekotese-az-aspnet-core-di-naplozo-konfiguralo-rendszereibe" title="Permanent link">&para;</a></h2>
+<p>A kontext konfigurálása az EF gyakorlat során - mivel ott egy sima konzol alkalmazást írtunk - a kontext <code>OnConfiguring</code> függvényében történt.
+Mivel az ASP.NET Core projekt beépítetten DI konténert is ad a számunkra, érdemes a kontextet a DI rendszerbe regisztrálni, hogy a projekten belül a modulok/osztályok függőségként tudják használni.
+A regisztrálás a legfelső szintű kódban történik (lásd ASP.NET Core bevezető gyakorlatot).</p>
+<p>A kontext regisztrálása a legfelső szintű kódban a DI konténerbe:</p>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddDbContext</span><span class="o">&lt;</span><span class="n">AppDbContext</span><span class="o">&gt;</span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="n">o</span><span class="p">.</span><span class="n">UseSqlServer</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="n">Configuration</span><span class="p">.</span><span class="n">GetConnectionString</span><span class="p">(</span><span class="s">&quot;DefaultConnection&quot;</span><span class="p">)));</span>
+</code></pre></div>
+<p>Az EF naplózást az ASP.NET Core naplózó rendszere végzi, amit a kiinduló builder már inicializál, így ezzel kapcsolatban nincs teendőnk.
+Viszont egy új kontext konstruktorra lesz szükségünk, ami <code>DbContextOptions&lt;AppDbContext&gt;</code>-et vár.</p>
+<p>A kontext <code>OnConfiguring</code>-jára pedig nincs szükség, úgyhogy töröljük ki, helyére tegyük az új konstruktort:</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">AppDbContext</span><span class="p">(</span><span class="n">DbContextOptions</span><span class="o">&lt;</span><span class="n">AppDbContext</span><span class="o">&gt;</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
+<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Az Entity Framework gyakorlat alapján hozzunk létre egy új LocalDB adatbázist egy választott névvel, pl. neptun kód, northwind, stb. Az SQL Server Object Explorer-ből a connection string-et lopjuk el. (menu:nyissuk le az adatbáziskapcsolatot[jobbklikk az adatbázison &gt; Properties &gt; a Properties ablakból a <em>Connection String</em> értéke]).</p>
+<p>Az <em>appsettings.Development.json</em>-ba vegyük fel a connection string-et és a generált SQL megfigyeléséhez a <em>Microsoft</em> kategóriájú naplók minimum szintjét csökkentsük <em>Information</em>-re.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;Logging&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;LogLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;Default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information&quot;</span><span class="p">,</span>
+<span class="hll"><span class="w">      </span><span class="nt">&quot;Microsoft&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information&quot;</span><span class="p">,</span>
+</span><span class="w">    </span><span class="p">}</span>
+<span class="hll"><span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="c1">//vessző bekerült</span>
+</span><span class="hll"><span class="w">  </span><span class="nt">&quot;ConnectionStrings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">     </span><span class="nt">&quot;DefaultConnection&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;connection string&gt;&quot;</span>
+</span><span class="hll"><span class="w">  </span><span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Escapelt karakterek</p>
+<p>Kukac (<code>@</code>) ilyenkor nem kell a connection string elé, mert ez JSON.</p>
+<p>A connection string különleges karaktereit a beillesztés után a VS alapesetben automatikusan escape-eli. Ha az automatikus escape-elés mégsem történik meg, manuálisan kell ezt megtennünk, különben <em>A network-related or instance-specific error occurred while establishing a connection to SQL Server</em> hibát kaphatunk.</p>
+<p>Az adatbáziskapcsolatot azért kellhet lenyitni, hogy az SQL Server Object Explorer csatlakozzon is az új adatbázishoz, ezután tudjuk megszerezni a connection stringet.</p>
+</div>
+<h3 id="adatbazis-inicializalasa-code-first-migracioval">Adatbázis inicializálása Code-First migrációval<a class="headerlink" href="#adatbazis-inicializalasa-code-first-migracioval" title="Permanent link">&para;</a></h3>
+<p>Fordítsuk a teljes solution-t, állítsuk be indítandó (startup) projektnek az új Web API projektet (menu:jobbklikk a projekten[Set as Startup Project]).
+A <em>Package Manager Console</em>-t nyissuk meg, és állítsuk be Default Project-ként a DAL projektet.</p>
+<p>.NET 8-ban a migrációk csak akkor <a href="https://github.com/dotnet/SqlClient/issues/2239">működnek rendesen</a>, ha az API projekten kikapcsoljuk az InvariantGlobalization beállítást. Ezt a <em>WebApiLab.Api.csproj</em> fájlban tehetjük meg:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;InvariantGlobalization&gt;</span>false<span class="nt">&lt;/InvariantGlobalization&gt;</span>
+</code></pre></div>
+<p>Készíttessük el a migrációt és futtassuk is le:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Add-Migration</span> <span class="n">Init</span>
+<span class="nb">Update-Database</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Projektek a migrációhoz</p>
+<p>Fontos, hogy a fenti parancs két projektet ismerjen: azt, amelyikben a kontext van, ill. a kontextet használó futtatható projektet.
+A VS Package Manager Console-jában futtatva alapértelmezésben az előbbit a Default Project értéke adja meg, utóbbit az indítandó projekt.
+Továbbá ezeket a projekteket meg lehet adni <a href="https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/powershell#common-parameters">paraméterként</a> is.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Migráció során lefut a Program.cs is?</p>
+<p>Igen, itt mutatkozik meg, hogy a migráció lényegében egy teljes alkalmazásindítást jelent a <code>Program</code> osztályon keresztül: inicializálódik a DI konténer, a konfigurációs objektum stb.</p>
+</div>
+<p>Ellenőrizzük az SQL Server Object Explorer-ben, hogy rendben lefutott-e a migráció, létrejöttek-e az adatbázis objektumok, feltöltődtek-e a táblák.</p>
+<h2 id="ef-entitasok-hasznalata-az-api-feluleten">EF entitások használata az API felületen<a class="headerlink" href="#ef-entitasok-hasznalata-az-api-feluleten" title="Permanent link">&para;</a></h2>
+<p>Bár architektúra szempontból nem a legszebb, a BLL réteget gyakorlatilag mellőzve közvetlenül is használhatjuk az EF entitásokat a kontrollerek megvalósításánál. Ehhez használhatjuk a Visual Studio Entity Framework-ös Controller sablonjait, amit most csak azért használunk, hogy gyorsan legyen egy működő API felületünk.</p>
+<p>Adjunk hozzá egy új Controllert a <em>Controllers</em> mappába (menu:Add[Controller &gt; bal fában Common &gt; API &gt; jobb oldalon API Controller with read/write actions]) <code>EFProductController</code> néven.</p>
+<figure>
+<p><a class="glightbox" href="images/new-ef-controller1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="new ef controller" src="images/new-ef-controller1.png" /></a></p>
+</figure>
+<p>Válasszuk ki az <code>AppDbContext</code>-t, és a <code>Product</code> entitást. Az új kontrollerben már láthatjuk is a scaffoldolt CRUD műveleteket.</p>
+<figure>
+<p><a class="glightbox" href="../images/new-ef-controller2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="new ef controller" src="../images/new-ef-controller2.png" /></a></p>
+</figure>
+<div class="admonition warning">
+<p class="admonition-title">névterek</p>
+<p>Figyeljünk rá, hogy <strong>ne</strong> a <code>Dtos</code> névtérből adjuk meg a DTO típust a tényleges entitástípus helyett.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Generálás hibára fut</p>
+<p>A generálás során <em>Unable to create an object of type <code>AppDbContext</code>.</em> hibát kaphatunk. A hiba a kódgeneráló eszközben keresendő, a <a href="https://github.com/dotnet/Scaffolding/issues/1875">kapcsolódó GitHub issue-ban</a> találunk egy lehetséges megoldást is a problémára, ami elő van készítve a kiinduló projektben is.</p>
+</div>
+<p>A legenerálódó kontroller már használható is. Állítsuk át a zöld nyíl mellett az indítási konfigurációt a projektnevesre, hogy ne IIS Express induljon és így lássuk a konzolon a naplót.
+Indítsuk a projektet és próbáljuk például lekérni az összes terméket az <strong>api/efproduct</strong> címről vagy a Swagger felületről.</p>
+<figure>
+<p><a class="glightbox" href="../images/swagger.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../images/swagger.png" /></a></p>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Böngésző választása debugoláshoz</p>
+<p>Érdemes a zöld nyíl melletti lenyíló menüben olyan böngészőt megadni (Chrome, Firefox), ami értelmes formában meg tudja jeleníteni a nyers JSON adatokat, ha nem Swagger felületről tesztelünk.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Alapértelmezett URL útvonal</p>
+<p>Az alapértelmezésben megnyitandó URL útvonalat a projekt tulajdonságok között adhatjuk meg: menu:zöld nyíl melletti legördülő menü[\&lt;Projektnév&gt; Debug Properties].
+Ide egy a gyökércímhez képesti relatív útvonalrészt kell beírni. (pl. <em>api/efproduct</em>)</p>
+</div>
+<p>Figyeljük meg, hogy a controller a konstruktorban igényli meg a DI-tól az EF kontextet, amit a szokásos módon osztályváltozóban tárol el.</p>
+<h2 id="koztes-reteg-alkalmazasa">Köztes réteg alkalmazása<a class="headerlink" href="#koztes-reteg-alkalmazasa" title="Permanent link">&para;</a></h2>
+<p>A rétegezett architektúra elveit követve gyakori eljárás, hogy a kontroller nem éri el közvetlenül az EF kontextet, hanem csak egy extra rétegen keresztül. A kontroller projekt így függetleníthető az EF modelltől.</p>
+<p>Ehhez a megoldáshoz készítsünk külön kontroller változatot. A <em>Controllers</em> mappába hozzunk létre egy kontrollert (menu:Add[Controller &gt; bal fában Common &gt; API &gt; jobb oldalon API Controller with read/write actions]) <code>ProductsController</code> néven.</p>
+<p>A BLL projekt Services mappájába hozzunk létre egy új osztályt <code>ProductService</code> néven.
+Az új osztály kontroller számára nyújtandó funkcióit az <code>IProductService</code> adja meg.</p>
+<p>Implementáljuk ezt az interfészt, a kiinduló implementációt generáltassuk a Visual Studio-val.
+Konstruktorban várja a függőségként a kontextet.
+A kontext segítségével implementáljuk normálisan a <code>GetProducts</code> függvényt.
+Eager Loading* használatával az egyes termékekhez a kapcsolódó kategóriát és megrendeléseket is adjuk vissza.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ProductService</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IProductService</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">_context</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">ProductService</span><span class="p">(</span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetProducts</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span>
+<span class="w">            </span><span class="p">.</span><span class="n">Include</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Category</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">Include</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ProductOrders</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="n">ThenInclude</span><span class="p">(</span><span class="n">po</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">po</span><span class="p">.</span><span class="n">Order</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">products</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="cm">/*Többi függvény generált implementációja*/</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Injektáljunk <code>IProductService</code>-t a <code>ProductsController</code>-be.</p>
+<div class="highlight"><pre><span></span><code><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IProductService</span><span class="w"> </span><span class="n">_productService</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="nf">ProductsController</span><span class="p">(</span><span class="n">IProductService</span><span class="w"> </span><span class="n">productService</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">_productService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">productService</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Adjuk meg a DI alrendszernek, hogy hogyan kell egy <code>IProductService</code> típusú függőséget létrehozni. A legfelső szintű kódba:</p>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddTransient</span><span class="o">&lt;</span><span class="n">IProductService</span><span class="p">,</span><span class="w"> </span><span class="n">ProductService</span><span class="o">&gt;</span><span class="p">();</span>
+</code></pre></div>
+<p>A függőséginjektálás úgy működik, hogy a kontrollereket is a központi DI komponens példányosítja, és ilyenkor megvizsgálja a konstruktor paramétereket.
+Ha a konténerben talál alkalmas beregisztrált osztályt, akkor azt létrehozza és átadja a konstruktornak.
+Ezt hívjuk konstruktor injektálásnak.
+Ha a létrehozandó függőségnek is vannak konstruktor paraméterei, akkor azokat is megpróbálja feloldani, így rekurzívan a teljes függőségi objektum hierarchiát le tudja kezelni (ha abban nincs irányított kör).
+Ezt hívjuk autowiring-nek.</p>
+<p>A regisztráció során több lehetőségünk is van.
+Egyrészt nem kötelező interfészt megadni egy osztály beregisztrálásához, az osztályt önmagában is be lehet regisztrálni, ilyenkor a konstruktorban is osztályként kell elkérni a függőségeket.</p>
+<p>Háromféle példányosítási stratégiával regisztrálhatjuk be az osztályainkat:</p>
+<ul>
+<li><strong>Transient</strong>: minden egyes injektálás során új példány jön létre</li>
+<li><strong>Scoped</strong>: HTTP kérésenként egy példány kerül létrehozásra és a kérésen belül mindenkinek ez lesz injektálva</li>
+<li><strong>Singleton</strong>: mindenkinek ugyanaz az egy példány kerül átadásra kéréstől függetlenül</li>
+</ul>
+<p>Írjunk új <code>Get()</code> változatot az eredeti helyett a <code>ProductsController</code>-be az <code>IProductService</code> függőséget felhasználva:</p>
+<div class="highlight"><pre><span></span><code><span class="na">[HttpGet]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProducts</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Próbáljuk ki (<code>api/products</code>).</p>
+<p>Hibát kapunk, mert a <code>ProductService</code> lekérdező függvénye eager loading-gal (<code>Include</code>) navigációs property-ket is kitölt, így könnyen hivatkozási kör jön létre, amit a JSON sorosító alapértelmezésben kivétellel jutalmaz.
+A sorosítást a keretrendszer végzi, a kontrollerfüggvény visszatérési értékét sorosítja a HTTP tartalomegyeztetési szabályok szerint.
+Böngésző kliens esetén alapesetben a JSON formátum lesz a befutó. Persze a sorosítás ennél közvetlenebbül is <a href="https://docs.microsoft.com/en-us/aspnet/core/web-api/advanced/formatting">konfigurálható</a>, ha szükséges.</p>
+<p>A kontrollerek által használt JSON sorosítót konfigurálhatjuk a legfelső szintű kódban, például beállíthatjuk, hogy ha egy objektumot már korábban sorosított, akkor csak hivatkozzon rá és ne sorosítsa újra.</p>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddControllers</span><span class="p">()</span><span class="w"> </span><span class="c1">//; törölve</span>
+<span class="w">    </span><span class="p">.</span><span class="n">AddJsonOptions</span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">JsonSerializerOptions</span><span class="p">.</span><span class="n">ReferenceHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReferenceHandler</span><span class="p">.</span><span class="n">Preserve</span><span class="p">);</span>
+</code></pre></div>
+<p>Így már sikerülni fog a sorosítás, egy elég furcsa JSON-t láthatunk, ahol az első elem egy nagyobb objektumgráfot leíró rész, a többi elem pedig csak hivatkozás.
+Ennek a megoldásnak a hátránya, hogy a kliensoldali sorosítónak is támogatnia kell ezt a sorosítási logikát, a JSON-on belüli kereszthivatkozások kezelését.
+Emiatt kommentezzük is ki ezt a beállítást, keressünk más megoldást.</p>
+<h2 id="dto-osztalyok">DTO osztályok<a class="headerlink" href="#dto-osztalyok" title="Permanent link">&para;</a></h2>
+<p>Láthattuk, hogy az entitástípusok közvetlen sorosítása gyakran nehézségekbe ütközik.
+A modell kifejezetten az EF számára lett megalkotva, illetve hogy a lekérdező műveleteket minél kényelmesebben végezhessük.
+A kliensoldal számára érdemes külön modellt megalkotni, egy ún. DTO (<em>Data Transfer Object</em>) modellt, ami a kliensoldal igényeit veszi figyelembe: <strong>pontosan</strong> annyi adatot és <strong>olyan szerkezetben</strong> tartalmaz, amire a kliensnek szüksége van.</p>
+<p>A <em>BLL</em> projektben jelenleg egy nagyon egyszerű DTO modell található a <em>Dtos</em> mappában:</p>
+<ul>
+<li>rekord típusok alkotják a modellt</li>
+<li>nincs benne minden navigációs property, pl. <code>Category.Products</code></li>
+<li>nincs benne a kapcsolótáblát reprezentáló entitás</li>
+<li>a termékből közvetlenül elérhetők a megrendelések</li>
+</ul>
+<p>A különféle modellek közötti leképezésnél jól jönnek az ún. <em>object mapper</em>-ek, melyek segítenek elkerülni a leképezésnél nagyon gyakori repetitív kódokat, mint amilyen az <code>x.Prop = y.Prop</code> jellegű propertyérték-másolgatás.</p>
+<p>Adjuk hozzá az API és a BLL projekthez az <em>AutoMapper</em> csomagot.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tranzitív nuget referenciák</p>
+<p>Alap esetben elég lenne csak a BLL projekthez felvenni a nuget csomagot, mivel az API projekt hivatkozik a BLL-re, az az ott behivatkozott csomagokat is láthatja (mint ahogy az EF-et is hivatkoztuk fentebbi rétegekből).
+Az AutoMapper-t viszont explicit be kell hivatkoznunk az API projektbe is, mert a BLL-ben behivatkozott, class library-val kompatibilis csomag nem tartalmazza az ASP.NET Core-hez szükséges konfigurációs függvényeket.</p>
+</div>
+<p>A leképezési konfigurációkat profilokba szervezve adhatjuk meg. Adjunk hozzá a BLL projekthez egy új osztályt <code>WebApiProfile</code> néven a <em>Dtos</em> mappába.
+Az AutoMapper konvenció alapon működik, tehát a DTO-entitás párokon kívül nem kell megadni például egyesével a property- vagy konstruktorparaméter-leképezéseket, ha a nevek alapján a leképezés kikövetkeztethető.
+Külön konfigurálásra csak a nem-triviális esetekben van szükség.</p>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">AutoMapper</span><span class="p">;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">WebApiLab.Bll.Dtos</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">WebApiProfile</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Profile</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">WebApiProfile</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CreateMap</span><span class="o">&lt;</span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span><span class="p">,</span><span class="w"> </span><span class="n">Product</span><span class="o">&gt;</span><span class="p">().</span><span class="n">ReverseMap</span><span class="p">();</span>
+<span class="w">        </span><span class="n">CreateMap</span><span class="o">&lt;</span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Order</span><span class="p">,</span><span class="w"> </span><span class="n">Order</span><span class="o">&gt;</span><span class="p">().</span><span class="n">ReverseMap</span><span class="p">();</span>
+<span class="w">        </span><span class="n">CreateMap</span><span class="o">&lt;</span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Category</span><span class="p">,</span><span class="w"> </span><span class="n">Category</span><span class="o">&gt;</span><span class="p">().</span><span class="n">ReverseMap</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A DI konténerhez adjuk hozzá és konfiguráljuk a leképezési szolgáltatást.</p>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddAutoMapper</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">WebApiProfile</span><span class="p">));</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Típusparaméter</p>
+<p>Az AutoMapper az <code>AddAutoMapper</code> paramétereként megadott típust definiáló szerelvényben fogja a profilt keresni. A konkrét típusnak nincs más jelentősége, nem kell feltétlenül profilnak lenni.</p>
+</div>
+<p>Injektáéjuk be a leképzőt reprezentáló <code>IMapper</code> típusú objektumot a <code>ProductService</code>-be.</p>
+<div class="highlight"><pre><span></span><code><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">_context</span><span class="p">;</span>
+<span class="hll"><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IMapper</span><span class="w"> </span><span class="n">_mapper</span><span class="p">;</span>
+</span>
+<span class="hll"><span class="k">public</span><span class="w"> </span><span class="nf">ProductService</span><span class="p">(</span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">IMapper</span><span class="w"> </span><span class="n">mapper</span><span class="p">)</span>
+</span><span class="p">{</span>
+<span class="w">    </span><span class="n">_context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="n">_mapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapper</span><span class="p">;</span>
+</span><span class="p">}</span>
+</code></pre></div>
+<p>A <code>ProductsController</code>-ben, az <code>IProductService</code>-ben és a <code>ProductService</code>-ben az entitásokra mutató névteret cseréljük ki a DTO-kra mutatóra:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//using WebApiLab.Dal.Entities;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">WebApiLab.Bll.Dtos</span><span class="p">;</span>
+</code></pre></div>
+<p>Írjuk át a lekérdezést a <code>ProductService</code>-ben a leképzőt alkalmazva:</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetProducts</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">ProjectTo</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_mapper</span><span class="p">.</span><span class="n">ConfigurationProvider</span><span class="p">)</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">AsEnumerable</span><span class="p">();</span>
+</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">products</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Hogy ne zavarjanak be a Swaggernek az <code>EFProductController</code>-ben használt entitás osztályok, töröljük ki a Controllers mappából az <code>EFProductController</code>-t!</p>
+<p>Próbáljuk ismét meghívni böngészőből, figyeljük meg a naplóban, hogy milyen SQL lekérdezés fut le.</p>
+<div class="admonition tip">
+<p class="admonition-title">Modell rétegek</p>
+<p>A többrétegű architektúránál elméletben minden rétegnek külön objektummodellje kellene, hogy legyen DAL: EF entitások, BLL: <a href="https://en.wikipedia.org/wiki/Domain_model">domain objektumok</a>,
+Kontroller: DTO-k, viszont ha a domain objektumok nem visznek plusz funkciót a rendszerbe, akkor el szoktuk hagyni.</p>
+</div>
+<p>A DTO leképezést más rétegben is végezhetnénk. Egyes megközelítések szerint a kontroller réteg feladata lenne, azonban, ha az EF lekérdezésekkel összevonva végezzük a leképezést, akkor kiaknázhatjuk a <em>query result shaping</em> előnyeit, azaz csak azt kérdezzük le az adatbázisból, amire a leképezésnek szüksége van. Az AutoMapper <code>ProjectTo</code> függvénye ráadásul mindezt el is intézi helyettünk a leképezési konfiguráció alapján.</p>
+<p>A <code>ProjectTo</code> metódust felfoghatjuk a továbbiakban egy LINQ-s <code>Select()</code> operátornak, annyi különbséggel, hogy az AutoMapper generálja azt az <code>Expression</code>-t, ami alapján előáll majd az eredmény.</p>
+<div class="admonition tip">
+<p class="admonition-title">ProjectTo</p>
+<p>A <code>ProjectTo</code> speciálisan <code>IQueryable</code>-en működik.
+Ha csak simán memóriabeli objektumok között szeretnénk leképezni, akkor az <code>IMapper</code> <code>Map&lt;&gt;</code> függvényét hívjuk.
+A memóriabeli leképezésnek hátránya, hogy EF szinten gondoskodnunk kell róla, hogy <code>Include</code> hívásokkal a leképezéshez szükséges kapcsolódó entitásokat is lekérdezzük.
+A <code>ProjectTo</code> ezt is elintézi helyettünk.</p>
+</div>
+<h2 id="bll-funkciok-implementacioja">BLL funkciók implementációja<a class="headerlink" href="#bll-funkciok-implementacioja" title="Permanent link">&para;</a></h2>
+<h3 id="egy-elem-lekerdezese">Egy elem lekérdezése<a class="headerlink" href="#egy-elem-lekerdezese" title="Permanent link">&para;</a></h3>
+<p>Valósítsunk meg további interfész által előírt funkciókat a <code>ProductService</code> osztályban:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">GetProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span>
+<span class="w">            </span><span class="p">.</span><span class="n">ProjectTo</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_mapper</span><span class="p">.</span><span class="n">ConfigurationProvider</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
+<span class="w">            </span><span class="o">??</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EntityNotFoundException</span><span class="p">(</span><span class="s">&quot;Nem található a termék&quot;</span><span class="p">);</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="beszuras">Beszúrás<a class="headerlink" href="#beszuras" title="Permanent link">&para;</a></h3>
+<p>Ez hasonló az EF gyakorlaton látottakhoz, csak itt nem kell legyártanunk az új <code>Product</code> példányt, paraméterként kapjuk és memóriában leképezzük az enititásra. A <code>SaveChanges</code> hívás után a kulcs értéke már ki lesz töltve (adatbázis osztja ki a kulcsot).</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">InsertProduct</span><span class="p">(</span><span class="n">Product</span><span class="w"> </span><span class="n">newProduct</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_mapper</span><span class="p">.</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">newProduct</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">efProduct</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">GetProduct</span><span class="p">(</span><span class="n">efProduct</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="modositas">Módosítás<a class="headerlink" href="#modositas" title="Permanent link">&para;</a></h3>
+<p>Konvenció szerint külön paraméterként szokták átadni a módosítandó elem azonosítóját és az új értékeket összefogó példányt. Leképezés után összeállítunk egy olyan entitás példányt, mint amilyet az adatbázisból kérdeztünk volna le - viszont ez a példány nem lesz a kontext látókörében. Az <code>Attach</code> függvény hasonló az <code>Add</code>-hoz, hozzáadja a kontext nyilvántartásához a példányt, de az <code>Attach</code> alapesetben nem jelöli meg a státuszt, marad változatlan (<em>Unchanged</em>). Explicit megjelöljük változottként, a változást végül a <code>SaveChanges</code> érvényesíti.</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">UpdateProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">,</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_mapper</span><span class="p">.</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">updatedProduct</span><span class="p">);</span>
+<span class="w">        </span><span class="n">efProduct</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">productId</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_context</span><span class="p">.</span><span class="n">Attach</span><span class="p">(</span><span class="n">efProduct</span><span class="p">).</span><span class="n">State</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EntityState</span><span class="p">.</span><span class="n">Modified</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<div class="tip">
+
+Alternatíva lehetne még ennél a függvénynél, hogy lekérdezzük azonosító (`Id`) alapján az entitást és AutoMapperrel a lekérdezett objektumba mappeljük a DTO-t. Ebben az esetben nincs szükség `Attach`-ra és állapotkezelésre sem, viszont extra lekérdezéssel jár.
+
+</div>
+
+<h3 id="torles">Törlés<a class="headerlink" href="#torles" title="Permanent link">&para;</a></h3>
+<p>Egy trükkel elkerülhetjük, hogy le kelljen kérdezni a törlendő terméket. Az azonosító alapján előállítunk memóriában egy példányt a megfelelő kulccsal, majd <code>Remove</code> függvénnyel hozzáadjuk a kontexthez. A <code>Remove</code> törlendőnek jelöli a példányt.</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">DeleteProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span><span class="p">(</span><span class="k">null</span><span class="o">!</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">productId</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="n">_context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<h2 id="rest-konvenciok-alkalmazasa">REST konvenciók alkalmazása<a class="headerlink" href="#rest-konvenciok-alkalmazasa" title="Permanent link">&para;</a></h2>
+<p>A REST megközelítés nem csak átviteli közegnek tekinti a HTTP-t, hanem a protokoll részeit felhasználja, hogy kiegészítő információkat vigyen át. Emiatt előnyös lenne, ha nagyobb ellenőrzésünk lenne a HTTP válasz felett - szerencsére az ASP.NET Core biztosítja ehhez a megfelelő API-kat.</p>
+<p>Egyik legegyszerűbb ilyen irányelv, hogy a lekérdezések eredményeként, ha megtaláltuk és visszaadtuk a kért adatokat, akkor <strong>200 (OK)</strong> HTTP válaszkódot adjunk.</p>
+<div class="tip">
+
+A HTTP kérést érintő irányelvekről egy jó összefoglaló elérhető [itt](https://www.restapitutorial.com/lessons/httpmethods.html).
+
+</div>
+
+<p>Az eddig megírt <code>Get()</code> függvényünk most is <strong>200 (OK)</strong>-ot ad, ezt le is ellenőrizhetjük a böngészőnk hálózati monitorozó eszközében.</p>
+<div class="tip">
+
+A HTTP kommunikáció megfigyelésére használhatjuk a böngészők beépített eszközeit, mint amilyen a [Firefox Developer Tools](https://developer.mozilla.org/en-US/docs/Tools), illetve [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/). Általában az kbd:\[F12\] billentyűvel aktiválhatók. Emellett, ha egy teljesértékű HTTP kliensre van szükségünk, amivel például könnyen tudunk nem csak GET kéréseket küldeni, akkor a [Postman](https://www.getpostman.com/) és a [Fiddler Classic](https://www.telerik.com/download/fiddler) külön telepítendő eszközök ajánlhatók. A Fiddler mint proxy megoldás egy Windows gépen folyó HTTP kommunikáció megfigyelésére is alkalmas.
+
+</div>
+
+<p>Első körben a két lekérdező függvényt írjuk át úgy, hogy a HTTP válaszkódokat explicit megadjuk. A jelenlegi legmodernebb mód ehhez az <code>ActionResult&lt;&gt;</code> használata. Elég <code>T</code>-t visszaadnunk a függvényben, automatikusan <code>ActionResult&lt;T&gt;</code> típussá konvertálódik. Tehát elvileg írhatnánk ezt:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//NEM FORDUL!</span>
+<span class="cm">/**/</span><span class="p">[</span><span class="n">HttpGet</span><span class="p">]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">()</span>
+<span class="w">        </span><span class="c1">//ActionResult&lt;T&gt; visszatérési érték</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProducts</span><span class="p">();</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<p>Azonban ez nem fordul, mert interfész típus esetén nem működik a konverzió. Konkrét típust, pl. egy listát kell megadnunk.</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="p">[</span><span class="n">HttpGet</span><span class="p">]</span>
+<span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">()</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProducts</span><span class="p">().</span><span class="n">ToList</span><span class="p">();</span><span class="w"> </span><span class="c1">//ToList bekerült</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<p>Írjuk meg ugyanígy a másik <code>Get</code> függvényt is:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="p">[</span><span class="n">HttpGet</span><span class="p">(</span><span class="s">&quot;{id}&quot;</span><span class="p">)]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">//ActionResult&lt;Product&gt; visszatérési érték</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProduct</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<p>Próbáljuk ki mindkét kontroller függvényt (<em>api/products</em>, <em>api/products/1</em>), ellenőrizzük a státuszkódokat is.</p>
+<p>Ami fura, hogy még mindig nem állítottunk explicit státuszkódokat. A logikánk most még nagyon egyszerű, csak a hibamentes ágat kezeltük, így eddig az <code>ActionResult</code> alapértelmezései megoldották, hogy <strong>200 (OK)</strong>-ot kapjunk.</p>
+<p>Most viszont következzen egy létrehozó művelet:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="p">[</span><span class="n">HttpPost</span><span class="p">]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Post</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">product</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">//ActionResult&lt;T&gt; visszatérési érték + Product paraméter</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">InsertProduct</span><span class="p">(</span><span class="n">product</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">CreatedAtAction</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">Get</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">created</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">created</span><span class="p">);</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<p>Itt már látszik az <code>ActionResult</code> haszna. A konvenciónak megfelelően 201-es kódot akarunk visszaadni. Ehhez a <code>ControllerBase</code> ősosztály biztosít segédfüggvényt. A segédfüggvény olyan <code>ActionResult</code> leszármazottat ad vissza, ami 201-es kódot szolgáltat a kliensnek. Másik konvenció, hogy a <em>Location</em> HTTP fejlécben legyen egy URL az új termék lekérdező műveletének meghívásához. Ezt az URL-t rakjuk össze a <code>CreatedAtAction</code> paraméterei révén.</p>
+<p>Gyakori, hogy a lefele irányú kommunikáció során (kliens felé) bővebb adathalmaz kerül leküldésre, mint amit egy létrehozáskor vagy módosításkor várunk. Esetünkben is az <code>Orders</code> és a <code>Category</code> propertyk létrehozáskor feleslegesek. Erre a célra jobb egy külön DTO-t létrehozni, ami csak a megfelelő adatokat tartalmazza. Most ideiglenesen tegyük nullozhatóvá ezt a két propertyt.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="n">Product</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/*többi property*/</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Category</span><span class="o">?</span><span class="w"> </span><span class="n">Category</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">//? módosító bekerült</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;?</span><span class="w"> </span><span class="n">Orders</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">//? módosító bekerült</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Próbáljuk ki a műveletet Swagger felületről. Egy <code>Product</code>-ot kell felküldenünk. Erre egy példa érték:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;Name&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Pálinka&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;UnitPrice&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">4000</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;ShipmentRegion&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;CategoryId&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="warning">
+
+Ha Fiddlerből vagy Postmanből tesztelünk, ne felejtsük el a *Content-Type* fejlécet **application/json**-re állítani! Figyeljük meg a kapott választ. A válaszból másoljuk ki a *Location* fejlécből az URL-t és hívjuk meg böngészőből.
+
+</div>
+
+<p>Fiddler Classic példa POST hívásra:</p>
+<figure>
+<a class="glightbox" href="images/aspnetcorerest-fiddlerpost.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="images/aspnetcorerest-fiddlerpost.png" alt="Fiddler - POST küldése" /></a>
+</figure>
+
+<p>A módosító, törlő műveleteknél a konvenció megengedi, hogy üres törzsű (body) választ adjunk, ilyenkor a válaszkód <strong>204 (No Content)</strong>. Ilyesfajta válasz előállításához is van segédfüggvény, illetve elég csak az <code>ActionResult</code> típust megadni visszatérési típusnak:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="p">[</span><span class="n">HttpPut</span><span class="p">(</span><span class="s">&quot;{id}&quot;</span><span class="p">)]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="w"> </span><span class="nf">Put</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">product</span><span class="p">)</span>
+<span class="w">         </span><span class="c1">//ActionResult visszatérési érték + Product paraméter</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="n">_productService</span><span class="p">.</span><span class="n">UpdateProduct</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">NoContent</span><span class="p">();</span>
+<span class="cm">/**/</span><span class="p">}</span>
+
+<span class="cm">/**/</span><span class="p">[</span><span class="n">HttpDelete</span><span class="p">(</span><span class="s">&quot;{id}&quot;</span><span class="p">)]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="w"> </span><span class="nf">Delete</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w">     </span><span class="c1">//ActionResult visszatérési érték</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="n">_productService</span><span class="p">.</span><span class="n">DeleteProduct</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">NoContent</span><span class="p">();</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<div class="tip">
+
+PUT mellett a módosításhoz használatos a PATCH is. A PUT konvenció szerint teljes, míg a PATCH részleges felülírásnál használatos. PATCH esetén általában valamilyen patch formátumú adatot küld a kliens, pl. [RFC 6902 - JSON Patch](https://tools.ietf.org/html/rfc6902). A JSON Patch formátumot jelenleg csak a JSON korábbi sorosító (*Newtonsoft.Json*) [támogatja](https://docs.microsoft.com/en-us/aspnet/core/web-api/jsonpatch).
+
+</div>
+
+<div class="tip">
+
+Gyakori, hogy a PUT művelet esetében nem 204 No Content válasszal térünk vissza, hanem 200 OK státuszkóddal és a módosított erőforrással, hogy a kliens a tényleges érvényre jutott értékekkel befrissíthesse a saját adatait.
+
+</div>
+
+<p>Próbáljuk kitörölni az újonnan felvett terméket Swaggerből/Fiddler-ből/Postman-ből (<em>DELETE</em> igés kérés az <code>api/products/&lt;új id&gt;</code> címre, üres törzzsel). Sikerülnie kell, mert még nincs rá idegen kulcs hivatkozás.</p>
+<h2 id="hibakezeles">Hibakezelés<a class="headerlink" href="#hibakezeles" title="Permanent link">&para;</a></h2>
+<p>Eddig főleg csak a hibamentes ágakat (happy path) néztük. A REST konvenciók rendelkeznek arról is, hogy bizonyos hibahelyezetekben milyen <a href="https://httpstatuses.com">HTTP választ</a> illik adni, például ha a kérésben hivatkozott azonosító nem létezik - 404-es hiba a bevett eljárás. Státuszkódok szempontjából a korábban idézett oldal ad segítséget, a válasz törzsében a hibaüzenet szerkezete tekintetében az <a href="https://tools.ietf.org/html/rfc7807">RFC 7807</a> ad iránymutatást az ún. <em>Problem Details</em> típusú válaszok bevezetésével. Az ASP.NET Core 2.1-es verzió óta támogatja a <em>Problem Details</em> válaszokat, és általában automatikusan ilyen válaszokat küld.</p>
+<h3 id="400-bad-request">400 Bad Request<a class="headerlink" href="#400-bad-request" title="Permanent link">&para;</a></h3>
+<p>Kezdjük a kliens által küldött nem helyes adatokkal. Ez a hibakód nem összekeverendő a 415-tel, ahol az adat formátuma nem megfelelő (XML vagy JSON): ezt általában nem kell kézzel lekezeljük, mivel ezt az ASP.NET megteszi helyettünk. 400-zal olyan hibákat szoktunk lekezelni, ahol a küldött adat formátuma megfelelő, de valamilyen saját validációs logikának nem felel meg a kapott objektum, pl.: egységár nem lehet negatív stb.</p>
+<p>Itt használjuk fel a .NET ún. <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation#built-in-attributes"><em>Data Annotation</em> attribútumait</a>, amiket a DTO-kon érvényesíthetünk, és az ASP.NET Core figyelembe vesz a művelet végrehajtása során. Vegyünk fel a <code>Product</code> DTO osztályban néhány megkötést attribútumok formájában.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="na">[Required(ErrorMessage = &quot;Product name is required.&quot;, AllowEmptyStrings = false)]</span>
+<span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="o">!</span><span class="p">;</span>
+
+<span class="w">    </span><span class="na">[Range(1, int.MaxValue, ErrorMessage = &quot;Unit price must be higher than 0.&quot;)]</span>
+<span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Próbáljuk ki egy <strong>POST /api/Products</strong> művelet meghívásával. Paraméterként kiindulhatunk a felület által adott minta JSON-ból, csak töröljük ki a navigációs property-ket és sértsük meg valamelyik (vagy mindkét) fenti szabályt. Egy példa törzs:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;Name&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;UnitPrice&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;ShipmentRegion&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;CategoryId&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A válasz 400-as kód és valami hasonló, RFC 7807-nek megfelelő törzs lesz:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://tools.ietf.org/html/rfc7231#section-6.5.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;One or more validation errors occurred.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">400</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;traceId&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;|2f35d378-4420cbafb80aec04.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;errors&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;Name&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;Product name is required.&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;UnitPrice&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;Unit price must be higher than 0.&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="404-not-found-kontroller-szinten">404 Not Found - kontroller szinten<a class="headerlink" href="#404-not-found-kontroller-szinten" title="Permanent link">&para;</a></h3>
+<p>Konvenció szerint 404-es hibát kellene adnunk, ha a keresett azonosítóval nem található erőforrás - esetünkben termék. Jelenleg a <code>ProductService</code> <code>EntityNotFoundException</code>-t dob, és amennyiben Development módban futtatjuk az alkalmazást, a cifra hibaoldal jelenik meg, amit a <em>DeveloperExceptionPage</em> middleware generál. Ha kivesszük a middleware-t (vagy nem Development módban indítjuk, de ekkor gondoskodnunk kell connection string-ről, ami eddig csak a Development konfigurációban volt beállítva), akkor 500-as hibát kapunk vissza.</p>
+<div class="warning">
+
+A kezeletlen kivételek általában 500-as hibakód formájában kerülnek vissza a kliensre, mindenfajta egyéb információ nélkül (üres oldalként jelenik meg). Ez a jobbik eset, ahhoz képest, ha a teljes kivételszöveg és stack trace is visszakerülne. Az átlagos felhasználók nem tudják értelmezni, viszont a támadó szándékúaknak értékes információt jelenthet, így ajánlott elkerülni, hogy a kivétel ilyen módon kijusson. Ez az elkerülés az úgynevezett *exception shielding* technika, és az ASP.NET Core alapértelmezetten alkalmazza.
+
+</div>
+
+<p>Legegyszerűbb módszer a kontroller műveletben érvényesíteni a konvenciót:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="p">[</span><span class="n">HttpGet</span><span class="p">(</span><span class="s">&quot;{id}&quot;</span><span class="p">)]</span>
+<span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="cm">/**/</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProduct</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">EntityNotFoundException</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">NotFound</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<div class="tip">
+
+Alternatív megoldás, hogy a `ProductService` egy `null` értékkel jelezné, hogy nincs találat. Ezesetben a fenti kódban a `null` értékre kellene vizsgálni, pl. `if` szerkezettel.
+
+</div>
+
+<p>Próbáljuk ki, hogy 404-es státuszkódot és annak megfelelő <em>problem details</em>-t kapunk-e, ha egy nem létező termékazonosítóval hívjuk a fenti műveletet.</p>
+<p>Ha saját <em>problem details</em>-t szeretnénk a 404-es kód mellé, akkor kézzel összerakhatjuk és visszaküldhetjük.</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">EntityNotFoundException</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="n">ProblemDetails</span><span class="w"> </span><span class="n">details</span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProblemDetails</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Invalid ID&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StatusCodes</span><span class="p">.</span><span class="n">Status404NotFound</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Detail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;No product with ID {id}&quot;</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">NotFound</span><span class="p">(</span><span class="n">details</span><span class="p">);</span><span class="w"> </span><span class="c1">//ProblemDetails átadása</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<p>Így is próbáljuk ki. Az általunk megadott üzenetet kell visszakapjuk.</p>
+<h3 id="404-not-found-globalis-kivetellekepezessel">404 Not Found - globális kivételleképezéssel<a class="headerlink" href="#404-not-found-globalis-kivetellekepezessel" title="Permanent link">&para;</a></h3>
+<p>A rendhagyó válaszok előállításánál előnyös lehet, ha az alacsonyabb rétegekből specifikus kivételeket dobunk, mert ezeket egy központi helyen szisztematikusan átalakíthatjuk konvenciónak megfelelő HTTP válaszokká. Ez a képesség egyelőre még nem érhető el beépítetten, ezért egy <a href="https://github.com/khellang/Middleware">közösségi fejlesztésű NuGet csomagot</a> használunk fel.</p>
+<p>Telepítsük fel a <em>Hellang.Middleware.ProblemDetails</em> csomagot az API projektbe. Megtehetjük a szokásos módon, de akár a <em>Package Manager Console</em>-ból is a következő paranccsal (az API projekt legyen megadva, mint <em>Default Project</em>):</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Install-Package</span> <span class="n">Hellang</span><span class="p">.</span><span class="n">Middleware</span><span class="p">.</span><span class="n">ProblemDetails</span>
+</code></pre></div>
+<p>Szokás szerint konfiguráljuk a legfelső szintű kódban. Sose adjuk vissza a kivétel részleteit (szigorú <em>exception shielding</em>), illetve a saját kivételtípusunkat képezzük le 404-es hibára.</p>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddProblemDetails</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">IncludeExceptionDetails</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">MapToStatusCode</span><span class="o">&lt;</span><span class="n">EntityNotFoundException</span><span class="o">&gt;</span><span class="p">(</span><span class="n">StatusCodes</span><span class="p">.</span><span class="n">Status404NotFound</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Illesszük a pipeline-ba a legelső helyre:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="kt">var</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="n">Build</span><span class="p">();</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">UseProblemDetails</span><span class="p">();</span>
+</code></pre></div>
+<p>Térjünk vissza a korábbi, nem kivétel-elkapós változatra, az előzőt kommentezzük ki:</p>
+<div class="highlight"><pre><span></span><code><span class="na">[HttpGet(&quot;{id}&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProduct</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Próbáljuk ki: hasonlóan kell működjön, mint a kontroller szintű változat, de ez általánosabb, bármely műveletből <code>EntityNotFoundException</code> érkezik, azt kezeli, nem kell minden műveletben megírni a kezelő logikát.</p>
+<h3 id="500-internal-server-error">500 Internal Server Error<a class="headerlink" href="#500-internal-server-error" title="Permanent link">&para;</a></h3>
+<p>Próbáljunk kitörölni egy nem létező terméket <strong>DELETE api/products/\&lt;nem létező id&gt;</strong> kéréssel. Az újonnan beállított MW a nem kezelt kivétel esetén is egy alapszintű Problem Details választ állít elő 500-as kóddal.</p>
+<h3 id="azonositok-ellenorzese">Azonosítók ellenőrzése<a class="headerlink" href="#azonositok-ellenorzese" title="Permanent link">&para;</a></h3>
+<p>Készítsük fel a módosító és törlő műveleteket is a nem létező azonosítók konvenció szerinti kezelésére.</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">UpdateProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">,</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="cm">/*...*/</span>
+<span class="w">        </span><span class="k">try</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="cm">/**/</span><span class="w">         </span><span class="n">_context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">DbUpdateConcurrencyException</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Any</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">))</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">EntityNotFoundException</span><span class="p">(</span><span class="s">&quot;Nem található a termék&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="k">throw</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="cm">/**/</span><span class="p">}</span>
+
+<span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">DeleteProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="cm">/*...*/</span>
+<span class="w">        </span><span class="k">try</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="cm">/**/</span><span class="w">        </span><span class="n">_context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">DbUpdateConcurrencyException</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Any</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">))</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">EntityNotFoundException</span><span class="p">(</span><span class="s">&quot;Nem található a termék&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="k">throw</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<p>Ez egy optimista megközelítés: feltételezzük, hogy helyes azonosítót kapunk. Ha kivételes esetben mégsem, akkor az UPDATE/DELETE utasítás nem a megfelelő számú sort módosítja és <code>DbUpdateConcurrencyException</code>-t kapunk. Ekkor vizsgáljuk csak meg, hogy az azonosító helyes-e.</p>
+<div class="tip">
+
+Egy másik megközelítés szerint a DELETE műveletnek idempotensnek kellene lennie, tehát egymás után többször végrehajtva is sikeres eredményt kell kapjunk. Ez azt is jelenti, hogy 404-es hiba helyet 204 No Content státuszkódot kell küldenünk akkor is, ha nem található adott ID-val entitás. Ezt a jelenlegi kódban egyszerűen implementálhatjuk, hogy nem dobunk kivételt a megfelelő ágban.
+
+</div>
+
+<h3 id="sajat-hibauzenet">Saját hibaüzenet<a class="headerlink" href="#sajat-hibauzenet" title="Permanent link">&para;</a></h3>
+<p>Módosítsuk a hibakezelő MW konfigurációját a legfelső szintű kódban, hogy a kivétel szövege bekerüljön a válaszba. Ez akkor lehet hasznos, ha a felhasználónak kiírandó hibaüzenetet is vissza akarjuk küldeni (másik lehetőség, hogy a kliens állítja elő, pl. a státuszkód alapján).</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**/</span><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddProblemDetails</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">IncludeExceptionDetails</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">EntityNotFoundException</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">            </span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">pd</span><span class="o">=</span><span class="n">StatusCodeProblemDetails</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">StatusCodes</span><span class="p">.</span><span class="n">Status404NotFound</span><span class="p">);</span>
+<span class="w">                </span><span class="n">pd</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">;</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">pd</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="cm">/**/</span><span class="p">});</span>
+</code></pre></div>
+<div class="warning">
+
+Az *exception shielding* elv miatt csak olyan kivételeknél alkalmazzuk, ahol a felhasználók számára hasznos, de nem technikai jellegű információt tartalmaz a kivétel szövege.
+
+</div>
+
+<p>Próbáljuk ki, hogy az egy termék lekérdezésénél, a módosításnál és a törlésnél is a rossz azonosító egységesen működik-e: 404-es hibát ad vissza, a Problem Details-ben a kivétel szövegével.</p>
+<h2 id="aszinkron-muveletek">Aszinkron műveletek<a class="headerlink" href="#aszinkron-muveletek" title="Permanent link">&para;</a></h2>
+<p>Aszinkron műveletek alkalmazásával hatékonyságjavulást érhetünk el: nem feltétlenül az egyes műveleteink lesznek gyorsabbak, hanem időegység alatt több műveletet tudunk kiszolgálni. Ennek oka, hogy az <code>await</code>-nél (például egy adatbázis művelet elküldésekor) a várakozási idejére történő kiugrásnál, ha vissza tudunk ugrálni egészen az ASP.NET engine szintjéig, akkor a végrehajtó környezet a kiszolgáló szálat a várakozás idejére más kérés kiszolgálására felhasználhatja.</p>
+<div class="tip">
+
+Ökölszabály, hogy ha elköteleztük magunkat az aszinkronitás mellett, akkor ha megoldható, az aszinkronitást vezessük végig a kontrollertől az adatbázis művelet végrehajtásáig minden rétegben. Ha egy API-nak van *TAP* jellegű változata, akkor azt részesítsük előnyben (pl. `SaveChanges` helyett `SaveChangesAsync`). Ha aszinkronból szinkronba váltunk, csökkentjük a hatékonyságot, rosszabb esetben deadlock-ot is [előidézhetünk](https://blog.stephencleary.com/2012/07/dont-block-on-async-code.html).
+
+</div>
+
+<p>Vezessük végig az aszinkronitást egy művelet teljes végrehajtásán:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Service réteg - interfész</span>
+
+<span class="cm">/**/</span><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IProductService</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//public void UpdateProduct(int productId, Product updatedProduct);</span>
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">UpdateProductAsync</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">,</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">);</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="c1">//többi fv.</span>
+<span class="cm">/**/</span><span class="p">}</span>
+
+<span class="c1">// Service réteg - implementáció</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">UpdateProductAsync</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">,</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_mapper</span><span class="p">.</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">updatedProduct</span><span class="p">);</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="n">efProduct</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">productId</span><span class="p">;</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="n">_context</span><span class="p">.</span><span class="n">Attach</span><span class="p">(</span><span class="n">efProduct</span><span class="p">).</span><span class="n">State</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EntityState</span><span class="p">.</span><span class="n">Modified</span><span class="p">;</span>
+<span class="cm">/**/</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="k">try</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="p">{</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="n">_context</span><span class="p">.</span><span class="n">SaveChangesAsync</span><span class="p">();</span><span class="w"> </span><span class="c1">//async változat hívása</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="p">}</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">DbUpdateConcurrencyException</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="p">{</span>
+<span class="cm">/**/</span><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">await</span><span class="w"> </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span>
+<span class="w">                        </span><span class="p">.</span><span class="n">AnyAsync</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">))</span>
+<span class="w">            </span><span class="c1">//async változat hívása</span>
+<span class="cm">/**/</span><span class="w">               </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EntityNotFoundException</span><span class="p">(</span><span class="s">&quot;Nem található a termék&quot;</span><span class="p">);</span>
+<span class="cm">/**/</span><span class="w">        </span><span class="k">else</span>
+<span class="cm">/**/</span><span class="w">            </span><span class="k">throw</span><span class="p">;</span>
+<span class="cm">/**/</span><span class="w">    </span><span class="p">}</span>
+<span class="cm">/**/</span><span class="p">}</span>
+
+<span class="c1">// Kontroller réteg</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Put</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">product</span><span class="p">)</span>
+<span class="cm">/**/</span><span class="p">{</span>
+<span class="cm">/**/</span><span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span>
+<span class="w">                </span><span class="p">.</span><span class="n">UpdateProductAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p">);</span>
+<span class="w">                </span><span class="c1">//async változat hívása</span>
+<span class="cm">/**/</span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">NoContent</span><span class="p">();</span>
+<span class="cm">/**/</span><span class="p">}</span>
+</code></pre></div>
+<div class="warning">
+
+Az *Async* végződés alkalmazása kontroller műveletek nevében jelenleg nem ajánlott, mert könnyen [hibákba futhatunk](https://github.com/dotnet/aspnetcore/issues/8998).
+
+</div>
+
+<p>Próbáljuk ki, például küldjünk PUT-ot az <code>api/products/1</code> címre, állítsuk be a <em>Content-Type: application/json</em> fejlécet és a POST-nál használt JSON-t küldjük a törzsben. Ezzel az 1-es <code>id</code>-jű termék adatait fogjuk felülírni.</p>
+<h2 id="vegallapot">Végállapot<a class="headerlink" href="#vegallapot" title="Permanent link">&para;</a></h2>
+<p>A végállapot elérhető a kapcsolódó GitHub repo <a href="https://github.com/bmeviauav24/WebApiLab-kiindulo/tree/megoldas">megoldas ágán</a> is.</p>
+  <hr>
+  <div class="md-source-file">
+    <span class="md-source-file__fact"> <span class="md-icon" title="Utolsó frissítés"> <svg
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z">
+          </path>
+        </svg>
+      </span>
+      <span title="2024. április 14. 13:37:03">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-04-14T13:37:03+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-04-14</span>
+      </span>
+    </span>
+
+    
+
+    <span class="md-source-file__fact">
+      <span class="md-icon" title="Szerzők">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z">
+          </path>
+        </svg>
+      </span>
+      <span>Szerzők</span>
+      <nav><a href="https://github.com/tibitoth" target="_blank" rel="noopener noreferrer" class="md-author" title="@Tibor Tóth">
+          <img src="https://avatars.githubusercontent.com/u/8333960?u=d26653213d265ecdceeaf20a896d74f479d35450&v=4?size=72" alt="@Tibor Tóth">
+        </a></nav>      
+    </span>
+  </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Vissza a tetejére
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; BME VIK AUT
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "content.action.edit", "content.code.annotate", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.term.missing": "\u00dcres", "select.version": "Verzi\u00f3v\u00e1lt\u00e1s"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
