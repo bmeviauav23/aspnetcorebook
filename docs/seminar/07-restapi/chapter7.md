@@ -1,10 +1,5 @@
 # ASP.NET Core webszolgáltatások I.-II.
 
-## Kiegészítő anyagok, segédeszközök
-
-- kapcsolódó GitHub repo: <https://github.com/bmeviauav23/WebApiLab-kiindulo>
-- [Postman](https://www.getpostman.com/) vagy [Fiddler Classic](https://www.telerik.com/download/fiddler) HTTP kérések küldéséhez
-
 ## Kiinduló projektek beüzemelése
 
 Klónozzuk le a publikus kiinduló projektet a GitHub-ról az alábbi paranccsal:
@@ -523,7 +518,7 @@ Próbáljuk ki a műveletet Swagger felületről. Egy `Product`-ot kell felküld
 
 !!! warning "Content-Type"
     Ha Fiddlerből vagy Postmanből tesztelünk, ne felejtsük el a *Content-Type* fejlécet **application/json**-re állítani!
-    
+
 Figyeljük meg a kapott választ. A válaszból másoljuk ki a *Location* fejlécből az URL-t és hívjuk meg böngészőből.
 
 Fiddler Classic példa POST hívásra:
