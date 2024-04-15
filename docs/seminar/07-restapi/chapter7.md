@@ -364,7 +364,7 @@ public Product GetProduct(int productId)
     return _context.Products
         .ProjectTo<Product>(_mapper.ConfigurationProvider)
         .SingleOrDefault(p => p.Id == productId)
-        ?? throw new EntityNotFoundException("Nem található a termék");
+        ?? throw new EntityNotFoundException("Nem található a termék", productId);
 }
 ```
 
@@ -395,11 +395,11 @@ public Product InsertProduct(Product newProduct)
 Módosításhoz lekérdezzük az adott elemet, majd a `Map` függvénnyel a DTO-ból az entitásba mappeljük az új adatokat.
 Mentés után pedig visszaadjuk a módosított elemet.
 
-``` csharp hl_lines="
+``` csharp hl_lines="3-7"
 public Product UpdateProduct(int productId, Product updatedProduct)
 {
     var efProduct = _context.Products.SingleOrDefault(p => p.Id == productId)
-        ?? throw new EntityNotFoundException("Nem található a termék");
+        ?? throw new EntityNotFoundException("Nem található a termék", productId);
     _mapper.Map(updatedProduct, efProduct);
     _context.SaveChanges();
     return GetProduct(efProduct.Id);
@@ -418,7 +418,7 @@ Hasonlóan az előzőekhez, csak itt a `Remove` függvényt hívjuk meg a kontex
 public void DeleteProduct(int productId)
 {
     var efProduct = _context.Products.SingleOrDefault(p => p.Id == productId)
-        ?? throw new EntityNotFoundException("Nem található a termék");
+        ?? throw new EntityNotFoundException("Nem található a termék", productId);
     _context.Products.Remove(efProduct);
     _context.SaveChanges();
 }
@@ -542,6 +542,7 @@ public ActionResult<Product> Put(int id, [FromBody] Product product)
 {
     return _productService.UpdateProduct(id, product);
 }
+```
 
 !!! tip "PUT és PATCH"
     PUT mellett a módosításhoz használatos a PATCH is.
@@ -571,25 +572,33 @@ Sikerülnie kell, mert még nincs rá idegen kulcs hivatkozás.
 
 ## Hibakezelés
 
-Eddig főleg csak a hibamentes ágakat (happy path) néztük. A REST konvenciók rendelkeznek arról is, hogy bizonyos hibahelyezetekben milyen [HTTP választ](https://httpstatuses.com) illik adni, például ha a kérésben hivatkozott azonosító nem létezik - 404-es hiba a bevett eljárás. Státuszkódok szempontjából a korábban idézett oldal ad segítséget, a válasz törzsében a hibaüzenet szerkezete tekintetében az [RFC 7807](https://tools.ietf.org/html/rfc7807) ad iránymutatást az ún. *Problem Details* típusú válaszok bevezetésével. Az ASP.NET Core 2.1-es verzió óta támogatja a *Problem Details* válaszokat, és általában automatikusan ilyen válaszokat küld.
+Eddig főleg csak a hibamentes ágakat (happy path) néztük.
+A REST konvenciók rendelkeznek arról is, hogy bizonyos hibahelyezetekben milyen [HTTP választ](https://httpstatuses.com) illik adni, például ha a kérésben hivatkozott azonosító nem létezik - 404-es hiba a bevett eljárás.
+Státuszkódok szempontjából a korábban idézett oldal ad segítséget, a válasz törzsében a hibaüzenet szerkezete tekintetében az [RFC 7807](https://tools.ietf.org/html/rfc7807) ad iránymutatást az ún. *Problem Details* típusú válaszok bevezetésével.
+Az ASP.NET Core támogatja a *Problem Details* válaszokat, és általában automatikusan ilyen válaszokat küld.
 
 ### 400 Bad Request
 
-Kezdjük a kliens által küldött nem helyes adatokkal. Ez a hibakód nem összekeverendő a 415-tel, ahol az adat formátuma nem megfelelő (XML vagy JSON): ezt általában nem kell kézzel lekezeljük, mivel ezt az ASP.NET megteszi helyettünk. 400-zal olyan hibákat szoktunk lekezelni, ahol a küldött adat formátuma megfelelő, de valamilyen saját validációs logikának nem felel meg a kapott objektum, pl.: egységár nem lehet negatív stb.
+Kezdjük a kliens által küldött nem helyes adatokkal.
+Ez a hibakód nem összekeverendő a 415-tel, ahol az adat formátuma nem megfelelő (XML vagy JSON): ezt általában nem kell kézzel lekezeljük, mivel ezt az ASP.NET Core megteszi helyettünk.
+400-zal olyan hibákat szoktunk lekezelni, ahol a küldött adat formátuma megfelelő, de valamilyen saját validációs logikának nem felel meg a kapott objektum, pl.: egységár nem lehet negatív stb.
 
-Itt használjuk fel a .NET ún. [*Data Annotation* attribútumait](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation#built-in-attributes), amiket a DTO-kon érvényesíthetünk, és az ASP.NET Core figyelembe vesz a művelet végrehajtása során. Vegyünk fel a `Product` DTO osztályban néhány megkötést attribútumok formájában.
+Itt használjuk fel a .NET ún. [*Data Annotation* attribútumait](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation#built-in-attributes), amiket a DTO-kon érvényesíthetünk, és az ASP.NET Core figyelembe vesz a művelet végrehajtása során.
+Vegyünk fel a `Product` DTO osztályban néhány megkötést attribútumok formájában.
 
-``` csharp
-    [Required(ErrorMessage = "Product name is required.", AllowEmptyStrings = false)]
-/**/public string Name { get; init; } = null!;
+``` csharp hl_lines="1 4"
+[Required(ErrorMessage = "Product name is required.", AllowEmptyStrings = false)]
+public string Name { get; init; } = null!;
 
-    [Range(1, int.MaxValue, ErrorMessage = "Unit price must be higher than 0.")]
-/**/public int UnitPrice { get; init; }
+[Range(1, int.MaxValue, ErrorMessage = "Unit price must be higher than 0.")]
+public int UnitPrice { get; init; }
 ```
 
-Próbáljuk ki egy **POST /api/Products** művelet meghívásával. Paraméterként kiindulhatunk a felület által adott minta JSON-ból, csak töröljük ki a navigációs property-ket és sértsük meg valamelyik (vagy mindkét) fenti szabályt. Egy példa törzs:
+Próbáljuk ki egy **POST /api/Products** művelet meghívásával.
+Paraméterként kiindulhatunk a felület által adott minta JSON-ból, csak töröljük ki a navigációs property-ket és sértsük meg valamelyik (vagy mindkét) fenti szabályt.
+Egy példa törzs:
 
-``` javascript
+``` json
 {
     "Name" : "",
     "UnitPrice" : 0,
@@ -600,7 +609,7 @@ Próbáljuk ki egy **POST /api/Products** művelet meghívásával. Paraméterk�
 
 A válasz 400-as kód és valami hasonló, RFC 7807-nek megfelelő törzs lesz:
 
-``` javascript
+``` json
 {
     "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
     "title": "One or more validation errors occurred.",
@@ -617,86 +626,95 @@ A válasz 400-as kód és valami hasonló, RFC 7807-nek megfelelő törzs lesz:
 }
 ```
 
+!!! tip "Összetettebb validáció"
+    Az egyszerűbb eseteknél a *Data Annotation* attribútumok elegendőek, de ha összetettebb validációra van szükség, akkor érdemes a [FluentValidation](https://fluentvalidation.net/) csomagot használni.
+
 ### 404 Not Found - kontroller szinten
 
-Konvenció szerint 404-es hibát kellene adnunk, ha a keresett azonosítóval nem található erőforrás - esetünkben termék. Jelenleg a `ProductService` `EntityNotFoundException`-t dob, és amennyiben Development módban futtatjuk az alkalmazást, a cifra hibaoldal jelenik meg, amit a *DeveloperExceptionPage* middleware generál. Ha kivesszük a middleware-t (vagy nem Development módban indítjuk, de ekkor gondoskodnunk kell connection string-ről, ami eddig csak a Development konfigurációban volt beállítva), akkor 500-as hibát kapunk vissza.
+Konvenció szerint 404-es hibát kellene adnunk, ha a keresett azonosítóval nem található erőforrás - esetünkben termék.
+Jelenleg a `ProductService` `EntityNotFoundException`-t dob, és amennyiben Development módban futtatjuk az alkalmazást, a cifra hibaoldal jelenik meg, amit a *DeveloperExceptionPage* middleware generál.
+Ha kivesszük a middleware-t (vagy nem Development módban indítjuk, de ekkor gondoskodnunk kell connection string-ről, ami eddig csak a Development konfigurációban volt beállítva), akkor 500-as hibát kapunk vissza.
 
-<div class="warning">
+!!! warning "Exception Shielding"
+    A kezeletlen kivételek általában 500-as hibakód formájában kerülnek vissza a kliensre, mindenfajta egyéb információ nélkül (üres oldalként jelenik meg).
+    Ez a jobbik eset, ahhoz képest, ha a teljes kivételszöveg és stack trace is visszakerülne.
+    Az átlagos felhasználók nem tudják értelmezni, viszont a támadó szándékúaknak értékes információt jelenthet, így ajánlott elkerülni, hogy a kivétel ilyen módon kijusson.
+    Ez az elkerülés az úgynevezett *exception shielding* technika, és az ASP.NET Core alapértelmezetten alkalmazza.
 
-A kezeletlen kivételek általában 500-as hibakód formájában kerülnek vissza a kliensre, mindenfajta egyéb információ nélkül (üres oldalként jelenik meg). Ez a jobbik eset, ahhoz képest, ha a teljes kivételszöveg és stack trace is visszakerülne. Az átlagos felhasználók nem tudják értelmezni, viszont a támadó szándékúaknak értékes információt jelenthet, így ajánlott elkerülni, hogy a kivétel ilyen módon kijusson. Ez az elkerülés az úgynevezett *exception shielding* technika, és az ASP.NET Core alapértelmezetten alkalmazza.
+Legegyszerűbb módszer a kontroller műveletben érvényesíteni a konvenciót egy try-catch blokkal:
 
-</div>
-
-Legegyszerűbb módszer a kontroller műveletben érvényesíteni a konvenciót:
-
-``` csharp
-/**/[HttpGet("{id}")]
-/**/public ActionResult<Product> Get(int id)
-/**/{
-        try
-        {
-/**/        return _productService.GetProduct(id);
-        }
-        catch (EntityNotFoundException)
-        {
-            return NotFound();
-        }
-/**/}
+``` csharp hl_lines="4-5 7-9 11"
+[HttpGet("{id}")]
+public ActionResult<Product> Get(int id)
+{
+    try
+    {
+        return _productService.GetProduct(id);
+    }
+    catch (EntityNotFoundException)
+    {
+        return NotFound();
+    }
+}
 ```
 
-<div class="tip">
-
-Alternatív megoldás, hogy a `ProductService` egy `null` értékkel jelezné, hogy nincs találat. Ezesetben a fenti kódban a `null` értékre kellene vizsgálni, pl. `if` szerkezettel.
-
-</div>
+!!! tip "null érték"
+    Alternatív megoldás, hogy a `ProductService` egy `null` értékkel jelezné, hogy nincs találat.
+    Ezesetben a fenti kódban a `null` értékre kellene vizsgálni, pl. `if` szerkezettel.
+    A későbbiekben látjuk majd, hogy a kivételeket egyszerűbb központi helyen kezelni.
 
 Próbáljuk ki, hogy 404-es státuszkódot és annak megfelelő *problem details*-t kapunk-e, ha egy nem létező termékazonosítóval hívjuk a fenti műveletet.
 
 Ha saját *problem details*-t szeretnénk a 404-es kód mellé, akkor kézzel összerakhatjuk és visszaküldhetjük.
 
 ``` csharp
-/**/catch (EntityNotFoundException)
-/**/{
-        ProblemDetails details= new ProblemDetails
-        {
-            Title = "Invalid ID",
-            Status = StatusCodes.Status404NotFound,
-            Detail = $"No product with ID {id}"
-        };
-        return NotFound(details); //ProblemDetails átadása
-/**/}
+catch (EntityNotFoundException)
+{
+    ProblemDetails details= new ProblemDetails
+    {
+        Title = "Invalid ID",
+        Status = StatusCodes.Status404NotFound,
+        Detail = $"No product with ID {id}"
+    };
+    return NotFound(details);
+}
 ```
 
-Így is próbáljuk ki. Az általunk megadott üzenetet kell visszakapjuk.
+Így is próbáljuk ki.
+Az általunk megadott üzenetet kell visszakapjuk.
 
-### 404 Not Found - globális kivételleképezéssel
+### 404 Not Found - központi hibakezeléssel
 
-A rendhagyó válaszok előállításánál előnyös lehet, ha az alacsonyabb rétegekből specifikus kivételeket dobunk, mert ezeket egy központi helyen szisztematikusan átalakíthatjuk konvenciónak megfelelő HTTP válaszokká. Ez a képesség egyelőre még nem érhető el beépítetten, ezért egy [közösségi fejlesztésű NuGet csomagot](https://github.com/khellang/Middleware) használunk fel.
+A rendhagyó válaszok előállításánál előnyös lehet, ha az alacsonyabb rétegekből specifikus kivételeket dobunk, mert ezeket egy központi helyen szisztematikusan átalakíthatjuk konvenciónak megfelelő HTTP válaszokká.
+Ezt az ASP.NET Core 8 óta beépítetten meg tudjuk tenni. Erre a célra több kiterjesztési pontja is van a keretrendszernek [1](https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors?view=aspnetcore-8.0) [2](https://timdeschryver.dev/blog/translating-exceptions-into-problem-details-responses), de nekünk most elég a legmagasabb szinten a `ProblemDetails` választ testreszabni.
 
-Telepítsük fel a *Hellang.Middleware.ProblemDetails* csomagot az API projektbe. Megtehetjük a szokásos módon, de akár a *Package Manager Console*-ból is a következő paranccsal (az API projekt legyen megadva, mint *Default Project*):
-
-``` powershell
-Install-Package Hellang.Middleware.ProblemDetails
-```
-
-Szokás szerint konfiguráljuk a legfelső szintű kódban. Sose adjuk vissza a kivétel részleteit (szigorú *exception shielding*), illetve a saját kivételtípusunkat képezzük le 404-es hibára.
+Az `AddProblemDetails` konfigurációjában a saját kivételtípusunkat képezzük le 404-es hibakódra és a válasz tartalmát módosítsuk.
 
 ``` csharp
 builder.Services.AddProblemDetails(options =>
-{
-    options.IncludeExceptionDetails = (ctx,ex) => false;
-    options.MapToStatusCode<EntityNotFoundException>(StatusCodes.Status404NotFound);
-});
+        options.CustomizeProblemDetails = context =>
+        {
+            if (context.HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error is EntityNotFoundException ex)
+            {
+                context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+                context.ProblemDetails.Title = "Invalid ID";
+                context.ProblemDetails.Status = StatusCodes.Status404NotFound;
+                context.ProblemDetails.Detail = $"No product with ID {ex.Id}";
+            }
+        }
+    );
 ```
 
-Illesszük a pipeline-ba a legelső helyre:
+A middleware pipeline-ba az alábbi beépített middleware-eket kell felvenni a csővezeték elejére:
 
-``` csharp
-/**/var app = builder.Build();
-    app.UseProblemDetails();
+``` csharp hl_lines="3-4"
+var app = builder.Build();
+
+app.UseExceptionHandler();
+app.UseStatusCodePages();
 ```
 
-Térjünk vissza a korábbi, nem kivétel-elkapós változatra, az előzőt kommentezzük ki:
+Térjünk vissza a korábbi, nem kivétel-elkapós változatra:
 
 ``` csharp
 [HttpGet("{id}")]
@@ -708,146 +726,59 @@ public ActionResult<Product> Get(int id)
 
 Próbáljuk ki: hasonlóan kell működjön, mint a kontroller szintű változat, de ez általánosabb, bármely műveletből `EntityNotFoundException` érkezik, azt kezeli, nem kell minden műveletben megírni a kezelő logikát.
 
-### 500 Internal Server Error
+!!! note "500 Internal Server Error"
+    Beépítetten a fenti megoldás minden egyéb kezeletlen hibára 500-as hibakódot ad vissza, és egy általános ProblemDetails tartalommal tér vissza, ami nem tartalmazza a kivétel szövegét és stack trace-jét.
 
-Próbáljunk kitörölni egy nem létező terméket **DELETE api/products/\<nem létező id\>** kéréssel. Az újonnan beállított MW a nem kezelt kivétel esetén is egy alapszintű Problem Details választ állít elő 500-as kóddal.
+    Az *exception shielding* elv miatt csak olyan kivételeknél alkalmazzuk, ahol a felhasználók számára hasznos, de nem technikai jellegű információt tartalmaz a kivétel szövege.
 
-### Azonosítók ellenőrzése
+!!! tip "Delete idempotens működése"
+    Jelenleg a delete műveletünk hibával tér vissza másodjára, ha 2x egymás után meghívnánk azonos azonosítóval.
 
-Készítsük fel a módosító és törlő műveleteket is a nem létező azonosítók konvenció szerinti kezelésére.
-
-``` csharp
-/**/public void UpdateProduct(int productId, Product updatedProduct)
-/**/{
-/**/    /*...*/
-        try
-        {
-/**/         _context.SaveChanges();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!_context.Products.Any(p => p.Id == productId))
-                throw new EntityNotFoundException("Nem található a termék");
-            else
-                throw;
-        }
-/**/}
-
-/**/public void DeleteProduct(int productId)
-/**/{
-/**/    /*...*/
-        try
-        {
-/**/        _context.SaveChanges();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!_context.Products.Any(p => p.Id == productId))
-                throw new EntityNotFoundException("Nem található a termék");
-            else
-                throw;
-        }
-/**/}
-```
-
-Ez egy optimista megközelítés: feltételezzük, hogy helyes azonosítót kapunk. Ha kivételes esetben mégsem, akkor az UPDATE/DELETE utasítás nem a megfelelő számú sort módosítja és `DbUpdateConcurrencyException`-t kapunk. Ekkor vizsgáljuk csak meg, hogy az azonosító helyes-e.
-
-<div class="tip">
-
-Egy másik megközelítés szerint a DELETE műveletnek idempotensnek kellene lennie, tehát egymás után többször végrehajtva is sikeres eredményt kell kapjunk. Ez azt is jelenti, hogy 404-es hiba helyet 204 No Content státuszkódot kell küldenünk akkor is, ha nem található adott ID-val entitás. Ezt a jelenlegi kódban egyszerűen implementálhatjuk, hogy nem dobunk kivételt a megfelelő ágban.
-
-</div>
-
-### Saját hibaüzenet
-
-Módosítsuk a hibakezelő MW konfigurációját a legfelső szintű kódban, hogy a kivétel szövege bekerüljön a válaszba. Ez akkor lehet hasznos, ha a felhasználónak kiírandó hibaüzenetet is vissza akarjuk küldeni (másik lehetőség, hogy a kliens állítja elő, pl. a státuszkód alapján).
-
-``` csharp
-/**/builder.Services.AddProblemDetails(options =>
-/**/{
-/**/    options.IncludeExceptionDetails = (ctx, ex) => false;
-        options.Map<EntityNotFoundException>(
-            (ctx, ex) =>
-            {
-                var pd=StatusCodeProblemDetails.Create(StatusCodes.Status404NotFound);
-                pd.Title = ex.Message;
-                return pd;
-            }
-        );
-/**/});
-```
-
-<div class="warning">
-
-Az *exception shielding* elv miatt csak olyan kivételeknél alkalmazzuk, ahol a felhasználók számára hasznos, de nem technikai jellegű információt tartalmaz a kivétel szövege.
-
-</div>
+    Egy másik megközelítés szerint a DELETE műveletnek idempotensnek kellene lennie, tehát egymás után többször végrehajtva is sikeres eredményt kell kapjunk.
+    Ez azt is jelenti, hogy 404-es hiba helyet 204 No Content státuszkódot kell küldenünk akkor is, ha nem található adott ID-val entitás.
+    Ezt a jelenlegi kódban egyszerűen implementálhatjuk, hogy nem dobunk kivételt a megfelelő ágban.
 
 Próbáljuk ki, hogy az egy termék lekérdezésénél, a módosításnál és a törlésnél is a rossz azonosító egységesen működik-e: 404-es hibát ad vissza, a Problem Details-ben a kivétel szövegével.
 
 ## Aszinkron műveletek
 
-Aszinkron műveletek alkalmazásával hatékonyságjavulást érhetünk el: nem feltétlenül az egyes műveleteink lesznek gyorsabbak, hanem időegység alatt több műveletet tudunk kiszolgálni. Ennek oka, hogy az `await`-nél (például egy adatbázis művelet elküldésekor) a várakozási idejére történő kiugrásnál, ha vissza tudunk ugrálni egészen az ASP.NET engine szintjéig, akkor a végrehajtó környezet a kiszolgáló szálat a várakozás idejére más kérés kiszolgálására felhasználhatja.
+Aszinkron műveletek alkalmazásával hatékonyságjavulást érhetünk el: nem feltétlenül az egyes műveleteink lesznek gyorsabbak, hanem időegység alatt több műveletet tudunk kiszolgálni.
+Ennek oka, hogy az `await`-nél (például egy adatbázis művelet elküldésekor) a várakozási idejére történő kiugrásnál, ha vissza tudunk ugrálni egészen az ASP.NET engine szintjéig, akkor a végrehajtó környezet a kiszolgáló szálat a várakozás idejére más kérés kiszolgálására felhasználhatja.
 
-<div class="tip">
-
-Ökölszabály, hogy ha elköteleztük magunkat az aszinkronitás mellett, akkor ha megoldható, az aszinkronitást vezessük végig a kontrollertől az adatbázis művelet végrehajtásáig minden rétegben. Ha egy API-nak van *TAP* jellegű változata, akkor azt részesítsük előnyben (pl. `SaveChanges` helyett `SaveChangesAsync`). Ha aszinkronból szinkronba váltunk, csökkentjük a hatékonyságot, rosszabb esetben deadlock-ot is [előidézhetünk](https://blog.stephencleary.com/2012/07/dont-block-on-async-code.html).
-
-</div>
+!!! tip "Aszinkronitás végigvezetése a kódban"
+    Ökölszabály, hogy ha elköteleztük magunkat az aszinkronitás mellett, akkor ha megoldható, az aszinkronitást vezessük végig a kontrollertől az adatbázis művelet végrehajtásáig minden rétegben.
+    Ha egy API-nak van *TAP* jellegű változata, akkor azt részesítsük előnyben (pl. `SaveChanges` helyett `SaveChangesAsync`).
+    Ha aszinkronból szinkronba váltunk, csökkentjük a hatékonyságot, rosszabb esetben deadlock-ot is [előidézhetünk](https://blog.stephencleary.com/2012/07/dont-block-on-async-code.html).
 
 Vezessük végig az aszinkronitást egy művelet teljes végrehajtásán:
 
-``` csharp
-// Service réteg - interfész
-
-/**/public interface IProductService
-/**/{
-        //public void UpdateProduct(int productId, Product updatedProduct);
-        public Task UpdateProductAsync(int productId, Product updatedProduct);
-/**/    //többi fv.
-/**/}
-
-// Service réteg - implementáció
-
-    public async Task UpdateProductAsync(int productId, Product updatedProduct)
-/**/{
-/**/    var efProduct = _mapper.Map<Dal.Entities.Product>(updatedProduct);
-/**/    efProduct.Id = productId;
-/**/    _context.Attach(efProduct).State = EntityState.Modified;
-/**/
-/**/    try
-/**/    {
-            await _context.SaveChangesAsync(); //async változat hívása
-/**/    }
-/**/    catch (DbUpdateConcurrencyException)
-/**/    {
-/**/          if (!await _context.Products
-                        .AnyAsync(p => p.Id == productId))
-            //async változat hívása
-/**/               throw new EntityNotFoundException("Nem található a termék");
-/**/        else
-/**/            throw;
-/**/    }
-/**/}
-
-// Kontroller réteg
-
-    public async Task<ActionResult> Put(int id, [FromBody] Product product)
-/**/{
-/**/  await _productService.
-                .UpdateProductAsync(id, product);
-                //async változat hívása
-/**/  return NoContent();
-/**/}
+``` csharp title="IProductService.cs"
+public Task<Product> UpdateProductAsync(int productId, Product updatedProduct);
 ```
 
-<div class="warning">
+``` csharp title="ProductService.cs" hl_lines="1 3 5-6"
+public async Task<Product> UpdateProductAsync(int productId, Product updatedProduct)
+{
+    var efProduct = await _context.Products.SingleOrDefaultAsync(p => p.Id == productId)
+        ?? throw new EntityNotFoundException("Nem található a termék", productId);
+    _mapper.Map(updatedProduct, efProduct);
+    await _context.SaveChangesAsync();
+    return await GetProductAsync(efProduct.Id);
+}
+```
 
-Az *Async* végződés alkalmazása kontroller műveletek nevében jelenleg nem ajánlott, mert könnyen [hibákba futhatunk](https://github.com/dotnet/aspnetcore/issues/8998).
+``` csharp title="ProductController.cs" hl_lines="2 4"
+[HttpPut("{id}")]
+public async Task<ActionResult<Product>> Put(int id, [FromBody] Product product)
+{
+    return await _productService.UpdateProductAsync(id, product);
+}
+```
 
-</div>
+!!! warning "Async végződés és kontroller műveletek"
+    Az *Async* végződés alkalmazása kontroller műveletek nevében jelenleg nem ajánlott, mert könnyen [hibákba futhatunk](https://github.com/dotnet/aspnetcore/issues/8998).
 
-Próbáljuk ki, például küldjünk PUT-ot az `api/products/1` címre, állítsuk be a *Content-Type: application/json* fejlécet és a POST-nál használt JSON-t küldjük a törzsben. Ezzel az 1-es `id`-jű termék adatait fogjuk felülírni.
+Próbáljuk ki, hogy továbbra is működik a módosított művelet.
 
 ## Végállapot
 
