@@ -105,6 +105,7 @@ nav:
       - seminar/05-aspnetcore1/chapter5.md
       - seminar/06-efcore/chapter6.md
       - seminar/07-restapi/chapter7.md
+      - seminar/08-client/chapter8.md
   - "Házi feladat":
       - homework/index.md
       - homework/example-spec.md
