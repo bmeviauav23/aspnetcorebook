@@ -1078,11 +1078,15 @@
 <li>OpenAPI leíró (swagger) alapú dokumentáció <strong>[3-12]</strong><ul>
 <li>minden végpont kliens szempontjából releváns működése dokumentált, minden lehetséges válaszkóddal együtt <strong>3</strong></li>
 <li>az API-nak egyidejűleg több támogatott verziója van, mindegyik dokumentált és mindegyik támogatott verzió dokumentációja elérhető  <strong>+4</strong></li>
-<li>A kliensen az OpenApi leíró alapján generált klienskönyvtár használata <strong>+5</strong></li>
+<li>A kliensen az OpenApi leíró alapján generált klienskönyvtár használata <strong>+5</strong><ul>
+<li>Command-line generátor eszköz használata és konfigurálása <strong>+3</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Adatbázis entitás elsődleges kulcs elrejtése a kliens elől véletlenszerűen generált, nem növekvő sorrendben kiosztott kulcsokkal. A kliens nem ismeri az adatbázis entitás kulcs értékét, helyette egy generált kulcsot lát csak. Az adatbázis <strong>nem</strong> tárolja a generált kulcsot. Megvalósítható kétirányú szám &lt;-&gt; generált azonosító függvények <a href="https://hashids.org/net/">segítségével</a>. <strong>7</strong></li>
 <li>Központosított hibakezelés, a kliens számára értelmezhető <code>ProblemDetails</code> objektumok küldése hibás kérések esetén. Tehát nem a Controllerekben van try-catch, hanem a hibák központilag vannak kezelve <strong>5</strong></li>
+<li>Minden bejövő kliensről érkező adat validációja pl.: DataAnnotations, FluentValidation stb. használatával és <code>ValidationProblemDetails</code>-ként visszajelezve a kliens felé <strong>5</strong></li>
 <li>Dátumok helyes kezelése olyan esetben is, ha a kliens és a szerver(ek) eltérő időzónában vannak. (tipikusan <code>DateTimeOffset</code> használata). Implementációt nem kell bemutatáskör demonstrálni, de a kód alapján érvelve bizonyítani kell a helyes működést. <strong>5</strong></li>
 </ul>
 <h2 id="kommunikacio-halozatkezeles">Kommunikáció, hálózatkezelés<a class="headerlink" href="#kommunikacio-halozatkezeles" title="Permanent link">&para;</a></h2>
@@ -1230,8 +1234,8 @@
           </path>
         </svg>
       </span>
-      <span title="2024. március 14. 14:57:38">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-14T14:57:38+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-14</span>
+      <span title="2024. május 2. 15:15:09">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-05-02T15:15:09+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-05-02</span>
       </span>
     </span>
 
