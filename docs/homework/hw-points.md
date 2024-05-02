@@ -66,8 +66,10 @@
     * minden végpont kliens szempontjából releváns működése dokumentált, minden lehetséges válaszkóddal együtt **3**
     * az API-nak egyidejűleg több támogatott verziója van, mindegyik dokumentált és mindegyik támogatott verzió dokumentációja elérhető  **+4**
     * A kliensen az OpenApi leíró alapján generált klienskönyvtár használata **+5**
+        * Command-line generátor eszköz használata és konfigurálása **+3**
 * Adatbázis entitás elsődleges kulcs elrejtése a kliens elől véletlenszerűen generált, nem növekvő sorrendben kiosztott kulcsokkal. A kliens nem ismeri az adatbázis entitás kulcs értékét, helyette egy generált kulcsot lát csak. Az adatbázis **nem** tárolja a generált kulcsot. Megvalósítható kétirányú szám <-> generált azonosító függvények [segítségével](https://hashids.org/net/). **7**
 * Központosított hibakezelés, a kliens számára értelmezhető `ProblemDetails` objektumok küldése hibás kérések esetén. Tehát nem a Controllerekben van try-catch, hanem a hibák központilag vannak kezelve **5**
+* Minden bejövő kliensről érkező adat validációja pl.: DataAnnotations, FluentValidation stb. használatával és `ValidationProblemDetails`-ként visszajelezve a kliens felé **5**
 * Dátumok helyes kezelése olyan esetben is, ha a kliens és a szerver(ek) eltérő időzónában vannak. (tipikusan `DateTimeOffset` használata). Implementációt nem kell bemutatáskör demonstrálni, de a kód alapján érvelve bizonyítani kell a helyes működést. **5**
 
 ## Kommunikáció, hálózatkezelés
