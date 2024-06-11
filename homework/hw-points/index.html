@@ -1108,6 +1108,7 @@
 <li>módosítás vagy hozzáadás vagy törlés is <strong>+3</strong></li>
 </ul>
 </li>
+<li>Aszinkron kommunikáció használata üzenetsorral (pl.: RabbitMQ, Azure ServiceBus, Azure Queue Storage, AMQP, MQTT stb.) <strong>7</strong></li>
 </ul>
 <h2 id="entity-framework-core">Entity Framework Core<a class="headerlink" href="#entity-framework-core" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1234,8 +1235,8 @@
           </path>
         </svg>
       </span>
-      <span title="2024. május 2. 15:15:09">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-05-02T15:15:09+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-05-02</span>
+      <span title="2024. június 11. 15:16:20">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-06-11T15:16:20+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-06-11</span>
       </span>
     </span>
 
@@ -1308,5 +1309,7 @@
         <script src="../../js/timeago_mkdocs_material.js"></script>
       
     
-  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>
