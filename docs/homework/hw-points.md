@@ -85,6 +85,7 @@
 * az EF adatmodell kiajánlása OData szolgáltatás segítségével (*Microsoft.AspNetCore.OData* csomag). Példahívás bemutatása a kliensből OData v4 protokollt használva.  **\[7-10\]**
     * csak lekérdezés **7**
     * módosítás vagy hozzáadás vagy törlés is **+3**
+* Aszinkron kommunikáció használata üzenetsorral (pl.: RabbitMQ, Azure ServiceBus, Azure Queue Storage, AMQP, MQTT stb.) **7**
 
 ## Entity Framework Core
 
