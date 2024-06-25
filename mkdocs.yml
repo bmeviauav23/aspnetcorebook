@@ -75,6 +75,7 @@ markdown_extensions:
 
 plugins:
   - search
+  - extra-sass
   - glightbox
   - git-revision-date-localized:
       # override from docker environment variables
@@ -91,6 +92,21 @@ plugins:
       github_token: !ENV [GITHUB_TOKEN, '']
       repository: bmeviauav23/aspnetcorebook
       branch: master
+  - with-pdf:
+      author: 'Tóth Tibor <toth.tibor@vik.bme.hu>;Simon Gábor <simon.gabor@vik.bme.hu>;Szabó Gábor <szabo.gabor@podnet.hu>'
+      cover_logo: bme_logo.svg
+      cover: true
+      back_cover: false
+      cover_title: Szoftverfejlesztés .NET platformra gyakorlatok
+      cover_subtitle: v1.7 - hetedik kiadás, 2024. június
+      toc_title: Tartalomjegyzék
+      toc_level: 3
+      exclude_pages:
+         - 'homework/'
+      output_path: pdf/aspnetcorebook.1.7.pdf
+      enabled_if_env: IsPdfExportEnabled
+      #debug_html: true
+      #verbose: true
 
 nav:
   - "Tudnivalók":
@@ -111,3 +127,4 @@ nav:
       - homework/index.md
       - homework/example-spec.md
       - homework/hw-points.md
+  - "Zárszó": information/afterword.md

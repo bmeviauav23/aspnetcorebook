@@ -123,11 +123,6 @@ Próbáljuk ki, hogy működik-e a dokumentációs felület a **/swagger** útvo
 !!! tip
     A Swagger leíró linkje megtalálható a dokumentációs felület címsora alatt.
 
-<figure markdown>
-![SwaggerUI](images/aspnetcoreclient-swaggerui.png)
-<figcaption>SwaggerUI felület</figcaption>
-</figure>
-
 ### Testreszabás - XML kommentek
 
 Az NSwag képes a kódunk [XML kommentjeit](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc) hasznosítani a dokumentációs felületen. Írjuk meg egy művelet XML kommentjét.

@@ -1,1 +1,0 @@
-docker run --rm -it -v ${PWD}:/documents/ asciidoctor/docker-asciidoctor

@@ -1,0 +1,53 @@
+<article id="doc-cover">
+    {% if cover_logo is defined %}
+        <div class="wrapper upper">
+            <div class="logo" style="background-image: url({{ cover_logo | to_url }});"></div>
+        </div>
+    {% else %}
+        <div class="wrapper"></div>
+    {% endif %}
+    <div class="wrapper">
+        <h1>{{ cover_title | e }}</h1>
+        <h2>{{ cover_subtitle | e }}</h2>
+    </div>
+    <div class="properties">
+        <address>
+            {% if author is defined %}
+                {% set authors = author.split(';') %}
+                {% for a in authors %}
+                    <p id="author">{{ a | e }}</p>
+                {% endfor %}
+            {% endif %}
+            {% if copyright is defined %}
+                <p id="copyright">{{ copyright | e }}</p>
+            {% endif %}
+        </address>
+    </div>
+
+</article>
+
+<div id="colophon" class="page-break">
+
+    <p>Budapesti Műszaki és Gazdaságtudományi Egyetem <br />
+    Villamosmérnöki és Informatikai Kar <br />
+    Automatizálási és Alkalmazott Informatikai Tanszék</p>
+
+
+    <p>1117 Budapest, Magyar tudósok körútja 2. (Q épület)</p>
+
+    <p style="margin-bottom: 300px;"><a href="https://www.bme.hu">https://www.bme.hu</a><br />
+    <a href="https://www.vik.bme.hu">https://www.vik.bme.hu</a><br />
+    <a href="https://www.aut.bme.hu">https://www.aut.bme.hu</a></p>
+    
+
+    {% if author is defined %}
+        {% set authors = author.split(';') %}
+        {% for a in authors %}
+            <p id="author">{{ a | e }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <p style="margin-top: 300px; margin-bottom: 50px;">Hibajelentések, közreműködők: <a href="https://github.com/bmeviauav23/aspnetcorebook">https://github.com/bmeviauav23/aspnetcorebook</a></p>
+
+    <p>ISBN 978-963-421-878-4</p>
+</div>
