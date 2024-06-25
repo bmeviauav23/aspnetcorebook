@@ -1,67 +1,26 @@
 
-<!doctype html>
-<html lang="hu" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-        <meta name="author" content="Tóth Tibor, Simon Gábor, Albert István, Szabó Gábor">
-      
-      
-        <link rel="canonical" href="https://bmeviauav23.github.io/aspnetcorebook/seminar/02-csharp2/chapter2/">
-      
-      
-        <link rel="prev" href="../../01-csharp1/chapter1/">
-      
-      
-        <link rel="next" href="../../03-linq/chapter3/">
-      
-      
-      <link rel="icon" href="../../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
-    
-    
-      
-        <title>C# alapok II. - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.f2e4d321.min.css">
-      
-        
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
-      
-      
+<!DOCTYPE html>
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-      <link rel="stylesheet" href="../../../css/timeago.css">
-    
-      <link rel="stylesheet" href="../../../extra-material-theme.css">
-    
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-    
-   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+<html class="no-js" lang="hu">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Tóth Tibor, Simon Gábor, Albert István, Szabó Gábor" name="author"/>
+<link href="https://bmeviauav23.github.io/aspnetcorebook/seminar/02-csharp2/chapter2/" rel="canonical"/>
+<link href="../../01-csharp1/chapter1/" rel="prev"/>
+<link href="../../03-linq/chapter3/" rel="next"/>
+<link href="../../../favicon.ico" rel="icon"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-9.5.27" name="generator"/>
+<title>C# alapok II. - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
+<link href="../../../assets/stylesheets/main.6543a935.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/timeago.css" rel="stylesheet"/>
+<link href="../../../extra-material-theme.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../../../assets/stylesheets/extra-style.m7c10_cn.min.css" rel="stylesheet"/> <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -71,1036 +30,540 @@
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
     body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
-  
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="aut" data-md-color-primary="aut" data-md-color-accent="red">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#c-alapok-ii" class="md-skip">
+<body data-md-color-accent="red" data-md-color-primary="aut" data-md-color-scheme="aut" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#c-alapok-ii">
           Kihagyás
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
+</div>
+<div data-md-component="announce">
+</div>
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Élőfej">
-    <a href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-header__button md-logo" aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" data-md-component="logo">
-      
-  <img src="../../../logo-bme-aut.png" alt="logo">
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
+<nav aria-label="Élőfej" class="md-header__inner md-grid">
+<a aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra">
+<img alt="logo" src="../../../logo-bme-aut.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
             BMEVIAUAV23 - Szoftverfejlesztés .NET platformra
           </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
             
               C# alapok II.
             
           </span>
-        </div>
-      </div>
-    </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="aut" data-md-color-primary="aut" data-md-color-accent="red"  aria-label="Váltás sötét témára"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Váltás sötét témára" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Váltás világos témára"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Váltás világos témára" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
-      </label>
-    
-  
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Váltás sötét témára" class="md-option" data-md-color-accent="red" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="aut" data-md-color-scheme="aut" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Váltás sötét témára">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"></path></svg>
+</label>
+<input aria-label="Váltás világos témára" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Váltás világos témára">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"></path></svg>
+</label>
 </form>
-      
-    
-    
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Keresés">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Törlés" aria-label="Törlés" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
+<script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Keresés" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Keresés" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Keresés" class="md-search__options">
+<button aria-label="Törlés" class="md-search__icon md-icon" tabindex="-1" title="Törlés" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
             Keresés inicializálása
           </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<ol class="md-search-result__list" role="presentation"></ol>
 </div>
-    
-    
-      <div class="md-header__source">
-        <a href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-  </div>
-  <div class="md-source__repository">
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
     bmeviauav23/aspnetcorebook
   </div>
 </a>
-      </div>
-    
-  </nav>
-  
+</div>
+</nav>
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-            
-<nav class="md-tabs" aria-label="Lapok" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../.." class="md-tabs__link">
+<div class="md-container" data-md-component="container">
+<nav aria-label="Lapok" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../..">
           
   
   Tudnivalók
 
         </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../01-csharp1/chapter1/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../../01-csharp1/chapter1/">
           
   
   Laborok
 
         </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../homework/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../homework/">
           
   
   Házi feladat
 
         </a>
-      </li>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../information/afterword/">
+        
+  
     
   
+  Zárszó
 
-      
-    </ul>
-  </div>
+      </a>
+</li>
+</ul>
+</div>
 </nav>
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-  
-
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigáció" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-nav__button md-logo" aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" data-md-component="logo">
-      
-  <img src="../../../logo-bme-aut.png" alt="logo">
-
-    </a>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigáció" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra">
+<img alt="logo" src="../../../logo-bme-aut.png"/>
+</a>
     BMEVIAUAV23 - Szoftverfejlesztés .NET platformra
   </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-  </div>
-  <div class="md-source__repository">
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
     bmeviauav23/aspnetcorebook
   </div>
 </a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
-        
-          
-          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+<span class="md-ellipsis">
     Tudnivalók
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_1">
+<span class="md-nav__icon md-icon"></span>
             Tudnivalók
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
+<span class="md-ellipsis">
     Szoftverfejlesztés .NET platformra
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../information/preface/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../information/preface/">
+<span class="md-ellipsis">
     Tudnivalók
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../information/contributing/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../information/contributing/">
+<span class="md-ellipsis">
     Hozzájárulás az anyaghoz
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-      
-        
-        
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-            
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-ellipsis">
     Laborok
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
             Laborok
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../01-csharp1/chapter1/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../01-csharp1/chapter1/">
+<span class="md-ellipsis">
     C# alapok, szintaxis
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
     C# alapok II.
   </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
     C# alapok II.
   </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</a>
+<nav aria-label="Tartalomjegyzék" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Tartalomjegyzék
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#elokeszites" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#elokeszites">
+<span class="md-ellipsis">
       Előkészítés
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Előkészítés">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#legfelso-szintu-utasitasok-implicit-globalis-nevter-hivatkozasok" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Előkészítés" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#legfelso-szintu-utasitasok-implicit-globalis-nevter-hivatkozasok">
+<span class="md-ellipsis">
       Legfelső szintű utasítások, implicit globális névtér-hivatkozások
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#implicit-tipusdeklaracio" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#implicit-tipusdeklaracio">
+<span class="md-ellipsis">
       Implicit típusdeklaráció
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#init-only-setter" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#init-only-setter">
+<span class="md-ellipsis">
       Init-only setter
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#indexer-operator-nameof-operator-index-inicializalo" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#indexer-operator-nameof-operator-index-inicializalo">
+<span class="md-ellipsis">
       Indexer operátor, nameof operátor, index inicializáló
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#using-static" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#using-static">
+<span class="md-ellipsis">
       Using static
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#nullozhato-tipusok" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nullozhato-tipusok">
+<span class="md-ellipsis">
       Nullozható típusok
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#rekord-tipus" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rekord-tipus">
+<span class="md-ellipsis">
       Rekord típus
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Rekord típus">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pozicio-alapu-megadas" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Rekord típus" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pozicio-alapu-megadas">
+<span class="md-ellipsis">
       Pozíció alapú megadás
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#kitero-a-szotar-visszavag" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#kitero-a-szotar-visszavag">
+<span class="md-ellipsis">
       Kitérő: a szótár visszavág
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#normal-megadas" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#normal-megadas">
+<span class="md-ellipsis">
       Normál megadás
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
+</ul>
 </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../03-linq/chapter3/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../03-linq/chapter3/">
+<span class="md-ellipsis">
     LINQ
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../04-csharp4/chapter4/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../04-csharp4/chapter4/">
+<span class="md-ellipsis">
     C# alapok IV.
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../05-aspnetcore1/chapter5/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../05-aspnetcore1/chapter5/">
+<span class="md-ellipsis">
     ASP.NET Core alapszolgáltatások
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../06-efcore/chapter6/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../06-efcore/chapter6/">
+<span class="md-ellipsis">
     Entity Framework Core I-II.
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../07-restapi/chapter7/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../07-restapi/chapter7/">
+<span class="md-ellipsis">
     ASP.NET Core webszolgáltatások I.-II.
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../08-client/chapter8/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../08-client/chapter8/">
+<span class="md-ellipsis">
     ASP.NET Core webszolgáltatások III.
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../10-test/chapter10/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../10-test/chapter10/">
+<span class="md-ellipsis">
     Automatizált tesztelés
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
     Házi feladat
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
             Házi feladat
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../homework/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../homework/">
+<span class="md-ellipsis">
     Házi feladat tudnivalók
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../homework/example-spec/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../homework/example-spec/">
+<span class="md-ellipsis">
     Példa kisHF specifikáció
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../homework/hw-points/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../homework/hw-points/">
+<span class="md-ellipsis">
     NagyHF pontrendszer
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-  </ul>
+</a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../information/afterword/">
+<span class="md-ellipsis">
+    Zárszó
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Tartalomjegyzék" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Tartalomjegyzék
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#elokeszites" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#elokeszites">
+<span class="md-ellipsis">
       Előkészítés
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Előkészítés">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#legfelso-szintu-utasitasok-implicit-globalis-nevter-hivatkozasok" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Előkészítés" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#legfelso-szintu-utasitasok-implicit-globalis-nevter-hivatkozasok">
+<span class="md-ellipsis">
       Legfelső szintű utasítások, implicit globális névtér-hivatkozások
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#implicit-tipusdeklaracio" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#implicit-tipusdeklaracio">
+<span class="md-ellipsis">
       Implicit típusdeklaráció
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#init-only-setter" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#init-only-setter">
+<span class="md-ellipsis">
       Init-only setter
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#indexer-operator-nameof-operator-index-inicializalo" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#indexer-operator-nameof-operator-index-inicializalo">
+<span class="md-ellipsis">
       Indexer operátor, nameof operátor, index inicializáló
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#using-static" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#using-static">
+<span class="md-ellipsis">
       Using static
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#nullozhato-tipusok" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nullozhato-tipusok">
+<span class="md-ellipsis">
       Nullozható típusok
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#rekord-tipus" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rekord-tipus">
+<span class="md-ellipsis">
       Rekord típus
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Rekord típus">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pozicio-alapu-megadas" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Rekord típus" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pozicio-alapu-megadas">
+<span class="md-ellipsis">
       Pozíció alapú megadás
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#kitero-a-szotar-visszavag" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#kitero-a-szotar-visszavag">
+<span class="md-ellipsis">
       Kitérő: a szótár visszavág
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#normal-megadas" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#normal-megadas">
+<span class="md-ellipsis">
       Normál megadás
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-  
-    <a href="https://github.com/bmeviauav23/aspnetcorebook/edit/master/docs/seminar/02-csharp2/chapter2.md" title="Oldal szerkesztése" class="md-content__button md-icon">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="c-alapok-ii">C# alapok II.<a class="headerlink" href="#c-alapok-ii" title="Permanent link">&para;</a></h1>
-<h2 id="elokeszites">Előkészítés<a class="headerlink" href="#elokeszites" title="Permanent link">&para;</a></h2>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/bmeviauav23/aspnetcorebook/edit/master/docs/seminar/02-csharp2/chapter2.md" title="Oldal szerkesztése">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"></path></svg>
+</a>
+<h1 id="c-alapok-ii">C# alapok II.<a class="headerlink" href="#c-alapok-ii" title="Permanent link">¶</a></h1>
+<h2 id="elokeszites">Előkészítés<a class="headerlink" href="#elokeszites" title="Permanent link">¶</a></h2>
 <p>Első lépésként hozzunk létre egy .NET C# konzolalkalmazást: a projektsablon szűrőben válasszuk a C# nyelv - Windows platform - <em>Console</em> projekttípust.
 A szűrt listában válasszuk a <em>Console App</em> sablont (<strong>ne</strong> a .NET Framework-ös legyen). A neve legyen <em>HelloCSharp2</em>.
 A solutiont ne tegyük külön mappába (<em>Place solution and project in the same directory</em> legyen bekapcsolva).
 A megcélzott framework verzió legyen .NET 8.</p>
-<h3 id="legfelso-szintu-utasitasok-implicit-globalis-nevter-hivatkozasok">Legfelső szintű utasítások, implicit globális névtér-hivatkozások<a class="headerlink" href="#legfelso-szintu-utasitasok-implicit-globalis-nevter-hivatkozasok" title="Permanent link">&para;</a></h3>
+<h3 id="legfelso-szintu-utasitasok-implicit-globalis-nevter-hivatkozasok">Legfelső szintű utasítások, implicit globális névtér-hivatkozások<a class="headerlink" href="#legfelso-szintu-utasitasok-implicit-globalis-nevter-hivatkozasok" title="Permanent link">¶</a></h3>
 <p>Csodálkozzunk rá, hogy a generált projekt mindössze egyetlen érdemi sort tartalmaz.</p>
-<div class="highlight"><pre><span></span><code><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Hello, World!"</span><span class="p">);</span>
 </code></pre></div>
 <p>C# 10 óta a program belépési pontját adó forrásfájlt jelentősen lerövidíthetjük:</p>
 <ul>
@@ -1119,7 +582,7 @@ A megcélzott framework verzió legyen .NET 8.</p>
 <p>A legfelső szintű kód olyan, amit a program más részéről nem tudunk hívni, hiszen nem is ismerjük a burkoló osztály nevét. Emiatt nincs értelme legfelső szintű kódban láthatósági beállításnak (<code>private</code>, <code>protected</code> stb.) vagy propertynek.</p>
 </div>
 <p>Akadályozzuk meg a program azonnali lefutását egy blokkoló hívással.</p>
-<div class="highlight"><pre><span></span><code><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Hello, World!"</span><span class="p">);</span>
 <span class="hll"><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
 </span></code></pre></div>
 <p>Próbáljuk ki a generált projektet mindenféle egyéb változtatás nélkül, fordítás (menu:projekten jobbklikk[Build]) után. Nézzünk bele a kimeneti könyvtárba (menu:projekten jobbklikk[Open Folder in File Explorer], majd menu:bin[Debug &gt; net8.0]): látható, hogy az alkalmazásunkból a fordítás során egy cross-platform bináris (\&lt;projektnév&gt;.dll) és .NET Core v3 óta egy platform specifikus futtatható állomány (Windows esetén \&lt;projektnév&gt;.exe) is generálódik. Kipróbálhatjuk, hogy az exe a szokott módon indítható (pl. duplaklikkel), míg a dll a <code>dotnet</code> paranccsal.</p>
@@ -1139,30 +602,30 @@ A megcélzott framework verzió legyen .NET 8.</p>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">AgeInDays</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">365</span><span class="p">;</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">AgeInDogYears</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">AgeInDays</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">365</span><span class="p">;</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">ToString</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span>
-<span class="w">            </span><span class="s">$&quot;{Name} ({Age} | {AgeInDogYears}) [ID: {Id}]&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="s">$"{Name} ({Age} | {AgeInDogYears}) [ID: {Id}]"</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Az adatmodell az előző órán létrehozotthoz nagyon hasonlít, ennek viszont nincsen explicit konstruktora és a <code>Name</code> és <code>DateOfBirth</code> tulajdonságok publikusan is állíthatók.</p>
 <p>Hozzunk létre egy <code>Dog</code> példányt objektum inicializációs szintaxissal, majd írjuk ki ezt a példányt a kezdeti köszöntő szöveg helyett:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Dog</span><span class="w"> </span><span class="n">banan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Banán&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Banán"</span><span class="p">,</span>
 <span class="w">    </span><span class="n">DateOfBirth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">2014</span><span class="p">,</span><span class="w"> </span><span class="m">06</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
 <span class="p">};</span>
 <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">banan</span><span class="p">);</span>
 </code></pre></div>
 <p>Ezzel kész a kiinduló projektünk.</p>
-<h2 id="implicit-tipusdeklaracio">Implicit típusdeklaráció<a class="headerlink" href="#implicit-tipusdeklaracio" title="Permanent link">&para;</a></h2>
+<h2 id="implicit-tipusdeklaracio">Implicit típusdeklaráció<a class="headerlink" href="#implicit-tipusdeklaracio" title="Permanent link">¶</a></h2>
 <p>A <code>var</code> kulcsszó jelentősége: ha a fordító ki tudja találni a kontextusból az értékadás jobb oldalán álló érték típusát, nem szükséges a típus nevét explicit megadnunk, az implicit következik a kódból.
 Ebben az esetben a típus egyértelműen <code>Dog</code>.
 Ha csak deklarálni szeretnénk egy változót (nem adunk értékül a változónak semmit), akkor nem használhatjuk a <code>var</code> kulcsszót, ugyanis nem következik a kódból a változó típusa.
 Ekkor explicit meg kell adnunk a típust.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Dog</span><span class="w"> </span><span class="n">banan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span>
 <span class="p">{</span>
-<span class="w">   </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Banán&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Banán"</span><span class="p">,</span>
 <span class="w">   </span><span class="n">DateOfBirth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">2014</span><span class="p">,</span><span class="w"> </span><span class="m">06</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
 <span class="hll"><span class="p">};</span>
-</span><span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="w"> </span><span class="p">};</span>
+</span><span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Watson"</span><span class="w"> </span><span class="p">};</span>
 </span><span class="hll">
 </span><span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">unnamed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">DateOfBirth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">2017</span><span class="p">,</span><span class="w"> </span><span class="m">02</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
 </span><span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">unknown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span>
@@ -1187,11 +650,11 @@ Ekkor explicit meg kell adnunk a típust.</p>
 <li>feleslegesnek tartjuk az inicializáció mindkét oldalán kiírni ugyanazt a típust</li>
 <li>anonim típusokat használunk (később)</li>
 </ul>
-<h2 id="init-only-setter">Init-only setter<a class="headerlink" href="#init-only-setter" title="Permanent link">&para;</a></h2>
+<h2 id="init-only-setter">Init-only setter<a class="headerlink" href="#init-only-setter" title="Permanent link">¶</a></h2>
 <p>Az objektum inicializáció működéséhez szükséges a megfelelő láthatóságú setter. Viszont egy ilyen settert nem csak objektum inicializációkor lehet használni, hanem bármikor átállíthatjuk egy példány adatát (mutáció).</p>
 <p>Az alábbi példa egy ilyen utólagos módosításra / mutációra.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="w"> </span><span class="p">};</span>
-<span class="hll"><span class="n">watson</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sherlock&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Watson"</span><span class="w"> </span><span class="p">};</span>
+<span class="hll"><span class="n">watson</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sherlock"</span><span class="p">;</span>
 </span></code></pre></div>
 <p>Ez így hiba nélkül lefordul.</p>
 <p>Kizárólag az inicializációra korlátozhatjuk a setter meghívását az init-only setterrel (<code>init</code> kulcsszó).</p>
@@ -1219,7 +682,7 @@ Erre a megoldás a C# 11-ben bevezetett <code>required</code> kulcsszó a proper
 <span class="p">}</span>
 </code></pre></div>
 <p>Ezzel kötelezővé válik a <code>Name</code> kitöltése, ha a <code>Dog</code> példányt inicializáljuk.</p>
-<h2 id="indexer-operator-nameof-operator-index-inicializalo">Indexer operátor, nameof operátor, index inicializáló<a class="headerlink" href="#indexer-operator-nameof-operator-index-inicializalo" title="Permanent link">&para;</a></h2>
+<h2 id="indexer-operator-nameof-operator-index-inicializalo">Indexer operátor, nameof operátor, index inicializáló<a class="headerlink" href="#indexer-operator-nameof-operator-index-inicializalo" title="Permanent link">¶</a></h2>
 <p>A collection initializer analógiájára jött létre az <em>index initializer</em> nyelvi elem, ami a korábbihoz hasonlóan sorban hív meg egy operátort, hogy már inicializált objektumot kapjunk vissza. A különbség egyrészt a szintaxis, másrészt az ilyenkor meghívott metódus, ami az index operátor.</p>
 <div class="admonition tip">
 <p class="admonition-title">operátor felüldefiniálás</p>
@@ -1250,24 +713,24 @@ Ezen felül állítsuk be a <code>Dog</code> indexerét, hogy az a <code>Metadat
 <p>Az objektum inicializáló és az index inicializáló vegyíthető, így az alábbi módon tudunk felvenni további tulajdonságokat a kutyákhoz a legfelső szintű kódba:</p>
 <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">pimpedli</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Pimpedli&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Pimpedli"</span><span class="p">,</span>
 <span class="w">    </span><span class="n">DateOfBirth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">2006</span><span class="p">,</span><span class="w"> </span><span class="m">06</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span>
-<span class="w">    </span><span class="na">[&quot;Chip azonosító&quot;]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123125AJ&quot;</span>
+<span class="w">    </span><span class="na">["Chip azonosító"]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"123125AJ"</span>
 <span class="p">};</span>
 </code></pre></div>
 <p>Mivel indexelni általában kollekciókat szokás (tömb, lista, szótár), ezért ezekben az esetekben igen jó eszköz lehet az index inicializáló.
 Vegyünk fel egy új kutyaszótárt a kutyák kitenyésztése után:</p>
 <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">dogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">Dog</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="na">[&quot;banan&quot;]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banan</span><span class="p">,</span>
-<span class="w">    </span><span class="na">[&quot;watson&quot;]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson</span><span class="p">,</span>
-<span class="w">    </span><span class="na">[&quot;unnamed&quot;]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unnamed</span><span class="p">,</span>
-<span class="w">    </span><span class="na">[&quot;unknown&quot;]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unknown</span><span class="p">,</span>
-<span class="w">    </span><span class="na">[&quot;pimpedli&quot;]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pimpedli</span>
+<span class="w">    </span><span class="na">["banan"]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banan</span><span class="p">,</span>
+<span class="w">    </span><span class="na">["watson"]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson</span><span class="p">,</span>
+<span class="w">    </span><span class="na">["unnamed"]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unnamed</span><span class="p">,</span>
+<span class="w">    </span><span class="na">["unknown"]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unknown</span><span class="p">,</span>
+<span class="w">    </span><span class="na">["pimpedli"]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pimpedli</span>
 <span class="p">};</span>
 
 <span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">dogs</span><span class="p">)</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{dog.Key} - {dog.Value}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"{dog.Key} - {dog.Value}"</span><span class="p">);</span>
 </code></pre></div>
 <p>Próbáljuk ki - minden név-kutya párt ki kell írnia a szótárból.</p>
 <p>Elsőre jó ötletnek tűnhet kiváltani a szövegliterálokat a <code>Name</code> property használatával.</p>
@@ -1303,14 +766,14 @@ Vegyünk fel egy új kutyaszótárt a kutyák kitenyésztése után:</p>
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">nameof</span><span class="p">(</span><span class="n">pimpedli</span><span class="p">),</span><span class="w"> </span><span class="n">pimpedli</span><span class="w"> </span><span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div>
-<h2 id="using-static">Using static<a class="headerlink" href="#using-static" title="Permanent link">&para;</a></h2>
+<h2 id="using-static">Using static<a class="headerlink" href="#using-static" title="Permanent link">¶</a></h2>
 <p>Ha egy osztály statikus tagjait vagy egy statikus osztályt szeretnénk használni, lehetőségünk van a <code>using static</code> kulcsszavakkal az osztályt bevonni a névfeloldási logikába.
 Ha a <code>Console</code> osztályt referáljuk ilyen módon, lehetőségünk van a rajta levő metódusok meghívására az aktuális kontextusunkban anélkül, hogy az osztály nevét kiírnánk:</p>
 <div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
 <span class="hll"><span class="k">using</span><span class="w"> </span><span class="nn">static</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">;</span>
 </span><span class="c1">//..</span>
 <span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">dogs</span><span class="p">)</span>
-<span class="hll"><span class="w">    </span><span class="cm">/*Console.*/</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{dog.Key} - {dog.Value}&quot;</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="cm">/*Console.*/</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"{dog.Key} - {dog.Value}"</span><span class="p">);</span>
 </span><span class="hll"><span class="cm">/*Console.*/</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">banan</span><span class="p">);</span>
 </span><span class="hll"><span class="cm">/*Console.*/</span><span class="n">ReadLine</span><span class="p">();</span>
 </span></code></pre></div>
@@ -1318,7 +781,7 @@ Ha a <code>Console</code> osztályt referáljuk ilyen módon, lehetőségünk va
 <p class="admonition-title">névfeloldás</p>
 <p>Az általános névfeloldási szabály továbbra is él: ha egyértelműen feloldható a hivatkozás, akkor nem szükséges kitenni a megkülönböztető előtagot (itt: osztály), különben igen.</p>
 </div>
-<h2 id="nullozhato-tipusok">Nullozható típusok<a class="headerlink" href="#nullozhato-tipusok" title="Permanent link">&para;</a></h2>
+<h2 id="nullozhato-tipusok">Nullozható típusok<a class="headerlink" href="#nullozhato-tipusok" title="Permanent link">¶</a></h2>
 <p>Természetesen a referenciatípusok mind olyan típusok, melyek vehetnek fel <code>null</code> értéket, viszont esetenként jó volna, ha a <code>null</code> értéket egyébként felvenni nem képes típusok is lehetének ilyen értékűek, ezzel pl. jelezvén, hogy egy érték be van-e állítva vagy sem.
 Pl. egy szám esetén a 0 egy konkrét, helyes érték lehet a domain modellünkben, a <code>null</code> viszont azt jelenthetné, hogy nem vett fel értéket.</p>
 <p>Vizsgáljuk meg, hogy a konzolra történő kiíráskor miért lesz az aktuális év <strong>Watson</strong> kutya életkora!
@@ -1353,7 +816,7 @@ A kifejezést meg kellett változtatnunk, hogy a <code>DateOfBirth</code>-ből v
 <p>Az Elvis operátor nevének eredetére több magyarázatot is lehet találni, a források annyiban nagyrészt megegyeznek, hogy a kérdőjel tekeredő része az énekes jellegzetes bodorodó hajviseletére emlékeztet, a pontok pedig a szemeket jelölik, így végülis a ?. egy Elvis emotikonként fogható fel. Ezen logika mentén adódik a magyar megfelelő, a Kozsó operátor, hiszen a szem körül tekergőző legikonikusabb hajtincs a magyar zenei kultúrában <a href="https://hu.wikipedia.org/wiki/Kozso">Kozsó</a> nevéhez köthető.</p>
 </details>
 <p>Ha így futtatjuk az alkalmazást, az <code>AgeInDays</code> és a származtatott tulajdonságok értéke <code>null</code> (vagy kiírva üres) lesz, ha a születési dátum nincs megadva.</p>
-<h2 id="rekord-tipus">Rekord típus<a class="headerlink" href="#rekord-tipus" title="Permanent link">&para;</a></h2>
+<h2 id="rekord-tipus">Rekord típus<a class="headerlink" href="#rekord-tipus" title="Permanent link">¶</a></h2>
 <p>A rekord típusok speciális típusok, melyek:</p>
 <ul>
 <li>egyenlőségvizsgálat során érték típusokra jellemző logikát követnek, azaz két példány akkor egyenlő, ha adataik egyenlőek</li>
@@ -1368,7 +831,7 @@ A kifejezést meg kellett változtatnunk, hogy a <code>DateOfBirth</code>-ből v
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">Guid</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
 </code></pre></div>
 <p>Vegyünk fel egy logikailag megegyező példányt.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="w"> </span><span class="p">};</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Watson"</span><span class="w"> </span><span class="p">};</span>
 <span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="p">};</span>
 </span></code></pre></div>
 <p>Ismét álljunk meg debug során valamelyik <code>WriteLine</code> soron.
@@ -1378,7 +841,7 @@ Láthatjuk, hogy ez az egyenlőségvizsgálat hamist ad, ami technikailag helyes
 Sok esetben azonban nem ezt szeretnénk, hanem például a dupla rögzítés elkerülésére az adatok alapján történő összehasonlítást, ami érték típusoknál van.
 Referencia típusoknál klasszikusan ezt a <code>GetHashCode</code>, <code>Equals</code> függvények felüldefiniálásával értük el (vagy az <code>IComparable&lt;T&gt;</code>, <code>IComparer&lt;T&gt;</code> interfészre épülő logikákkal).
 Egy újabb lehetőség a rekord típus használata.</p>
-<h3 id="pozicio-alapu-megadas">Pozíció alapú megadás<a class="headerlink" href="#pozicio-alapu-megadas" title="Permanent link">&para;</a></h3>
+<h3 id="pozicio-alapu-megadas">Pozíció alapú megadás<a class="headerlink" href="#pozicio-alapu-megadas" title="Permanent link">¶</a></h3>
 <p>Vegyünk fel a <code>Dog</code> típus adatainak megfelelő rekord típust, mindössze egy kifejezésként. A <code>Dog</code> típus alá:</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nf">DogRec</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Guid</span><span class="w"> </span><span class="n">Id</span><span class="p">,</span>
@@ -1406,27 +869,27 @@ Ebből a rövid formából, mindenfajta extra kód írása nélkül a fordító 
 <p>Az <code>Id</code>-nek nem tudjuk beállítani ebben a formában az alapértelmezett <code>Guid.Empty</code> értéket vagy a <code>Metadata</code>-nak az új példányt, mert az egyenlőségjeles kifejezésekből alapértelmezett konstruktorparaméter-értékek lesznek, amik csak statikus, fordítási időben kiértékelhető kifejezések lehetnek.</p>
 </div>
 <p>Vegyünk fel a többi Watson példány mellé két újabbat, de itt már az új rekord típusunkat használjuk.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="p">);</span>
-<span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">"Watson"</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">"Watson"</span><span class="p">);</span>
 </code></pre></div>
 <p>A fentebbi <strong>Watch</strong> ablakos módszerrel ellenőrizzük a <code>watson3 == watson4</code> kifejezés értékét.
 Ez már igaz érték lesz az adatmező alapú összehasonlítási logika miatt.</p>
 <p>Próbáljuk ki ugyanezt a kiértékelést az alábbi változattal:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="p">);</span>
-<span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">"Watson"</span><span class="p">);</span>
+<span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">"Watson"</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
 </span></code></pre></div>
 <p>Ez hamis értéket ad, az egyenlőségnek minden mezőre teljesülnie kell, nem csak a mindkettőben kitöltöttekre.</p>
 <p>A <code>DogRec</code> típus alapvetően immutábilis, a példányainak alapadatai inicializálás után nem módosíthatók. Próbáljuk felülírni a nevet.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="p">);</span>
-<span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
-<span class="hll"><span class="n">watson4</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson3</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;_2&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">//&lt;= nem fordul</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">"Watson"</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">"Watson"</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
+<span class="hll"><span class="n">watson4</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson3</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"_2"</span><span class="p">;</span><span class="w"> </span><span class="c1">//&lt;= nem fordul</span>
 </span></code></pre></div>
 <p>Nem fog lefordulni, mert minden property init-only típusú. A sor jobboldala egyébként lefordulna, tehát a lekérdezés (getter hívás) működne.</p>
 <p>Ha immutábilis típusokkal dolgozunk, akkor mutáció helyett új példányt hozunk létre megváltoztatott adatokkal.
 Alapvetően ezt az OO nyelvekben másoló konstruktorral oldjuk meg.
 A rekord típusnál ennél is továbbmenve másoló kifejezést használhatunk.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
-<span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sherlock&quot;</span><span class="w"> </span><span class="p">};</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">"Watson"</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
+<span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sherlock"</span><span class="w"> </span><span class="p">};</span>
 </span><span class="hll"><span class="n">WriteLine</span><span class="p">(</span><span class="n">watson4</span><span class="p">);</span>
 </span><span class="hll"><span class="n">WriteLine</span><span class="p">(</span><span class="n">watson5</span><span class="p">);</span>
 </span></code></pre></div>
@@ -1438,20 +901,20 @@ Gondoljunk erre akkor, amikor egy ciklusban használjuk ezt a módszert sok egym
 <p class="admonition-title">Mire is jó a rekord típus</p>
 <p>Mire jó a rekord típus, az immutabilitás? Az immutábilis típussokkal való hatékony és eredményes munka másfajta, az imperatív nyelvekhez szokott fejlesztők számára szokatlan módszereket kíván. Vannak területek, ahol ez a befektetés megtérül, ilyen például a többszálú környezet. A legtöbb szálkezeléssel kapcsolatos probléma ugyanis a szálak által közösen használt adatstruktúrák mutációjára vezethető vissza (ún. <em>race condition</em>, versenyhelyzet). Nincs mutáció - nincs probléma. (<em>No mutation - no cry</em>)</p>
 </div>
-<h3 id="kitero-a-szotar-visszavag">Kitérő: a szótár visszavág<a class="headerlink" href="#kitero-a-szotar-visszavag" title="Permanent link">&para;</a></h3>
+<h3 id="kitero-a-szotar-visszavag">Kitérő: a szótár visszavág<a class="headerlink" href="#kitero-a-szotar-visszavag" title="Permanent link">¶</a></h3>
 <p>A rekord típus által biztosított kellemes tulajdonságok csak akkor érvényesek, ha nem keverjük hagyományos referencia típusokkal.</p>
 <p>A szokásos módszerrel ellenőrizzük le, hogy a <code>watson5 == watson6</code> kifejezés igaz-e. Igen, hiszen minden kitöltött adatuk egyezik.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
-<span class="kt">var</span><span class="w"> </span><span class="n">watson5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sherlock&quot;</span><span class="w"> </span><span class="p">};</span>
-<span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sherlock&quot;</span><span class="w"> </span><span class="p">};</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">"Watson"</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">watson5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sherlock"</span><span class="w"> </span><span class="p">};</span>
+<span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sherlock"</span><span class="w"> </span><span class="p">};</span>
 </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">watson4</span><span class="p">);</span>
 <span class="n">WriteLine</span><span class="p">(</span><span class="n">watson5</span><span class="p">);</span>
 <span class="hll"><span class="n">WriteLine</span><span class="p">(</span><span class="n">watson6</span><span class="p">);</span>
 </span></code></pre></div>
 <p>Vigyünk be egy ártatlan inicializációt a <code>Metadata</code> propertyre.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
-<span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sherlock&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
-</span><span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sherlock&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Metadata</span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRec</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="s">"Watson"</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
+<span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sherlock"</span><span class="p">,</span><span class="w"> </span><span class="n">Metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+</span><span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sherlock"</span><span class="p">,</span><span class="w"> </span><span class="n">Metadata</span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
 </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">watson4</span><span class="p">);</span>
 <span class="n">WriteLine</span><span class="p">(</span><span class="n">watson5</span><span class="p">);</span>
 <span class="n">WriteLine</span><span class="p">(</span><span class="n">watson6</span><span class="p">);</span>
@@ -1460,9 +923,9 @@ Gondoljunk erre akkor, amikor egy ciklusban használjuk ezt a módszert sok egym
 Az oka az, hogy a <code>Metadata</code> szótár egy klasszikus referencia típus, az összehasonlításnál a klasszikus memóriacím-összehasonlítás történik, viszont az a két új szótár példány esetében eltérő lesz.
 A formázott szöveges kiírásba is belerondít a szótár, mert ott is a szótár típus alapértelmezett szöveges reprezentációja jut érvényre, ami a típus neve.</p>
 <p>Klónozzunk tovább, aztán próbáljunk mutációt végrehajtani a <code>Metadata</code> szótáron.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sherlock&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
-<span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson6</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="w"> </span><span class="p">};</span>
-</span><span class="hll"><span class="n">watson7</span><span class="p">.</span><span class="n">Metadata</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Chip azonosító&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;12345QQ&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson4</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sherlock"</span><span class="p">,</span><span class="w"> </span><span class="n">Metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">watson7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson6</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Watson"</span><span class="w"> </span><span class="p">};</span>
+</span><span class="hll"><span class="n">watson7</span><span class="p">.</span><span class="n">Metadata</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"Chip azonosító"</span><span class="p">,</span><span class="w"> </span><span class="s">"12345QQ"</span><span class="p">);</span>
 </span><span class="n">WriteLine</span><span class="p">(</span><span class="n">watson4</span><span class="p">);</span>
 </code></pre></div>
 <p>Ez lefordul, pedig ez mutáció.
@@ -1479,7 +942,7 @@ Ez az ún. <em>shallow copy</em> jelenség, amikor nem a szótár memóriaterül
 <p class="admonition-title">Immutabilitás</p>
 <p>Immutábilis környezetben törekedjünk arra, hogy a <strong>teljes</strong> adatstruktúránk támogassa az immutábilis kezelést.</p>
 </div>
-<h3 id="normal-megadas">Normál megadás<a class="headerlink" href="#normal-megadas" title="Permanent link">&para;</a></h3>
+<h3 id="normal-megadas">Normál megadás<a class="headerlink" href="#normal-megadas" title="Permanent link">¶</a></h3>
 <p>Ha nincs szükségünk a kikényszerített immutabilitásra, akkor használhatjuk a rekord normál megadását.
 Fogjuk a <code>Dog</code> osztályt, másoljuk le a kódját, adjunk neki más nevet és <code>class</code> helyett <code>record</code> jelölőt.</p>
 <p>A <code>Dog</code> osztály fölé:</p>
@@ -1506,7 +969,7 @@ Fogjuk a <code>Dog</code> osztályt, másoljuk le a kódját, adjunk neki más n
 <p>A <code>ToString</code> implementációját elhagytuk az előző szakaszban említettek miatt.</p>
 </div>
 <p>A <code>Program.cs</code>-be:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRecExt</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Watson&quot;</span><span class="w"> </span><span class="p">};</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">watson8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DogRecExt</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Watson"</span><span class="w"> </span><span class="p">};</span>
 <span class="n">watson8</span><span class="p">.</span><span class="n">DateOfBirth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddYears</span><span class="p">(</span><span class="o">-</span><span class="m">15</span><span class="p">);</span>
 <span class="kt">var</span><span class="w"> </span><span class="n">watson9</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watson8</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span>
 <span class="n">WriteLine</span><span class="p">(</span><span class="n">watson8</span><span class="p">);</span>
@@ -1523,92 +986,61 @@ Fogjuk a <code>Dog</code> osztályt, másoljuk le a kódját, adjunk neki más n
 <p class="admonition-title">record struct</p>
 <p>A rekordoknak további válfajai vannak, ugyanis struktúra is lehet rekord, ilyenkor a <code>record struct</code> kulcsszó párt használjuk a típus deklarációjánál. Sőt, a <code>readonly record struct</code> egy immutábilis <code>record struct</code>. Ezen válfajok nyilván különbözőképpen viselkednek, mely viselkedéseket itt most nem részletezzük, de a <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record">dokumentációban</a> megtalálhatók.</p>
 </div>
-  <hr>
-  <div class="md-source-file">
-    <span class="md-source-file__fact"> <span class="md-icon" title="Utolsó frissítés"> <svg
-          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z">
-          </path>
-        </svg>
-      </span>
-      <span title="2024. február 13. 15:24:04">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-13T15:24:04+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-13</span>
-      </span>
-    </span>
-
-    
-
-    <span class="md-source-file__fact">
-      <span class="md-icon" title="Szerzők">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z">
-          </path>
-        </svg>
-      </span>
-      <span>Szerzők</span>
-      <nav><a href="https://github.com/kszicsillag" target="_blank" rel="noopener noreferrer" class="md-author" title="@kszicsillag">
-          <img src="https://avatars.githubusercontent.com/kszicsillag?size=72" alt="@kszicsillag">
-        </a><a href="https://github.com/tibitoth" target="_blank" rel="noopener noreferrer" class="md-author" title="@tibitoth">
-          <img src="https://avatars.githubusercontent.com/tibitoth?size=72" alt="@tibitoth">
-        </a></nav>      
-    </span>
-  </div>
-
-
-
-
-                
-              </article>
-            </div>
-          
-          
+<hr/>
+<div class="md-source-file">
+<span class="md-source-file__fact"> <span class="md-icon" title="Utolsó frissítés"> <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z">
+</path>
+</svg>
+</span>
+<span title="2024. február 13. 15:24:04">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-02-13T15:24:04+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-13</span>
+</span>
+</span>
+<span class="md-source-file__fact">
+<span class="md-icon" title="Szerzők">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z">
+</path>
+</svg>
+</span>
+<span>Szerzők</span>
+<nav><a class="md-author" href="https://github.com/kszicsillag" rel="noopener noreferrer" target="_blank" title="@kszicsillag">
+<img alt="@kszicsillag" src="https://avatars.githubusercontent.com/kszicsillag?size=72"/>
+</a><a class="md-author" href="https://github.com/tibitoth" rel="noopener noreferrer" target="_blank" title="@tibitoth">
+<img alt="@tibitoth" src="https://avatars.githubusercontent.com/tibitoth?size=72"/>
+</a></nav>
+</span>
+</div>
+</article>
+</div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
   Vissza a tetejére
 </button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      Copyright &copy; BME VIK AUT
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © BME VIK AUT
     </div>
-  
-  
 </div>
-      
-    </div>
-  </div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "content.action.edit", "content.code.annotate", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.term.missing": "\u00dcres", "select.version": "Verzi\u00f3v\u00e1lt\u00e1s"}}</script>
-    
-    
-      <script src="../../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
-      
-        <script src="../../../js/timeago.min.js"></script>
-      
-        <script src="../../../js/timeago_mkdocs_material.js"></script>
-      
-    
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "content.action.edit", "content.code.annotate", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.term.missing": "\u00dcres", "select.version": "Verzi\u00f3v\u00e1lt\u00e1s"}}</script>
+<script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+<script src="../../../js/timeago.min.js"></script>
+<script src="../../../js/timeago_mkdocs_material.js"></script>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></body>
 </html>

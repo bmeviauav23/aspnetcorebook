@@ -1,67 +1,26 @@
 
-<!doctype html>
-<html lang="hu" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-        <meta name="author" content="Tóth Tibor, Simon Gábor, Albert István, Szabó Gábor">
-      
-      
-        <link rel="canonical" href="https://bmeviauav23.github.io/aspnetcorebook/seminar/04-csharp4/chapter4/">
-      
-      
-        <link rel="prev" href="../../03-linq/chapter3/">
-      
-      
-        <link rel="next" href="../../05-aspnetcore1/chapter5/">
-      
-      
-      <link rel="icon" href="../../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
-    
-    
-      
-        <title>C# alapok IV. - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.f2e4d321.min.css">
-      
-        
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
-      
-      
+<!DOCTYPE html>
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-      <link rel="stylesheet" href="../../../css/timeago.css">
-    
-      <link rel="stylesheet" href="../../../extra-material-theme.css">
-    
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-    
-   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+<html class="no-js" lang="hu">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Tóth Tibor, Simon Gábor, Albert István, Szabó Gábor" name="author"/>
+<link href="https://bmeviauav23.github.io/aspnetcorebook/seminar/04-csharp4/chapter4/" rel="canonical"/>
+<link href="../../03-linq/chapter3/" rel="prev"/>
+<link href="../../05-aspnetcore1/chapter5/" rel="next"/>
+<link href="../../../favicon.ico" rel="icon"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-9.5.27" name="generator"/>
+<title>C# alapok IV. - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
+<link href="../../../assets/stylesheets/main.6543a935.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/timeago.css" rel="stylesheet"/>
+<link href="../../../extra-material-theme.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../../../assets/stylesheets/extra-style.m7c10_cn.min.css" rel="stylesheet"/> <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -71,1044 +30,544 @@
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
     body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
-  
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="aut" data-md-color-primary="aut" data-md-color-accent="red">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#c-alapok-iv" class="md-skip">
+<body data-md-color-accent="red" data-md-color-primary="aut" data-md-color-scheme="aut" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#c-alapok-iv">
           Kihagyás
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
+</div>
+<div data-md-component="announce">
+</div>
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Élőfej">
-    <a href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-header__button md-logo" aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" data-md-component="logo">
-      
-  <img src="../../../logo-bme-aut.png" alt="logo">
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
+<nav aria-label="Élőfej" class="md-header__inner md-grid">
+<a aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra">
+<img alt="logo" src="../../../logo-bme-aut.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
             BMEVIAUAV23 - Szoftverfejlesztés .NET platformra
           </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
             
               C# alapok IV.
             
           </span>
-        </div>
-      </div>
-    </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="aut" data-md-color-primary="aut" data-md-color-accent="red"  aria-label="Váltás sötét témára"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Váltás sötét témára" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Váltás világos témára"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Váltás világos témára" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
-      </label>
-    
-  
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Váltás sötét témára" class="md-option" data-md-color-accent="red" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="aut" data-md-color-scheme="aut" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Váltás sötét témára">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"></path></svg>
+</label>
+<input aria-label="Váltás világos témára" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Váltás világos témára">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"></path></svg>
+</label>
 </form>
-      
-    
-    
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Keresés">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Törlés" aria-label="Törlés" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
+<script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Keresés" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Keresés" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Keresés" class="md-search__options">
+<button aria-label="Törlés" class="md-search__icon md-icon" tabindex="-1" title="Törlés" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
             Keresés inicializálása
           </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<ol class="md-search-result__list" role="presentation"></ol>
 </div>
-    
-    
-      <div class="md-header__source">
-        <a href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-  </div>
-  <div class="md-source__repository">
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
     bmeviauav23/aspnetcorebook
   </div>
 </a>
-      </div>
-    
-  </nav>
-  
+</div>
+</nav>
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-            
-<nav class="md-tabs" aria-label="Lapok" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../.." class="md-tabs__link">
+<div class="md-container" data-md-component="container">
+<nav aria-label="Lapok" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../..">
           
   
   Tudnivalók
 
         </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../01-csharp1/chapter1/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../../01-csharp1/chapter1/">
           
   
   Laborok
 
         </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../homework/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../homework/">
           
   
   Házi feladat
 
         </a>
-      </li>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../information/afterword/">
+        
+  
     
   
+  Zárszó
 
-      
-    </ul>
-  </div>
+      </a>
+</li>
+</ul>
+</div>
 </nav>
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-  
-
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigáció" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-nav__button md-logo" aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" data-md-component="logo">
-      
-  <img src="../../../logo-bme-aut.png" alt="logo">
-
-    </a>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigáció" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="BMEVIAUAV23 - Szoftverfejlesztés .NET platformra">
+<img alt="logo" src="../../../logo-bme-aut.png"/>
+</a>
     BMEVIAUAV23 - Szoftverfejlesztés .NET platformra
   </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-  </div>
-  <div class="md-source__repository">
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
     bmeviauav23/aspnetcorebook
   </div>
 </a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
-        
-          
-          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+<span class="md-ellipsis">
     Tudnivalók
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_1">
+<span class="md-nav__icon md-icon"></span>
             Tudnivalók
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
+<span class="md-ellipsis">
     Szoftverfejlesztés .NET platformra
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../information/preface/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../information/preface/">
+<span class="md-ellipsis">
     Tudnivalók
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../information/contributing/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../information/contributing/">
+<span class="md-ellipsis">
     Hozzájárulás az anyaghoz
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-      
-        
-        
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-            
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-ellipsis">
     Laborok
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
             Laborok
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../01-csharp1/chapter1/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../01-csharp1/chapter1/">
+<span class="md-ellipsis">
     C# alapok, szintaxis
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../02-csharp2/chapter2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../02-csharp2/chapter2/">
+<span class="md-ellipsis">
     C# alapok II.
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../03-linq/chapter3/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../03-linq/chapter3/">
+<span class="md-ellipsis">
     LINQ
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
     C# alapok IV.
   </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
     C# alapok IV.
   </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</a>
+<nav aria-label="Tartalomjegyzék" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Tartalomjegyzék
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#bejarasi-problemak" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bejarasi-problemak">
+<span class="md-ellipsis">
       Bejárási problémák
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Bejárási problémák">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#kollekcio-modosulasa-bejarasa-soran" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Bejárási problémák" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#kollekcio-modosulasa-bejarasa-soran">
+<span class="md-ellipsis">
       Kollekció módosulása bejárása során
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#azonnali-es-kesleltetett-kiertekeles" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azonnali-es-kesleltetett-kiertekeles">
+<span class="md-ellipsis">
       Azonnali és késleltetett kiértékelés
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#aszinkron-mukodes" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aszinkron-mukodes">
+<span class="md-ellipsis">
       Aszinkron működés
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Aszinkron működés">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tap-es-asyncawait-alapjai" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Aszinkron működés" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tap-es-asyncawait-alapjai">
+<span class="md-ellipsis">
       TAP és async/await alapjai
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#az-oldalletoltes-bevarasa" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#az-oldalletoltes-bevarasa">
+<span class="md-ellipsis">
       Az oldalletöltés bevárása
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#hattermuvelet-eredmenyenek-visszaadasa" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hattermuvelet-eredmenyenek-visszaadasa">
+<span class="md-ellipsis">
       Háttérművelet eredményének visszaadása
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#nemigazan-nullozhato-referencia-tipusok" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nemigazan-nullozhato-referencia-tipusok">
+<span class="md-ellipsis">
       Nem(igazán) nullozható referencia típusok
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#tuple-nyelvi-szinten-lokalis-fuggvenyek-dispose-minta" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tuple-nyelvi-szinten-lokalis-fuggvenyek-dispose-minta">
+<span class="md-ellipsis">
       Tuple nyelvi szinten, lokális függvények, Dispose minta
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Tuple nyelvi szinten, lokális függvények, Dispose minta">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tuple-nyelvi-szinten-lokalis-fuggvenyek" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Tuple nyelvi szinten, lokális függvények, Dispose minta" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tuple-nyelvi-szinten-lokalis-fuggvenyek">
+<span class="md-ellipsis">
       Tuple nyelvi szinten, lokális függvények
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#dispose-minta" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#dispose-minta">
+<span class="md-ellipsis">
       Dispose minta
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
+</ul>
 </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../05-aspnetcore1/chapter5/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../05-aspnetcore1/chapter5/">
+<span class="md-ellipsis">
     ASP.NET Core alapszolgáltatások
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../06-efcore/chapter6/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../06-efcore/chapter6/">
+<span class="md-ellipsis">
     Entity Framework Core I-II.
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../07-restapi/chapter7/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../07-restapi/chapter7/">
+<span class="md-ellipsis">
     ASP.NET Core webszolgáltatások I.-II.
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../08-client/chapter8/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../08-client/chapter8/">
+<span class="md-ellipsis">
     ASP.NET Core webszolgáltatások III.
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../10-test/chapter10/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../10-test/chapter10/">
+<span class="md-ellipsis">
     Automatizált tesztelés
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
     Házi feladat
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
             Házi feladat
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../homework/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../homework/">
+<span class="md-ellipsis">
     Házi feladat tudnivalók
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../homework/example-spec/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../homework/example-spec/">
+<span class="md-ellipsis">
     Példa kisHF specifikáció
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../homework/hw-points/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../homework/hw-points/">
+<span class="md-ellipsis">
     NagyHF pontrendszer
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-  </ul>
+</a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../information/afterword/">
+<span class="md-ellipsis">
+    Zárszó
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Tartalomjegyzék" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Tartalomjegyzék
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#bejarasi-problemak" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bejarasi-problemak">
+<span class="md-ellipsis">
       Bejárási problémák
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Bejárási problémák">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#kollekcio-modosulasa-bejarasa-soran" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Bejárási problémák" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#kollekcio-modosulasa-bejarasa-soran">
+<span class="md-ellipsis">
       Kollekció módosulása bejárása során
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#azonnali-es-kesleltetett-kiertekeles" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azonnali-es-kesleltetett-kiertekeles">
+<span class="md-ellipsis">
       Azonnali és késleltetett kiértékelés
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#aszinkron-mukodes" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#aszinkron-mukodes">
+<span class="md-ellipsis">
       Aszinkron működés
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Aszinkron működés">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tap-es-asyncawait-alapjai" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Aszinkron működés" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tap-es-asyncawait-alapjai">
+<span class="md-ellipsis">
       TAP és async/await alapjai
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#az-oldalletoltes-bevarasa" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#az-oldalletoltes-bevarasa">
+<span class="md-ellipsis">
       Az oldalletöltés bevárása
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#hattermuvelet-eredmenyenek-visszaadasa" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hattermuvelet-eredmenyenek-visszaadasa">
+<span class="md-ellipsis">
       Háttérművelet eredményének visszaadása
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#nemigazan-nullozhato-referencia-tipusok" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nemigazan-nullozhato-referencia-tipusok">
+<span class="md-ellipsis">
       Nem(igazán) nullozható referencia típusok
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#tuple-nyelvi-szinten-lokalis-fuggvenyek-dispose-minta" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tuple-nyelvi-szinten-lokalis-fuggvenyek-dispose-minta">
+<span class="md-ellipsis">
       Tuple nyelvi szinten, lokális függvények, Dispose minta
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Tuple nyelvi szinten, lokális függvények, Dispose minta">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tuple-nyelvi-szinten-lokalis-fuggvenyek" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Tuple nyelvi szinten, lokális függvények, Dispose minta" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tuple-nyelvi-szinten-lokalis-fuggvenyek">
+<span class="md-ellipsis">
       Tuple nyelvi szinten, lokális függvények
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#dispose-minta" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#dispose-minta">
+<span class="md-ellipsis">
       Dispose minta
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-  
-    <a href="https://github.com/bmeviauav23/aspnetcorebook/edit/master/docs/seminar/04-csharp4/chapter4.md" title="Oldal szerkesztése" class="md-content__button md-icon">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="c-alapok-iv">C# alapok IV.<a class="headerlink" href="#c-alapok-iv" title="Permanent link">&para;</a></h1>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/bmeviauav23/aspnetcorebook/edit/master/docs/seminar/04-csharp4/chapter4.md" title="Oldal szerkesztése">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"></path></svg>
+</a>
+<h1 id="c-alapok-iv">C# alapok IV.<a class="headerlink" href="#c-alapok-iv" title="Permanent link">¶</a></h1>
 <p>Ezen a gyakorlaton több különféle nyelvi konstrukciót tekintünk át, vegyesfelvágott jelleggel. Az egyes fő témaköröket külön projektként dolgozzuk ki. A projekteket hozzáadhatjuk az elsőként létrehozott projekt solutionjéhez (menu:jobbklikk a solution-ön[Add &gt; New project]). Hozzáadás után ne felejtsük el átállítani a futtatandó projektet: menu:jobbklikk a projekten[Set as Startup Project].</p>
-<h2 id="bejarasi-problemak">Bejárási problémák<a class="headerlink" href="#bejarasi-problemak" title="Permanent link">&para;</a></h2>
+<h2 id="bejarasi-problemak">Bejárási problémák<a class="headerlink" href="#bejarasi-problemak" title="Permanent link">¶</a></h2>
 <p>Enumerátorok használata esetén két alapvető problémába ütközünk: az egyik a mögöttes kollekció módosulása bejárás során, a másik pedig a késleltetett kiértékelésből adódó mellékhatások kezelése.</p>
-<h3 id="kollekcio-modosulasa-bejarasa-soran">Kollekció módosulása bejárása során<a class="headerlink" href="#kollekcio-modosulasa-bejarasa-soran" title="Permanent link">&para;</a></h3>
+<h3 id="kollekcio-modosulasa-bejarasa-soran">Kollekció módosulása bejárása során<a class="headerlink" href="#kollekcio-modosulasa-bejarasa-soran" title="Permanent link">¶</a></h3>
 <p>Szűrjünk le egy számokat tartalmazó kollekciót csak azokra az elemekre, amik megfelelnek egy feltételnek, és ezeket távolítsuk el a kollekcióból!</p>
 <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Enumerable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">).</span><span class="n">ToList</span><span class="p">();</span>
 <span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">numbers</span><span class="p">)</span>
@@ -1133,7 +592,7 @@ A <code>ToList</code> <code>IEnumerable</code> bővítő, tehát bejárhatja a k
 <p class="admonition-title">Kivételek</p>
 <p>Bár a fenti az általános szabály, bizonyos kollekciók bizonyos módosító műveletei mégsem dobnak kivételt, ilyen például a <code>Dictionary&lt;,&gt;</code> <code>Remove</code> és <code>Clear</code> műveletei.</p>
 </div>
-<h3 id="azonnali-es-kesleltetett-kiertekeles">Azonnali és késleltetett kiértékelés<a class="headerlink" href="#azonnali-es-kesleltetett-kiertekeles" title="Permanent link">&para;</a></h3>
+<h3 id="azonnali-es-kesleltetett-kiertekeles">Azonnali és késleltetett kiértékelés<a class="headerlink" href="#azonnali-es-kesleltetett-kiertekeles" title="Permanent link">¶</a></h3>
 <p>Amennyiben egy metódus generátor (<code>IEnumerable</code> vagy <code>IEnumerable&lt;&gt;</code> visszatérési értékű), az egyes elemeken történő iteráció a generátorok egymásba ágyazását jelenti, azaz az egyes generátorokban a <code>yield return</code> által visszaadott értéket fogja az enumerátor <code>MoveNext</code> metódusa visszaadni.
 Amíg az <code>IEnumerable</code>-re van referenciánk, és nem járjuk azt közvetlenül be, addig <em>késleltetett kiértékelésről</em> beszélünk.</p>
 <p>Az eddigiek alá:</p>
@@ -1142,7 +601,7 @@ Amíg az <code>IEnumerable</code>-re van referenciánk, és nem járjuk azt köz
 <span class="w">                    </span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 <span class="w">                    </span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="w"> </span><span class="p">}))</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{n} - {i}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"{n} - {i}"</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">();</span>
@@ -1153,7 +612,7 @@ Amíg az <code>IEnumerable</code>-re van referenciánk, és nem járjuk azt köz
 <span class="w">                    </span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="w"> </span><span class="p">})</span>
 <span class="w">                    </span><span class="p">.</span><span class="n">ToList</span><span class="p">())</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{n} - {i}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"{n} - {i}"</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>A <code>ToList</code> hívásunk először bejárja az iterátort és visszaad egy listát, amelybe összegyűjti az <code>IEnumerable</code> elemeit.
@@ -1161,7 +620,7 @@ Ezért az <code>i</code> változónk a második esetben nem együtt inkrementál
 Az első bejáráskor (a <code>ToList</code> hívásakor) inkrementálódik az <code>i</code> értéke, másodjára pedig már csak bejárjuk a kapott listát.
 Eddigre az <code>i</code> értéke már meg van növelve.</p>
 <p>Ezzel a megközelítéssel futásidőben is állíthatunk össze egy időben változó lekérdezést, amit majd egyszer, a későbbiekben fogunk bejárni (pl. sorosításkor).</p>
-<h2 id="aszinkron-mukodes">Aszinkron működés<a class="headerlink" href="#aszinkron-mukodes" title="Permanent link">&para;</a></h2>
+<h2 id="aszinkron-mukodes">Aszinkron működés<a class="headerlink" href="#aszinkron-mukodes" title="Permanent link">¶</a></h2>
 <p>Töltsünk le egy HTML oldalt, és ezen a problémán keresztül bemutatjuk az aszinkron programozási modellt.
 A <code>HttpClient</code> működésének a részletesebb ismertetése most nem téma, csak a legalapvetőbb funkciókat fogjuk használni.</p>
 <p>A fő gond, hogy a hosszan futó műveletek blokkolhatják a fő/UI/aktuális szál futását, mindez kliens alkalmazások esetében úgy jelentkezik, hogy nem lesz az alkalmazásunk reszponzív a felhasználói bemenetekre; szerveralkalmazások esetében pedig az adott kérést kiszolgáló szál feleslegesen blokkolódik, amikor esetleg mással is tudna foglalkozni.</p>
@@ -1173,20 +632,20 @@ A keretrendszer többféle mintát kínál erre:</p>
 <li>Task-based Asynchronous Pattern (TAP).</li>
 </ul>
 <p>Mi most a legutóbbival foglalkozunk csak, a többi jórészt elavultnak számít ma már.</p>
-<h3 id="tap-es-asyncawait-alapjai">TAP és async/await alapjai<a class="headerlink" href="#tap-es-asyncawait-alapjai" title="Permanent link">&para;</a></h3>
+<h3 id="tap-es-asyncawait-alapjai">TAP és async/await alapjai<a class="headerlink" href="#tap-es-asyncawait-alapjai" title="Permanent link">¶</a></h3>
 <p>A TAP-ra már C# nyelvi támogatást is kapunk az <code>async</code>/<code>await</code> kulcsszavakon keresztül.
 Vegyünk fel egy új metódust és hívjuk meg a legfelső szintű kódban.
 A megírt metódus írása során hivatkozzuk be a <code>System.Net.Http</code> névteret.
 A kód semmi mást nem csinál, csak elindít aszinkron módon egy HTTP GET kérést a megadott URL-re, illetve a válasz tartalmát is aszinkron módon kiolvassa és egy részét kiírja a konzolra.</p>
 <div class="highlight"><pre><span></span><code><span class="n">LoadWebPageAsync</span><span class="p">();</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Ez a vége&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Ez a vége"</span><span class="p">);</span>
 <span class="n">Console</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">();</span>
 
 <span class="k">static</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">LoadWebPageAsync</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">())</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://www.bing.com&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="s">"http://www.bing.com"</span><span class="p">));</span>
 <span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
 
 <span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">();</span>
@@ -1207,34 +666,34 @@ Figyeljük meg azt is, hogy az <em>Ez a vége</em> szöveg hamarabb kiíródik, 
 <p class="admonition-title">async void kerülendő</p>
 <p>Az <code>async void</code> általában helytelen kód, mert nem lehet bevárni a háttérművelet végét. Az <code>async Task</code> máris jobb a bevárhatóság és a hibakezelés miatt, és alig kell módosítani a kódot. Kivétel, amikor valamiért kötelező a <code>void</code>, például, ha esemény vagy interfész előírja.</p>
 </div>
-<h3 id="az-oldalletoltes-bevarasa">Az oldalletöltés bevárása<a class="headerlink" href="#az-oldalletoltes-bevarasa" title="Permanent link">&para;</a></h3>
+<h3 id="az-oldalletoltes-bevarasa">Az oldalletöltés bevárása<a class="headerlink" href="#az-oldalletoltes-bevarasa" title="Permanent link">¶</a></h3>
 <p>Módosítsuk úgy a kódot, hogy a <code>LoadWebPageAsync</code> utáni rész várja meg a letöltés befejeződését. Ez akkor jó például, ha a letöltés után valamit még szeretnék elvégezni a hívó függvényben.</p>
 <p>Módosítsuk a <code>LoadWebPageAsync</code> fejlécét, hogy taszkot adjon vissza:</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">LoadWebPageAsync</span><span class="p">()</span><span class="w"> </span><span class="c1">//void helyett Task</span>
 </code></pre></div>
 <p>Várjuk be az aszinkron művelet végét a legfelső szintű kódban.</p>
 <div class="highlight"><pre><span></span><code><span class="hll"><span class="k">await</span><span class="w"> </span><span class="nf">LoadWebPageAsync</span><span class="p">();</span><span class="w"> </span><span class="c1">//await bekerült</span>
-</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Ez a vége&quot;</span><span class="p">);</span>
+</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Ez a vége"</span><span class="p">);</span>
 <span class="cm">/*Console.ReadKey();*/</span>
 </code></pre></div>
 <p>Figyeljük meg, hogy így már az <em>Ez a vége</em> felirat már a letöltés után jelenik meg.</p>
 <p><code>await</code>-et használtunk a legfelső szintű kódban, ilyenkor automatikusan <code>async</code> kulcsszóval ellátott <code>Main</code> generálódik - valami hasonló, mint az alábbi kódrészlet.</p>
 <div class="highlight"><pre><span></span><code><span class="k">await</span><span class="w"> </span><span class="nf">LoadWebPageAsync</span><span class="p">();</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Ez a vége&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Ez a vége"</span><span class="p">);</span>
 <span class="c1">//Console.ReadKey();</span>
 </code></pre></div>
-<h3 id="hattermuvelet-eredmenyenek-visszaadasa">Háttérművelet eredményének visszaadása<a class="headerlink" href="#hattermuvelet-eredmenyenek-visszaadasa" title="Permanent link">&para;</a></h3>
+<h3 id="hattermuvelet-eredmenyenek-visszaadasa">Háttérművelet eredményének visszaadása<a class="headerlink" href="#hattermuvelet-eredmenyenek-visszaadasa" title="Permanent link">¶</a></h3>
 <p>Alakítsuk át, hogy a weboldal tartalmának kiíratása a legfelső szintű kódban történjen, és a <code>LoadWebPageAsync</code> csak adja vissza a tartalmat <code>string</code>-ként.
 Ehhez módosítsuk a visszatérési értéket <code>Task&lt;string&gt;</code>-re, így az <code>await</code> már eredménnyel fog tudni visszatérni.</p>
 <div class="highlight"><pre><span></span><code><span class="hll"><span class="kt">var</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">LoadWebPageAsync</span><span class="p">();</span>
 </span><span class="hll"><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
-</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Ez a vége&quot;</span><span class="p">);</span>
+</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Ez a vége"</span><span class="p">);</span>
 <span class="n">Console</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">();</span>
 <span class="hll"><span class="k">static</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">LoadWebPageAsync</span><span class="p">()</span><span class="w"> </span><span class="c1">//generikus paraméter</span>
 </span><span class="p">{</span>
 <span class="hll"><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">())</span>
 </span><span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://www.bing.com&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="s">"http://www.bing.com"</span><span class="p">));</span>
 <span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
 
 <span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">();</span>
@@ -1243,7 +702,7 @@ Ehhez módosítsuk a visszatérési értéket <code>Task&lt;string&gt;</code>-re
 <span class="hll"><span class="p">}</span>
 </span></code></pre></div>
 <p>A <code>return</code> valójában ezen <code>Task</code> eredményét állítja be <code>async</code> metódusok esetében, és nem egy nemgenerikus <code>Task</code> objektummal kell visszatérjünk.</p>
-<h2 id="nemigazan-nullozhato-referencia-tipusok">Nem(igazán) nullozható referencia típusok<a class="headerlink" href="#nemigazan-nullozhato-referencia-tipusok" title="Permanent link">&para;</a></h2>
+<h2 id="nemigazan-nullozhato-referencia-tipusok">Nem(igazán) nullozható referencia típusok<a class="headerlink" href="#nemigazan-nullozhato-referencia-tipusok" title="Permanent link">¶</a></h2>
 <p>Korábban láttuk, hogy hogyan lehet egy érték típusnak null értéket adni (<code>Nullable&lt;T&gt;</code>).
 Az érem másik oldala a C# 8-ban megjelent nem nullozható referencia típusok.
 Nem egy új típust vezettek be, hanem az eddig megszokott típusneveket értelmezi máshogyan a fordító.
@@ -1255,7 +714,7 @@ A projektfájlban az alábbi beállítás kapcsolja be ezt a funkciót.</p>
 <p>Ezen kívül még <a href="https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references#nullable-contexts">preprocessor direktívákkal</a> is szabályozhatjuk a működést.</p>
 </div>
 <p>Induljunk ki egy egyszerű személyeket nyilvántartó adatosztályból, ahol elhatározzuk, hogy a középső név kivételével a többi névdarab nem nullozható szöveg lesz.</p>
-<div class="highlight"><pre><span></span><code><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Hello World!"</span><span class="p">);</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Person</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">FirstName</span><span class="p">;</span><span class="w">   </span><span class="c1">// Not null</span>
@@ -1277,16 +736,16 @@ Adjunk konstruktort a típusnak:</p>
 <span class="w">    </span><span class="n">MiddleName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mname</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Ezzel meg is oldottunk minden figyelmeztetést.</p>
 <div class="admonition warning">
 <p class="admonition-title">Rebuild</p>
 <p>Ha biztosan látni akarjuk az összes figyelmeztetést, akkor sima Build művelet helyett használjuk a Rebuild-et.</p>
 </div>
+<p>Ezzel meg is oldottunk minden figyelmeztetést.</p>
 <div class="admonition warning">
 <p class="admonition-title">Konstruktorok</p>
 <p>Sajnos a kötelezően konstruktoron keresztüli inicializáció nem mindig működik, például a sorosítók általában nem szeretik, ha nincs alapértelmezett konstruktor.</p>
 </div>
-<p>Mennyire okos a fordító a <code>null</code> érték detektálásában?Nézzünk pár példát!
+<p>Mennyire okos a fordító a <code>null</code> érték detektálásában? Nézzünk pár példát!
 Az alábbi statikus függvényt tegyük bele a <code>Person</code> osztályunkba és vegyük fel a <code>using static System.Console;</code> névtérhivatkozást is.</p>
 <div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">M</span><span class="p">(</span><span class="kt">string?</span><span class="w"> </span><span class="n">ns</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1363,7 +822,7 @@ Vegyünk fel ennek tesztelésére egy újabb függvényt a <code>Person</code> o
 <p>A felkiáltójeles ráerőszakolást a <code>ResetFields</code>-ben látható ámokfutás helyett inkább a fals pozitív esetek kezelésére használjuk.
 Javítsuk ki a <code>GetAnotherPerson</code> hívás miatti fals pozitív esetet az <code>M(Person)</code> függvényben:</p>
 <div class="highlight"><pre><span></span><code><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetAnotherPerson</span><span class="p">();</span>
-<span class="hll"><span class="n">WriteLine</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">MiddleName</span><span class="o">!</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span><span class="w"> </span><span class="c1">//bekerült egy &#39;!&#39;</span>
+<span class="hll"><span class="n">WriteLine</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">MiddleName</span><span class="o">!</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span><span class="w"> </span><span class="c1">//bekerült egy '!'</span>
 </span></code></pre></div>
 <p>Figyeljük meg, ahogy a figyelmeztetés eltűnik.</p>
 <p>Ha igazán elkötelezettek vagyunk a <code>null</code> kiirtása mellett, akkor bekapcsolhatjuk, hogy minden, a <code>null</code> kezelés miatti, fordító által detektált figyelmeztetés legyen hiba.
@@ -1371,8 +830,8 @@ A projekt beállítási között (menu:a projekten jobbklikk[Properties]), a <em
 (Ha több értéket akarunk megadni, akkor a <code>;</code> elválasztót alkalmazhatjuk.)</p>
 <p>Ellenőrizzük, hogy tényleg hibaként jelennek-e meg az eddigi <code>null</code> kezelés miatti figyelmeztetések.</p>
 <p>Mivel ez csak egy példakód, ne javítsuk ki a hibákat, csak távolítsuk el a projektet a solutionből (menu:a projekten jobbklikk[Remove]).</p>
-<h2 id="tuple-nyelvi-szinten-lokalis-fuggvenyek-dispose-minta">Tuple nyelvi szinten, lokális függvények, Dispose minta<a class="headerlink" href="#tuple-nyelvi-szinten-lokalis-fuggvenyek-dispose-minta" title="Permanent link">&para;</a></h2>
-<h3 id="tuple-nyelvi-szinten-lokalis-fuggvenyek">Tuple nyelvi szinten, lokális függvények<a class="headerlink" href="#tuple-nyelvi-szinten-lokalis-fuggvenyek" title="Permanent link">&para;</a></h3>
+<h2 id="tuple-nyelvi-szinten-lokalis-fuggvenyek-dispose-minta">Tuple nyelvi szinten, lokális függvények, Dispose minta<a class="headerlink" href="#tuple-nyelvi-szinten-lokalis-fuggvenyek-dispose-minta" title="Permanent link">¶</a></h2>
+<h3 id="tuple-nyelvi-szinten-lokalis-fuggvenyek">Tuple nyelvi szinten, lokális függvények<a class="headerlink" href="#tuple-nyelvi-szinten-lokalis-fuggvenyek" title="Permanent link">¶</a></h3>
 <p>Készítsünk Fibonacci számsor kiszámolására alkalmas függvényt, ahol használjuk ki az alábbi két új nyelvi elemet.
 Természetesen nagyon sokféleképpen meg lehetne valósítani ezt a metódust, de most kifejezetten a <em>tuple</em>-ök nyelvi támogatását és lokális függvényeket szeretnénk demonstrálni.</p>
 <ul>
@@ -1394,7 +853,7 @@ Természetesen nagyon sokféleképpen meg lehetne valósítani ezt a metódust, 
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span>
-<span class="w">        </span><span class="o">?</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArgumentException</span><span class="p">(</span><span class="s">&quot;Less negativity please!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nameof</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="w">        </span><span class="o">?</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArgumentException</span><span class="p">(</span><span class="s">"Less negativity please!"</span><span class="p">,</span><span class="w"> </span><span class="n">nameof</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="n">Fib</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">Current</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1407,7 +866,7 @@ Természetesen nagyon sokféleképpen meg lehetne valósítani ezt a metódust, 
 <p class="admonition-title">Dekonstrukció</p>
 <p>A dekonstrukciós szintaxis a korábbi gyakorlaton megismert rekord típusok esetén is működik.</p>
 </div>
-<h3 id="dispose-minta">Dispose minta<a class="headerlink" href="#dispose-minta" title="Permanent link">&para;</a></h3>
+<h3 id="dispose-minta">Dispose minta<a class="headerlink" href="#dispose-minta" title="Permanent link">¶</a></h3>
 <p>A Dispose minta az erőforrás-felszabadítás megfelelő megvalósításához készült.
 Hasonló elv mentén üzemel, mint a destruktor, viszont a minta nem feltétlenül kötött az objektum életciklusának elejéhez és végéhez.
 Amennyiben egy objektum megvalósítja az <code>IDisposable</code> interfészt, van <code>Dispose</code> metódusa.
@@ -1417,10 +876,10 @@ Nem csak memóriafoglalásra kell gondolni, hanem lehetnek nyitott fájlrendszer
 <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">sw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stopwatch</span><span class="p">.</span><span class="n">StartNew</span><span class="p">();</span>
 <span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Enumerable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">))</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{n}: {Fibonacci(n)}&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"{n}: {Fibonacci(n)}"</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="n">sw</span><span class="p">.</span><span class="n">Stop</span><span class="p">();</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Elapsed: {sw.ElapsedMilliseconds}&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"Elapsed: {sw.ElapsedMilliseconds}"</span><span class="p">);</span>
 <span class="n">Console</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">();</span>
 </code></pre></div>
 <p>Ez így jó, működik, viszont nem újrahasznosítható ez az időmérési mechanizmus.</p>
@@ -1434,14 +893,14 @@ Nem csak memóriafoglalásra kell gondolni, hanem lehetnek nyitott fájlrendszer
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">StopwatchWrapper</span><span class="p">(</span><span class="kt">string?</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">().</span><span class="n">ToString</span><span class="p">();</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Task {title} starting at {DateTime.Now}.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"Task {title} starting at {DateTime.Now}."</span><span class="p">);</span>
 <span class="w">        </span><span class="n">Stopwatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stopwatch</span><span class="p">.</span><span class="n">StartNew</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Ha kérjük a villanykörte segítségét az <code>IDisposable</code>-ön, akkor 2x2 lehetőségünk van: megvalósítjuk az interfészt implicit vagy explicit, illetve megvalósítjuk-e az interfészt a Dispose mintát alkalmazva. Valósítsuk meg implicit a Dispose mintát!</p>
 <figure>
-<p><a class="glightbox" href="../images/csharp4-dispose.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="dispose" src="../images/csharp4-dispose.png" /></a>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/csharp4-dispose.png"><img alt="dispose" src="../images/csharp4-dispose.png"/></a>
 <figurecaption>Dispose minta implementálása IntelliSense segítségével</figurecaption></p>
 </figure>
 <p>Fussuk át a generált kódot, ami szépen kommentezett.
@@ -1455,8 +914,8 @@ Készítsük el az időmérő mechanizmust!</p>
 <span class="w">        </span><span class="p">{</span>
 <span class="hll"><span class="w">            </span><span class="n">Stopwatch</span><span class="p">.</span><span class="n">Stop</span><span class="p">();</span>
 </span><span class="hll"><span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
-</span><span class="hll"><span class="w">                </span><span class="s">$&quot;Task {Title} completed in { Stopwatch.ElapsedMilliseconds} ms &quot;</span><span class="o">+</span>
-</span><span class="hll"><span class="w">                </span><span class="s">$&quot;at { DateTime.Now}&quot;</span><span class="p">);</span>
+</span><span class="hll"><span class="w">                </span><span class="s">$"Task {Title} completed in { Stopwatch.ElapsedMilliseconds} ms "</span><span class="o">+</span>
+</span><span class="hll"><span class="w">                </span><span class="s">$"at { DateTime.Now}"</span><span class="p">);</span>
 </span><span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="n">disposedValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
@@ -1464,11 +923,11 @@ Készítsük el az időmérő mechanizmust!</p>
 </code></pre></div>
 <p>Csak felügyelt erőforrásokkal (<em>managed objects</em>) dolgozunk, így csak egy helyen kellett a leállító logikát megadnunk.</p>
 <p>Az <code>IDisposable</code> interfészt megvalósító elemekkel használhatjuk a <code>using</code> konstrukciót:</p>
-<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StopwatchWrapper</span><span class="p">(</span><span class="s">&quot;Fib 1-15&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StopwatchWrapper</span><span class="p">(</span><span class="s">"Fib 1-15"</span><span class="p">))</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Enumerable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">))</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{n}: {Fibonacci(n)}&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"{n}: {Fibonacci(n)}"</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1476,103 +935,72 @@ Készítsük el az időmérő mechanizmust!</p>
 <p>Jelenleg csak a folyamat végén kapunk jelentést az eltelt időről. Részidők kiírásához készítsünk egy segédfüggvényt a <code>StopwatchWrapper</code>-be:</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Snapshot</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
 <span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
-<span class="w">        </span><span class="s">$&quot;Task {Title} snapshot {text}: {Stopwatch.ElapsedMilliseconds} ms&quot;</span>
+<span class="w">        </span><span class="s">$"Task {Title} snapshot {text}: {Stopwatch.ElapsedMilliseconds} ms"</span>
 <span class="w">    </span><span class="p">);</span>
 </code></pre></div>
 <p>Hívjuk meg a <code>foreach</code> ciklusból:</p>
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">sw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StopwatchWrapper</span><span class="p">(</span><span class="s">&quot;Fib 1-15&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">sw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StopwatchWrapper</span><span class="p">(</span><span class="s">"Fib 1-15"</span><span class="p">))</span>
 </span><span class="p">{</span>
 <span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Enumerable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">))</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="hll"><span class="w">        </span><span class="n">sw</span><span class="p">.</span><span class="n">Snapshot</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
-</span><span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{n}: {Fibonacci(n)}&quot;</span><span class="p">);</span>
+</span><span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"{n}: {Fibonacci(n)}"</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-  <hr>
-  <div class="md-source-file">
-    <span class="md-source-file__fact"> <span class="md-icon" title="Utolsó frissítés"> <svg
-          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z">
-          </path>
-        </svg>
-      </span>
-      <span title="2024. március 8. 08:36:08">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-03-08T08:36:08+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-08</span>
-      </span>
-    </span>
-
-    
-
-    <span class="md-source-file__fact">
-      <span class="md-icon" title="Szerzők">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z">
-          </path>
-        </svg>
-      </span>
-      <span>Szerzők</span>
-      <nav><a href="https://github.com/tibitoth" target="_blank" rel="noopener noreferrer" class="md-author" title="@Tibor Tóth">
-          <img src="https://avatars.githubusercontent.com/u/8333960?u=d26653213d265ecdceeaf20a896d74f479d35450&v=4?size=72" alt="@Tibor Tóth">
-        </a></nav>      
-    </span>
-  </div>
-
-
-
-
-                
-              </article>
-            </div>
-          
-          
+<hr/>
+<div class="md-source-file">
+<span class="md-source-file__fact"> <span class="md-icon" title="Utolsó frissítés"> <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z">
+</path>
+</svg>
+</span>
+<span title="2024. június 25. 10:38:05">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-06-25T10:38:05+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-06-25</span>
+</span>
+</span>
+<span class="md-source-file__fact">
+<span class="md-icon" title="Szerzők">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z">
+</path>
+</svg>
+</span>
+<span>Szerzők</span>
+<nav><a class="md-author" href="https://github.com/tibitoth" rel="noopener noreferrer" target="_blank" title="@Tibor Tóth">
+<img alt="@Tibor Tóth" src="https://avatars.githubusercontent.com/u/8333960?u=d26653213d265ecdceeaf20a896d74f479d35450&amp;v=4?size=72"/>
+</a></nav>
+</span>
+</div>
+</article>
+</div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
   Vissza a tetejére
 </button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      Copyright &copy; BME VIK AUT
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © BME VIK AUT
     </div>
-  
-  
 </div>
-      
-    </div>
-  </div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "content.action.edit", "content.code.annotate", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.term.missing": "\u00dcres", "select.version": "Verzi\u00f3v\u00e1lt\u00e1s"}}</script>
-    
-    
-      <script src="../../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
-      
-        <script src="../../../js/timeago.min.js"></script>
-      
-        <script src="../../../js/timeago_mkdocs_material.js"></script>
-      
-    
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "content.action.edit", "content.code.annotate", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.term.missing": "\u00dcres", "select.version": "Verzi\u00f3v\u00e1lt\u00e1s"}}</script>
+<script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+<script src="../../../js/timeago.min.js"></script>
+<script src="../../../js/timeago_mkdocs_material.js"></script>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></body>
 </html>
