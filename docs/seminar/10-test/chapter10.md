@@ -413,4 +413,4 @@ _appFactory = appFactory
 
 Ellenőrizzük, hogy a tesztek lefuttatása után *Test Explorer*-ben megjelennek-e a szerveroldali üzenetek is.
 
-A végállapot elérhető a kapcsolódó GitHub repo [TODO](TODO).
+A végállapot elérhető a kapcsolódó GitHub repóban.

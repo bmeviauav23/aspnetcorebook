@@ -228,15 +228,16 @@ public Person(string fname, string lname, string? mname)
 }
 ```
 
-Ezzel meg is oldottunk minden figyelmeztetést.
 
 !!! warning "Rebuild"
     Ha biztosan látni akarjuk az összes figyelmeztetést, akkor sima Build művelet helyett használjuk a Rebuild-et.
+    
+Ezzel meg is oldottunk minden figyelmeztetést.
 
 !!! warning "Konstruktorok"
     Sajnos a kötelezően konstruktoron keresztüli inicializáció nem mindig működik, például a sorosítók általában nem szeretik, ha nincs alapértelmezett konstruktor.
 
-Mennyire okos a fordító a `null` érték detektálásában?Nézzünk pár példát!
+Mennyire okos a fordító a `null` érték detektálásában? Nézzünk pár példát!
 Az alábbi statikus függvényt tegyük bele a `Person` osztályunkba és vegyük fel a `using static System.Console;` névtérhivatkozást is.
 
 ``` csharp

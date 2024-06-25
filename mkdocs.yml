@@ -93,41 +93,19 @@ plugins:
       repository: bmeviauav23/aspnetcorebook
       branch: master
   - with-pdf:
-      author: Tóth Tibor <toth.tibor@vik.bme.hu>; Simon Gábor <simon.gabor@vik.bme.hu>; Szabó Gábor <szabo.gabor@podnet.hu>
-      #copyright: ANY TEXT
-      #
+      author: 'Tóth Tibor <toth.tibor@vik.bme.hu>;Simon Gábor <simon.gabor@vik.bme.hu>;Szabó Gábor <szabo.gabor@podnet.hu>'
+      cover_logo: bme_logo.svg
       cover: true
       back_cover: false
       cover_title: Szoftverfejlesztés .NET platformra gyakorlatok
       cover_subtitle: v1.7 - hetedik kiadás, 2024. június
-      #custom_template_path: TEMPLATES PATH
-      #
-      #toc_title: Tartalomjegyzék
-      #heading_shift: true
-      #toc_level: 4
-      #ordered_chapter_level: 2
-      #excludes_children:
-      #    - 'release-notes/:upgrading'
-      #    - 'release-notes/:changelog'
-      #
-      #exclude_pages:
-      #    - 'bugs/'
-      #    - 'appendix/contribute/'
-      #convert_iframe:
-      #    - src: IFRAME SRC
-      #      img: POSTER IMAGE URL
-      #      text: ALTERNATE TEXT
-      #    - src: ...
-      #two_columns_level: 3
-      #
-      # render_js: true
-      # headless_chrome_path: headless-chromium
-      #
+      toc_title: Tartalomjegyzék
+      toc_level: 3
+      exclude_pages:
+         - 'homework/'
       output_path: pdf/aspnetcorebook.1.7.pdf
-      #enabled_if_env: ENABLE_PDF_EXPORT
-      #
+      #enabled_if_env: IsPdfExportEnabled
       debug_html: true
-      #show_anchors: true
       verbose: true
 
 nav:
@@ -149,3 +127,4 @@ nav:
       - homework/index.md
       - homework/example-spec.md
       - homework/hw-points.md
+  - "Zárszó": information/afterword.md
