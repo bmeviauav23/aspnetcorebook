@@ -25,10 +25,16 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           IsRevisionDatePluginEnabled: "true"
           IsAuthorsPluginEnabled: "true"
+          IsPdfExportEnabled: "true"
         with:
           entrypoint: mkdocs
           args: build --config-file=mkdocs.yml
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PDF
+          path: ./site/pdf/*.pdf
+      
       - name: Deploy docs to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3
         with:

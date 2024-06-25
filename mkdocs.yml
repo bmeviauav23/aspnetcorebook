@@ -104,9 +104,9 @@ plugins:
       exclude_pages:
          - 'homework/'
       output_path: pdf/aspnetcorebook.1.7.pdf
-      #enabled_if_env: IsPdfExportEnabled
-      debug_html: true
-      verbose: true
+      enabled_if_env: IsPdfExportEnabled
+      #debug_html: true
+      #verbose: true
 
 nav:
   - "Tudnivalók":
