@@ -550,7 +550,7 @@ Kérdezzük le egy bizonyos árnál drágább, bizonyos betűt a nevükben tarta
 var q1 = ctx.Products.TagWith("Névszűrés")
     .Where(p => p.Name.Contains("r"));
 
-var q2 = ctx.Products
+var q2 = q1
     .Where(p => p.UnitPrice > 20)
     .Select(p => p.Name);
 
@@ -568,10 +568,10 @@ Itt is látszik a késleltetett kiértékelés és a lekérdezések össze leszn
 !!! tip "Lekérdezések összefűzése"
     Ez rámutat az EF egy nagy előnyére: bonyolult lekérdezéseket megírhatunk kisebb, egyszerűbb részletekben, az EF pedig összevonja, sőt optimalizálhatja is a teljes lekérdezést.
 
-Próbáljuk ki, `var q =` helyett `IEnumerable<Product> q =`-val is, ilyenkor nem fűzi össze a lekérdezést.
+Próbáljuk ki, `var q1 =` helyett `IEnumerable<Product> q1 =`-val is, ilyenkor nem fűzi össze a lekérdezést.
 A `q2` műveletei már memóriában fognak lefutni, hiszen a `q2` adatforrásként csak egy `IEnumerable`-t lát.
 
-Próbáljuk ki, `var q =` helyett `IQueryable<Product> q =` -val is, ilyenkor megint összefűzi a lekérdezést.
+Próbáljuk ki, `var q1 =` helyett `IQueryable<Product> q1 =` -val is, ilyenkor megint összefűzi a lekérdezést.
 
 Itt is érdemes összevetni a `where` operátor definícióját a két lekérdezésrészben.
 
