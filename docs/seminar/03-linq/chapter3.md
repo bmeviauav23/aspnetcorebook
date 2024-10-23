@@ -60,7 +60,7 @@ Oldjuk meg úgy, hogy az általános problémát is megoldjuk!
 Ehhez az szükséges, hogy a kollekciónk egyes elemein kiértékelhessünk egy, a hívó által megadott predikátumot.
 Készítsük el az általánosabb változatot, ehhez felhasználhatjuk a `ListDogsByNamePrefix` kódját.
 
-``` csharp hl_lines="1 6"
+``` csharp hl_lines="2 7"
 static List<Dog> ListDogsByPredicate(
     IEnumerable<Dog> dogs, Predicate<Dog> predicate)
 {
