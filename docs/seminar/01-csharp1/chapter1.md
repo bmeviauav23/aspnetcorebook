@@ -340,3 +340,26 @@ Nem kell az `Add` függvényhívást és a lista referenciát kiírni, egyértel
     Ez a forma is ugyanolyan `Add` függvényhívásokra fordul, mint az eredeti változatban.
 
 Próbáljuk ki az alkalmazást! Láthatjuk, hogy a konstruktoron keresztül teljesen inicializálható `Person` példányok esetében a kiírás teljes, viszont vannak olyan `Student` példányok, ahol a kiírás üres értékeket talál. Ezzel a jelenséggel a következő gyakorlatokon tovább foglalkozunk.
+
+C# új verziójában megjelent a Collection Expression szintaxis is, amivel a kollekció inicializálás még egyszerűbbé válik, aminek a szintaxisa a `[]` között megadott elemekből áll. Itt nem kell megadni a típust sem, a fordító automatikusan kitalálja azt a bal oldalból, és működik a legtöbb kollekció típussal és tömbbel is.
+
+```csharp hl_lines="1-2 12"
+List<Person> people =
+[
+    new Person("Horváth Aladár", new DateTime(1991, 06, 10)),
+    new Person("Kovács István", new DateTime(1994, 04, 22)),
+    new Person("Kovács Géza", new DateTime(1998, 03, 16)),
+    new Student("Fel Elek", new DateTime(2002, 06, 10))
+    {
+        Neptun = "ABC123",
+        Major="Info BSc"
+    },
+    new Student("Hiány Áron", new DateTime(2000, 02, 13))
+];
+```
+
+Továbbá van lehetőség kollekciók összefűzésére is a `..` operátorral.
+
+```csharp
+List<Person> people2 = [ .. people, new Person("Kovács Béla", new DateTime(1995, 01, 01)) ];
+```

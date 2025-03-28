@@ -53,14 +53,14 @@ static List<Dog> ListDogsByNamePrefix(IEnumerable<Dog> dogs, string prefix)
 
 Próbáljuk ki!
 
-A kód működik, viszont nem újrahasznosítható. 
+A kód működik, viszont nem újrahasznosítható.
 Ha bármi más alapján szeretnénk keresni a kutyák között (pl. a neve tartalmaz-e egy adott szövegrészt), mindig egy új segédfüggvényt kell készítenünk, ami rontja a kód újrahasznosíthatóságát.
 
 Oldjuk meg úgy, hogy az általános problémát is megoldjuk!
 Ehhez az szükséges, hogy a kollekciónk egyes elemein kiértékelhessünk egy, a hívó által megadott predikátumot.
 Készítsük el az általánosabb változatot, ehhez felhasználhatjuk a `ListDogsByNamePrefix` kódját.
 
-``` csharp hl_lines="1 6"
+``` csharp hl_lines="2 7"
 static List<Dog> ListDogsByPredicate(
     IEnumerable<Dog> dogs, Predicate<Dog> predicate)
 {
@@ -182,7 +182,7 @@ namespace HelloLinq.Extensions.Enumerable;
 
 public static class EnumerableExtensions
 {
-    public static int Sum<T> (IEnumerable<T>  source, Func<T, int>  sumSelector)
+    public static int Sum<T>(IEnumerable<T>  source, Func<T, int>  sumSelector)
     {
         var result = 0;
         foreach (var elem in source)
@@ -450,9 +450,13 @@ A fát kóddá fordíthatjuk a `Compile` metódus segítségével, mely a leford
 Console.WriteLine(e.Compile()(5));
 ```
 
-Bár az `Expression<>` emiatt okosabb választásnak tűnik, ám a LINQ-to-Objects alapinterfészének (ami a lekérdezőfüggvényeket biztosítja) függvényei `Func<>` / `Action<>` delegátokat várnak. Ami nem csoda, hiszen memóriabeli listákat általában sima programkóddal dolgozunk fel, nincs értelme felépíteni kifejezésfát csak azért, hogy utána egyből kóddá fordítsuk. Emellett más, memóriabeli adatokon dolgozó LINQ technológia is létezik, pl. LINQ-to-XML saját API-val (nem `IEnumerable<>` alaptípussal).
+Bár az `Expression<>` emiatt okosabb választásnak tűnik, ám a LINQ-to-Objects alapinterfészének (ami a lekérdezőfüggvényeket biztosítja) függvényei `Func<>` / `Action<>` delegátokat várnak.
+Ami nem csoda, hiszen memóriabeli listákat általában sima programkóddal dolgozunk fel, nincs értelme felépíteni kifejezésfát csak azért, hogy utána egyből kóddá fordítsuk.
+Emellett más, memóriabeli adatokon dolgozó LINQ technológia is létezik, pl. LINQ-to-XML saját API-val (nem `IEnumerable<>` alaptípussal).
 
-A nem memóriabeli adatokon, hanem például külső adatbázisból dolgozó LINQ provider-ek viszont `IQueryable<>`-t valósítanak meg. Az `IQueryable<>` az `IEnumerable<>`-ból származik, így neki is vannak `Func<>` / `Action<>`-ös függvényei, de emellett `Expression<>`-ösek is. Ez utóbbiak teszik lehetővé, hogy ne csak .NET kódot generáljanak a lambda kifejezésekből, hanem helyette pl. SQL kifejezést - hiszen egy relációs adatbázis adatfeldolgozó nyelve nem .NET, hanem valamilyen SQL dialektus.
+A nem memóriabeli adatokon, hanem például külső adatbázisból dolgozó LINQ provider-ek viszont `IQueryable<>`-t valósítanak meg.
+Az `IQueryable<>` az `IEnumerable<>`-ból származik, így neki is vannak `Func<>` / `Action<>`-ös függvényei, de emellett `Expression<>`-ösek is.
+Ez utóbbiak teszik lehetővé, hogy ne csak .NET kódot generáljanak a lambda kifejezésekből, hanem helyette pl. SQL kifejezést - hiszen egy relációs adatbázis adatfeldolgozó nyelve nem .NET, hanem valamilyen SQL dialektus.
 
 ### A LINQ providerek általános működése
 
@@ -462,4 +466,4 @@ Kimenetük: az adatforrásnak megfelelő nyelvű, a query-t végrehajtó kód (.
 
 LINQ-to-Objects esetén nincs valódi LINQ provider (a provider az `IQueryable.Provider`-en keresztül érhető el, de a `List<>` nem `IQueryable`!), hiszen nincs feladata: kódot kap bemenetül, ugyanazt kellene kimenetül adnia. A *LINQ-to-XML* is hasonló elven működik.
 
-Valódi LINQ providert valósít meg például az *Entity Framework*, de ezt a technológiát később tárgyaljuk.
+Valódi LINQ providert valósít meg például az *Entity Framework Core*, de ezt a technológiát később tárgyaljuk.

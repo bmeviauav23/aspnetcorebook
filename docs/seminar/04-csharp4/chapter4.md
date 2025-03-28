@@ -1,6 +1,8 @@
 # C# alapok IV.
 
-Ezen a gyakorlaton több különféle nyelvi konstrukciót tekintünk át, vegyesfelvágott jelleggel. Az egyes fő témaköröket külön projektként dolgozzuk ki. A projekteket hozzáadhatjuk az elsőként létrehozott projekt solutionjéhez (menu:jobbklikk a solution-ön\[Add \> New project\]). Hozzáadás után ne felejtsük el átállítani a futtatandó projektet: menu:jobbklikk a projekten\[Set as Startup Project\].
+Ezen a gyakorlaton több különféle nyelvi konstrukciót tekintünk át, vegyesfelvágott jelleggel.
+Az egyes fő témaköröket külön projektként dolgozzuk ki. A projekteket hozzáadhatjuk az elsőként létrehozott projekt solutionjéhez (menu:jobbklikk a solution-ön\[Add \> New project\]).
+Hozzáadás után ne felejtsük el átállítani a futtatandó projektet: menu:jobbklikk a projekten\[Set as Startup Project\].
 
 ## Bejárási problémák
 
@@ -22,7 +24,9 @@ foreach (var p in numbers)
 numbers.ForEach(Console.WriteLine);
 ```
 
-Futtatáskor kivételt kapunk. Mi a probléma? A kollekciót bejárás közben szerettük volna módosítani, viszont ez könnyen nem várt működést (túlcímzést, nemdeterminisztikus bejárást) tenne lehetővé, ezért kivételt kapunk. Oldjuk meg a problémát: nem módosíthatjuk a forrás objektumot bejárás közben, tehát ne azt a kollekciót járjuk be, másoljuk le!
+Futtatáskor kivételt kapunk. Mi a probléma?
+A kollekciót bejárás közben szerettük volna módosítani, viszont ez könnyen nem várt működést (túlcímzést, nemdeterminisztikus bejárást) tenne lehetővé, ezért kivételt kapunk.
+Oldjuk meg a problémát: nem módosíthatjuk a forrás objektumot bejárás közben, tehát ne azt a kollekciót járjuk be, másoljuk le!
 
 ``` csharp hl_lines="1"
 foreach (var p in numbers.ToList()) // a ToList bekerült
@@ -31,7 +35,7 @@ foreach (var p in numbers.ToList()) // a ToList bekerült
 }
 ```
 
-Ez megoldja a problémát, sikerül eltávolítani az elemeket a kollekcióból. De miért? 
+Ez megoldja a problémát, sikerül eltávolítani az elemeket a kollekcióból. De miért?
 A `ToList` `IEnumerable` bővítő, tehát bejárhatja a kollekciót, ezután pedig egy **másik** `List<>` objektumban tárolja az elemeket.
 Így tehát két listánk lesz (a `numbers` és a `numbers.ToList` visszatérési értéke), amik kezdetben egymás klónjai, menet közben az egyikből veszünk ki, a másikon pedig iterálunk.
 
@@ -48,8 +52,8 @@ Az eddigiek alá:
 ``` csharp
 var i = 0;
 foreach (var n in numbers
-                    .Where(p => p > 2)
-                    .Select(p => new { p, x = ++i }))
+    .Where(p => p > 2)
+    .Select(p => new { p, x = ++i }))
 {
     Console.WriteLine($"{n} - {i}");
 }
@@ -58,9 +62,9 @@ Console.WriteLine();
 
 i = 0;
 foreach (var n in numbers
-                    .Where(p => p > 2)
-                    .Select(p => new { p, x = ++i })
-                    .ToList())
+    .Where(p => p > 2)
+    .Select(p => new { p, x = ++i })
+    .ToList())
 {
     Console.WriteLine($"{n} - {i}");
 }
@@ -103,18 +107,17 @@ Console.ReadKey();
 
 static async void LoadWebPageAsync()
 {
-    using (var client = new HttpClient())
-    {
-        var response = await client.GetAsync(new Uri("http://www.bing.com"));
-        Console.WriteLine(response.StatusCode.ToString());
+    using var client = new HttpClient();
 
-        var content = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(content.Take(1000).ToArray());
-    }
+    var response = await client.GetAsync(new Uri("http://www.bing.com"));
+    Console.WriteLine(response.StatusCode.ToString());
+
+    var content = await response.Content.ReadAsStringAsync();
+    Console.WriteLine(content.Take(1000).ToArray());
 }
 ```
 
-**await:** Mindig egy `Task` `await`-elhető (vagy taszk szerű dolog: vagyis van neki `GetAwaiter` metódusa, ami meghatározott metódusokkal rendelkező objektummal tér vissza)! 
+**await:** Mindig egy `Task` `await`-elhető (vagy taszk szerű dolog: vagyis van neki `GetAwaiter` metódusa, ami meghatározott metódusokkal rendelkező objektummal tér vissza)!
 Akár létre is hozhatunk egy `Task`-ot, amit egy lokális változóban tárolunk, akkor azt is tudjuk `await`-elni.
 
 **async:** Ha await-elni akarunk, akkor muszáj `async`-nak lennie a tartalmazó metódusnak, mert ilyenkor építi fel a fordító az aszinkron végrehajtáshoz szükséges állapotgépet.
@@ -125,14 +128,16 @@ A `LoadWebPageAsync` utáni rész előbb fog lefutni, mint az első `await` utá
 Az `await` utáni rész nem a *Main Thread*-en fut.
 Figyeljük meg azt is, hogy az *Ez a vége* szöveg hamarabb kiíródik, mint a HTML oldal letöltése.
 
-Próbáljuk ki a `Console.ReadKey`-t kikommentezve is, ilyenkor jó eséllyel hamarabb leáll a process, minthogy a `Task` befejeződne. Az ilyen fire-and-forget típusú hívásoknál nem figyel arra senki, hogy itt még valami háttérművelet folyik.
+Próbáljuk ki a `Console.ReadKey`-t kikommentezve is, ilyenkor jó eséllyel hamarabb leáll a process, minthogy a `Task` befejeződne.
+Az ilyen fire-and-forget típusú hívásoknál nem figyel arra senki, hogy itt még valami háttérművelet folyik.
 
 !!! warning "async void kerülendő"
     Az `async void` általában helytelen kód, mert nem lehet bevárni a háttérművelet végét. Az `async Task` máris jobb a bevárhatóság és a hibakezelés miatt, és alig kell módosítani a kódot. Kivétel, amikor valamiért kötelező a `void`, például, ha esemény vagy interfész előírja.
 
 ### Az oldalletöltés bevárása
 
-Módosítsuk úgy a kódot, hogy a `LoadWebPageAsync` utáni rész várja meg a letöltés befejeződését. Ez akkor jó például, ha a letöltés után valamit még szeretnék elvégezni a hívó függvényben.
+Módosítsuk úgy a kódot, hogy a `LoadWebPageAsync` utáni rész várja meg a letöltés befejeződését.
+Ez akkor jó például, ha a letöltés után valamit még szeretnék elvégezni a hívó függvényben.
 
 Módosítsuk a `LoadWebPageAsync` fejlécét, hogy taszkot adjon vissza:
 
@@ -163,21 +168,20 @@ Console.WriteLine("Ez a vége");
 Alakítsuk át, hogy a weboldal tartalmának kiíratása a legfelső szintű kódban történjen, és a `LoadWebPageAsync` csak adja vissza a tartalmat `string`-ként.
 Ehhez módosítsuk a visszatérési értéket `Task<string>`-re, így az `await` már eredménnyel fog tudni visszatérni.
 
-``` csharp hl_lines="1-2 5 7 15"
+``` csharp hl_lines="1-2 5 13"
 var content = await LoadWebPageAsync();
 Console.WriteLine(content);
 Console.WriteLine("Ez a vége");
 Console.ReadKey();
 static async Task<string> LoadWebPageAsync() //generikus paraméter
 {
-    using (var client = new HttpClient())
-    {
-        var response = await client.GetAsync(new Uri("http://www.bing.com"));
-        Console.WriteLine(response.StatusCode.ToString());
+    using var client = new HttpClient();
 
-        var content = await response.Content.ReadAsStringAsync();
-        return new string(content.Take(1000).ToArray());
-    }
+    var response = await client.GetAsync(new Uri("http://www.bing.com"));
+    Console.WriteLine(response.StatusCode.ToString());
+
+    var content = await response.Content.ReadAsStringAsync();
+    return new string(content.Take(1000).ToArray());
 }
 ```
 
@@ -203,9 +207,9 @@ Induljunk ki egy egyszerű személyeket nyilvántartó adatosztályból, ahol el
 Console.WriteLine("Hello World!");
 class Person
 {
-    string FirstName;   // Not null
-    string? MiddleName; // May be null
-    string LastName;    // Not null
+    public string FirstName { get; set; } // Not null
+    public string? MiddleName { get; set; } // May be null
+    public string LastName { get; set; } // Not null
 }
 ```
 
@@ -228,14 +232,13 @@ public Person(string fname, string lname, string? mname)
 }
 ```
 
-
 !!! warning "Rebuild"
     Ha biztosan látni akarjuk az összes figyelmeztetést, akkor sima Build művelet helyett használjuk a Rebuild-et.
     
 Ezzel meg is oldottunk minden figyelmeztetést.
 
 !!! warning "Konstruktorok"
-    Sajnos a kötelezően konstruktoron keresztüli inicializáció nem mindig működik, például a sorosítók általában nem szeretik, ha nincs alapértelmezett konstruktor.
+    Sajnos a kötelezően konstruktoron keresztüli inicializáció nem mindig működik, például a sorosítók általában nem szeretik, ha nincs alapértelmezett konstruktor. Ezért célszerűbb a kötelező tulajdonságokat `required` kulcsszóval ellátni.
 
 Mennyire okos a fordító a `null` érték detektálásában? Nézzünk pár példát!
 Az alábbi statikus függvényt tegyük bele a `Person` osztályunkba és vegyük fel a `using static System.Console;` névtérhivatkozást is.
@@ -349,21 +352,20 @@ Mivel ez csak egy példakód, ne javítsuk ki a hibákat, csak távolítsuk el a
 Készítsünk Fibonacci számsor kiszámolására alkalmas függvényt, ahol használjuk ki az alábbi két új nyelvi elemet.
 Természetesen nagyon sokféleképpen meg lehetne valósítani ezt a metódust, de most kifejezetten a *tuple*-ök nyelvi támogatását és lokális függvényeket szeretnénk demonstrálni.
 
-* Lokális függvények: ezek a függvények csak adott metódusban láthatók.Két esetben érdemes őket használni: ha nem szeretnénk „szennyezni” a környező osztályt különféle privát segédmetódusokkal, vagy ha egy mélyebb, komplexebb hívási láncban nem szeretnénk a paramétereket folyamatosan továbbpasszolni, ugyanis ezek a metódusok elérik a külső scope-on található változókat is (a lenti esetben például az `x`-et).
+* Lokális függvények: ezek a függvények csak adott metódusban láthatók. Két esetben érdemes őket használni: ha nem szeretnénk „szennyezni” a környező osztályt különféle privát segédmetódusokkal, vagy ha egy mélyebb, komplexebb hívási láncban nem szeretnénk a paramétereket folyamatosan továbbpasszolni, ugyanis ezek a metódusok elérik a külső scope-on található változókat is (a lenti esetben például az `x`-et).
 * Value tuple típus: a tuple (ennes) több összetartozó érték összefogása, ami gyors, nyelvi szinten támogatott adattovábbítást tesz lehetővé - gyakorlatilag inline, nevesítetlen struktúratípust hozunk így létre. Publikus API-kon, függvényeken nem érdemes használni, viszont privát, belső használatnál sebességnövekedést és API tisztulást érhetünk vele el. Érték típus.
 
 !!! tip "Referencia típusú Tuple<>"
     Léteznek generikus `Tuple<>` típusok is. Ezek referencia típusok, hasonló szerepet töltenek be, viszont az egyes értékeiket az elég semmitmondó `Item1`, `Item2`… neveken lehet elérni.
 
-
 ``` csharp
 static long Fibonacci(long x)
 {
-    (long Current, long Previous) Fib(long i) # (1)!
+    (long Current, long Previous) Fib(long i) // (1)!
     {
         if (i == 0) return (1, 0);
-        var (curr, prev) = Fib(i - 1); # (2)!
-        Thread.Sleep(100); # (3)!
+        var (curr, prev) = Fib(i - 1); // (2)!
+        Thread.Sleep(100); // (3)!
         return (curr + prev, curr);
     }
 
@@ -374,7 +376,7 @@ static long Fibonacci(long x)
 ```
 
 1. Nevesített tuple visszatérés. Ez egy lokális függvény, szintaxist tekintve függvényen belüli függvény.
-2. Az eredmény eltárolása egy tuple változóban. Ezzel dekonstruáljuk is, darabokra szedjük a tuple-t, mert `curr`, `prev` változón keresztül elérjük a két `long` alkotórészt. Ugyanezen sorban történik a rekurzív hívás is.
+2. Az eredmény eltárolása egy tuple változóban. Ezzel felbontjuk (Deconstruct), darabokra szedjük a tuple-t, mert `curr`, `prev` változón keresztül elérjük a két `long` alkotórészt. Ugyanezen sorban történik a rekurzív hívás is.
 3. Lassú művelet szimulációja mesterséges késleltetéssel.
 
 !!! tip "Dekonstrukció"
@@ -470,7 +472,8 @@ Jelenleg csak a folyamat végén kapunk jelentést az eltelt időről. Részidő
 ``` csharp
 public void Snapshot(string text) =>
     Console.WriteLine(
-        $"Task {Title} snapshot {text}: {Stopwatch.ElapsedMilliseconds} ms"
+        $"Task {Title} snapshot {text}:"
+        + "{Stopwatch.ElapsedMilliseconds} ms"
     );
 ```
 

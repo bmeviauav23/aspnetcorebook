@@ -34,21 +34,6 @@ Az osztályok legyenek publikusak, az attribútumok pedig egyszerű auto-impleme
 A `string` típusú property-k esetén figyelmeztet a fordító, hogy nem nullozható referencia típusú property inicializáció után is `null` értékű lehet.
 Ennek kivédésére az ajánlott módszer a `required` kulcsszó használata a property előtt, ezzel kiválthatóak a felesleges konstruktorok, amelyben csak a kötelezőség miatt várunk el paramétereket és állítjuk be a propertyk értékét.
 
-??? warning "EF Core és konstruktorok required nélkül"
-    A fenti megoldás nem működött még C# 11-ben, így ott konstruktort kellett készítenünk. Ezt a konstruktort az EF is fogja hívni, így neki automatikusan tudnia kell, hogy melyik paraméter melyik tulajdonságot állítja - pedig ez a konstruktor szignatúrájából alapesetben nem kikövetkeztethető. Emiatt önkéntesen tartanunk kell magunkat ahhoz, hogy a konstruktorparaméter nevének és a property nevének egyeznie kell, kivéve, hogy a paramétere neve kezdődhet kisbetűvel is (**camel casing**).
-
-    Példaként így néz ki a `Product` konstruktor:
-
-    ``` csharp
-    public Product(string name)
-    {
-        Name = name;
-    }
-    ```
-
-    !!! tip "Quick Action"
-        A Visual Studio **Quick Action**-ként fel szokta ajánlani a **Generate constructor \[konstruktorfejléc\]** vagy **Add parameter to \[konstruktorfejléc\]** gyors kódgenerálási lehetőségeket, amivel létrehozhatjuk vagy bővíthetjük a szükséges konstruktort.
-
 ### Mapping és egyéb metaadatok megadása I.
 
 Eddig megadtuk az entitás nevét, a relációs attribútumok nevét és típusát, azonban ezen felül még sok mindent lehet/kell megadni: az entitás elsődleges kulcsa, idegen kulcsok, relációk, kényszerek és egyéb mapping információk (pl. hogy mi legyen a relációs attribútum oszlopneve az adatbázisban).
@@ -85,7 +70,9 @@ A többes navigációs property-k legyenek csak olvashatók és a típusuk legye
     Az entitáson végzendő műveleteket egyszerűsíti, illetve a konvenciós logika is következtet belőle.
 
 A navigációs propertyk referencia típusúak, így foglalkoznunk kell a nullozhatóság kérdésével.
+
 Ha a kapcsolat modellezési szempontból nem kötelező (például ha nem várnánk el, hogy minden terméknek legyen megadva a kategóriája), akkor a navigációs property típusa is legyen értelemszerűen nullozható.
+
 Ha a kapcsolat kötelező, akkor az ajánlott eljárás, hogy a navigációs property típusa ne legyen nullozható - viszont ekkor kezdeti értéket kell adnunk.
 Gyakori eset, hogy egy entitást betöltünk adatbázisból, de a hozzá kapcsolódó entitás(oka)t nem, ilyenkor mégis a `null` érték lenne a megfelelő.
 Emiatt az egyik ajánlott módszer, ha a propertyt **null forgiving** operátorral inicializáljuk `null` értékre.
@@ -122,7 +109,7 @@ public class Order
 {
     public int Id { get; set; }
 
-    public DateTime OrderDate { get; set; }
+    public required DateTime OrderDate { get; set; }
 
     public ICollection<OrderItem> OrderItems { get; } = new List<OrderItem>();
 }
@@ -144,7 +131,7 @@ public class OrderItem
 {
     public int Id { get; set; }
 
-    public int Quantity { get; set; }
+    public required int Quantity { get; set; }
 
     public int ProductId { get; set; }
     public Product Product { get; set; } = null!;
@@ -160,9 +147,10 @@ Vegyük észre, hogy eddig semmilyen EF specifikus kódot nem írtunk, a modell�
 
 ### DbContext - NuGet
 
-Az entitásokat definiáltuk, a mapping-et az EF eszére bíztuk, a következő lépés az adatbázisséma létrehozása a mapping alapján, amit képes az EF migrációs eszköze megoldani. 
+Az entitásokat definiáltuk, a mapping-et az EF eszére bíztuk, a következő lépés az adatbázisséma létrehozása a mapping alapján, amit képes az EF migrációs eszköze megoldani.
 Műveletet az ún. *kontext*-en keresztül tudunk végezni.
 Érdemes saját kontext típust létrehozni, amit az alap `DbContext`-ből származtatunk.
+
 Eddig még nem is írtunk semmilyen EF specifikus kódot, most viszont már kell a `DbContext` típus, így NuGet-ből hozzá kell adnunk a **Microsoft.EntityFrameworkCore.SqlServer** csomagot.
 Nem ez a csomag tartalmazza a `DbContext`-et, viszont függőségként hivatkozza (**Microsoft.EntityFrameworkCore**).
 
@@ -178,7 +166,7 @@ Az Entity Framework önmagában független az adatbázis implementációktól, a
 A **Microsoft.EntityFrameworkCore.SqlServer** csomag hivatkozza az EF absztrakt relációs komponensét (*EntityFrameworkCore.Relational*), és tartalmazza az *MS SQL Server*-hez tartozó providert.
 A providert a `DbContext` `OnConfiguring` metódusában adhatjuk meg, esetünkben a `UseSqlServer` metódussal, ami egy connection stringet vár.
 
-[MS SQL Server](https://www.microsoft.com/en-us/sql-server) helyett a *LocalDB* nevű fejlesztői adatbázist használjuk, mely fejlesztői szempontból gyakorlatilag megegyezik az MS SQL Server-rel.
+[MS SQL Server](https://www.microsoft.com/en-us/sql-server) helyett a *LocalDB* nevű fejlesztői adatbázist használjuk, mely fejlesztői szempontból gyakorlatilag egy lebutított MS SQL Server-rel megegyező.
 A LocalDB a Visual Studio-val együtt települ, minden Windows felhasználónak külön LocalDB példány indítható el.
 A Visual Studio az *SQL Server Object Explorer* ablak megnyitásakor automatikusan létrehozza a felhasználónkhoz tartozó, *MSSQLLocalDB* nevű példányt.
 
@@ -188,6 +176,7 @@ A Visual Studio az *SQL Server Object Explorer* ablak megnyitásakor automatikus
 Adjunk hozzá új osztályt a projekthez `LabDbContext` néven, ebben definiáljuk majd, hogy milyen entitáskollekciókon lehet műveleteket végezni.
 
 Az automatikusan létrejövő MSSQLLocalDB nevű LocalDB példány connection stringjét adjuk meg, pontosabban az *SQL Server Object Explorer* ablak segítésével másoljuk ki: menu:SQL Server-t kibontva\[*(localdb)\MSSQLLocalDB*-n jobbklikk \> Properties \> Connection String\].
+
 A kimásolt stringben az *Initial Catalog* értékét (a DB nevét) a **master**-ről változtassuk meg valamilyen más névre, például a Neptun kódunkra.
 Ha nincs a stringben *Initial Catalog* rész, akkor írjuk a string végére, hogy `;Initial Catalog=neptunkod`.
 
@@ -197,7 +186,7 @@ Ha nincs a stringben *Initial Catalog* rész, akkor írjuk a string végére, ho
 </figure>
 
 !!! warning "Különleges karakterek"
-    A connection stringben különleges karakterek (pl. *\\*) vannak. Ha a kimásolt connection két " közé illesztjük be, a VS automatikusan escape-eli a különleges karaktereket. Ellenkező esetben (ha pl. a két " a beillesztés után kerül elhelyezésre a szöveg köré) az automatikus escape-elés nem történik meg, ilyenkor ne felejtsük el a @-ot a string elé írni, vagy manuálisan escape-elni a szükséges karaktereket!
+    A connection stringben különleges karakterek (pl. *\\*) vannak. Ha a kimásolt connection két " közé illesztjük be, a VS automatikusan escape-eli a különleges karaktereket. Ellenkező esetben (ha pl. a két " a beillesztés után kerül elhelyezésre a szöveg köré) az automatikus escape-elés nem történik meg, ilyenkor ne felejtsük el a `@`-ot a string elé írni, vagy manuálisan escape-elni a szükséges karaktereket!
 
 ``` csharp
 public class LabDbContext : DbContext
@@ -294,7 +283,7 @@ A fluent mellett próbáljuk ki az attribútumos konfigurációt is.
 public string Name { get; set; }
 ```
 
-!!! note "POCO"
+!!! warning "POCO"
     A fenti miatt az entitásmodellünk már nem POCO, mert EF specifikus attribútum jelent meg a kódjában.
 
 !!! tip "Többesszámok kezelése"
@@ -387,10 +376,10 @@ A termék beszúrásakor viszont a 0 érték már nem lesz helyes, hiszen addigr
 Mindezt a problémát navigációs property-s hivatkozással elkerülhetjük.
 
 Figyeljük meg a konzol naplóban, hogy a `Category` beszúrása még megtörténik, de az egyik `Product` hozzáadása már elszáll.
-A debuggerrel, ha megállunk a `SaveChanges` híváson, akkor látható, hogy a `CategoryId` property értéke nulla.
+A debuggerrel, ha megállunk a `SaveChanges` híváson, akkor látható, hogy a `CategoryId` property értéke 0.
 
 Figyeljük meg azt is, hogy a `SaveChanges` hívásig nem történik módosító adatbázisművelet.
-Az EF memóriában gyűjti a változásokat, amiket a SaveChanges-szel szinkronizálunk az adatbázisba.
+Az EF memóriában gyűjti a változásokat, amiket a `SaveChanges`-szel szinkronizálunk az adatbázisba.
 
 Itt láthatjuk az alapértelmezett tranzakciókezelés működését is.
 Egy hívásban több elemet kell beszúrni, ha bármelyik művelet meghiúsul, akkor semmilyen változás nem érvényesül az adatbázisban.
@@ -528,6 +517,7 @@ var q = ctx.Products
 ```
 
 Ez működik, de a konzolon megjelenő SQL utasításon látszik, hogy a **teljes** termék táblát lekérdeztük és felolvastuk a memóriába.
+
 Az `AsEnumerable` jelentése: a lekérdezés innentől LINQ-to-Objects-ként épül tovább, a lekérdezés eddigi részének memóriabeli reprezentációja lesz az adatforrás, tehát a szűrés és a projekció már memóriában fut le.
 Mivel a teljes lekérdezés egy része LINQ-to-Entities (adatbázis értékeli ki), a másik része LINQ-to-Objects (a .NET runtime értékeli ki), az ilyen lekérdezéseket ún. vegyes kiértékelésűnek (*mixed evaluation*), a LINQ-to-Objects részt kliensoldali kiértékelésűnek (*client evaluation*) nevezik.
 A `q` típusa ebben az esetben már nem `IQueryable<>`, csak `IEnumerable<>`.
@@ -547,7 +537,8 @@ A `q` típusa ebben az esetben már nem `IQueryable<>`, csak `IEnumerable<>`.
 Kérdezzük le egy bizonyos árnál drágább, bizonyos betűt a nevükben tartalmazó termékek nevét - mindezt két külön lekérdezésben:
 
 ``` csharp
-var q1 = ctx.Products.TagWith("Névszűrés")
+var q1 = ctx.Products
+    .TagWith("Névszűrés")
     .Where(p => p.Name.Contains("r"));
 
 var q2 = ctx.Products
@@ -580,7 +571,6 @@ Itt is érdemes összevetni a `where` operátor definícióját a két lekérdez
 
     Ha nem akarunk véletlenül memóriabeli kiértékelésre váltani, az implicit típus (`var`) alkalmazása jó szolgálatot tehet.
 
-
 ## Beszúrás több-többes kapcsolatba
 
 Azokat a termékeket szeretnénk megrendelni, amiknek a nevében van egy adott betű. Használjuk fel újra az előző, hasonló lekérdezésünket.
@@ -595,7 +585,7 @@ var order = new Order { OrderDate = DateTime.Now };
 foreach (var p in products)
 {
     order.OrderItems.Add(
-        new OrderItem { Product = p, Order = order, Quantity=2 }
+        new OrderItem { Product = p, Order = order, Quantity = 2 }
     );
 }
 
@@ -604,6 +594,7 @@ ctx.SaveChanges();
 ```
 
 Ismét figyeljük, hogy milyen SQL generálódik. Az `Order` létrehozása után nekünk még egy új `OrderItem` entitást is létre kell hoznunk, amit a több-több kapcsolatra használunk fel.
+
 Figyeljük meg, hogy nem kellett minden `OrderItem`-et külön-külön hozzáadnunk a kontextushoz, az `Order` hozzáadásával minden `OrderItem` is bekerült a kontextusba, majd el is mentődött az adatbázisba.
 
 ## Kapcsolódó entitások betöltése
@@ -779,6 +770,11 @@ Figyeljük meg, hogyan kezeli az EF a hozzá tartozó objektumok állapotát.
     Nem kell ismernünk az elsődleges kulcs property nevét.
     Ha a változáskövetőbe már korábban bekerült a keresett entitás, akkor onnan kapjuk vissza, ilyenkor adatbázishozzáférés nem történik.
 
+!!! warning "Mikor nem él a Change Tracker?"
+    Ha `Select` operátort használunk akkor az EF nem tudja követni a változásokat, hiszen nem entitásokat kezelünk többé, hanem egy új típusú objektumot adunk vissza, így a SaveChanges nem fogja tudni, hogy mit kellene menteni.
+
+    A Change Tracker entitások lekérdezésekor ki is lehet kapcsolni az `AsNoTracking()` metódussal a Teljes `IQueryable` lekérdezésen.
+
 ## Törlés
 
 Töröljük ki az adatbázisból az egyik megrendelést.
@@ -793,6 +789,7 @@ ctx.SaveChanges();
 ```
 
 Figyeljük meg az adatbázis adatai között, hogy az `Order` törlésével a kapcsolódó `OrderItem` bejegyzések is törlődtek, mivel alapértelmezetten a sémán be van kapcsolva a **kaszkád** törlés.
+
 Ez ebben az esetben indokolt is lenne, de sokszor nem szeretnénk, ha a kapcsolódó rekordok is törlődnének.
 Ennek megakadályozására vegyük fel explicit a konfigurációban az `Order-OrderItem` kapcsolatot és kapcsoljuk ki rajta a kaszkád törlést az `OnModelCreating`-ben.
 
@@ -962,6 +959,7 @@ try
 }
 catch (Exception)
 {
+    // TODO logging
 }
 ```
 

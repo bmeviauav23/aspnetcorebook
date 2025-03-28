@@ -6,19 +6,24 @@ Ezen a gyakorlaton nem a beépített API projektsablont fogjuk felhasználni, ha
 
 ### Generálás
 
-Hozzunk létre a Visual Studioban egy új, C# nyelvű projektet az *ASP.NET Core Empty* sablonnal, a neve legyen *HelloAspNetCore*. Megcélzott keretrendszerként adjuk meg a *.NET 8*-ot. Minden extra opció legyen kikapcsolva, a docker és a HTTPS is.
+Hozzunk létre a Visual Studioban egy új, C# nyelvű projektet az *ASP.NET Core Empty* sablonnal, a neve legyen *HelloAspNetCore*.
+Megcélzott keretrendszerként adjuk meg a *.NET 8*-at.
+Minden extra opció legyen kikapcsolva, a docker és a HTTPS is (a laborgépek miatt).
 
-### Kitérő: NuGet és a keretrendszert alkotó komponensek helye
+??? note "Kitérő: NuGet és a keretrendszert alkotó komponensek helye"
 
-A .NET 8 és az ASP.NET Core gyakorlatilag teljes mértékben publikusan elérhető komponensekből épül fel.
-A komponensek kezelésének infrastruktúráját a NuGet csomagkezelő szolgáltatja.
-A csomagkezelőn keresztül elérhető csomagokat a [nuget.org](https://www.nuget.org/) listázza és igény esetén a NuGet kliens, illetve a .NET Core eszközök (dotnet.exe, Visual Studio) is innen töltik le.
-A fejlesztőknek teljesítményszempontból nem érné meg az alap keretrendszert alkotó csomagokat állandóan letöltögetni, így a klasszikus keretrendszerekhez hasonlóan a .NET 8 telepítésekor egy könyvtárba (Windows-on ide: **C:\Program Files (x86)\dotnet**, illetve **C:\Program Files\dotnet**) bekerülnek az alap keretrendszert alkotó komponensek - lényegében egy csomó .dll különböző alkönyvtárakban.
-A futtatáshoz szükséges szerelvények a **shared** alkönyvtárba települnek, ezek az ún. **Shared Framework**-ök.
-A gépen futó különböző .NET Core/8 alkalmazások közösen használhatják ezeket.
-A fejlesztéshez az alapvető függőségeket a **packs** alkönyvtárból hivatkozhatjuk.
+    A .NET 8 és az ASP.NET Core gyakorlatilag teljes mértékben publikusan elérhető komponensekből épül fel.
+    A komponensek kezelésének infrastruktúráját a NuGet csomagkezelő szolgáltatja.
+    A csomagkezelőn keresztül elérhető csomagokat a [nuget.org](https://www.nuget.org/) listázza és igény esetén a NuGet kliens, illetve a .NET Core eszközök (dotnet.exe, Visual Studio) is innen töltik le.
+    
+    A fejlesztőknek teljesítményszempontból nem érné meg az alap keretrendszert alkotó csomagokat állandóan letöltögetni, így a klasszikus keretrendszerekhez hasonlóan a .NET 8 telepítésekor egy könyvtárba (Windows-on ide: **C:\Program Files (x86)\dotnet**, illetve **C:\Program Files\dotnet**) bekerülnek az alap keretrendszert alkotó komponensek - lényegében egy csomó .dll különböző alkönyvtárakban.
+    
+    A futtatáshoz szükséges szerelvények a **shared** alkönyvtárba települnek, ezek az ún. **Shared Framework**-ök.
+    A gépen futó különböző .NET Core/8 alkalmazások közösen használhatják ezeket.
+    
+    A fejlesztéshez az alapvető függőségeket a **packs** alkönyvtárból hivatkozhatjuk.
 
-Nem fejlesztői, például végfelhasználói vagy szerver környezetben- ahol nem is biztos, hogy fel van telepítve az SDK, nem feltétlenül így biztosítjuk a függőségeket, de ennek a boncolgatása nem témája ennek a gyakorlatnak.
+    Nem fejlesztői, például végfelhasználói vagy szerver környezetben- ahol nem is biztos, hogy fel van telepítve az SDK, nem feltétlenül így biztosítjuk a függőségeket, de ennek a boncolgatása nem témája ennek a gyakorlatnak.
 
 ### Eredmény
 
@@ -120,8 +125,7 @@ app.MapGet("/", () =>
 {
     throw new Exception("hiba");
     //return "Hello World!"
-}
-);
+});
 ```
 
 Próbáljuk ki debugger nélkül (++ctrl+f5++)!
@@ -182,12 +186,11 @@ Alapértelmezésben az **appsettings.\<indítási konfiguráció neve\>.json** b
 !!! tip "Naplózási szintek"
     A naplózási szintek sorrendje [itt található](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging#configure-logging).
 
-
 Próbáljuk ki, hogy így az alkalmazásunk futásakor minden böngészőbeli frissítésünk (++f5++) megjelenik a konzolon.
 
 VS-ből is tudjuk állítani a környezeti változókat, nem kell a **launchSettings.json**-ben kézzel varázsolni.
 A projekt tulajdonságok *Debug* lapján az *Open debug launch profiles UI* szövegre kattintva egy dialógusablak ugrik fel, itt tudunk új indítási profilt megadni, illetve a meglévőeket módosítani.
-Válasszuk ki az aktuálisan használt profilunkat (projektneves), majd írjuk át az *ASPNETCORE_ENVIRONMENT* környezeti változó értékét az *Environment Variables* részen mondjuk *Production*-re.
+Válasszuk ki az aktuálisan használt profilunkat (projektneves), majd írjuk át az `ASPNETCORE_ENVIRONMENT` környezeti változó értékét az *Environment Variables* részen mondjuk *Production*-re.
 
 Indítsuk ezzel a profillal és figyeljük meg, hogy már nem jelennek meg az egyes kérések a naplóban, bárhogy is frissítgetjük a böngészőt.
 Oka: nincs **appsettings.Production.json**, így az általános **appsettings.json** jut érvényre.
@@ -267,11 +270,9 @@ A `Get` függvényen levő `HttpGet` mutatja, hogy ez a függvény akkor hívand
 
 Ha van időnk, próbáljuk ki az `/api/Dummy/[egész szám]` címet is. A `Get(int id)` függvény kódjának megfelelően, bármit adunk meg, az eredmény a *value* szöveg lesz.
 
-## Típusos beállítások, `IOptions<T>`
+## Konfigurációs beállítások, Dependency Injection
 
-Fentebb láttuk, hogy a konfigurációt ki tudtuk olvasni az `IConfiguration` interfészen keresztül, de még jobb lenne, ha csoportosítva és csoportonként külön C# osztályokon keresztül látnánk őket.
-
-Bővítsük az *appsettings.json*-t egy saját beállításcsoporttal (*DummySettings*):
+Bővítsük az *appsettings.json*-t egy saját beállításcsoporttal (`DummySettings`):
 
 ``` json hl_lines="9-14"
 {
@@ -291,7 +292,41 @@ Bővítsük az *appsettings.json*-t egy saját beállításcsoporttal (*DummySet
 }
 ```
 
+Kérjük le a beállításokat a `DummyController`-ben, a `Get` függvényekben írjuk ki a `DefaultString` és `DefaultInt` értékét.
+
+Ehhez viszont el kell kérjük a `IConfiguration` interfészt a konstruktorban a Dependency Injection (DI) mechanizmuson keresztül a DI konténertől.
+Ez többek között lehetővé teszi, hogy az alkalmazáson belül konstruktorban paraméterként igényeljük a szolgáltatást.
+A paraméter értékét a DI alrendszer automatikusan tölti ki a regisztrált szolgáltatások alapján.
+
+``` csharp
+private readonly IConfiguration _configuration;
+
+public DummyController(IConfiguration configuration)
+{
+    _configuration = configuration;
+}
+
+[HttpGet]
+public string Get()
+{
+    return $"string: {_configuration.GetValue<string>("DummySettings:DefaultString")}" +
+           $"int: {_configuration.GetValue<int>("DummySettings:DefaultInt")}" +
+           $"secret: {_configuration.GetValue<string>("DummySettings:SuperSecret")}";
+}
+```
+
+!!! tip "DI minta preferálása"
+    ASP.NET Core környezetben (is) törekedjünk arra, hogy lehetőleg minden osztályunk minden függőségét a DI minta szerint a DI konténer kezelje.
+    Ez nagyban hozzájárul a komponensek közötti laza csatolás és a jobb tesztelhetőség eléréséhez.
+    Bővebb információ az ASP.NET Core DI alrendszeréről a [dokumentációban](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection) található.
+
+
+## Típusos beállítások, `IOptions<T>`
+
+Fentebb láttuk, hogy a konfigurációt ki tudtuk olvasni az `IConfiguration` interfészen keresztül, de még jobb lenne, ha csoportosítva és csoportonként külön C# osztályokon keresztül látnánk őket.
+
 Hozzunk létre egy új mappát `Options` néven.
+
 A mappába hozzunk létre egy sima osztályt `DummySettings` néven, a szerkezete feleljen meg a JSON-ben leírt beállításcsoportnak:
 
 ``` csharp
@@ -311,22 +346,15 @@ builder.Services.Configure<DummySettings>(
 ```
 
 A `builder.Services`-ben regisztrált szolgáltatások valójában egy dependency injection (DI) konténerbe kerülnek regisztrálásra.
-Ez többek között lehetővé teszi, hogy az alkalmazáson belül konstruktorban paraméterként igényeljük a szolgáltatást.
-A paraméter értékét a DI alrendszer automatikusan tölti ki a regisztrált szolgáltatások alapján.
 
-!!! tip "DI minta preferálása"
-    ASP.NET Core környezetben (is) törekedjünk arra, hogy lehetőleg minden osztályunk minden függőségét a DI minta szerint a DI konténer kezelje.
-    Ez nagyban hozzájárul a komponensek közötti laza csatolás és a jobb tesztelhetőség eléréséhez.
-    Bővebb információ az ASP.NET Core DI alrendszeréről a [dokumentációban](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection) található.
-
-Igényeljünk `DummySettings`-t a `DummyController` konstruktorban:
+Igényeljünk `DummySettings`-t a `DummyController` konstruktorban az `IConfiguration` helyett:
 
 ``` csharp
 private readonly DummySettings _options;
 
 public DummyController(IOptions<DummySettings> options)
 {
-    options = options.Value;
+    _options = options.Value;
 }
 ```
 
@@ -337,16 +365,16 @@ public DummyController(IOptions<DummySettings> options)
 Az egész számot váró `Get` változatban használjuk fel az értékeket:
 
 ``` csharp hl_lines="4-6"
-[HttpGet("{id}")]
-public string Get(int id)
+[HttpGet]
+public string Get()
 {
-    return id % 2 == 0
-        ? (options.DefaultString ?? "value")
-        : options.DefaultInt.ToString();
+    return $"string: {_options.DefaultString}" +
+           $"int: {_options.DefaultInt}" +
+           $"secret: {_options.SuperSecret}";
 }
 ```
 
-Próbáljuk ki, hogy az `/api/Dummy/[páros szám]`, illetve `/api/Dummy/[páratlan szám]` végpontok meghívásakor a megfelelő értéket kapjuk-e vissza.
+Próbáljuk ki, hogy a végpont meghívásakor a megfelelő értékeket kapjuk-e vissza.
 
 ## User Secrets
 

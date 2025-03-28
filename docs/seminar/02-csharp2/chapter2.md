@@ -47,7 +47,7 @@ dotnet <projektnév.dll>
 ```
 
 !!! tip "Parancssor aktuális mappája"
-    A dotnet parancshoz a dll könyvtárában kell lennünk. Ehhez a legegyszerűbb, ha a Windows fájlkezelőben a megfelelő könyvtárban állva az elérési útvonal mezőt átírjuk a `cmd` szövegre, majd kbd:\[ENTER\]-t nyomunk.
+    A dotnet parancshoz a dll könyvtárában kell lennünk. Ehhez a legegyszerűbb, ha a Windows fájlkezelőben a megfelelő könyvtárban állva az elérési útvonal mezőt átírjuk a `cmd` szövegre, majd ++enter++-t nyomunk.
 
 Adjunk a létrejövő projekthez egy `Dog` osztályt *Dog.cs* néven, ez lesz az adatmodellünk:
 
@@ -87,7 +87,7 @@ Ebben az esetben a típus egyértelműen `Dog`.
 Ha csak deklarálni szeretnénk egy változót (nem adunk értékül a változónak semmit), akkor nem használhatjuk a `var` kulcsszót, ugyanis nem következik a kódból a változó típusa.
 Ekkor explicit meg kell adnunk a típust.
 
-``` csharp hl_lines="5-10"
+``` csharp hl_lines="6-11"
 Dog banan = new Dog
 {
    Name = "Banán",
@@ -97,15 +97,15 @@ var watson = new Dog { Name = "Watson" };
 
 var unnamed = new Dog { DateOfBirth = new DateTime(2017, 02, 10) };
 var unknown = new Dog { };
-//watson = 3; // 
-//var error;  // 
+//watson = 3; // (1)
+//var error;  // (2)
 
 Console.WriteLine(banan);
 Console.ReadLine();
 ```
 
-* Fordítási hiba: a `watson` deklarációjakor eldőlt, hogy ő `Dog` típus, utólag nem lehet megváltoztatni és például számértéket értékül adni. Ez nem JavaScript.
-* Fordítási hiba: implicit típust csak úgy lehet deklarálni, ha egyúttal inicializáljuk is. Az inicializációs kifejezés alapján dől el (implicit) a példány típusa.
+1. Fordítási hiba: a `watson` deklarációjakor eldőlt, hogy ő `Dog` típus, utólag nem lehet megváltoztatni és például számértéket értékül adni. Ez nem JavaScript.
+2. Fordítási hiba: implicit típust csak úgy lehet deklarálni, ha egyúttal inicializáljuk is. Az inicializációs kifejezés alapján dől el (implicit) a példány típusa.
 
 Próbáljuk ki a nem forduló sorokat, nézzük meg a fordító hibaüzeneteit!
 
@@ -180,8 +180,8 @@ public class Dog
     public Dictionary<string, object>  Metadata { get; } = new();
     public object this[string key]
     {
-        get { return Metadata[key]; }
-        set { Metadata[key] = value; }
+        get => Metadata[key];
+        set => Metadata[key] = value;
     }
 }
 ```
@@ -217,7 +217,9 @@ var dogs = new Dictionary<string, Dog>
 };
 
 foreach (var dog in dogs)
+{
     Console.WriteLine($"{dog.Key} - {dog.Value}");
+}
 ```
 
 Próbáljuk ki - minden név-kutya párt ki kell írnia a szótárból.
@@ -236,7 +238,9 @@ var dogs = new Dictionary<string, Dog>
 //ArgumentNullException!
 ```
 
-Ez azonban kivételt okoz, amikor a kutya neve nincs kitöltve, azaz `null` értékű. Esetünkben elég lenne az adott változó neve szövegként. Erre jó a `nameof` operátor.
+Ez azonban kivételt okoz, amikor a kutya neve nincs kitöltve, azaz `null` értékű.
+Esetünkben elég lenne az adott változó neve szövegként.
+Erre jó a `nameof` operátor.
 
 ``` csharp
 var dogs = new Dictionary<string, Dog>
@@ -253,7 +257,8 @@ Ez a változat már nem fog kivételt okozni.
 
 A `nameof` operátor sokfajta nyelvi elemet támogat, vissza tudja adni egy változó, egy típus, egy property vagy egy függvény nevét is.
 
-A szótár feltöltését megírhatjuk kollekció inicializációval is. Ehhez kihasználjuk, hogy a szótár típus rendelkezik egy `Add` metódussal, amelyik egyszerűen egy kulcsot és egy hozzátartozó értéket vár:
+A szótár feltöltését megírhatjuk kollekció inicializációval is.
+Ehhez kihasználjuk, hogy a szótár típus rendelkezik egy `Add` metódussal, amelyik egyszerűen egy kulcsot és egy hozzátartozó értéket vár:
 
 ``` csharp
 var dogs = new Dictionary<string, Dog>
