@@ -34,6 +34,8 @@ theme:
     - search.suggest
     - content.action.edit
     - content.code.annotate
+    - content.code.copy
+    - content.tooltips
     - toc.follow
   logo: logo-bme-aut.png
   favicon: favicon.ico
@@ -45,6 +47,7 @@ extra:
   generator: false
 
 markdown_extensions:
+  - abbr
   - admonition
   - attr_list
   - md_in_html
@@ -68,6 +71,7 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tabbed
   - pymdownx.tilde
+  - pymdownx.blocks.caption
   - pymdownx.keys
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
