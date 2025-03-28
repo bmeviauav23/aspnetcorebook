@@ -10,17 +10,17 @@
 <link href="../../05-aspnetcore1/chapter5/" rel="prev"/>
 <link href="../../07-restapi/chapter7/" rel="next"/>
 <link href="../../../favicon.ico" rel="icon"/>
-<meta content="mkdocs-1.6.0, mkdocs-material-9.5.27" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.9" name="generator"/>
 <title>Entity Framework Core I-II. - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
-<link href="../../../assets/stylesheets/main.6543a935.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/main.4af4bdda.min.css" rel="stylesheet"/>
 <link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
 <link href="../../../css/timeago.css" rel="stylesheet"/>
 <link href="../../../extra-material-theme.css" rel="stylesheet"/>
-<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-<link href="../../../assets/stylesheets/extra-style.1rn8hjb8.min.css" rel="stylesheet"/> <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../../../assets/stylesheets/extra-style.ekb2prfh.min.css" rel="stylesheet"/> <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -47,7 +47,7 @@
 <img alt="logo" src="../../../logo-bme-aut.png"/>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
 </label>
 <div class="md-header__title" data-md-component="header-title">
 <div class="md-header__ellipsis">
@@ -68,16 +68,16 @@
 <form class="md-header__option" data-md-component="palette">
 <input aria-label="Váltás sötét témára" class="md-option" data-md-color-accent="red" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="aut" data-md-color-scheme="aut" id="__palette_0" name="__palette" type="radio"/>
 <label class="md-header__button md-icon" for="__palette_1" hidden="" title="Váltás sötét témára">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"></path></svg>
 </label>
 <input aria-label="Váltás világos témára" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
 <label class="md-header__button md-icon" for="__palette_0" hidden="" title="Váltás világos témára">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"></path></svg>
 </label>
 </form>
-<script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
 <label class="md-header__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
 </label>
 <div class="md-search" data-md-component="search" role="dialog">
 <label class="md-search__overlay" for="__search"></label>
@@ -85,12 +85,12 @@
 <form class="md-search__form" name="search">
 <input aria-label="Keresés" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Keresés" required="" spellcheck="false" type="text"/>
 <label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
 </label>
 <nav aria-label="Keresés" class="md-search__options">
 <button aria-label="Törlés" class="md-search__icon md-icon" tabindex="-1" title="Törlés" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
 </button>
 </nav>
 <div class="md-search__suggest" data-md-component="search-suggest"></div>
@@ -110,7 +110,7 @@
 <div class="md-header__source">
 <a class="md-source" data-md-component="source" href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
 </div>
 <div class="md-source__repository">
     bmeviauav23/aspnetcorebook
@@ -175,7 +175,7 @@
 <div class="md-nav__source">
 <a class="md-source" data-md-component="source" href="https://github.com/bmeviauav23/aspnetcorebook" title="Főoldalra ugrás">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
 </div>
 <div class="md-source__repository">
     bmeviauav23/aspnetcorebook
@@ -188,6 +188,7 @@
 <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
 <span class="md-ellipsis">
     Tudnivalók
+    
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
@@ -201,6 +202,7 @@
 <a class="md-nav__link" href="../../..">
 <span class="md-ellipsis">
     Szoftverfejlesztés .NET platformra
+    
   </span>
 </a>
 </li>
@@ -208,6 +210,7 @@
 <a class="md-nav__link" href="../../../information/preface/">
 <span class="md-ellipsis">
     Tudnivalók
+    
   </span>
 </a>
 </li>
@@ -215,6 +218,7 @@
 <a class="md-nav__link" href="../../../information/contributing/">
 <span class="md-ellipsis">
     Hozzájárulás az anyaghoz
+    
   </span>
 </a>
 </li>
@@ -226,6 +230,7 @@
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
     Laborok
+    
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
@@ -239,6 +244,7 @@
 <a class="md-nav__link" href="../../01-csharp1/chapter1/">
 <span class="md-ellipsis">
     C# alapok, szintaxis
+    
   </span>
 </a>
 </li>
@@ -246,6 +252,7 @@
 <a class="md-nav__link" href="../../02-csharp2/chapter2/">
 <span class="md-ellipsis">
     C# alapok II.
+    
   </span>
 </a>
 </li>
@@ -253,6 +260,7 @@
 <a class="md-nav__link" href="../../03-linq/chapter3/">
 <span class="md-ellipsis">
     LINQ
+    
   </span>
 </a>
 </li>
@@ -260,6 +268,7 @@
 <a class="md-nav__link" href="../../04-csharp4/chapter4/">
 <span class="md-ellipsis">
     C# alapok IV.
+    
   </span>
 </a>
 </li>
@@ -267,6 +276,7 @@
 <a class="md-nav__link" href="../../05-aspnetcore1/chapter5/">
 <span class="md-ellipsis">
     ASP.NET Core alapszolgáltatások
+    
   </span>
 </a>
 </li>
@@ -275,12 +285,14 @@
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
     Entity Framework Core I-II.
+    
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     Entity Framework Core I-II.
+    
   </span>
 </a>
 <nav aria-label="Tartalomjegyzék" class="md-nav md-nav--secondary">
@@ -473,6 +485,7 @@
 <a class="md-nav__link" href="../../07-restapi/chapter7/">
 <span class="md-ellipsis">
     ASP.NET Core webszolgáltatások I.-II.
+    
   </span>
 </a>
 </li>
@@ -480,6 +493,7 @@
 <a class="md-nav__link" href="../../08-client/chapter8/">
 <span class="md-ellipsis">
     ASP.NET Core webszolgáltatások III.
+    
   </span>
 </a>
 </li>
@@ -487,6 +501,7 @@
 <a class="md-nav__link" href="../../10-test/chapter10/">
 <span class="md-ellipsis">
     Automatizált tesztelés
+    
   </span>
 </a>
 </li>
@@ -498,6 +513,7 @@
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
 <span class="md-ellipsis">
     Házi feladat
+    
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
@@ -511,6 +527,7 @@
 <a class="md-nav__link" href="../../../homework/">
 <span class="md-ellipsis">
     Házi feladat tudnivalók
+    
   </span>
 </a>
 </li>
@@ -518,6 +535,7 @@
 <a class="md-nav__link" href="../../../homework/example-spec/">
 <span class="md-ellipsis">
     Példa kisHF specifikáció
+    
   </span>
 </a>
 </li>
@@ -525,6 +543,7 @@
 <a class="md-nav__link" href="../../../homework/hw-points/">
 <span class="md-ellipsis">
     NagyHF pontrendszer
+    
   </span>
 </a>
 </li>
@@ -535,6 +554,7 @@
 <a class="md-nav__link" href="../../../information/afterword/">
 <span class="md-ellipsis">
     Zárszó
+    
   </span>
 </a>
 </li>
@@ -737,7 +757,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <a class="md-content__button md-icon" href="https://github.com/bmeviauav23/aspnetcorebook/edit/master/docs/seminar/06-efcore/chapter6.md" title="Oldal szerkesztése">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
 <h1 id="entity-framework-core-i-ii">Entity Framework Core I-II.<a class="headerlink" href="#entity-framework-core-i-ii" title="Permanent link">¶</a></h1>
 <h2 id="az-entity-framework-lekepezesi-modszerei">Az Entity Framework leképezési módszerei<a class="headerlink" href="#az-entity-framework-lekepezesi-modszerei" title="Permanent link">¶</a></h2>
@@ -767,20 +787,6 @@ A leképezés alapján az EF eszközök képesek az adatbázis létrehozására,
 <p>Az osztályok legyenek publikusak, az attribútumok pedig egyszerű auto-implementált propertyk (<em>prop</em> snippet).</p>
 <p>A <code>string</code> típusú property-k esetén figyelmeztet a fordító, hogy nem nullozható referencia típusú property inicializáció után is <code>null</code> értékű lehet.
 Ennek kivédésére az ajánlott módszer a <code>required</code> kulcsszó használata a property előtt, ezzel kiválthatóak a felesleges konstruktorok, amelyben csak a kötelezőség miatt várunk el paramétereket és állítjuk be a propertyk értékét.</p>
-<details class="warning">
-<summary>EF Core és konstruktorok required nélkül</summary>
-<p>A fenti megoldás nem működött még C# 11-ben, így ott konstruktort kellett készítenünk. Ezt a konstruktort az EF is fogja hívni, így neki automatikusan tudnia kell, hogy melyik paraméter melyik tulajdonságot állítja - pedig ez a konstruktor szignatúrájából alapesetben nem kikövetkeztethető. Emiatt önkéntesen tartanunk kell magunkat ahhoz, hogy a konstruktorparaméter nevének és a property nevének egyeznie kell, kivéve, hogy a paramétere neve kezdődhet kisbetűvel is (<strong>camel casing</strong>).</p>
-<p>Példaként így néz ki a <code>Product</code> konstruktor:</p>
-<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">Product</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">Quick Action</p>
-<p>A Visual Studio <strong>Quick Action</strong>-ként fel szokta ajánlani a <strong>Generate constructor [konstruktorfejléc]</strong> vagy <strong>Add parameter to [konstruktorfejléc]</strong> gyors kódgenerálási lehetőségeket, amivel létrehozhatjuk vagy bővíthetjük a szükséges konstruktort.</p>
-</div>
-</details>
 <h3 id="mapping-es-egyeb-metaadatok-megadasa-i">Mapping és egyéb metaadatok megadása I.<a class="headerlink" href="#mapping-es-egyeb-metaadatok-megadasa-i" title="Permanent link">¶</a></h3>
 <p>Eddig megadtuk az entitás nevét, a relációs attribútumok nevét és típusát, azonban ezen felül még sok mindent lehet/kell megadni: az entitás elsődleges kulcsa, idegen kulcsok, relációk, kényszerek és egyéb mapping információk (pl. hogy mi legyen a relációs attribútum oszlopneve az adatbázisban).
 A Code-First stratégia kétfajta módszert is kínál ezek megadására.
@@ -809,9 +815,9 @@ A többes navigációs property-k legyenek csak olvashatók és a típusuk legye
 <p>Általánosságban nem kötelező egy kapcsolat mindkét oldalán navigációs property-t vagy külső kulcsot felvenni, de erősen javasolt és mindig jó, ha van.
 Az entitáson végzendő műveleteket egyszerűsíti, illetve a konvenciós logika is következtet belőle.</p>
 </div>
-<p>A navigációs propertyk referencia típusúak, így foglalkoznunk kell a nullozhatóság kérdésével.
-Ha a kapcsolat modellezési szempontból nem kötelező (például ha nem várnánk el, hogy minden terméknek legyen megadva a kategóriája), akkor a navigációs property típusa is legyen értelemszerűen nullozható.
-Ha a kapcsolat kötelező, akkor az ajánlott eljárás, hogy a navigációs property típusa ne legyen nullozható - viszont ekkor kezdeti értéket kell adnunk.
+<p>A navigációs propertyk referencia típusúak, így foglalkoznunk kell a nullozhatóság kérdésével.</p>
+<p>Ha a kapcsolat modellezési szempontból nem kötelező (például ha nem várnánk el, hogy minden terméknek legyen megadva a kategóriája), akkor a navigációs property típusa is legyen értelemszerűen nullozható.</p>
+<p>Ha a kapcsolat kötelező, akkor az ajánlott eljárás, hogy a navigációs property típusa ne legyen nullozható - viszont ekkor kezdeti értéket kell adnunk.
 Gyakori eset, hogy egy entitást betöltünk adatbázisból, de a hozzá kapcsolódó entitás(oka)t nem, ilyenkor mégis a <code>null</code> érték lenne a megfelelő.
 Emiatt az egyik ajánlott módszer, ha a propertyt <strong>null forgiving</strong> operátorral inicializáljuk <code>null</code> értékre.</p>
 <p>Példa: <code>public Category Category { get; set; } = null!;</code>.</p>
@@ -842,7 +848,7 @@ Ezt a módszert akkor érdemes követni, ha a kapcsolótábla csupán technikai 
 <span class="p">{</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">DateTime</span><span class="w"> </span><span class="n">OrderDate</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="n">DateTime</span><span class="w"> </span><span class="n">OrderDate</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">ICollection</span><span class="o">&lt;</span><span class="n">OrderItem</span><span class="o">&gt;</span><span class="w"> </span><span class="n">OrderItems</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">OrderItem</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="p">}</span>
@@ -864,7 +870,7 @@ Ezt a módszert akkor érdemes követni, ha a kapcsolótábla csupán technikai 
 <span class="p">{</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Quantity</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Quantity</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ProductId</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="o">!</span><span class="p">;</span>
@@ -876,10 +882,10 @@ Ezt a módszert akkor érdemes követni, ha a kapcsolótábla csupán technikai 
 <p>Vegyük észre, hogy eddig semmilyen EF specifikus kódot nem írtunk, a modellünk sima ún. <a href="https://stackoverflow.com/a/250006/472575"><em>POCO</em></a> osztályokból áll.</p>
 <h2 id="kapcsolat-az-adatbazissal">Kapcsolat az adatbázissal<a class="headerlink" href="#kapcsolat-az-adatbazissal" title="Permanent link">¶</a></h2>
 <h3 id="dbcontext-nuget">DbContext - NuGet<a class="headerlink" href="#dbcontext-nuget" title="Permanent link">¶</a></h3>
-<p>Az entitásokat definiáltuk, a mapping-et az EF eszére bíztuk, a következő lépés az adatbázisséma létrehozása a mapping alapján, amit képes az EF migrációs eszköze megoldani. 
+<p>Az entitásokat definiáltuk, a mapping-et az EF eszére bíztuk, a következő lépés az adatbázisséma létrehozása a mapping alapján, amit képes az EF migrációs eszköze megoldani.
 Műveletet az ún. <em>kontext</em>-en keresztül tudunk végezni.
-Érdemes saját kontext típust létrehozni, amit az alap <code>DbContext</code>-ből származtatunk.
-Eddig még nem is írtunk semmilyen EF specifikus kódot, most viszont már kell a <code>DbContext</code> típus, így NuGet-ből hozzá kell adnunk a <strong>Microsoft.EntityFrameworkCore.SqlServer</strong> csomagot.
+Érdemes saját kontext típust létrehozni, amit az alap <code>DbContext</code>-ből származtatunk.</p>
+<p>Eddig még nem is írtunk semmilyen EF specifikus kódot, most viszont már kell a <code>DbContext</code> típus, így NuGet-ből hozzá kell adnunk a <strong>Microsoft.EntityFrameworkCore.SqlServer</strong> csomagot.
 Nem ez a csomag tartalmazza a <code>DbContext</code>-et, viszont függőségként hivatkozza (<strong>Microsoft.EntityFrameworkCore</strong>).</p>
 <div class="admonition tip">
 <p class="admonition-title">NuGet csomagok telepítése</p>
@@ -894,7 +900,7 @@ Ez nem azt jelenti, hogy az inkonzisztens verziók mindig hibát eredményeznek,
 <p>Az Entity Framework önmagában független az adatbázis implementációktól, azokhoz különböző, adatbázisgyártó-specifikus <a href="https://docs.microsoft.com/en-us/ef/core/providers/"><em>adatbázis providereken</em></a> keresztül kapcsolódik.
 A <strong>Microsoft.EntityFrameworkCore.SqlServer</strong> csomag hivatkozza az EF absztrakt relációs komponensét (<em>EntityFrameworkCore.Relational</em>), és tartalmazza az <em>MS SQL Server</em>-hez tartozó providert.
 A providert a <code>DbContext</code> <code>OnConfiguring</code> metódusában adhatjuk meg, esetünkben a <code>UseSqlServer</code> metódussal, ami egy connection stringet vár.</p>
-<p><a href="https://www.microsoft.com/en-us/sql-server">MS SQL Server</a> helyett a <em>LocalDB</em> nevű fejlesztői adatbázist használjuk, mely fejlesztői szempontból gyakorlatilag megegyezik az MS SQL Server-rel.
+<p><a href="https://www.microsoft.com/en-us/sql-server">MS SQL Server</a> helyett a <em>LocalDB</em> nevű fejlesztői adatbázist használjuk, mely fejlesztői szempontból gyakorlatilag egy lebutított MS SQL Server-rel megegyező.
 A LocalDB a Visual Studio-val együtt települ, minden Windows felhasználónak külön LocalDB példány indítható el.
 A Visual Studio az <em>SQL Server Object Explorer</em> ablak megnyitásakor automatikusan létrehozza a felhasználónkhoz tartozó, <em>MSSQLLocalDB</em> nevű példányt.</p>
 <div class="admonition note">
@@ -902,8 +908,8 @@ A Visual Studio az <em>SQL Server Object Explorer</em> ablak megnyitásakor auto
 <p>A LocalDB külön is letölthető, illetve a vele együtt települő <code>sqllocaldb</code> parancs segítségével egyszerűen kezelhető. Minderről bővebb információ a dokumentációban <a href="https://docs.microsoft.com/en-us/sql/tools/sqllocaldb-utility?view=sql-server-ver15">olvasható</a>.</p>
 </div>
 <p>Adjunk hozzá új osztályt a projekthez <code>LabDbContext</code> néven, ebben definiáljuk majd, hogy milyen entitáskollekciókon lehet műveleteket végezni.</p>
-<p>Az automatikusan létrejövő MSSQLLocalDB nevű LocalDB példány connection stringjét adjuk meg, pontosabban az <em>SQL Server Object Explorer</em> ablak segítésével másoljuk ki: menu:SQL Server-t kibontva[<em>(localdb)\MSSQLLocalDB</em>-n jobbklikk &gt; Properties &gt; Connection String].
-A kimásolt stringben az <em>Initial Catalog</em> értékét (a DB nevét) a <strong>master</strong>-ről változtassuk meg valamilyen más névre, például a Neptun kódunkra.
+<p>Az automatikusan létrejövő MSSQLLocalDB nevű LocalDB példány connection stringjét adjuk meg, pontosabban az <em>SQL Server Object Explorer</em> ablak segítésével másoljuk ki: menu:SQL Server-t kibontva[<em>(localdb)\MSSQLLocalDB</em>-n jobbklikk &gt; Properties &gt; Connection String].</p>
+<p>A kimásolt stringben az <em>Initial Catalog</em> értékét (a DB nevét) a <strong>master</strong>-ről változtassuk meg valamilyen más névre, például a Neptun kódunkra.
 Ha nincs a stringben <em>Initial Catalog</em> rész, akkor írjuk a string végére, hogy <code>;Initial Catalog=neptunkod</code>.</p>
 <figure>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/efcore-ssoe.png"><img alt="Connection string megszerzése az SQL Server Object Explorer-ből" src="../images/efcore-ssoe.png"/></a>
@@ -911,7 +917,7 @@ Ha nincs a stringben <em>Initial Catalog</em> rész, akkor írjuk a string vég�
 </figure>
 <div class="admonition warning">
 <p class="admonition-title">Különleges karakterek</p>
-<p>A connection stringben különleges karakterek (pl. <em>\</em>) vannak. Ha a kimásolt connection két " közé illesztjük be, a VS automatikusan escape-eli a különleges karaktereket. Ellenkező esetben (ha pl. a két " a beillesztés után kerül elhelyezésre a szöveg köré) az automatikus escape-elés nem történik meg, ilyenkor ne felejtsük el a @-ot a string elé írni, vagy manuálisan escape-elni a szükséges karaktereket!</p>
+<p>A connection stringben különleges karakterek (pl. <em>\</em>) vannak. Ha a kimásolt connection két " közé illesztjük be, a VS automatikusan escape-eli a különleges karaktereket. Ellenkező esetben (ha pl. a két " a beillesztés után kerül elhelyezésre a szöveg köré) az automatikus escape-elés nem történik meg, ilyenkor ne felejtsük el a <code>@</code>-ot a string elé írni, vagy manuálisan escape-elni a szükséges karaktereket!</p>
 </div>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">LabDbContext</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DbContext</span>
 <span class="p">{</span>
@@ -981,7 +987,7 @@ Nézzük meg, hogy pusztán konvenciók alapján milyen tulajdonságokat talált
 
 <span class="w">    </span><span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="w">        </span><span class="p">.</span><span class="n">Property</span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">HasMaxLength</span><span class="p">(</span><span class="m">15</span><span class="p">);</span>
+<span class="w">        </span><span class="p">.</span><span class="n">HasMaxLength</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Ezzel a <code>Name</code> property hosszát állítottuk be.</p>
@@ -990,7 +996,7 @@ Nézzük meg, hogy pusztán konvenciók alapján milyen tulajdonságokat talált
 <div class="highlight"><pre><span></span><code><span class="na">[Column("ProductName")]</span>
 <span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
-<div class="admonition note">
+<div class="admonition warning">
 <p class="admonition-title">POCO</p>
 <p>A fenti miatt az entitásmodellünk már nem POCO, mert EF specifikus attribútum jelent meg a kódjában.</p>
 </div>
@@ -1048,7 +1054,7 @@ Ehhez a <code>LogTo</code>-nak adjuk meg paraméterként a <code>m =&gt; Debug.W
 <span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">Categories</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">drink</span><span class="p">);</span>
 <span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">Categories</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">food</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sör"</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">Category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drink</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sör"</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">Category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drink</span><span class="w"> </span><span class="p">});</span>
 <span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Bor"</span><span class="p">,</span><span class="w"> </span><span class="n">Category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drink</span><span class="w"> </span><span class="p">});</span>
 <span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Tej"</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drink</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="p">});</span>
 
@@ -1069,9 +1075,9 @@ Az új elemeknél gyakori, hogy az adatbázis osztja ki az elsődleges kulcs ér
 A termék beszúrásakor viszont a 0 érték már nem lesz helyes, hiszen addigra a kategória kapott valamilyen kulcs értéket.
 Mindezt a problémát navigációs property-s hivatkozással elkerülhetjük.</p>
 <p>Figyeljük meg a konzol naplóban, hogy a <code>Category</code> beszúrása még megtörténik, de az egyik <code>Product</code> hozzáadása már elszáll.
-A debuggerrel, ha megállunk a <code>SaveChanges</code> híváson, akkor látható, hogy a <code>CategoryId</code> property értéke nulla.</p>
+A debuggerrel, ha megállunk a <code>SaveChanges</code> híváson, akkor látható, hogy a <code>CategoryId</code> property értéke 0.</p>
 <p>Figyeljük meg azt is, hogy a <code>SaveChanges</code> hívásig nem történik módosító adatbázisművelet.
-Az EF memóriában gyűjti a változásokat, amiket a SaveChanges-szel szinkronizálunk az adatbázisba.</p>
+Az EF memóriában gyűjti a változásokat, amiket a <code>SaveChanges</code>-szel szinkronizálunk az adatbázisba.</p>
 <p>Itt láthatjuk az alapértelmezett tranzakciókezelés működését is.
 Egy hívásban több elemet kell beszúrni, ha bármelyik művelet meghiúsul, akkor semmilyen változás nem érvényesül az adatbázisban.
 Általánosan igaz, hogy egy <code>SaveChanges</code> vagy minden változást érvényesít vagy semmit sem.</p>
@@ -1097,13 +1103,13 @@ Paraméterezett <code>INSERT</code> utasításokat használ az EF, így elkerül
 <h2 id="osfeltoltes-seeding-elvart-adattartalom-megadasaval">Ősfeltöltés (seeding) elvárt adattartalom megadásával<a class="headerlink" href="#osfeltoltes-seeding-elvart-adattartalom-megadasaval" title="Permanent link">¶</a></h2>
 <p>A kontextuskonfiguráció részeként megadhatjuk, hogy milyen adattartalmat szeretnénk az egyes táblákban látni. A kontext <code>OnModelCreating</code> függvényének végére:</p>
 <div class="highlight"><pre><span></span><code><span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span><span class="p">().</span><span class="n">HasData</span><span class="p">(</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Category</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Ital"</span><span class="p">,</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Category</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Ital"</span><span class="p">,</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
 <span class="p">);</span>
 
 <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">().</span><span class="n">HasData</span><span class="p">(</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sör"</span><span class="p">,</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Bor"</span><span class="p">,</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">550</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Tej"</span><span class="p">,</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">260</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sör"</span><span class="p">,</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Bor"</span><span class="p">,</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">550</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Tej"</span><span class="p">,</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">260</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
 <div class="admonition warning">
@@ -1172,8 +1178,8 @@ Próbáljuk ki - mivel a szűrést nem sikerült átfordítani, a szűrés elé 
 </span><span class="w">    </span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="sc">'ö'</span><span class="p">))</span>
 <span class="w">    </span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">());</span>
 </code></pre></div>
-<p>Ez működik, de a konzolon megjelenő SQL utasításon látszik, hogy a <strong>teljes</strong> termék táblát lekérdeztük és felolvastuk a memóriába.
-Az <code>AsEnumerable</code> jelentése: a lekérdezés innentől LINQ-to-Objects-ként épül tovább, a lekérdezés eddigi részének memóriabeli reprezentációja lesz az adatforrás, tehát a szűrés és a projekció már memóriában fut le.
+<p>Ez működik, de a konzolon megjelenő SQL utasításon látszik, hogy a <strong>teljes</strong> termék táblát lekérdeztük és felolvastuk a memóriába.</p>
+<p>Az <code>AsEnumerable</code> jelentése: a lekérdezés innentől LINQ-to-Objects-ként épül tovább, a lekérdezés eddigi részének memóriabeli reprezentációja lesz az adatforrás, tehát a szűrés és a projekció már memóriában fut le.
 Mivel a teljes lekérdezés egy része LINQ-to-Entities (adatbázis értékeli ki), a másik része LINQ-to-Objects (a .NET runtime értékeli ki), az ilyen lekérdezéseket ún. vegyes kiértékelésűnek (<em>mixed evaluation</em>), a LINQ-to-Objects részt kliensoldali kiértékelésűnek (<em>client evaluation</em>) nevezik.
 A <code>q</code> típusa ebben az esetben már nem <code>IQueryable&lt;&gt;</code>, csak <code>IEnumerable&lt;&gt;</code>.</p>
 <div class="admonition tip">
@@ -1188,11 +1194,12 @@ A <code>q</code> típusa ebben az esetben már nem <code>IQueryable&lt;&gt;</cod
 </div>
 <h3 id="lekerdezesek-osszefuzese-es-cimkezese">Lekérdezések összefűzése és címkézése<a class="headerlink" href="#lekerdezesek-osszefuzese-es-cimkezese" title="Permanent link">¶</a></h3>
 <p>Kérdezzük le egy bizonyos árnál drágább, bizonyos betűt a nevükben tartalmazó termékek nevét - mindezt két külön lekérdezésben:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">q1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">TagWith</span><span class="p">(</span><span class="s">"Névszűrés"</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">q1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span>
+<span class="w">    </span><span class="p">.</span><span class="n">TagWith</span><span class="p">(</span><span class="s">"Névszűrés"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"r"</span><span class="p">));</span>
 
 <span class="kt">var</span><span class="w"> </span><span class="n">q2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span>
-<span class="w">    </span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
 <span class="w">    </span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
 
 <span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">q2</span><span class="p">)</span>
@@ -1227,15 +1234,15 @@ A <code>q2</code> műveletei már memóriában fognak lefutni, hiszen a <code>q2
 <span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">products</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">order</span><span class="p">.</span><span class="n">OrderItems</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">OrderItem</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">Quantity</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">OrderItem</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">Quantity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="n">ctx</span><span class="p">.</span><span class="n">Orders</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
 <span class="n">ctx</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
 </code></pre></div>
-<p>Ismét figyeljük, hogy milyen SQL generálódik. Az <code>Order</code> létrehozása után nekünk még egy új <code>OrderItem</code> entitást is létre kell hoznunk, amit a több-több kapcsolatra használunk fel.
-Figyeljük meg, hogy nem kellett minden <code>OrderItem</code>-et külön-külön hozzáadnunk a kontextushoz, az <code>Order</code> hozzáadásával minden <code>OrderItem</code> is bekerült a kontextusba, majd el is mentődött az adatbázisba.</p>
+<p>Ismét figyeljük, hogy milyen SQL generálódik. Az <code>Order</code> létrehozása után nekünk még egy új <code>OrderItem</code> entitást is létre kell hoznunk, amit a több-több kapcsolatra használunk fel.</p>
+<p>Figyeljük meg, hogy nem kellett minden <code>OrderItem</code>-et külön-külön hozzáadnunk a kontextushoz, az <code>Order</code> hozzáadásával minden <code>OrderItem</code> is bekerült a kontextusba, majd el is mentődött az adatbázisba.</p>
 <h2 id="kapcsolodo-entitasok-betoltese">Kapcsolódó entitások betöltése<a class="headerlink" href="#kapcsolodo-entitasok-betoltese" title="Permanent link">¶</a></h2>
 <p>Írjuk ki minden termék neve mellé a kategóriáját is.</p>
 <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
@@ -1349,11 +1356,11 @@ Az ilyen többszintes hivatkozást az <code>Include</code> és <code>ThenInclude
 </div>
 <h2 id="modositas-find">Módosítás, Find<a class="headerlink" href="#modositas-find" title="Permanent link">¶</a></h2>
 <p>Nézzünk példát egyszerű módosításra.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">pFirst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Find</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">pFirst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pFirst</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">pFirst</span><span class="p">).</span><span class="n">State</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pFirst</span><span class="p">.</span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pFirst</span><span class="p">.</span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">pFirst</span><span class="p">).</span><span class="n">State</span><span class="p">);</span>
 <span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
 <span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">pFirst</span><span class="p">).</span><span class="n">State</span><span class="p">);</span>
@@ -1373,6 +1380,11 @@ Figyeljük meg, hogyan kezeli az EF a hozzá tartozó objektumok állapotát.</p
 Nem kell ismernünk az elsődleges kulcs property nevét.
 Ha a változáskövetőbe már korábban bekerült a keresett entitás, akkor onnan kapjuk vissza, ilyenkor adatbázishozzáférés nem történik.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Mikor nem él a Change Tracker?</p>
+<p>Ha <code>Select</code> operátort használunk akkor az EF nem tudja követni a változásokat, hiszen nem entitásokat kezelünk többé, hanem egy új típusú objektumot adunk vissza, így a SaveChanges nem fogja tudni, hogy mit kellene menteni.</p>
+<p>A Change Tracker entitások lekérdezésekor ki is lehet kapcsolni az <code>AsNoTracking()</code> metódussal a Teljes <code>IQueryable</code> lekérdezésen.</p>
+</div>
 <h2 id="torles">Törlés<a class="headerlink" href="#torles" title="Permanent link">¶</a></h2>
 <p>Töröljük ki az adatbázisból az egyik megrendelést.</p>
 <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">orderToRemove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Orders</span>
@@ -1382,8 +1394,8 @@ Ha a változáskövetőbe már korábban bekerült a keresett entitás, akkor on
 <span class="n">ctx</span><span class="p">.</span><span class="n">Orders</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">orderToRemove</span><span class="p">);</span>
 <span class="n">ctx</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
 </code></pre></div>
-<p>Figyeljük meg az adatbázis adatai között, hogy az <code>Order</code> törlésével a kapcsolódó <code>OrderItem</code> bejegyzések is törlődtek, mivel alapértelmezetten a sémán be van kapcsolva a <strong>kaszkád</strong> törlés.
-Ez ebben az esetben indokolt is lenne, de sokszor nem szeretnénk, ha a kapcsolódó rekordok is törlődnének.
+<p>Figyeljük meg az adatbázis adatai között, hogy az <code>Order</code> törlésével a kapcsolódó <code>OrderItem</code> bejegyzések is törlődtek, mivel alapértelmezetten a sémán be van kapcsolva a <strong>kaszkád</strong> törlés.</p>
+<p>Ez ebben az esetben indokolt is lenne, de sokszor nem szeretnénk, ha a kapcsolódó rekordok is törlődnének.
 Ennek megakadályozására vegyük fel explicit a konfigurációban az <code>Order-OrderItem</code> kapcsolatot és kapcsoljuk ki rajta a kaszkád törlést az <code>OnModelCreating</code>-ben.</p>
 <div class="highlight"><pre><span></span><code><span class="n">j</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">j</span>
 <span class="w">    </span><span class="p">.</span><span class="n">HasOne</span><span class="p">(</span><span class="n">oi</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">Order</span><span class="p">)</span>
@@ -1393,12 +1405,12 @@ Ennek megakadályozására vegyük fel explicit a konfigurációban az <code>Ord
 </span></code></pre></div>
 <p>A törölt <code>Order</code>-t és a szükséges kapcsoló rekordokat vegyük fel migráció által beszúrt adatként. Az <code>OnModelCreating</code> végére:</p>
 <div class="highlight"><pre><span></span><code><span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span><span class="p">().</span><span class="n">HasData</span><span class="p">(</span>
-<span class="w">     </span><span class="k">new</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">OrderDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="m">2019</span><span class="p">,</span><span class="w"> </span><span class="m">02</span><span class="p">,</span><span class="w"> </span><span class="m">01</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">     </span><span class="k">new</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">OrderDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span><span class="w"> </span><span class="mi">02</span><span class="p">,</span><span class="w"> </span><span class="mi">01</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
 <span class="p">);</span>
 
 <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="o">&lt;</span><span class="n">OrderItem</span><span class="o">&gt;</span><span class="p">().</span><span class="n">HasData</span><span class="p">(</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">OrderItem</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">OrderId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">ProductId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">OrderItem</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">OrderId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">ProductId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">OrderItem</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">OrderId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ProductId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">OrderItem</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">OrderId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ProductId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
 <p>Fordítás után ne felejtsük el migrációval átvezetni az adatbázis sémájába is a változásokat, mivel a kaszkád törlés egy MSSQL funkció nem EF viselkedés.</p>
@@ -1417,10 +1429,10 @@ Emiatt az egész törlési művelet meghiúsul.</p>
 <div class="highlight"><pre><span></span><code><span class="na">[Flags]</span>
 <span class="k">public</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">ShipmentRegion</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">EU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
-<span class="w">    </span><span class="n">NorthAmerica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span>
-<span class="w">    </span><span class="n">Asia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span>
-<span class="w">    </span><span class="n">Australia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span>
+<span class="w">    </span><span class="n">EU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">NorthAmerica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Asia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Australia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>A <code>Flags</code> attribútummal azt jelezzük, hogy szeretnénk a bitműveleteket is alkalmazni a felsorolt értékére, így egy <code>ShipmentRegion</code> típusú változó egyszerre több értéket is felvehet (pl.: 3-as érték egyszerre tartalmazza az EU-t és Észak-Amerikát is).</p>
@@ -1431,28 +1443,28 @@ Emiatt az egész törlési művelet meghiúsul.</p>
 <div class="highlight"><pre><span></span><code><span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">().</span><span class="n">HasData</span><span class="p">(</span>
 <span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">        </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Sör"</span><span class="p">,</span>
-<span class="w">        </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span>
-<span class="w">        </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">        </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="hll"><span class="w">        </span><span class="n">ShipmentRegion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShipmentRegion</span><span class="p">.</span><span class="n">Asia</span>
 </span><span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Bor"</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">550</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Tej"</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">260</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Bor"</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">550</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Tej"</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">260</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
 <span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
 <span class="w">        </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Whiskey"</span><span class="p">,</span>
-<span class="w">        </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">960</span><span class="p">,</span>
-<span class="w">        </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">960</span><span class="p">,</span>
+<span class="w">        </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="hll"><span class="w">        </span><span class="n">ShipmentRegion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShipmentRegion</span><span class="p">.</span><span class="n">Australia</span>
 </span><span class="hll"><span class="w">    </span><span class="p">},</span>
 </span><span class="hll"><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Product</span><span class="p">()</span>
 </span><span class="hll"><span class="w">    </span><span class="p">{</span>
-</span><span class="hll"><span class="w">        </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
 </span><span class="hll"><span class="w">        </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Rum"</span>
-</span><span class="hll"><span class="w">        </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">960</span><span class="p">,</span>
-</span><span class="hll"><span class="w">        </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">960</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 </span><span class="hll"><span class="w">        </span><span class="n">ShipmentRegion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShipmentRegion</span><span class="p">.</span><span class="n">EU</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ShipmentRegion</span><span class="p">.</span><span class="n">NorthAmerica</span>
 </span><span class="hll"><span class="w">    </span><span class="p">}</span>
 </span><span class="p">);</span>
@@ -1516,6 +1528,7 @@ Tehát ha az egyik sikertelenül fut le, akkor a többit sem szabad érvényre j
 <span class="p">}</span>
 <span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="p">)</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="c1">// TODO logging</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>A tranzakciók kezdete-végével kapcsolatos események csak a debug szintű naplóban jelennek meg. Állítsuk át a naplózási szintet a <code>LogTo</code> függvényben:</p>
@@ -1536,7 +1549,7 @@ Ha bármilyen ok miatt a <code>Commit</code> nem hívódik meg, legkésőbb a us
 <span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Product</span><span class="p">()</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="hll"><span class="w">        </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Kőműves Actimel"</span><span class="p">,</span><span class="w"> </span><span class="c1">//új név</span>
-</span><span class="hll"><span class="w">        </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="c1">//nem létező CategoryId</span>
+</span><span class="hll"><span class="w">        </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="c1">//nem létező CategoryId</span>
 </span><span class="w">    </span><span class="p">});</span>
 <span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
 <span class="w">    </span><span class="n">transaction</span><span class="p">.</span><span class="n">Commit</span><span class="p">();</span>
@@ -1550,8 +1563,8 @@ Ha bármilyen ok miatt a <code>Commit</code> nem hívódik meg, legkésőbb a us
 </path>
 </svg>
 </span>
-<span title="2024. április 10. 12:56:37">
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-04-10T12:56:37+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-04-10</span>
+<span title="2025. március 28. 11:46:02">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2025. március 28. 11:46:02"><span class="timeago" datetime="2025-03-28T11:46:02+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025. március 28. 11:46:02">2025-03-28</span>
 </span>
 </span>
 <span class="md-source-file__fact">
@@ -1572,7 +1585,7 @@ Ha bármilyen ok miatt a <code>Commit</code> nem hívódik meg, legkésőbb a us
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
 </div>
 <button class="md-top md-icon" data-md-component="top" hidden="" type="button">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
   Vissza a tetejére
 </button>
 </main>
@@ -1591,8 +1604,8 @@ Ha bármilyen ok miatt a <code>Commit</code> nem hívódik meg, legkésőbb a us
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "content.action.edit", "content.code.annotate", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.term.missing": "\u00dcres", "select.version": "Verzi\u00f3v\u00e1lt\u00e1s"}}</script>
-<script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "content.action.edit", "content.code.annotate", "content.code.copy", "content.tooltips", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.term.missing": "\u00dcres", "select.version": "Verzi\u00f3v\u00e1lt\u00e1s"}}</script>
+<script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
 <script src="../../../js/timeago.min.js"></script>
 <script src="../../../js/timeago_mkdocs_material.js"></script>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
