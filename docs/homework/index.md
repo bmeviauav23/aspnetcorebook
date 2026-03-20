@@ -20,3 +20,7 @@ Az alábbiak közül mindegyiknek teljesülnie kell az aláíráshoz:
     * Az előbb megadott verziókhoz képest későbbi verziók használhatók - saját felelősségre
 * Minimum 3 összefüggő tábla használata, nem számolva a felhasználókezeléssel kapcsolatos táblákat
 * A leadott specifikációnak megfelelő funkcionalitás
+
+## Beadás GitHub classroom-on keresztül
+
+Tudnivalók: [GitHub ismertető](../information/GitHub.md)
