@@ -24,8 +24,8 @@ Egy olyan alkalmazás készítése, mely törzsanyagokból disszertációt áll�
 
 ## Alkalmazott alaptechnológiák [^4]
 
-- adatelérés: Entity Framework Core v8
-- kommunikáció, szerveroldal: ASP.NET Core v8
+- adatelérés: Entity Framework Core 10
+- kommunikáció, szerveroldal: ASP.NET Core 10
 - kliensoldal: Blazor WebAssembly
 
 ## Továbbfejlesztési tervek [^5]
