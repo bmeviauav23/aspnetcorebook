@@ -9,7 +9,7 @@
 
 !!! note "Pontrendszer véglegesítés"
 
-    Jelenleg a 2024. tavaszifélévre nincs véglegesítve a pontrendszer!
+    Jelenleg a 2026. tavaszifélévre nincs véglegesítve a pontrendszer!
     
     Véglegesítés után csak a következő típusú változások lehetnek
 
