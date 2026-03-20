@@ -131,4 +131,6 @@ nav:
       - homework/index.md
       - homework/example-spec.md
       - homework/hw-points.md
+      - information/GitHub.md
+      - information/GitHub-Actions.md
   - "Zárszó": information/afterword.md
