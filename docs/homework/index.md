@@ -15,8 +15,8 @@ Az alábbiak közül mindegyiknek teljesülnie kell az aláíráshoz:
     * a vastag/vékony kliens kiváltható Postman klienssel
 * A kliens nem éri el közvetlenül az adatbázist
 * A kliens nem csak egymástól független hívásokat csinál, hanem ténylegesen végre is lehet hajtani a felhasználói folyamatokat. Pl. Postman kliens esetében, nem csak különálló teszthívások vannak, hanem kollekciókba rendezve hívási sorozatok, ahol ez egyes hívások között változókban állapotot is tárolunk.
-* Adatelérés: Entity Framework Core v8.x
-* Kommunikáció: ASP.NET Core v8.x
+* Adatelérés: Entity Framework Core v10.x
+* Kommunikáció: ASP.NET Core v10.x
     * Az előbb megadott verziókhoz képest későbbi verziók használhatók - saját felelősségre
 * Minimum 3 összefüggő tábla használata, nem számolva a felhasználókezeléssel kapcsolatos táblákat
 * A leadott specifikációnak megfelelő funkcionalitás
