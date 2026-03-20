@@ -2,12 +2,10 @@
 <meta charset="utf-8">
 <meta content="width=device-width,initial-scale=1" name="viewport">
 <meta content="Tóth Tibor, Simon Gábor, Albert István, Szabó Gábor" name="author">
-<link href="https://bmeviauav23.github.io/aspnetcorebook/information/contributing/" rel="canonical">
-<link href="../preface/" rel="prev">
-<link href="../../seminar/01-csharp1/chapter1/" rel="next">
+<link href="https://bmeviauav23.github.io/aspnetcorebook/information/GitHub-Actions/" rel="canonical">
 <link href="../../favicon.ico" rel="icon">
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator">
-<title>Hozzájárulás az anyaghoz - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
+<title>GitHub Actions ismertető - BMEVIAUAV23 - Szoftverfejlesztés .NET platformra</title>
 <link href="../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet">
 <link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet">
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
@@ -32,7 +30,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox">
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#hozzajarulas-az-anyaghoz">
+<a class="md-skip" href="#github-actions-ismerteto">
           Kihagyás
         </a>
 </div>
@@ -56,7 +54,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Hozzájárulás az anyaghoz
+              GitHub Actions ismertető
             
           </span>
 </div>
@@ -120,7 +118,7 @@
 <nav aria-label="Lapok" class="md-tabs" data-md-component="tabs">
 <div class="md-grid">
 <ul class="md-tabs__list">
-<li class="md-tabs__item md-tabs__item--active">
+<li class="md-tabs__item">
 <a class="md-tabs__link" href="../..">
           
   
@@ -184,9 +182,9 @@
 </a>
 </div>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_1" type="checkbox">
-<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_1" type="checkbox">
+<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
 <span class="md-ellipsis">
     
   
@@ -197,7 +195,7 @@
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="false" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_1">
 <span class="md-nav__icon md-icon"></span>
             
@@ -231,20 +229,8 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox">
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    
-  
-    Hozzájárulás az anyaghoz
-  
-
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../contributing/">
 <span class="md-ellipsis">
     
   
@@ -254,54 +240,6 @@
     
   </span>
 </a>
-<nav aria-label="Tartalomjegyzék" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Tartalomjegyzék
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#hibak-jelzese">
-<span class="md-ellipsis">
-      
-        Hibák jelzése
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#valtoztatasok-javaslasa">
-<span class="md-ellipsis">
-      
-        Változtatások javaslása
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#code-style">
-<span class="md-ellipsis">
-      
-        Code style
-      
-    </span>
-</a>
-<nav aria-label="Code style" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#vscode">
-<span class="md-ellipsis">
-      
-        VSCode
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -523,174 +461,30 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Tartalomjegyzék" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Tartalomjegyzék
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#hibak-jelzese">
-<span class="md-ellipsis">
-      
-        Hibák jelzése
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#valtoztatasok-javaslasa">
-<span class="md-ellipsis">
-      
-        Változtatások javaslása
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#code-style">
-<span class="md-ellipsis">
-      
-        Code style
-      
-    </span>
-</a>
-<nav aria-label="Code style" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#vscode">
-<span class="md-ellipsis">
-      
-        VSCode
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/bmeviauav23/aspnetcorebook/edit/master/docs/information/contributing.md" rel="edit" title="Oldal szerkesztése">
+<a class="md-content__button md-icon" href="https://github.com/bmeviauav23/aspnetcorebook/edit/master/docs/information/GitHub-Actions.md" rel="edit" title="Oldal szerkesztése">
 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="hozzajarulas-az-anyaghoz">Hozzájárulás az anyaghoz<a class="headerlink" href="#hozzajarulas-az-anyaghoz" title="Permanent link">¶</a></h1>
-<p>Az anyag terjedelméből adandóan apróbb hibák esetenként hiányosságok jelentkezhetnek a laborokban.
-Ha egy ilyennel találkozol és úgy döntesz szeretnél segíteni hallgatótársaidnak, azt a következőkben leírtak alapján tudod megtenni.</p>
-<div class="admonition quote">
-<p class="admonition-title">Plusz pont jegyzet javításért</p>
-<p>Más tantárgyak mintájára itt is szeretnénk plusz pontot adni a jegyzet open-source hozzájárulásaiért.
-Akik a tárgyat jelenleg hallgatják, pontokat kaphatnak hozzájárulásaikérrt.</p>
-<p>A félév során max 3 db plusz pontot lehet szerezni fejenként olyan javításokért, amik a triviális 1-2 betű elgépelésen túl érdemben javítanak a githubon található labor jegyzetek minőségén.
-Pl.: jelentős mennyiségű elgépelés javítása, egyértelműsítések, illusztrációk kiegészítések készítése vagy akár egy teljes kiegészítő jegyzet írása  (természetesen nem azonos pontértékkel).</p>
-<p>Persze a pont nélkül az 1-1 betűs elgépeléseket is szívesen fogadjuk, ami bemelegítésnek is tökéletes.</p>
-</div>
-<h2 id="hibak-jelzese">Hibák jelzése<a class="headerlink" href="#hibak-jelzese" title="Permanent link">¶</a></h2>
-<p>Amennyiben hibát találsz az anyagban, vagy szeretnéd bővíteni, de nem áll módodban javítani, nyithatsz egy issue-t amiben leírod a hibát.</p>
-<ol>
-<li>Nézd meg, hogy valaki nem jelezte-e, amit szeretnél.
-    Gyakran már létező problémákat találnak, amire már van pull request,
-    így mielőtt bármit tennél nézd meg valaki nem előzött-e meg</li>
-<li>Az issues tabon a new issue gombbal hozz létre egy új issue-t.
-    <a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/github-new-issue.png"><img alt="How to create new issue" src="../images/github-new-issue.png"></a></li>
-<li>Lásd el a megfelelő címkékkel<ol>
-<li>A labor típusa (<code>android</code> az androidos laboroknál és <code>web</code> a webes laboroknál)</li>
-<li>A hiba típusa (<code>clarification</code>, <code>typo</code>, <code>illustration</code> vagy <code>notes</code>)</li>
-</ol>
-</li>
-<li>Írd le, hogy mit kéne tartalmaznia a javításnak</li>
-</ol>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Az címe legyen rövid és lényegretörő, pl.: <code>Megfogalmazás pontosítása a 4. laborban</code> vagy <code>A 6. laborban a leírt kód hibásan működik Android 12-n</code></p>
-<p>A issue descriptionjében pedig fejtsd ki, hol található a hiányosság, illetve ha van rá ötleted, hogy lehetne orvosolni ezt.
-Ha ezeken túl még screenshotot is tudsz mellékelni, az nagyban megsegíti a probléma mihamarabbi javítását.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>A github issues nem a laborfeladatok megoldásával kapcsolatos problémák helye, így a "Nem tudom megoldani hogy az értesítés megérkezzen" jellegű problémákat ne itt jelezzétek, erre vannak a laboralkalmak.</p>
-</div>
-<h2 id="valtoztatasok-javaslasa">Változtatások javaslása<a class="headerlink" href="#valtoztatasok-javaslasa" title="Permanent link">¶</a></h2>
-<p>Amennyiben a hozzájárulásod meg tudod valósítani indíts pull requestet</p>
-<ol>
-<li>
-<p>Forkold a repository-t a Githubon jobb felső sarokban található gombbal
-    <a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/github-fork.png"><img alt="fork button" src="../images/github-fork.png"></a></p>
-</li>
-<li>
-<p>Végezd el a változtatásokat.</p>
-<ol>
-<li>
-<p>Hozz létre egy branchet a saját forkodon, amin a változtatásokat el fogod végezni.</p>
-</li>
-<li>
-<p>Ezen a branchen készítsd el a javításokat</p>
-</li>
-<li>
-<p>Ellenőrizd, hogy ne kerüljön bele a commitba olyan file, amit az editor generált (pl.: <code>.idea</code> mappa)
-illetve olyan file aminek nem kéne kikerülnie, pl.: Github Private Access Token</p>
-</li>
-<li>
-<p>Ha kész vagy indíts egy pull requestet a jegyzeteket tartalmazó repó fő ágára.</p>
-</li>
-<li>
-<p>A leírásban részletezd változtatások okát.
-    Ne felejtsd el beleírni a NEPTUN kódod a leírásba, mert így fogjuk tudni megadni a pontokat.</p>
-</li>
-</ol>
-</li>
-<li>
-<p>Valaki, akinek hozzáférése van a repositoryhoz, ellenőrzi a változtatások szükségességét, és elbírálja, hogy valóban bekerülhet az anyagba.</p>
-</li>
-<li>A változtatásokra review-t indítunk és ha kell módosításokat fogunk kérni.</li>
-<li>Ha minden kért változtatás megtörtént, a hozzájárulásod belekerül az anyagba.</li>
-</ol>
-<h2 id="code-style">Code style<a class="headerlink" href="#code-style" title="Permanent link">¶</a></h2>
-<ul>
-<li>Markdown: Mivel az alap spec nem mindig a legtisztábban érthető, a <a href="https://github.com/markdownlint/markdownlint/blob/master/docs/RULES.md">markdownlint szabályai</a> alapján, az néhány kivételével. Ezeket a <code>.markdownlint.yaml</code>-ben találod, ha VSCode-ot használsz automatikusan alkalmazza őket az editor és jelzi ha nem megfelelő amit írsz.</li>
-</ul>
-<p>Ezek a stílusok a tárgyban ajánlott editorokban könnyen beállíthatóak.</p>
-<h3 id="vscode">VSCode<a class="headerlink" href="#vscode" title="Permanent link">¶</a></h3>
-<p>Ajánlott extensionök:</p>
-<ul>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one"><code>yzhang.markdown-all-in-one</code></a>: MD szinkronizált live preview</li>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint"><code>DavidAnson.vscode-markdownlint</code></a>: MD formázás, szabályok stb.</li>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a>: HTML+CSS formázó</li>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens">Error Lens</a>: Kiemeli a hibákat hogy gyorsabben megtaláljuk őket</li>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image">Paste Image</a>: egyszerűsíti a képek beillesztését markdownba</li>
-</ul>
-<p>Az editor beállításához nyisd meg a repo-t a gyökerében VSCode-al. A VSCode fel fogja ajánlani a két markdown extension-t.</p>
-<figure>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/vscode-recommended.png"><img alt="VSCode recommended extensions" src="../images/vscode-recommended.png"></a></p>
-</figure>
-<p>Ha ez megtörtént, nyiss meg egy markdown dokumentumot, és használd a <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span> shortcutot, a command palette megnyitásához.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>A command palette a VSCode parancsaihoz nyújt hozzáférést, autocompleteeli a parancsokat és egy minimális GUI-t is biztosít.</p>
-</div>
-<p>A command palette-be keressük meg a <code>Format Document With...</code> menüpontot és válasszuk ki.
-Ekkor egy almenübe dob az editor és kiválaszthatjuk hogy melyik formázóval formázzuk a MD dokumentumokat.
-Legalul lesz egy <code>Configure Default Formatter</code>, válasszuk ezt.
-Ezután válasszuk a <code>markdownlint</code> extensiont, és készen vagyunk.</p>
-<div class="admonition caution">
-<p class="admonition-title">Megfelelő formatter kiválasztása</p>
-<p>Ne válaszd ki a prettiert formatterként, mert eltöri a szövegbuborékokat.</p>
-</div>
-<p>Ezen felül érdemes lehet bekapcsolni a mentés előtti formázást.</p>
-<p>A <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-comma">,</kbd></span> shortcuttal megnyitjuk a beállításokat, és rákeresünk arra, hogy format on save.
-Itt kipipáljuk a checkboxot és készen vagyunk.</p>
-<p>Ha ehhez nem lenne türelmed, itt a json amit a <code>settings.json</code>-ba illesztve beállítódik minden.</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">"[markdown]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">"editor.defaultFormatter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DavidAnson.vscode-markdownlint"</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<h1 id="github-actions-ismerteto">GitHub Actions ismertető<a class="headerlink" href="#github-actions-ismerteto" title="Permanent link">¶</a></h1>
+<p>A laborfeladatok kiértékelésében a <a href="https://github.com/features/actions">GitHub Actions</a>-re támaszkodunk. Segítségével a git repository-kon műveleteket és programokat tudunk futtatni. Ilyen művelet például a C# kód lefordítása, vagy a beadott kód tesztelése.</p>
+<p>A lefutott kiértékelésről a pull request-ben fogsz értesítést kapni. Ha meg szeretnéd nézni részletesebben a háttérben történteket, vagy például az alkalmazás naplókat, a GitHub felületén az <em>Actions</em> alatt indulhatsz el.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/github-actions-tab.png"><img alt="GitHub Actions a webfelületen" src="../images/github-actions-tab.png"></a></p>
+<p>Az <em>Actions</em> felületén un. <em>Workflow</em>-kat látsz; minden egyes kiértékelés futtatás egy-egy elem lesz itt (tehát historikusan is visszakereshetőek).</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/github-actions-executions-list.png"><img alt="GitHub Actions workflow lista" src="../images/github-actions-executions-list.png"></a></p>
+<p>Ezek közül egyet kiválasztva (pl. a legfelső mindig a legutolsó) láthatod a workflow futásának részleteit. A futás naplójához a bal oldali listában még kattintani kell egyet. Jobb oldalon látható a folyamat teljes naplója.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/github-actions-job-log.png"><img alt="GitHub Actions a job naplója" src="../images/github-actions-job-log.png"></a></p>
+<p>Minden zöld pipa egy-egy sikeres lépést jelent. Ezen lépések nem azonosak a feladatokokkal, hanem a kiértékelés folyamatának lépései lesznek. Ilyen lépés például a környezet előkészítése, pl. a .NET SDK telepítése (minden kiértékelés egy vadiúj környezetben indul, így mindent elő kell készíteni).</p>
+<p>Alapvetően a lépések mindig sikeresek, akkor is, ha a megoldásodban hiba van, mert a kiértékelés erre fel van készítve. Kivételt ez alól csak a <code>neptun.txt</code> hiánya ill. a C# kód lefordítása jelent. Előbbi feltétlenül szükséges, ezért semmilyen folyamatot nem hajtunk végre nélküle. Utóbbi esetében a C# kód fordítása szintén szükséges a továbblépéshez, ezért sikertelenség esetén leáll a folyamat.</p>
+<p>Néha előfordulhat azonban tranziens, időszakos hiba is. Például a .NET környezet letöltése nem sikerül hálózati hiba miatt. Ilyen esetben a futtatást kézzel meg lehet ismételni. Ez persze csak akkor segít, ha tényleg átmeneti hibáról van szó, tehát pl. egy C# fordítási hibán nem fog segíteni. (Ezt a hibaüzenetből illetve a lépés nevéből tudod kideríteni, vagy legalább is megtippelni kellő bizonyossággal.)</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/github-actions-rerun.png"><img alt="GitHub Actions tranziens hiba és újra futtatás" src="../images/github-actions-rerun.png"></a></p>
+<p>A feladat függvényében akár az alkalmazás naplókat is meg tudod nézni itt. Pl. amikor .NET alkalmazást készítesz, az alkalmazást elindítjuk, és minden, amit naplóz, itt megtekinthető.</p>
+<p>Az alábbi például egy Entity Framework-öt használó alkalmazás inicializását mutatja, köztük például a kiadott SQL parancsokat is. Debuggolás közben a Visual Studio <em>Output</em> ablakában is hasonlókat láthatsz. Ez természetesen nagyban függ a konkrét feladattól.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/github-actions-app-log.png"><img alt="GitHub Actions alkalmazás napló" src="../images/github-actions-app-log.png"></a></p>
 <hr>
 <div class="md-source-file">
 <span class="md-source-file__fact"> <span class="md-icon" title="Utolsó frissítés"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -698,8 +492,8 @@ Itt kipipáljuk a checkboxot és készen vagyunk.</p>
 </path>
 </svg>
 </span>
-<span title="2024. február 12. 13:44:52">
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2024. február 12. 13:44:52 CET"><span class="timeago" datetime="2024-02-12T13:44:52+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2024. február 12. 13:44:52 CET">2024-02-12</span>
+<span title="2026. március 20. 11:37:10">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026. március 20. 11:37:10 CET"><span class="timeago" datetime="2026-03-20T11:37:10+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026. március 20. 11:37:10 CET">2026-03-20</span>
 </span>
 </span>
 <span class="md-source-file__fact">
@@ -710,8 +504,8 @@ Itt kipipáljuk a checkboxot és készen vagyunk.</p>
 </svg>
 </span>
 <span>Szerzők</span>
-<nav><a class="md-author" href="https://github.com/tibitoth" rel="noopener noreferrer" target="_blank" title="@Tibor Tóth">
-<img alt="@Tibor Tóth" src="https://avatars.githubusercontent.com/u/8333960?u=d26653213d265ecdceeaf20a896d74f479d35450&amp;v=4?size=72">
+<nav><a class="md-author" href="https://github.com/tibitoth" rel="noopener noreferrer" target="_blank" title="@tibitoth">
+<img alt="@tibitoth" src="https://avatars.githubusercontent.com/tibitoth?size=72">
 </a></nav>
 </span>
 </div>
