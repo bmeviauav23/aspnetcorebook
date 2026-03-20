@@ -1,13 +1,6 @@
 # NagyHF pontrendszer
 
-## Pontszerzési szabályok
-
-* Egy jogcímen csak egyszer szerezhető pont (pl. nem lehet 3 külső osztálykönyvtárral 21 pontot összeszedni), kivéve ahol ezt külön jelezzük
-* Részpontszám nem adható, kivéve, ahol intervallum van megadva
-* Kliensoldali megoldásért nem adható pont
-* A szoftvernek egységes funkcióhalmazt kell nyújtania, különálló, egymáshoz nem kapcsolódó funkciókból álló szoftver nem elfogadható. Azaz különálló tutorialok összefércelését nem díjazzuk.
-
-!!! note "Pontrendszer véglegesítés"
+!!! danger "Pontrendszer véglegesítés"
 
     Jelenleg a 2026. tavaszifélévre nincs véglegesítve a pontrendszer!
     
@@ -16,6 +9,20 @@
     * hallgatóknak kedvező változások (pl. új jogcímek)
     * elírások, megfogalmazásbeli pontosítások javítása
     * ellentmondások feloldása
+
+Az elkészített rendszer egyes képességeire az alábbiak szerint pontok kaphatók. A végső jegy az összpontszámból adódik. A 4-es szintet el nem érő megoldások nem kaphatnak megajánlott jegyet.
+
+| Jegy  | Pont   |
+|-------|--------|
+| 5     | 60+    |
+| 4     | 40-59  |
+
+## Pontszerzési szabályok
+
+* Egy jogcímen csak egyszer szerezhető pont (pl. nem lehet 3 külső osztálykönyvtárral 21 pontot összeszedni), kivéve ahol ezt külön jelezzük
+* Részpontszám nem adható, kivéve, ahol intervallum van megadva
+* Kliensoldali megoldásért nem adható pont
+* A szoftvernek egységes funkcióhalmazt kell nyújtania, különálló, egymáshoz nem kapcsolódó funkciókból álló szoftver nem elfogadható. Azaz különálló tutorialok összefércelését nem díjazzuk.
 
 ## Társadalmi munka
 
