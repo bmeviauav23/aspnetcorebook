@@ -16,7 +16,7 @@
 <link href="../../../css/timeago.css" rel="stylesheet">
 <link href="../../../extra-material-theme.css" rel="stylesheet">
 <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-<link href="../../../assets/stylesheets/extra-style.gbiq4gsw.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+<link href="../../../assets/stylesheets/extra-style.99nzd7qb.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -663,8 +663,8 @@
 <p class="admonition-title">New Project dialogusablak kereső</p>
 <p>A kikereséshez használhatjuk felül a szövegdobozos szűrőt, illetve a legördülő listás szűrőket is (Nyelv: C#, Platform: Windows, Projekttípus: Console)</p>
 </div>
-<p>A sablon konfigurációjánál adjunk meg egy olyan helyet, ahová van írási jogunk. A <em>Place solution and project in the same directory</em> opciót kapcsoljuk be, így nem fog létrejönni egy felesleges mappa a könyvtárszerkezetben. A .NET verziót állítsuk .NET 8-ra.</p>
-<p>Észrevehetjük, hogy az alkalmazás sablonok között sima és (.NET Framework) jelölésűek is vannak. A simák alapvetően a modernebb .NET Core/.NET 5-8 platformot célozzák, a <em>.NET Framework</em> ezekhez képest egy régebbi platform.</p>
+<p>A sablon konfigurációjánál adjunk meg egy olyan helyet, ahová van írási jogunk. A <em>Place solution and project in the same directory</em> opciót kapcsoljuk be, így nem fog létrejönni egy felesleges mappa a könyvtárszerkezetben. A .NET verziót állítsuk .NET 10-re.</p>
+<p>Észrevehetjük, hogy az alkalmazás sablonok között sima és (.NET Framework) jelölésűek is vannak. A simák alapvetően a modernebb .NET Core/.NET 5-10 platformot célozzák, a <em>.NET Framework</em> ezekhez képest egy régebbi platform.</p>
 <ul>
 <li><strong>.NET Core</strong>: a .NET Framework modularizált, modernizált, cross-platform és nyílt forráskódú megvalósítása. Kisebb NuGet csomagokban érhető el a teljes .NET Framework funkcionalitása (Collections, Reflection, XML feldolgozás, stb.).</li>
 <li><strong>.NET Framework</strong>: a „klasszikus”, teljesértékű .NET keretrendszer, out-of-the-box támogatja a legelterjedtebb alkalmazásfejlesztési lehetőségeket. A .NET Core megjelenését követően is támogatott, enterprise környezetekben használatos, ugyanis néhány enterprise technológia elsődlegesen csak ebben támogatott (pl. szerver oldali WCF). Csak Windows-ra telepíthető.</li>
@@ -672,8 +672,8 @@
 </ul>
 <p>Az alábbi elemeket ismertethetjük, mielőtt a kódírásba belekezdünk:</p>
 <ul>
-<li>Rövid áttekintés az IDE-ről: menüsáv, Solution Explorer, Properties, Output, Error List ablakok, ablakozórendszer. Mutassuk meg, hogy drag-n-drop műveletekkel testreszabható a felület, pl. helyezzük a Solution Explorert a képernyő bal oldalára. Ha valaki véletlenül átrendezi az alapértelmezett elrendezést, a menu:Window[Reset Window Layout] lehetőséggel visszaállíthatja.</li>
-<li>A projekt tulajdonságok (menu:jobb klikk[Properties]) oldalán az Application fülön megnézhetjük, hogy az Output type értéke határozza meg, hogy milyen jellegű (konzolos, Windows, osztálykönyvtár) alkalmazást készítünk.</li>
+<li>Rövid áttekintés az IDE-ről: menüsáv, Solution Explorer, Properties, Output, Error List ablakok, ablakozórendszer. Mutassuk meg, hogy drag-n-drop műveletekkel testreszabható a felület, pl. helyezzük a Solution Explorert a képernyő bal oldalára. Ha valaki véletlenül átrendezi az alapértelmezett elrendezést, a <em>Window menü / Reset Window Layout</em> lehetőséggel visszaállíthatja.</li>
+<li>A projekt tulajdonságok (<em>jobb klikk / Properties</em>) oldalán az Application fülön megnézhetjük, hogy az Output type értéke határozza meg, hogy milyen jellegű (konzolos, Windows, osztálykönyvtár) alkalmazást készítünk.</li>
 <li>Mutassuk meg, hogy milyen alapvető szerelvényekre adunk referenciát a projektben!</li>
 <li>Nézzük meg a <code>Program.cs</code> fájl tartalmát és fussuk át a látható elemeket!</li>
 <li>Magyarázzuk el a <code>using</code> és <code>namespace</code> kulcsszavak jelentését, egymáshoz képesti viszonyukat! A névtér értéke egy újonnan létrehozott fájlnál alapértelmezetten Projektnév.Mappaszerkezet alakú, érdemes konvencionálisan ezt követni. Sok hallgatónál nem tiszta, hogy hogyan viszonyul egymáshoz a névtér és a szerelvény fogalma, ezért próbáljuk meg ezt tisztázni!</li>
@@ -690,12 +690,12 @@
 <ul>
 <li>A kódban bármely logikus helyen használható az IntelliSense a <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Space</kbd></span> billentyűkombinációval, ezen kívül alapértelmezetten felugrik kódírás közben is.</li>
 <li>Írjuk be a <code>Console</code> és a <code>.WriteLine()</code> elemeket úgy, hogy gépelés közben az IntelliSense legördülőből válasszuk ki az elemet, majd <span class="keys"><kbd class="key-tab">Tab</kbd></span> billentyűvel véglegesítsük a választást.</li>
-<li>Használjuk a <code>cw</code> code snippetet, amit az IntelliSense is jelez, azaz írjuk be: <code>cw</code> majd nyomjunk kétszer <span class="keys"><kbd class="key-tab">Tab</kbd></span>-ot.</li>
-<li>Ha a <code>Console.ReadLine()</code> helyett <code>Console.Readline()</code>-t írunk, elsőként az IDE azonnal javítja a hibát. Ha ezt a javítást visszavonjuk <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-z">Z</kbd></span>), lehetőségünk van a javításra a <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-period">.</kbd></span> használatával: a fejlesztőeszköz észreveszi, hogy hibát vétettünk, és felkínálja a gyakori megoldásokat.</li>
+<li>Használjuk a <code>cw</code> code snippetet, amit az IntelliSense is jelez, azaz írjuk be: <code>cw</code> majd nyomjunk a <span class="keys"><kbd class="key-tab">Tab</kbd></span>-ot.</li>
+<li>Ha a <code>Console.ReadLine()</code> helyett <code>Console.Readline()</code>-t írunk, elsőként az IDE azonnal javítja a hibát. Ha ezt a javítást visszavonjuk (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-z">Z</kbd></span>), lehetőségünk van a javításra a <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-period">.</kbd></span> használatával: a fejlesztőeszköz észreveszi, hogy hibát vétettünk, és felkínálja a gyakori megoldásokat.</li>
 <li><em>Overload</em>-ok: jelöljük ki a <code>WriteLine</code> hívás nyitó zárójelét, és írjuk be ismét a nyitó zárójelet. Így előjön az overload-ok listája, amik közül a megfelelőt a föl/le iránybillentyűkkel választhatjuk ki. Az overload listát megnyithatjuk úgy is, hogy a zárójelben bárhova írunk egy vessző karaktert. Az overload azt jelenti, hogy ugyanazzal a függvénynévvel több, különböző szignatúrájú metódust is felvehetünk, a megfelelő függvény kiválasztása a megadott paraméterek száma és típusa alapján történik.</li>
 </ul>
-<p>Indítsuk el az alkalmazást! Ehhez a fent található Start lehetőséget használhatjuk, de mondjuk el, hogy ez a menü menu:Debug[Start Debugging] (<span class="keys"><kbd class="key-f5">F5</kbd></span>) lehetőséggel ekvivalens.</p>
-<p>Mutassuk be a <code>for</code> és <code>foreach</code> vezérlési szerkezeteket! A projekt <em>Properties</em> oldalán (kbd:[Alt+Enter] a projekt kijelölése után) adjunk meg a <em>Debug</em> fülön a <em>Start Options</em> blokknál legalább öt tetszőleges parancssori argumentumot (szóközzel elválasztva), pl. kutya alma béka banán ló.</p>
+<p>Indítsuk el az alkalmazást! Ehhez a fent található Start lehetőséget használhatjuk, de mondjuk el, hogy ez a Debug menü / Start Debugging (<span class="keys"><kbd class="key-f5">F5</kbd></span>) lehetőséggel ekvivalens.</p>
+<p>Mutassuk be a <code>for</code> és <code>foreach</code> vezérlési szerkezeteket! A projekt <em>Properties</em> oldalán (<span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span> a projekt kijelölése után) adjunk meg a <em>Debug</em> fülön a <em>Start Options</em> blokknál legalább öt tetszőleges parancssori argumentumot (szóközzel elválasztva), pl. kutya alma béka banán ló.</p>
 <figure>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/csharp1-cmdargs.png"><img alt=".NET projektbeállítások - parancssor" src="../images/csharp1-cmdargs.png"></a>
 <figurecaption>.NET projektbeállítások</figurecaption></p>
@@ -714,14 +714,17 @@
 Amikor a breakpointon megáll az alkalmazás futása, a sor sárga színű lesz.
 Ekkor vigyük az egeret az <code>i</code>, az <code>args</code> és az <code>args.Length</code> elemek felé, és mutassuk meg, hogy láthatjuk az aktuális értékeiket, komplexebb objektumok esetén be tudjuk járni az objektumgráfot.
 A <em>Watch</em> ablakba is írhatunk kifejezéseket, és megmutathatjuk a <em>Locals</em> ablakot is. <span class="keys"><kbd class="key-f10">F10</kbd></span>-zel (vagy a menüsoron a <em>Step Over</em> elemmel) lépjünk tovább, nézzük meg, milyen sorrendben értékelődik ki a <code>for</code> ciklus. Az <span class="keys"><kbd class="key-f5">F5</kbd></span>-tel továbbengedhetjük az alkalmazás futását, majd zárjuk is be.</p>
-<p>Mutassuk meg a Conditional Breakpoint használatát is. Tegyünk még egy breakpointot a másik <code>Console.WriteLine</code>-ra is. menu:Jobb egér gomb az első breakpointon[Conditions…], majd adjuk meg az alábbiakat: <em>Conditional Expression Is true</em> <code>(i == 3)</code>. A másik breakpointon is adjunk meg feltételt: <em>Hit Count = 4</em>. Mindkét alkalommal a 4. elemen (banán) állunk meg. Megjegyezhetjük, hogy a Conditional Breakpoint használatával nem érdemes mellékhatást okozó műveleteket megadni, illetve hogy jelentősen le tudja csökkenteni a debuggolás sebességét.</p>
+<p>Mutassuk meg a Conditional Breakpoint használatát is. Tegyünk még egy breakpointot a másik <code>Console.WriteLine</code>-ra is.
+<em>Jobb egér gomb az első breakpointon / Conditions...</em>, majd adjuk meg az alábbiakat: <em>Conditional Expression Is true</em> <code>(i == 3)</code>.
+A másik breakpointon is adjunk meg feltételt: <em>Hit Count = 4</em>. Mindkét alkalommal a 4. elemen (banán) állunk meg.
+Megjegyezhetjük, hogy a Conditional Breakpoint használatával nem érdemes mellékhatást okozó műveleteket megadni, illetve hogy jelentősen le tudja csökkenteni a debuggolás sebességét.</p>
 <h2 id="tulajdonsagok-property-k">Tulajdonságok (Property-k)<a class="headerlink" href="#tulajdonsagok-property-k" title="Permanent link">¶</a></h2>
-<p>Hozzuk létre a <code>Person</code> adatosztályt! Ehhez menu: jobb katt a projekten[Add &gt; Class], a fájl neve legyen <code>Person</code> (a kiterjesztést automatikusan hozzábiggyeszti a Visual Studio, ha nem adjuk meg).
+<p>Hozzuk létre a <code>Person</code> adatosztályt! Ehhez <em>jobb katt a projekten / Add / Class</em>, a fájl neve legyen <code>Person</code> (a kiterjesztést automatikusan hozzábiggyeszti a Visual Studio, ha nem adjuk meg).
 .NET-ben nincs megkötés arra, hogy a kódokat tartalmazó fájlok és az egyes típusok számossága hogyan viszonyul egymáshoz: lehetséges egy kódfájlba is írnunk a teljes alkalmazás-kódot, illetve egy osztályt is szétdarabolhatunk több fájlra (ehhez a <code>partial</code> kulcsszót használjuk).</p>
 <p>A C# tulajdonság (<em>property</em>) egy szintaktikai édesítőszer, amely egy objektumpéldány (vagy osztály) egy explicit (memóriabeli) vagy implicit (származtatott vagy indirekt) jellemzőjét írja le.
 Egy tulajdonsággal két művelet végezhető: lekérdezés (<em>get</em>) és értékadás (<em>set</em>); ezeknek megadható külön a láthatósága, és a kettő közül elegendő egy implementálása.
 A legtöbb C# szintaktikai édesítőszer a boilerplate kódok írásának elkerülése végett készült, így kevesebb kódolással érjük el ugyanazt az eredményt (sokszor az IL kód nem is változik, gyakorlatilag hasonló a kódgeneráláshoz).</p>
-<p>A <code>Person</code> osztályban hozzuk létre a <code>string Name</code> property-t, <code>name</code> osztályváltozóval (field). Ehhez használjuk a <code>propfull</code> code snippetet (<code>propf</code>, majd <span class="keys"><kbd class="key-tab">Tab</kbd><span>+</span><kbd class="key-tab">Tab</kbd></span>, ezután <span class="keys"><kbd class="key-tab">Tab</kbd></span>-bal lehet lépkedni a módosítandó elemek között):</p>
+<p>A <code>Person</code> osztályban hozzuk létre a <code>string Name</code> property-t, <code>name</code> osztályváltozóval (field). Ehhez használjuk a <code>propfull</code> code snippetet (<code>propf</code>, majd <span class="keys"><kbd class="key-tab">Tab</kbd></span>, ezután <span class="keys"><kbd class="key-tab">Tab</kbd></span>-bal lehet lépkedni a módosítandó elemek között):</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
@@ -848,7 +851,7 @@ Ez egyrészt kényelmes, mert nem kell sokparaméteres konstruktorokkal küzdeni
 <p>Ha az ősosztálynak nincs paraméter nélküli konstruktora (a <code>Person</code> osztálynak nincs), akkor kötelesek vagyunk a gyerek konstruktorban az ősosztály valamelyik konstruktorát meghívni a <code>base</code> kulcsszóval.</p>
 </div>
 <h2 id="objektum-inicializalok">Objektum inicializálók<a class="headerlink" href="#objektum-inicializalok" title="Permanent link">¶</a></h2>
-<p>Az <em>object initializer</em> segítségével az objektum létrehozását (konstruktor hívás) és a property setterek meghívásával történő inicializálását intézhetjük egy füst alatt. 
+<p>Az <em>object initializer</em> segítségével az objektum létrehozását (konstruktor hívás) és a property setterek meghívásával történő inicializálását intézhetjük egy füst alatt.
 Az objektum inicializáló csak konstruktorhívás esetén használható, így pl. factory metódus által gyártott objektumpéldány esetén nem.</p>
 <p>A <code>Main</code> metódusban írhatjuk az alábbi példát:</p>
 <div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span>
@@ -934,8 +937,8 @@ A teljes lista létrehozást és -feltöltés részt cseréljük le az alábbira
 </path>
 </svg>
 </span>
-<span title="2025. március 28. 11:46:02">
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2025. március 28. 11:46:02 CET"><span class="timeago" datetime="2025-03-28T11:46:02+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025. március 28. 11:46:02 CET">2025-03-28</span>
+<span title="2026. május 18. 17:00:36">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026. május 18. 17:00:36 CEST"><span class="timeago" datetime="2026-05-18T17:00:36+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026. május 18. 17:00:36 CEST">2026-05-18</span>
 </span>
 </span>
 <span class="md-source-file__fact">

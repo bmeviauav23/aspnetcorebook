@@ -16,7 +16,7 @@
 <link href="../../../css/timeago.css" rel="stylesheet">
 <link href="../../../extra-material-theme.css" rel="stylesheet">
 <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-<link href="../../../assets/stylesheets/extra-style.gbiq4gsw.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+<link href="../../../assets/stylesheets/extra-style.99nzd7qb.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -741,14 +741,14 @@
 <p>Első lépésként hozzunk létre egy .NET C# konzolalkalmazást: a projektsablon szűrőben válasszuk a C# nyelv - Windows platform - <em>Console</em> projekttípust.
 A szűrt listában válasszuk a <em>Console App</em> sablont (<strong>ne</strong> a .NET Framework-ös legyen). A neve legyen <em>HelloCSharp2</em>.
 A solutiont ne tegyük külön mappába (<em>Place solution and project in the same directory</em> legyen bekapcsolva).
-A megcélzott framework verzió legyen .NET 8.</p>
+A megcélzott framework verzió legyen .NET 10.</p>
 <h3 id="legfelso-szintu-utasitasok-implicit-globalis-nevter-hivatkozasok">Legfelső szintű utasítások, implicit globális névtér-hivatkozások<a class="headerlink" href="#legfelso-szintu-utasitasok-implicit-globalis-nevter-hivatkozasok" title="Permanent link">¶</a></h3>
 <p>Csodálkozzunk rá, hogy a generált projekt mindössze egyetlen érdemi sort tartalmaz.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Hello, World!"</span><span class="p">);</span>
 </code></pre></div>
-<p>C# 10 óta a program belépési pontját adó forrásfájlt jelentősen lerövidíthetjük:</p>
+<p>C# 10 óta (nem .NET 10!) a program belépési pontját adó forrásfájlt jelentősen lerövidíthetjük:</p>
 <ul>
-<li>a fájl tetején lévő using-okat elhagyhatjuk, ha azok implicit hivatkozva vannak. Az implicit hivatkozott using-ok projekttípustól függenek és a <a href="https://docs.microsoft.com/en-us/dotnet/core/project-sdk/overview#implicit-using-directives">dokumentációból</a> olvashatjuk ki</li>
+<li>a fájl tetején lévő using-okat elhagyhatjuk, ha azok implicit hivatkozva vannak. Az implicit hivatkozott using-ok projekttípustól függenek és a <a href="https://docs.microsoft.com/en-us/dotnet/core/project-sdk/overview#implicit-using-directives">dokumentációból</a> olvashatjuk ki, de akár saját magunk is testreszabhajuk ezeket a projekt beállításainál.</li>
 <li>a <code>Main</code> függvényt tartalmazó osztály deklarációját (<code>namespace</code> blokk, <code>class</code> blokk) elhagyhatjuk, ezt a fordító generálja nekünk</li>
 <li>a <code>Main</code> függvény deklarációját szintén generálja a fordító. A metódus neve nem definiált, nem (biztos, hogy) <code>Main</code>. A metódus szignatúrája attól függ, milyen utasításokat adunk meg a forrásfájlban. Például, ha nincs return, akkor <code>void</code> visszatérési értékű. A paramétere viszont mindig <code>string[] args</code>.</li>
 <li>a függvény blokkba nem foglalt kód a generált belépési pont függvény belsejébe kerül. Függvényt is írhatunk, az a belépési pontot tartalmazó generált osztály tagfüggvénye lesz.</li>
@@ -766,7 +766,9 @@ A megcélzott framework verzió legyen .NET 8.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Hello, World!"</span><span class="p">);</span>
 <span class="hll"><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
 </span></code></pre></div>
-<p>Próbáljuk ki a generált projektet mindenféle egyéb változtatás nélkül, fordítás (menu:projekten jobbklikk[Build]) után. Nézzünk bele a kimeneti könyvtárba (menu:projekten jobbklikk[Open Folder in File Explorer], majd menu:bin[Debug &gt; net8.0]): látható, hogy az alkalmazásunkból a fordítás során egy cross-platform bináris (\&lt;projektnév&gt;.dll) és .NET Core v3 óta egy platform specifikus futtatható állomány (Windows esetén \&lt;projektnév&gt;.exe) is generálódik. Kipróbálhatjuk, hogy az exe a szokott módon indítható (pl. duplaklikkel), míg a dll a <code>dotnet</code> paranccsal.</p>
+<p>Próbáljuk ki a generált projektet mindenféle egyéb változtatás nélkül, fordítás (<em>projekten jobbklikk * Build</em>) után.
+Nézzünk bele a kimeneti könyvtárba (<em>projekten jobbklikk / Open Folder in File Explorer</em>), majd a <code>bin\Debug\net10.0</code>): látható, hogy az alkalmazásunkból a fordítás során egy cross-platform bináris (\&lt;projektnév&gt;.dll) és .NET Core v3 óta egy platform specifikus futtatható állomány (Windows esetén \&lt;projektnév&gt;.exe) is generálódik.
+Kipróbálhatjuk, hogy az exe a szokott módon indítható (pl. duplaklikkel), míg a dll a <code>dotnet</code> paranccsal.</p>
 <div class="highlight"><pre><span></span><code>dotnet &lt;projektnév.dll&gt;
 </code></pre></div>
 <div class="admonition tip">
@@ -783,7 +785,7 @@ A megcélzott framework verzió legyen .NET 8.</p>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">AgeInDays</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">365</span><span class="p">;</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">AgeInDogYears</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">AgeInDays</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">365</span><span class="p">;</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">ToString</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span>
-<span class="w">            </span><span class="s">$"{Name} ({Age} | {AgeInDogYears}) [ID: {Id}]"</span><span class="p">;</span>
+<span class="w">        </span><span class="s">$"{Name} ({Age} | {AgeInDogYears}) [ID: {Id}]"</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Az adatmodell az előző órán létrehozotthoz nagyon hasonlít, ennek viszont nincsen explicit konstruktora és a <code>Name</code> és <code>DateOfBirth</code> tulajdonságok publikusan is állíthatók.</p>
@@ -875,7 +877,7 @@ Ezen felül állítsuk be a <code>Dog</code> indexerét, hogy az a <code>Metadat
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Dog</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">//...</span>
-<span class="hll"><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="w">  </span><span class="n">Metadata</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">();</span>
+<span class="hll"><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Metadata</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">();</span>
 </span><span class="hll"><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="k">this</span><span class="p">[</span><span class="kt">string</span><span class="w"> </span><span class="n">key</span><span class="p">]</span>
 </span><span class="hll"><span class="w">    </span><span class="p">{</span>
 </span><span class="hll"><span class="w">        </span><span class="k">get</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Metadata</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
@@ -971,7 +973,7 @@ Ha a <code>Console</code> osztályt referáljuk ilyen módon, lehetőségünk va
 <p>Természetesen a referenciatípusok mind olyan típusok, melyek vehetnek fel <code>null</code> értéket, viszont esetenként jó volna, ha a <code>null</code> értéket egyébként felvenni nem képes típusok is lehetének ilyen értékűek, ezzel pl. jelezvén, hogy egy érték be van-e állítva vagy sem.
 Pl. egy szám esetén a 0 egy konkrét, helyes érték lehet a domain modellünkben, a <code>null</code> viszont azt jelenthetné, hogy nem vett fel értéket.</p>
 <p>Vizsgáljuk meg, hogy a konzolra történő kiíráskor miért lesz az aktuális év <strong>Watson</strong> kutya életkora!
-Valamelyik <code>Console.WriteLine</code> sorhoz vegyünk fel egy töréspontot (<span class="keys"><kbd class="key-f9">F9</kbd></span>), majd debuggolás közben a <strong>Locals</strong> ablakban (debuggolás közben menu:Debug[Windows &gt; Locals]) figyeljük meg az egyes példányok adatait.
+Valamelyik <code>Console.WriteLine</code> sorhoz vegyünk fel egy töréspontot (<span class="keys"><kbd class="key-f9">F9</kbd></span>), majd debuggolás közben a <strong>Locals</strong> ablakban (debuggolás közben <em>Debug menü / Windows / Locals</em>) figyeljük meg az egyes példányok adatait.
 Watsont kinyitva láthatjuk, hogy a turpisság abból fakad, hogy a <code>DateOfBirth</code> adat típusa, a <code>DateTime</code> nem referenciatípus, és alapértelmezés szerinti értéket veszi fel, ami <strong>0001. 01. 01. 00:00:00</strong> - hiszen nem állítottunk be mást.</p>
 <p>Ismeretlen születési dátumú, korú egyedek helyes tárolásához az <code>Age</code> tulajdonság típusát változtassuk <code>int?</code>-re!
 Az <code>int?</code> szintaktikai édesítőszere a <code>Nullable&lt;int&gt;</code>-nek, egy olyan struktúrának, ami egy <code>int</code> értéket tárol, és tárolja, hogy az be van-e állítva vagy sem.
@@ -1022,7 +1024,7 @@ A kifejezést meg kellett változtatnunk, hogy a <code>DateOfBirth</code>-ből v
 </span></code></pre></div>
 <p>Ismét álljunk meg debug során valamelyik <code>WriteLine</code> soron.
 A <strong>Locals</strong> ablakban nézzük meg, hogy a két példány minden adata megegyezik.
-A <strong>Watch</strong> ablakban (debuggolás közben menu:Debug[Windows &gt; Watch &gt; Watch 1]) értékeljük ki a <code>watson == watson2</code> kifejezést.
+A <strong>Watch</strong> ablakban (debuggolás közben <em>Debug menü / Windows / Watch / Watch 1</em>) értékeljük ki a <code>watson == watson2</code> kifejezést.
 Láthatjuk, hogy ez az egyenlőségvizsgálat hamist ad, ami technikailag helyes, mert két különböző memóriaterületről van szó, a referenciák nem ugyanoda mutatnak a memóriában.
 Sok esetben azonban nem ezt szeretnénk, hanem például a dupla rögzítés elkerülésére az adatok alapján történő összehasonlítást, ami érték típusoknál van.
 Referencia típusoknál klasszikusan ezt a <code>GetHashCode</code>, <code>Equals</code> függvények felüldefiniálásával értük el (vagy az <code>IComparable&lt;T&gt;</code>, <code>IComparer&lt;T&gt;</code> interfészre épülő logikákkal).
@@ -1179,8 +1181,8 @@ Fogjuk a <code>Dog</code> osztályt, másoljuk le a kódját, adjunk neki más n
 </path>
 </svg>
 </span>
-<span title="2025. március 28. 11:46:02">
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2025. március 28. 11:46:02 CET"><span class="timeago" datetime="2025-03-28T11:46:02+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025. március 28. 11:46:02 CET">2025-03-28</span>
+<span title="2026. május 18. 17:00:36">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026. május 18. 17:00:36 CEST"><span class="timeago" datetime="2026-05-18T17:00:36+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026. május 18. 17:00:36 CEST">2026-05-18</span>
 </span>
 </span>
 <span class="md-source-file__fact">
