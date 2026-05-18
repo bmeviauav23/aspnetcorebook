@@ -1,4 +1,5 @@
 {
-  "MD013": false,
-  "MD007": { "indent": 4 }
+  "MD013": false, // Disable line length rule
+  "MD033": false, // Disable inline HTML rule
+  "MD007": { "indent": 4 } // Set unordered list indentation to 4 spaces
 }

@@ -9,7 +9,7 @@ authors: kszicsillag,tibitoth
 Első lépésként hozzunk létre egy .NET C# konzolalkalmazást: a projektsablon szűrőben válasszuk a C# nyelv - Windows platform - *Console* projekttípust.
 A szűrt listában válasszuk a *Console App* sablont (**ne** a .NET Framework-ös legyen). A neve legyen *HelloCSharp2*.
 A solutiont ne tegyük külön mappába (*Place solution and project in the same directory* legyen bekapcsolva).
-A megcélzott framework verzió legyen .NET 8.
+A megcélzott framework verzió legyen .NET 10.
 
 ### Legfelső szintű utasítások, implicit globális névtér-hivatkozások
 
@@ -19,9 +19,9 @@ Csodálkozzunk rá, hogy a generált projekt mindössze egyetlen érdemi sort ta
 Console.WriteLine("Hello, World!");
 ```
 
-C# 10 óta a program belépési pontját adó forrásfájlt jelentősen lerövidíthetjük:
+C# 10 óta (nem .NET 10!) a program belépési pontját adó forrásfájlt jelentősen lerövidíthetjük:
 
-* a fájl tetején lévő using-okat elhagyhatjuk, ha azok implicit hivatkozva vannak. Az implicit hivatkozott using-ok projekttípustól függenek és a [dokumentációból](https://docs.microsoft.com/en-us/dotnet/core/project-sdk/overview#implicit-using-directives) olvashatjuk ki
+* a fájl tetején lévő using-okat elhagyhatjuk, ha azok implicit hivatkozva vannak. Az implicit hivatkozott using-ok projekttípustól függenek és a [dokumentációból](https://docs.microsoft.com/en-us/dotnet/core/project-sdk/overview#implicit-using-directives) olvashatjuk ki, de akár saját magunk is testreszabhajuk ezeket a projekt beállításainál.
 * a `Main` függvényt tartalmazó osztály deklarációját (`namespace` blokk, `class` blokk) elhagyhatjuk, ezt a fordító generálja nekünk
 * a `Main` függvény deklarációját szintén generálja a fordító. A metódus neve nem definiált, nem (biztos, hogy) `Main`. A metódus szignatúrája attól függ, milyen utasításokat adunk meg a forrásfájlban. Például, ha nincs return, akkor `void` visszatérési értékű. A paramétere viszont mindig `string[] args`.
 * a függvény blokkba nem foglalt kód a generált belépési pont függvény belsejébe kerül. Függvényt is írhatunk, az a belépési pontot tartalmazó generált osztály tagfüggvénye lesz.
@@ -40,7 +40,9 @@ Console.WriteLine("Hello, World!");
 Console.ReadLine();
 ```
 
-Próbáljuk ki a generált projektet mindenféle egyéb változtatás nélkül, fordítás (menu:projekten jobbklikk\[Build\]) után. Nézzünk bele a kimeneti könyvtárba (menu:projekten jobbklikk\[Open Folder in File Explorer\], majd menu:bin\[Debug \> net8.0\]): látható, hogy az alkalmazásunkból a fordítás során egy cross-platform bináris (\<projektnév\>.dll) és .NET Core v3 óta egy platform specifikus futtatható állomány (Windows esetén \<projektnév\>.exe) is generálódik. Kipróbálhatjuk, hogy az exe a szokott módon indítható (pl. duplaklikkel), míg a dll a `dotnet` paranccsal.
+Próbáljuk ki a generált projektet mindenféle egyéb változtatás nélkül, fordítás (*projekten jobbklikk * Build*) után.
+Nézzünk bele a kimeneti könyvtárba (*projekten jobbklikk / Open Folder in File Explorer*), majd a `bin\Debug\net10.0`): látható, hogy az alkalmazásunkból a fordítás során egy cross-platform bináris (\<projektnév\>.dll) és .NET Core v3 óta egy platform specifikus futtatható állomány (Windows esetén \<projektnév\>.exe) is generálódik.
+Kipróbálhatjuk, hogy az exe a szokott módon indítható (pl. duplaklikkel), míg a dll a `dotnet` paranccsal.
 
 ``` cmd
 dotnet <projektnév.dll>
@@ -61,7 +63,7 @@ public class Dog
     public int Age => AgeInDays / 365;
     public int AgeInDogYears => AgeInDays * 7 / 365;
     public override string ToString() =>
-            $"{Name} ({Age} | {AgeInDogYears}) [ID: {Id}]";
+        $"{Name} ({Age} | {AgeInDogYears}) [ID: {Id}]";
 }
 ```
 
@@ -177,7 +179,7 @@ Ezen felül állítsuk be a `Dog` indexerét, hogy az a `Metadata` indexelését
 public class Dog
 {
     //...
-    public Dictionary<string, object>  Metadata { get; } = new();
+    public Dictionary<string, object> Metadata { get; } = new();
     public object this[string key]
     {
         get => Metadata[key];
@@ -295,7 +297,7 @@ Természetesen a referenciatípusok mind olyan típusok, melyek vehetnek fel `nu
 Pl. egy szám esetén a 0 egy konkrét, helyes érték lehet a domain modellünkben, a `null` viszont azt jelenthetné, hogy nem vett fel értéket.
 
 Vizsgáljuk meg, hogy a konzolra történő kiíráskor miért lesz az aktuális év **Watson** kutya életkora!
-Valamelyik `Console.WriteLine` sorhoz vegyünk fel egy töréspontot (++f9++), majd debuggolás közben a **Locals** ablakban (debuggolás közben menu:Debug\[Windows \> Locals\]) figyeljük meg az egyes példányok adatait.
+Valamelyik `Console.WriteLine` sorhoz vegyünk fel egy töréspontot (++f9++), majd debuggolás közben a **Locals** ablakban (debuggolás közben *Debug menü / Windows / Locals*) figyeljük meg az egyes példányok adatait.
 Watsont kinyitva láthatjuk, hogy a turpisság abból fakad, hogy a `DateOfBirth` adat típusa, a `DateTime` nem referenciatípus, és alapértelmezés szerinti értéket veszi fel, ami **0001. 01. 01. 00:00:00** - hiszen nem állítottunk be mást.
 
 Ismeretlen születési dátumú, korú egyedek helyes tárolásához az `Age` tulajdonság típusát változtassuk `int?`-re!
@@ -358,7 +360,7 @@ var watson2 = new Dog { Name = watson.Name };
 
 Ismét álljunk meg debug során valamelyik `WriteLine` soron.
 A **Locals** ablakban nézzük meg, hogy a két példány minden adata megegyezik.
-A **Watch** ablakban (debuggolás közben menu:Debug\[Windows \> Watch \> Watch 1\]) értékeljük ki a `watson == watson2` kifejezést.
+A **Watch** ablakban (debuggolás közben *Debug menü / Windows / Watch / Watch 1*) értékeljük ki a `watson == watson2` kifejezést.
 Láthatjuk, hogy ez az egyenlőségvizsgálat hamist ad, ami technikailag helyes, mert két különböző memóriaterületről van szó, a referenciák nem ugyanoda mutatnak a memóriában.
 Sok esetben azonban nem ezt szeretnénk, hanem például a dupla rögzítés elkerülésére az adatok alapján történő összehasonlítást, ami érték típusoknál van.
 Referencia típusoknál klasszikusan ezt a `GetHashCode`, `Equals` függvények felüldefiniálásával értük el (vagy az `IComparable<T>`, `IComparer<T>` interfészre épülő logikákkal).

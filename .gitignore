@@ -394,6 +394,8 @@ fabric.properties
 
 .vscode/*
 !.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
 *.code-workspace
 
 # Local History for Visual Studio Code

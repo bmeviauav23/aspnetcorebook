@@ -20,9 +20,9 @@ Hozzunk létre egy új C# Console Application-t! Ehhez keressük ki a sablonok k
 !!! tip "New Project dialogusablak kereső"
     A kikereséshez használhatjuk felül a szövegdobozos szűrőt, illetve a legördülő listás szűrőket is (Nyelv: C#, Platform: Windows, Projekttípus: Console)
 
-A sablon konfigurációjánál adjunk meg egy olyan helyet, ahová van írási jogunk. A *Place solution and project in the same directory* opciót kapcsoljuk be, így nem fog létrejönni egy felesleges mappa a könyvtárszerkezetben. A .NET verziót állítsuk .NET 8-ra.
+A sablon konfigurációjánál adjunk meg egy olyan helyet, ahová van írási jogunk. A *Place solution and project in the same directory* opciót kapcsoljuk be, így nem fog létrejönni egy felesleges mappa a könyvtárszerkezetben. A .NET verziót állítsuk .NET 10-re.
 
-Észrevehetjük, hogy az alkalmazás sablonok között sima és (.NET Framework) jelölésűek is vannak. A simák alapvetően a modernebb .NET Core/.NET 5-8 platformot célozzák, a *.NET Framework* ezekhez képest egy régebbi platform.
+Észrevehetjük, hogy az alkalmazás sablonok között sima és (.NET Framework) jelölésűek is vannak. A simák alapvetően a modernebb .NET Core/.NET 5-10 platformot célozzák, a *.NET Framework* ezekhez képest egy régebbi platform.
 
 * **.NET Core**: a .NET Framework modularizált, modernizált, cross-platform és nyílt forráskódú megvalósítása. Kisebb NuGet csomagokban érhető el a teljes .NET Framework funkcionalitása (Collections, Reflection, XML feldolgozás, stb.).
 * **.NET Framework**: a „klasszikus”, teljesértékű .NET keretrendszer, out-of-the-box támogatja a legelterjedtebb alkalmazásfejlesztési lehetőségeket. A .NET Core megjelenését követően is támogatott, enterprise környezetekben használatos, ugyanis néhány enterprise technológia elsődlegesen csak ebben támogatott (pl. szerver oldali WCF). Csak Windows-ra telepíthető.
@@ -30,8 +30,8 @@ A sablon konfigurációjánál adjunk meg egy olyan helyet, ahová van írási j
 
 Az alábbi elemeket ismertethetjük, mielőtt a kódírásba belekezdünk:
 
-* Rövid áttekintés az IDE-ről: menüsáv, Solution Explorer, Properties, Output, Error List ablakok, ablakozórendszer. Mutassuk meg, hogy drag-n-drop műveletekkel testreszabható a felület, pl. helyezzük a Solution Explorert a képernyő bal oldalára. Ha valaki véletlenül átrendezi az alapértelmezett elrendezést, a menu:Window\[Reset Window Layout\] lehetőséggel visszaállíthatja.
-* A projekt tulajdonságok (menu:jobb klikk\[Properties\]) oldalán az Application fülön megnézhetjük, hogy az Output type értéke határozza meg, hogy milyen jellegű (konzolos, Windows, osztálykönyvtár) alkalmazást készítünk.
+* Rövid áttekintés az IDE-ről: menüsáv, Solution Explorer, Properties, Output, Error List ablakok, ablakozórendszer. Mutassuk meg, hogy drag-n-drop műveletekkel testreszabható a felület, pl. helyezzük a Solution Explorert a képernyő bal oldalára. Ha valaki véletlenül átrendezi az alapértelmezett elrendezést, a *Window menü / Reset Window Layout* lehetőséggel visszaállíthatja.
+* A projekt tulajdonságok (*jobb klikk / Properties*) oldalán az Application fülön megnézhetjük, hogy az Output type értéke határozza meg, hogy milyen jellegű (konzolos, Windows, osztálykönyvtár) alkalmazást készítünk.
 * Mutassuk meg, hogy milyen alapvető szerelvényekre adunk referenciát a projektben!
 * Nézzük meg a `Program.cs` fájl tartalmát és fussuk át a látható elemeket!
 * Magyarázzuk el a `using` és `namespace` kulcsszavak jelentését, egymáshoz képesti viszonyukat! A névtér értéke egy újonnan létrehozott fájlnál alapértelmezetten Projektnév.Mappaszerkezet alakú, érdemes konvencionálisan ezt követni. Sok hallgatónál nem tiszta, hogy hogyan viszonyul egymáshoz a névtér és a szerelvény fogalma, ezért próbáljuk meg ezt tisztázni!
@@ -51,13 +51,13 @@ Az IntelliSense-t demonstrálhatjuk az alábbi módon:
 
 * A kódban bármely logikus helyen használható az IntelliSense a ++ctrl+space++ billentyűkombinációval, ezen kívül alapértelmezetten felugrik kódírás közben is.
 * Írjuk be a `Console` és a `.WriteLine()` elemeket úgy, hogy gépelés közben az IntelliSense legördülőből válasszuk ki az elemet, majd ++tab++ billentyűvel véglegesítsük a választást.
-* Használjuk a `cw` code snippetet, amit az IntelliSense is jelez, azaz írjuk be: `cw` majd nyomjunk kétszer ++tab++-ot.
-* Ha a `Console.ReadLine()` helyett `Console.Readline()`-t írunk, elsőként az IDE azonnal javítja a hibát. Ha ezt a javítást visszavonjuk ++ctrl+z++), lehetőségünk van a javításra a ++ctrl+period++ használatával: a fejlesztőeszköz észreveszi, hogy hibát vétettünk, és felkínálja a gyakori megoldásokat.
+* Használjuk a `cw` code snippetet, amit az IntelliSense is jelez, azaz írjuk be: `cw` majd nyomjunk a ++tab++-ot.
+* Ha a `Console.ReadLine()` helyett `Console.Readline()`-t írunk, elsőként az IDE azonnal javítja a hibát. Ha ezt a javítást visszavonjuk (++ctrl+z++), lehetőségünk van a javításra a ++ctrl+period++ használatával: a fejlesztőeszköz észreveszi, hogy hibát vétettünk, és felkínálja a gyakori megoldásokat.
 * *Overload*-ok: jelöljük ki a `WriteLine` hívás nyitó zárójelét, és írjuk be ismét a nyitó zárójelet. Így előjön az overload-ok listája, amik közül a megfelelőt a föl/le iránybillentyűkkel választhatjuk ki. Az overload listát megnyithatjuk úgy is, hogy a zárójelben bárhova írunk egy vessző karaktert. Az overload azt jelenti, hogy ugyanazzal a függvénynévvel több, különböző szignatúrájú metódust is felvehetünk, a megfelelő függvény kiválasztása a megadott paraméterek száma és típusa alapján történik.
 
-Indítsuk el az alkalmazást! Ehhez a fent található Start lehetőséget használhatjuk, de mondjuk el, hogy ez a menü menu:Debug\[Start Debugging\] (++f5++) lehetőséggel ekvivalens.
+Indítsuk el az alkalmazást! Ehhez a fent található Start lehetőséget használhatjuk, de mondjuk el, hogy ez a Debug menü / Start Debugging (++f5++) lehetőséggel ekvivalens.
 
-Mutassuk be a `for` és `foreach` vezérlési szerkezeteket! A projekt *Properties* oldalán (kbd:\[Alt+Enter\] a projekt kijelölése után) adjunk meg a *Debug* fülön a *Start Options* blokknál legalább öt tetszőleges parancssori argumentumot (szóközzel elválasztva), pl. kutya alma béka banán ló.
+Mutassuk be a `for` és `foreach` vezérlési szerkezeteket! A projekt *Properties* oldalán (++alt+enter++ a projekt kijelölése után) adjunk meg a *Debug* fülön a *Start Options* blokknál legalább öt tetszőleges parancssori argumentumot (szóközzel elválasztva), pl. kutya alma béka banán ló.
 
 <figure markdown>
 ![.NET projektbeállítások - parancssor](images/csharp1-cmdargs.png)
@@ -83,18 +83,21 @@ Amikor a breakpointon megáll az alkalmazás futása, a sor sárga színű lesz.
 Ekkor vigyük az egeret az `i`, az `args` és az `args.Length` elemek felé, és mutassuk meg, hogy láthatjuk az aktuális értékeiket, komplexebb objektumok esetén be tudjuk járni az objektumgráfot.
 A *Watch* ablakba is írhatunk kifejezéseket, és megmutathatjuk a *Locals* ablakot is. ++f10++-zel (vagy a menüsoron a *Step Over* elemmel) lépjünk tovább, nézzük meg, milyen sorrendben értékelődik ki a `for` ciklus. Az ++f5++-tel továbbengedhetjük az alkalmazás futását, majd zárjuk is be.
 
-Mutassuk meg a Conditional Breakpoint használatát is. Tegyünk még egy breakpointot a másik `Console.WriteLine`-ra is. menu:Jobb egér gomb az első breakpointon\[Conditions…\], majd adjuk meg az alábbiakat: *Conditional Expression Is true* `(i == 3)`. A másik breakpointon is adjunk meg feltételt: *Hit Count = 4*. Mindkét alkalommal a 4. elemen (banán) állunk meg. Megjegyezhetjük, hogy a Conditional Breakpoint használatával nem érdemes mellékhatást okozó műveleteket megadni, illetve hogy jelentősen le tudja csökkenteni a debuggolás sebességét.
+Mutassuk meg a Conditional Breakpoint használatát is. Tegyünk még egy breakpointot a másik `Console.WriteLine`-ra is.
+*Jobb egér gomb az első breakpointon / Conditions...*, majd adjuk meg az alábbiakat: *Conditional Expression Is true* `(i == 3)`.
+A másik breakpointon is adjunk meg feltételt: *Hit Count = 4*. Mindkét alkalommal a 4. elemen (banán) állunk meg.
+Megjegyezhetjük, hogy a Conditional Breakpoint használatával nem érdemes mellékhatást okozó műveleteket megadni, illetve hogy jelentősen le tudja csökkenteni a debuggolás sebességét.
 
 ## Tulajdonságok (Property-k)
 
-Hozzuk létre a `Person` adatosztályt! Ehhez menu: jobb katt a projekten\[Add \> Class\], a fájl neve legyen `Person` (a kiterjesztést automatikusan hozzábiggyeszti a Visual Studio, ha nem adjuk meg).
+Hozzuk létre a `Person` adatosztályt! Ehhez *jobb katt a projekten / Add / Class*, a fájl neve legyen `Person` (a kiterjesztést automatikusan hozzábiggyeszti a Visual Studio, ha nem adjuk meg).
 .NET-ben nincs megkötés arra, hogy a kódokat tartalmazó fájlok és az egyes típusok számossága hogyan viszonyul egymáshoz: lehetséges egy kódfájlba is írnunk a teljes alkalmazás-kódot, illetve egy osztályt is szétdarabolhatunk több fájlra (ehhez a `partial` kulcsszót használjuk).
 
 A C# tulajdonság (*property*) egy szintaktikai édesítőszer, amely egy objektumpéldány (vagy osztály) egy explicit (memóriabeli) vagy implicit (származtatott vagy indirekt) jellemzőjét írja le.
 Egy tulajdonsággal két művelet végezhető: lekérdezés (*get*) és értékadás (*set*); ezeknek megadható külön a láthatósága, és a kettő közül elegendő egy implementálása.
 A legtöbb C# szintaktikai édesítőszer a boilerplate kódok írásának elkerülése végett készült, így kevesebb kódolással érjük el ugyanazt az eredményt (sokszor az IL kód nem is változik, gyakorlatilag hasonló a kódgeneráláshoz).
 
-A `Person` osztályban hozzuk létre a `string Name` property-t, `name` osztályváltozóval (field). Ehhez használjuk a `propfull` code snippetet (`propf`, majd ++tab+tab++, ezután ++tab++-bal lehet lépkedni a módosítandó elemek között):
+A `Person` osztályban hozzuk létre a `string Name` property-t, `name` osztályváltozóval (field). Ehhez használjuk a `propfull` code snippetet (`propf`, majd ++tab++, ezután ++tab++-bal lehet lépkedni a módosítandó elemek között):
 
 ``` csharp
 public class Person
@@ -269,7 +272,7 @@ Ez egyrészt kényelmes, mert nem kell sokparaméteres konstruktorokkal küzdeni
 
 ## Objektum inicializálók
 
-Az *object initializer* segítségével az objektum létrehozását (konstruktor hívás) és a property setterek meghívásával történő inicializálását intézhetjük egy füst alatt. 
+Az *object initializer* segítségével az objektum létrehozását (konstruktor hívás) és a property setterek meghívásával történő inicializálását intézhetjük egy füst alatt.
 Az objektum inicializáló csak konstruktorhívás esetén használható, így pl. factory metódus által gyártott objektumpéldány esetén nem.
 
 A `Main` metódusban írhatjuk az alábbi példát:
