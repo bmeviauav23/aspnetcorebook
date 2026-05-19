@@ -12,18 +12,18 @@ A gyakorlat kezdetén klónozzuk le a [kiinduló projektet](https://github.com/b
 git clone https://github.com/bmeviauav23/Linq-lab.git
 ```
 
-Nyissuk meg Visual Studio-ban a *HelloLinq.sln* solution fájlt.
+Nyissuk meg Visual Studio-ban a *HelloLinq.slnx* solution fájlt.
 
 Megnyitás után tekintsük át a kiinduló projektben levő fájlokat:
 
-* **Program.cs**: a legfelső szintű kódot tartalmazó osztály. Található benne egy `Dogs` változó, ami a `Dog` osztály statikus `Repository` tulajdonságába hív át.
+* **Program.cs**: a legfelső szintű kódot tartalmazó osztály. Található benne egy `Dogs` változó, ami a `DogRepository` osztály statikus `Dogs` tulajdonságába hív át.
 * **Dog.cs**: a korábbi gyakorlatokon használt adatmodell (apróbb módosításokkal).
-    * Bekerült egy `Siblings` tulajdonság, a `ToString` pedig kiírja a kutyához tartozó testvérek számát is (ehhez a `TrimPad` bővítő metódust használja).
+    * Bekerült egy `Siblings` tulajdonság, a `ToString` pedig kiírja a kutyához tartozó testvérek számát is.
+* **DogRepository.cs**: a kutyák adatait tároló osztály. A `Repository` tulajdonság egy `Dictionary<int, Dog>` típusú adattároló, ahol a kulcs a kutya azonosítója, az érték pedig maga a kutya objektum.
     * A statikus `Repository` tulajdonság mögött egy lustán inicializált `Lazy<T> RepositoryHolder` található, ami egy megfelelően formázott bemeneti CSV fájlból elkészíti számunkra az adatmodellt, amivel a későbbiekben dolgozunk. Ennek implementációját elég a gyakorlat végén megnézni. Az `Import` és `Export` függvények a kutyák sorosítását végzik el mindkét irányban.
-* **Extensions/StringExtensions.cs**: ez az osztály tartalmaz egy segédmetódust a formázott kiíráshoz. A `Dog` `ToString` metódusa használja fel. A bővítő metódusos részben lesz jelentősége.
 * **dogs.csv**: egy pontosvesszővel tagolt adathalmaz, amelyben 100 darab előre felvett kutya adata található. Innen puskázhatunk, ha ellenőrizni akarjuk, hogy helyesek-e a programunk eredményei.
 
-A kiinduló projektben a globális implicit névtérhivatkozások ki vannak kapcsolva. A **csproj** fájlban megnézhetjük (menu:jobb klikk a projekten\[Edit Project File\]):
+A kiinduló projektben a globális implicit névtérhivatkozások ki vannak kapcsolva. A **csproj** fájlban megnézhetjük:
 
 ``` xml
 <ImplicitUsings>disable</ImplicitUsings>
@@ -168,13 +168,15 @@ var dogFunc =
 
 Debugger-rel ellenőrizhetjük, hogy a `dogFunc` valódi típusa `Func<Dog, bool>` lesz.
 
-## IEnumerable\<T\> bővítő metódusok
+## `IEnumerable<T>` bővítő metódusok
+
+### Segédosztály
 
 Vigyük tovább az általánosítást.
 Írjunk olyan logikákat, mely nem csak kutyák listájára, hanem bármilyen felsorolható (enumerálható) kollekcióra működik.
 Írjunk `IEnumerable<T>` típuson működő segédfüggvényeket.
 
-Hozzunk létre egy `EnumerableExtensions` (I betű nélkül, az ugyanis interfészre utal) nevű fájlt az `Extensions` mappában!
+Hozzunk létre egy `Extensions` nevű mappát a projektünkben, majd ebben egy `EnumerableExtensions.cs` fájlt (I betű nélkül, az ugyanis interfészre utal).
 Elsőként valósítsuk meg az összegző logikát.
 
 ``` csharp
@@ -212,6 +214,8 @@ Console.WriteLine(
 string searchText;
 ```
 
+### Segédosztályok helyett bővítő metódusok
+
 A segédfüggvények hátránya, hogy ismernünk kell a segédosztály nevét.
 Továbbá jobb lenne, ha a kollekción közvetlenül hívhatnánk az összegző függvényt.
 Erre megoldás a bővítő metódus.
@@ -225,9 +229,9 @@ A bővítő metódusok:
 Az első paraméter elé tegyük be a `this` jelölőt.
 
 ``` csharp hl_lines="2"
-public static int Sum<T> (
-    this IEnumerable<T>  source,
-    Func<T, int>  sumSelector)
+public static int Sum<T>(
+    this IEnumerable<T> source,
+    Func<T, int> sumSelector)
     {
         // ...
     }
@@ -295,32 +299,65 @@ Console.WriteLine(
     $"{Dogs.Min(d => d.Age ?? 0)} | {Dogs.Max(d => d.Age ?? 0)}");
 ```
 
-!!! note "StringExtensions.cs"
-    A `StringExtensions` osztályban egy lambdaként megvalósított bővítő metódust láthatunk, ami egy szöveget adott hosszra (szélességre) egészít ki szóközökkel. A függvényt a `Dog` `ToString` metódusa használja fel.
+### Extension members
+
+C# 14 verziótól kezdve a bővítő metódusok mellett bővítő property-ket és operátorokat is definiálhatunk [extension members](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) szintaxis segítségével. Sőt az osztályok statikus tagjait is bővíthetjük, nem csak példánytagokat.
+
+A bővítő metódus `static` módosítója és a paraméter `this` módosító kombinációja helyett extension member-t definiálhatunk a következő szintaxissal egy statikus osztályban:
+
+``` csharp hl_lines="3 5"
+public static class EnumerableExtensions
+{
+    extension<T>(IEnumerable<T> source) //(1)
+    {
+        public int Sum(Func<T, int> sumSelector) //(2)
+        {
+            var result = 0;
+            foreach (var elem in source)
+            {
+                result += sumSelector(elem);
+            }
+            return result;
+        }
+
+        // ...
+    }
+}
+```
+
+1. Az `extension<T>(IEnumerable<T> source)` jelöli, hogy a `source` paraméterrel rendelkező `IEnumerable<T>` típuson definiálunk extension member-eket, ahol `T` egy általános típusparaméter.
+2. Az `extension` blokkban definiált `Sum` metódus egy extension member, amely a `source` paraméterként megadott `IEnumerable<T>` típusú objektumon lesz elérhető.
+    * Vegyük észre, hogy nincs szükség már `static` módosítóra a `Sum` metódusnál
+    * a `source` paraméter sem `this`-el van jelölve, mivel az extension member-ek esetén ez implicit módon értendő.
+
+Ezzel az `extension` blokk szintaxissal egyszerűbbé válik a bővítő tagok definiálása, és már nem csak metódusokat, hanem property-ket és operátorokat vagy statikus tagokat is létrehozhatunk extension member-ként.
 
 ## Gyakori lekérdező műveletek, yield return
 
 Gyakran előfordul, hogy egy listát szűrni vagy projektálni szeretnénk. Írjunk saját generátort ezekhez a műveletekhez is az `EnumerableExtensions`-be:
 
 ``` csharp
-public static IEnumerable<T> Where<T>(
-    this IEnumerable<T>  source, Predicate<T>  predicate)
+extension<T>(IEnumerable<T> source)
 {
-    foreach (var elem in source)
+    //...
+
+    public IEnumerable<T> Where(Predicate<T> predicate)
     {
-        if (predicate(elem))
+        foreach (var elem in source)
         {
-            yield return elem;
+            if (predicate(elem))
+            {
+                yield return elem;
+            }
         }
     }
-}
 
-public static IEnumerable<TValue> Select<T, TValue>(
-    this IEnumerable<T>  source, Func<T, TValue> selector)
-{
-    foreach (var elem in source)
+    public IEnumerable<TValue> Select<TValue>(Func<T, TValue> selector)
     {
-        yield return selector(elem);
+        foreach (var elem in source)
+        {
+            yield return selector(elem);
+        }
     }
 }
 ```
@@ -337,11 +374,19 @@ foreach (var text in Dogs
 ```
 
 !!! tip "A yield return haszna"
-    A `yield return` egy hasznos eszköz, ha IEnumerable-t kell produkálnunk visszatérési értékként. Segítségével mindig csak akkor állítjuk elő a következő elemet, amikor a hívó kéri. A működését debuggerrel is figyeljük meg: tegyünk breakpointot a két `yield return` sorra, majd ++f10++-zel kövessük végig, ahogy a `foreach` elkéri a `Select`-től a következő elemet, ami emiatt elkéri a `Where`-től, majd újraindul a ciklus. A hívások állapotgépként működnek, a következő meghíváskor onnan folytatódnak, ahonnan az előző `yield return`-nél kiléptünk.
+    A `yield return` egy hasznos eszköz, ha `IEnumerable`-t kell produkálnunk visszatérési értékként.
+    Segítségével mindig csak akkor állítjuk elő a következő elemet, amikor a hívó kéri.
+    A működését debuggerrel is figyeljük meg: tegyünk breakpointot a két `yield return` sorra, majd ++f10++-zel kövessük végig, ahogy a `foreach` elkéri a `Select`-től a következő elemet, ami emiatt elkéri a `Where`-től, majd újraindul a ciklus.
+    A hívások állapotgépként működnek, a következő meghíváskor onnan folytatódnak, ahonnan az előző `yield return`-nél kiléptünk.
 
-Nem nagy meglepetés, hogy az általunk megírt `Sum`, `Average` (melyek egyedi visszatérésűek), `Select` és `Where` (amik szekvenciális visszatérésűek, generátorok) metódusok mind a .NET keretrendszer részét képezik (a [`System.Linq.Enumerable`](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable) statikus osztályban definiált bővítő metódusok). A **LINQ** — **L**anguage **IN**tegrated **Q**uery — ezeket a műveleteket teszi lehetővé `IEnumerable` interfészt megvalósító objektumokon. A LINQ függvények bővítő metódusként lettek hozzáadva meglevő funkcionalitáshoz (kollekciókhoz, lekérdezésekhez), sőt, külső library-k is adnak saját LINQ bővítő metódusokat.
+Nem nagy meglepetés, hogy az általunk megírt `Sum`, `Average` (melyek egyedi visszatérésűek), `Select` és `Where` (amik szekvenciális visszatérésűek, generátorok) metódusok mind a .NET keretrendszer részét képezik (a [`System.Linq.Enumerable`](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable) statikus osztályban definiált bővítő metódusok).
+A **LINQ** — **L**anguage **IN**tegrated **Q**uery — ezeket a műveleteket teszi lehetővé `IEnumerable` interfészt megvalósító objektumokon.
+A LINQ függvények bővítő metódusként lettek hozzáadva meglevő funkcionalitáshoz (kollekciókhoz, lekérdezésekhez), sőt, külső library-k is adnak saját LINQ bővítő metódusokat.
 
-Cseréljük le a `Program.cs`-ben a `using HelloLinq.Extensions.Enumerable` hivatkozást `using System.Linq`-re: az általunk megírt kód továbbra is ugyanazt az eredményt produkálja! Nézzük meg, hogy hol vannak definiálva ezek a függvények a keretrendszeren belül: a kurzort tegyük a kódban oda, ahol valamelyik korábban megírt függvényünket hívnánk, majd nyomjunk ++f12++-t. Próbáljuk ki, hogy továbbra is az elvárt módon működik-e a programunk.
+Cseréljük le a `Program.cs`-ben a `using HelloLinq.Extensions.Enumerable` hivatkozást `using System.Linq`-re: az általunk megírt kód továbbra is ugyanazt az eredményt produkálja!
+Nézzük meg, hogy hol vannak definiálva ezek a függvények a keretrendszeren belül: a kurzort tegyük a kódban oda, ahol valamelyik korábban megírt függvényünket hívnánk, majd nyomjunk ++f12++-t.
+
+Próbáljuk ki, hogy továbbra is az elvárt módon működik-e a programunk.
 
 !!! tip "Implicit usings"
     A névtércsere helyett bekapcsolhatjuk a globális implicit névtér funkciót, mert a `System.Linq` névtér is egy implicit hivatkozott névtér. Ehhez a projektfájlban az `<ImplicitUsings>disable</ImplicitUsings>` beállítást írjuk át `enable`-re, majd a `using HelloLinq` -en kívül minden névtérhivatkozást töröljünk a `Program.cs`-ből.
@@ -433,7 +478,7 @@ A két szintaxist szokás ötvözni is, jellemzően akkor, ha query szintaxisban
 Ezen az órán memóriabeli adatforrásokkal dolgoztunk (konkrétan a `Dogs` nevű `Dictionary<,>` típusú változóval), a LINQ operátorok közül a memóriabeli listákon dolgozókat használtuk, melyeket az `IEnumerable<>` interfészre biggyesztettek rá bővítő metódusként.
 Ezt a LINQ API-t teljes nevén *LINQ-to-Objects*nek hívják, de gyakran csak LINQ-ként hivatkozzák.
 
-## Kitekintő: Expression\<\>, LINQ providerek
+## Kitekintő: `Expression<>`, LINQ providerek
 
 Vegyük az alábbi nagyon egyszerű delegate-et és ennek `Expression<>`-ös párját.
 

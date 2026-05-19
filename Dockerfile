@@ -31,4 +31,4 @@ ENTRYPOINT []
 # (to build the docs without serve: just override the cmd with "mkdocs build" when
 # executing docker run. This can be used when runnig this docker image as github action
 # in the CI pipeline)
-CMD mkdocs serve --dev-addr=0.0.0.0:8000
+CMD mkdocs serve --dev-addr=0.0.0.0:8000 --livereload
