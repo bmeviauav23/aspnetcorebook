@@ -566,6 +566,85 @@ public ActionResult Delete(int id)
 Próbáljuk kitörölni az újonnan felvett terméket Swaggerből/Fiddler-ből/Postman-ből (*DELETE* igés kérés az `api/products/<új id>` címre, üres törzzsel).
 Sikerülnie kell, mert még nincs rá idegen kulcs hivatkozás.
 
+## Műveletenkénti DTO típusok
+
+Ahogy korábban is említettük, gyakori, hogy külön DTO-kat hozunk létre művelet típusonként, pl. `CreateProductRequest`, `UpdateProductRequest` stb., amik a műveletek igényei szerint tartalmazzák az adatokat.
+Ezzel elkerülhető az a helyzet, hogy egy művelet számára irreleváns adatok is bekerüljenek a DTO-ba, illetve hogy egy művelet véletlenül módosíthatóvá tegye azokat az adatokat, amiket egy másik műveletnek szántunk.
+
+Továbbá az is megfontolandó, hogy használunk-e egyáltalán AutoMappert a DTO -> Entitás leképezéshez, vagy inkább kézzel írjuk meg a leképező kódot, hogy explicit látszódjon minden értékadás, és ne legyenek rejtett leképezési logikák.
+
+Vezessünk be egy `ProductRequest` DTO-t, amiben csak a létrehozáshoz és módosításhoz szükséges adatok vannak meg, majd használjuk ezt a DTO-t a `Post` és `Put` műveletekben.
+
+``` csharp
+public record ProductRequest
+{
+    [Required(ErrorMessage = "Product name is required.", AllowEmptyStrings = false)]
+    public required string Name { get; init; }
+
+    [Range(1, int.MaxValue, ErrorMessage = "Unit price must be higher than 0.")]
+    public required decimal UnitPrice { get; init; }
+
+    public required ShipmentRegion ShipmentRegion { get; init; }
+
+    public required int CategoryId { get; init; }
+}
+```
+
+A korábbi `Product` DTO-ból így már kitörölhetjük a validációs attribútumokat.
+
+A `ProductController`-ben a `Post` és `Put` műveletekben cseréljük le a `Product` típusú paramétert `ProductRequest`-re, majd a `ProductService`-ben és az `IProductService`-ben az `InsertProduct` és `UpdateProduct` függvényekben végezzük el a leképezést a `ProductRequest` DTO-ról a `Product` DTO-ra.
+
+``` csharp title="IProductService.cs"
+public Product InsertProduct(ProductRequest newProduct);
+public Product UpdateProduct(int productId, ProductRequest updatedProduct);
+```
+
+``` csharp title="ProductService.cs" hl_lines="1 3-10 14 19-21"
+public Product InsertProduct(ProductRequest newProduct)
+{
+    var efProduct = new Dal.Entities.Product
+    {
+        Name = newProduct.Name,
+        UnitPrice = newProduct.UnitPrice,
+        ShipmentRegion = newProduct.ShipmentRegion,
+        CategoryId = newProduct.CategoryId,
+    };
+    context.Products.Add(efProduct);
+    context.SaveChanges();
+    return GetProduct(efProduct.Id);
+}
+
+public Product UpdateProduct(int productId, ProductRequest updatedProduct)
+{
+    var efProduct = context.Products.SingleOrDefault(p => p.Id == productId)
+        ?? throw new EntityNotFoundException("Nem található a termék", productId);
+
+    efProduct.Name = updatedProduct.Name;
+    efProduct.UnitPrice = updatedProduct.UnitPrice;
+    efProduct.ShipmentRegion = updatedProduct.ShipmentRegion;
+    
+    context.SaveChanges();
+    return GetProduct(efProduct.Id);
+}
+```
+
+``` csharp title="ProductController.cs" hl_lines="2 9"
+[HttpPost]
+public ActionResult<Product> Post([FromBody] ProductRequest product)
+{
+    var created = productService.InsertProduct(product);
+    return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
+}
+
+[HttpPut("{id}")]
+public ActionResult<Product> Put(int id, [FromBody] ProductRequest product)
+{
+    return productService.UpdateProduct(id, product);
+}
+```
+
+Próbáljuk ki a műveleteket Swaggerből/Fiddler-ből/Postman-ből, figyeljük meg a validációs hibákat is.
+
 ## Hibakezelés
 
 Eddig főleg csak a hibamentes ágakat (happy path) néztük.
@@ -688,17 +767,17 @@ Az `AddProblemDetails` konfigurációjában a saját kivételtípusunkat képezz
 
 ``` csharp
 builder.Services.AddProblemDetails(options =>
-        options.CustomizeProblemDetails = context =>
+    options.CustomizeProblemDetails = context =>
+    {
+        if (context.HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error is EntityNotFoundException ex)
         {
-            if (context.HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error is EntityNotFoundException ex)
-            {
-                context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-                context.ProblemDetails.Title = "Invalid ID";
-                context.ProblemDetails.Status = StatusCodes.Status404NotFound;
-                context.ProblemDetails.Detail = $"No product with ID {ex.Id}";
-            }
+            context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+            context.ProblemDetails.Title = "Invalid ID";
+            context.ProblemDetails.Status = StatusCodes.Status404NotFound;
+            context.ProblemDetails.Detail = $"No product with ID {ex.Id}";
         }
-    );
+    }
+);
 ```
 
 A middleware pipeline-ba az alábbi beépített middleware-eket kell felvenni a csővezeték elejére:
@@ -775,7 +854,3 @@ public async Task<ActionResult<Product>> Put(int id, [FromBody] Product product)
     Az *Async* végződés alkalmazása kontroller műveletek nevében jelenleg nem ajánlott, mert könnyen [hibákba futhatunk](https://github.com/dotnet/aspnetcore/issues/8998).
 
 Próbáljuk ki, hogy továbbra is működik a módosított művelet.
-
-## Végállapot
-
-A végállapot elérhető a kapcsolódó GitHub repo [megoldas ágán](https://github.com/bmeviauav24/WebApiLab-kiindulo/tree/megoldas) is.
