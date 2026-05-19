@@ -23,7 +23,7 @@ A leképezés alapján az EF eszközök képesek az adatbázis létrehozására,
 
 ### Az entitások definiálása
 
-Készítsünk egy .NET 8 konzolos alkalmazást (csak [**ne** EF legyen a neve](https://github.com/dotnet/efcore/issues/8035)), majd a projekten belül hozzunk létre egy *Entities* nevű mappát. Adjunk hozzá a mappához egyszerű osztályokat az alábbi sémának megfelelően:
+Készítsünk egy .NET 10 konzolos alkalmazást (csak [**ne** EF legyen a neve](https://github.com/dotnet/efcore/issues/8035)), majd a projekten belül hozzunk létre egy *Entities* nevű mappát. Adjunk hozzá a mappához egyszerű osztályokat az alábbi sémának megfelelően:
 
 * `Product` (`Id`: `int`, `Name`: `string`, `UnitPrice`: `int`)
 * `Order` (`Id`: `int`, `OrderDate`: `DateTime`)
@@ -81,11 +81,11 @@ Példa: `public Category Category { get; set; } = null!;`.
 
 Az `Order`-`Product` több-többes kapcsolatokhoz hozzuk létre a kapcsolótáblának megfelelő entitást is, ami egy-egy `Product` és `Order` közötti kapcsolatot reprezentálja.
 
-- `OrderItem` (`Id`: `int`, `ProductId`: `int`, `OrderId`: `int`, `Quantity`: `int`)
+- `OrderItem` (`Id`: `int`, `ProductId`: `int`, `OrderId`: `int`, `Quantity`: `int`, `UnitPrice`: `int`)
 
 !!! tip "Kapcsoló entitás"
     Nem kötelező létrehozni osztályt a kapcsolótáblának, [konfigurációval is lehet érni](https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key#many-to-many), hogy a kapcsolótábla létrejöjjön és az EF megfelelően használja.
-    Ezt a módszert akkor érdemes követni, ha a kapcsolótábla csupán technikai tehertétel, de ha például extra adatot is tárol, esetünkben a rendelt mennyiséget (`Quantity`), akkor jobban követhető kódot eredményez, ha explicit létrehozzuk a kapcsolótáblának megfelelő entitástípust.
+    Ezt a módszert akkor érdemes követni, ha a kapcsolótábla csupán technikai tehertétel, de ha például extra adatot is tárol, esetünkben a rendelt mennyiséget és az egységárat (`Quantity`, `UnitPrice`), akkor jobban követhető kódot eredményez, ha explicit létrehozzuk a kapcsolótáblának megfelelő entitástípust.
 
 Az így kialakult modell:
 
@@ -102,7 +102,7 @@ public class Category
 
     public required string Name { get; set; }
 
-    public ICollection<Product> Products { get; } = new List<Product>();
+    public ICollection<Product> Products { get; } = [];
 }
 
 public class Order
@@ -111,7 +111,7 @@ public class Order
 
     public required DateTime OrderDate { get; set; }
 
-    public ICollection<OrderItem> OrderItems { get; } = new List<OrderItem>();
+    public ICollection<OrderItem> OrderItems { get; } = [];
 }
 
 public class Product
@@ -124,7 +124,7 @@ public class Product
     public int CategoryId { get; set; }
     public Category Category { get; set; } = null!;
 
-    public ICollection<OrderItem> ProductOrders { get; } = new List<OrderItem>();
+    public ICollection<OrderItem> ProductOrders { get; } = [];
 }
 
 public class OrderItem
@@ -132,6 +132,7 @@ public class OrderItem
     public int Id { get; set; }
 
     public required int Quantity { get; set; }
+    public required int UnitPrice { get; set; }
 
     public int ProductId { get; set; }
     public Product Product { get; set; } = null!;
@@ -151,15 +152,23 @@ Az entitásokat definiáltuk, a mapping-et az EF eszére bíztuk, a következő 
 Műveletet az ún. *kontext*-en keresztül tudunk végezni.
 Érdemes saját kontext típust létrehozni, amit az alap `DbContext`-ből származtatunk.
 
-Eddig még nem is írtunk semmilyen EF specifikus kódot, most viszont már kell a `DbContext` típus, így NuGet-ből hozzá kell adnunk a **Microsoft.EntityFrameworkCore.SqlServer** csomagot.
-Nem ez a csomag tartalmazza a `DbContext`-et, viszont függőségként hivatkozza (**Microsoft.EntityFrameworkCore**).
+Eddig még nem is írtunk semmilyen EF specifikus kódot, most viszont már kell a `DbContext` típus, így NuGet-ből hozzá kell adnunk a **Microsoft.EntityFrameworkCore.SqlServer** és **Microsoft.EntityFrameworkCore.Design** csomagot.
+Nem ez a csomag tartalmazza a `DbContext`-et, viszont függőségként hivatkozza (**Microsoft.EntityFrameworkCore**). A Design csomag tartalmazza a sémamódosításokhoz szükséges támogatást.
+
+```xml
+<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.8" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8">
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+</PackageReference>
+```
 
 !!! tip "NuGet csomagok telepítése"
     A NuGet csomagok telepítéséhez segítség a [dokumentációban](https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio#nuget-package-manager).
 
 !!! warning "NuGet verziók"
     Olyan csomagoknál, ahol a verziószámozás követi az alap keretrendszer verziószámozását, törekedjünk arra, hogy a csomagok verziói konzisztensek legyenek egymással és a keretrendszer verziójával is - akkor is, ha egyébként a függőségi szabályok engednék a verziók keverését.
-    Ha a projektünk például .NET 8-os keretrendszert használ, akkor az Entity Framework Core és egyéb extra ASP.NET Core csomagok közül is olyan verziót válasszunk, ahol legalább a főverzió egyezik, tehát valamilyen 8.x verziót.
+    Ha a projektünk például .NET 10-es keretrendszert használ, akkor az Entity Framework Core és egyéb extra ASP.NET Core csomagok közül is olyan verziót válasszunk, ahol legalább a főverzió egyezik, tehát valamilyen 10.x verziót.
     Ez nem azt jelenti, hogy az inkonzisztens verziók mindig hibát eredményeznek, inkább a projekt általában stabilabb, ha a főverziók közötti váltást egyszerre, külön migrációs folyamat ([példa](https://learn.microsoft.com/en-us/aspnet/core/migration/31-to-60)) keretében végezzük.
 
 Az Entity Framework önmagában független az adatbázis implementációktól, azokhoz különböző, adatbázisgyártó-specifikus [*adatbázis providereken*](https://docs.microsoft.com/en-us/ef/core/providers/) keresztül kapcsolódik.
@@ -175,7 +184,7 @@ A Visual Studio az *SQL Server Object Explorer* ablak megnyitásakor automatikus
 
 Adjunk hozzá új osztályt a projekthez `LabDbContext` néven, ebben definiáljuk majd, hogy milyen entitáskollekciókon lehet műveleteket végezni.
 
-Az automatikusan létrejövő MSSQLLocalDB nevű LocalDB példány connection stringjét adjuk meg, pontosabban az *SQL Server Object Explorer* ablak segítésével másoljuk ki: menu:SQL Server-t kibontva\[*(localdb)\MSSQLLocalDB*-n jobbklikk \> Properties \> Connection String\].
+Az automatikusan létrejövő MSSQLLocalDB nevű LocalDB példány connection stringjét adjuk meg, pontosabban az *SQL Server Object Explorer* ablak segítésével másoljuk ki: *SQL Server-t kibontva * (localdb)\MSSQLLocalDB-n jobbklikk / Properties / Connection String*.
 
 A kimásolt stringben az *Initial Catalog* értékét (a DB nevét) a **master**-ről változtassuk meg valamilyen más névre, például a Neptun kódunkra.
 Ha nincs a stringben *Initial Catalog* rész, akkor írjuk a string végére, hogy `;Initial Catalog=neptunkod`.
@@ -223,33 +232,37 @@ Esetünkben a séma nulláról felhúzása is már módosításnak számít.
 
 A migráció elvégzésére parancssoros utasításokat kell igénybe vennünk.
 Itt kétfajta megközelítés is adott: vannak **PowerShell** és vannak klasszikus **cmd** (dotnet cli) parancsaink.
-Fel kell telepítsük a projektünkbe valamelyik NuGet csomagot:
 
-* **PowerShell**: Microsoft.EntityFrameworkCore.Tools (telepítsük fel most ezt)
-* **Parancssor**: Microsoft.EntityFrameworkCore.Tools.DotNet
+* **PowerShell**: `Microsoft.EntityFrameworkCore.Tools` telepítése a projektbe, majd a *Package Manager Console* használata
+* **Parancssor**: `dotnet-ef` cli eszköz telepítése globális dotnet tool-ként, majd a `dotnet ef` parancs használata
 
-Hozzuk elő a **Package Manager Console**-t. (menu:Tools\[NuGet Package Manager \> Package Manager Console\]).
-Ellenőrizzük, hogy a *Default Project* legördülőben a mi projektünk van-e kiválasztva.
-Az `Add-Migration <név>` paranccsal tudunk készíteni egy új migrációs lépést, így az első migrációnk a kiinduló sémánk migrációját fogja tartalmazni.
+Telepítsük fel a dotnet-ef eszközt az alábbi paranccsal:
 
 ``` powershell
-Add-Migration Init
+dotnet tool install --global dotnet-ef
+```
+
+Navigáljunk el a projektünk gyökerére a parancssorban (nem a solution gyökerére) és adjuk ki a `dotnet ef` parancsot, hogy megnézzük, milyen alparancsok érhetőek el.
+A `dotnet ef migrations add <név>` paranccsal tudunk készíteni egy új migrációs lépést, így az első migrációnk a kiinduló sémánk migrációját fogja tartalmazni.
+
+``` powershell
+dotnet ef migrations add Init
 ```
 
 Figyeljük meg, mit generált a projektünkbe ez a parancs.
 Itt a migrációhoz egy osztályt készít, ami tartalmazza azokat az utasításokat (`Up` függvény), amikkel a modellünknek megfelelő táblákat fel lehet venni.
 Emellett külön függvényben (`Down`) olyan utasítások is vannak, melyek ugyanezen táblákat eldobják.
 
-Fordítás után adjuk ki az `Update-Database` parancsot, amivel egy adott migrációs állapotig próbálja frissíteni a sémát.
+Fordítás után adjuk ki az `dotnet ef database update` parancsot, amivel egy adott migrációs állapotig próbálja frissíteni a sémát.
 Ha nem adunk meg sémanevet akkor a legfrissebb migrációig frissít:
 
 ``` powershell
-Update-Database Init
+dotnet ef database update
 ```
 
 !!! warning "Localdb migrációs hiba"
     Bizonyos LocalDB verzióknál hibára futhat az adatbázislétrehozás (*CREATE FILE encountered operating system error 5(Access is denied.)*), mert rossz helyen próbálja létrehozni az adatbázisfájlt.
-    Ilyenkor az SQL Server Object Explorer ablakban bontsuk ki a LocalDB példányunk, alatta a menu:Databases mappán jobbklikk\[*Add New Database*\].
+    Ilyenkor az SQL Server Object Explorer ablakban bontsuk ki a LocalDB példányunk, alatta a *Databases mappán jobbklikk / Add New Database*.
     A megjelenő ablakban adjuk meg névként ugyanazt az adatbázisnevet, amit korábban a connection string-ben a *master* helyett megadtunk.
 
 Ellenőrizzük le az adatbázis sémáját az *SQL Server Object Explorer* ablakban.
@@ -291,22 +304,22 @@ public string Name { get; set; }
     Ezt az `IPluralizer` service végzi, melyhez saját implementáció is [írható](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-2.0#pluralization-hook-for-dbcontext-scaffolding).
 
 Mivel már létezik az adatbázisunk, migráció segítségével kell frissítsük az adatbázis sémáját.
-Készítsünk egy új migrációs lépést az `Add-Migration` utasítással és frissítsük a sémát az `Update-Database` paranccsal.
+Készítsünk egy új migrációs lépést és frissítsük a sémát.
 
 ``` powershell
-Add-Migration CategoryName_ProductName
-Update-Database CategoryName_ProductName
+dotnet ef migrations add CategoryName_ProductName
+dotnet ef database update
 ```
 
 !!! tip "Migrációs SQL script"
-    Megnézhetjük az adatbázison futtatott SQL-t is a Script-Migration paranccsal. Például ez mutatja a legutóbbi módosítást érvényesítő SQL-t: `Script-Migration -From Init`
+    Megnézhetjük az adatbázison futtatott SQL-t is a Script-Migration paranccsal. Például ez mutatja a legutóbbi módosítást érvényesítő SQL-t: `dotnet ef migrations script CategoryName_ProductName`.
 
 !!! warning "Migráció veszélyei"
-    Természetesen mivel még nincsenek adataink az adatbázisban, akár el is dobhatnánk az adatbázist és újra legenerálhatnánk nulláról a sémát, de most kifejezetten a migrációt szeretnénk gyakorolni. Az `Add-Migration` kimenete figyelmeztet, hogy adatvesztés is történhet. Vannak veszélyes migrációs műveletek, ezért érdemes átnézni a generálódó migrációs kódot.
+    Természetesen mivel még nincsenek adataink az adatbázisban, akár el is dobhatnánk az adatbázist és újra legenerálhatnánk nulláról a sémát, de most kifejezetten a migrációt szeretnénk gyakorolni. Az `dotnet ef database update` kimenete figyelmeztet, hogy adatvesztés is történhet. Vannak veszélyes migrációs műveletek, ezért érdemes átnézni a generálódó migrációs kódot.
 
 !!! warning "Migrációk szinkronban tartása"
     Ha valamilyen okból nem megfelelő a migrációnk, ne töröljük kézzel a generált C# kódfájlokat.
-    Használjuk helyette a `Remove-Migration` parancsot (mindenfajta paraméter nélkül), ami a legutóbbi migrációt törli.
+    Használjuk helyette a `dotnet ef migrations remove` parancsot (mindenfajta paraméter nélkül), ami a legutóbbi migrációt törli.
 
 Nézzük meg, milyen migrációs osztályt generáltunk, és hogy ez milyen utasításokat tartalmaz.
 
@@ -330,6 +343,8 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     Ha nem a konzolt szeretnénk teleszemetelni, akkor akár a Debug kimenetre (Output ablak) is írhatunk.
     Ehhez a `LogTo`-nak adjuk meg paraméterként a `m => Debug.WriteLine(m)` delegátot.
 
+    ASP.NET Core alkalmazásokban a beépített naplózási infrastruktúrát is használhatjuk majd (`ILogger`).
+
 ## Beszúrás
 
 Írjunk egy egyszerű beszúró kódot a `Program.cs`-be. Várjunk paraméterül egy kontext-et, és csak akkor szúrjunk be az adatbázisba bármit, ha még üres.
@@ -342,15 +357,15 @@ static void SeedDatabase(LabDbContext ctx)
         return;
     }
 
-    var drink = new Category() { Name = "Ital" };
-    var food = new Category() { Name = "Étel" };
+    var drink = new Category { Name = "Ital" };
+    var food = new Category { Name = "Étel" };
 
     ctx.Categories.Add(drink);
     ctx.Categories.Add(food);
 
-    ctx.Products.Add(new Product() { Name = "Sör", UnitPrice = 50, Category = drink });
-    ctx.Products.Add(new Product() { Name = "Bor", Category = drink });
-    ctx.Products.Add(new Product() { Name = "Tej", CategoryId = drink.Id });
+    ctx.Products.Add(new() { Name = "Sör", UnitPrice = 50, Category = drink });
+    ctx.Products.Add(new() { Name = "Bor", Category = drink });
+    ctx.Products.Add(new() { Name = "Tej", CategoryId = drink.Id });
 
     ctx.SaveChanges();
 }
@@ -388,7 +403,7 @@ Egy hívásban több elemet kell beszúrni, ha bármelyik művelet meghiúsul, a
 Javítsuk ki:
 
 ``` csharp hl_lines="4"
-ctx.Products.Add(new Product("Tej")
+ctx.Products.Add(new()
 {
     Name = "Tej",
     Category = drink //navigációs property-re váltottunk
@@ -412,13 +427,13 @@ A kontextuskonfiguráció részeként megadhatjuk, hogy milyen adattartalmat sze
 
 ``` csharp
 modelBuilder.Entity<Category>().HasData(
-    new Category() { Name = "Ital", Id = 1 }
+    new() { Id = 1, Name = "Ital" }
 );
 
 modelBuilder.Entity<Product>().HasData(
-    new Product() { Name = "Sör", Id = 1, UnitPrice = 50, CategoryId = 1 },
-    new Product() { Name = "Bor", Id = 2, UnitPrice = 550, CategoryId = 1 },
-    new Product() { Name = "Tej", Id = 3, UnitPrice = 260, CategoryId = 1 }
+    new() { Id = 1, Name = "Sör", UnitPrice = 50, CategoryId = 1 },
+    new() { Id = 2, Name = "Bor", UnitPrice = 550, CategoryId = 1 },
+    new() { Id = 3, Name = "Tej", UnitPrice = 260, CategoryId = 1 }
 );
 ```
 
@@ -426,8 +441,8 @@ modelBuilder.Entity<Product>().HasData(
     Fontos, hogy ezen módszer esetén mindenképp kézzel meg kell adnunk az elsődleges kulcs értékeket. Fordítás után generáltassunk új migrációt és frissítsük is az adatbázist - ez utóbbi hibára fog futni:
 
 ``` powershell
-Add-Migration Seed
-Update-Database
+dotnet ef migrations add SeedData
+dotnet ef database update
 ```
 
 A `HasData` alapján generált migrációs kód nem veszi figyelembe az időközben bekerült adatokat, csak a modellt és a többi migrációt nézi.
@@ -437,8 +452,8 @@ Mivel mi közben jól összeszemeteltük az adatbázist, a migráció által kia
 Ha szeretnénk tiszta lappal indulni, bármikor kipucolhatjuk az adatbázist a speciális nullás migrációra való frissítéssel, majd újrahúzhatjuk a `HasData`-nak köszönhetően kezdeti adatokkal ősfeltöltve.
 
 ``` powershell
-Update-Database 0
-Update-Database
+dotnet ef database update 0
+dotnet ef database update
 ```
 
 Ezek után a `SeedDatabase` hívásra nincs szükség, kommentezzük ki.
@@ -463,16 +478,16 @@ foreach (var name in q)
 }
 ```
 
-Itt figyelhető meg a korábban már tárgyalt `IEnumerable<>` - `IQueryable<>` különbség.
-A `Products` property típusa `DbSet`, ami `IQueryable<>`.
-Az `IQueryable<>`-en történő hívások kifejezésfát (`Expression`) építenek és szintén `IQueryable<>`-t adnak vissza.
-A `q` értéke egy olyan `IQueryable<>`, ami `Expression`-jében tartalmazza a teljes lekérdezést.
+Itt figyelhető meg a korábban már tárgyalt `IEnumerable<T>` - `IQueryable<T>` különbség.
+A `Products` property típusa `DbSet`, ami `IQueryable<T>`.
+Az `IQueryable<T>`-en történő hívások kifejezésfát (`Expression`) építenek és szintén `IQueryable<T>`-t adnak vissza.
+A `q` értéke egy olyan `IQueryable<T>`, ami `Expression`-jében tartalmazza a teljes lekérdezést.
 Amikor szükség van az adatra, a kifejezésfa alapján SQL generálódik és ez az SQL fut le az adatbázison.
 
 A debuggerrel léptessük át az egyes utasításokon a program futását.
 A késleltetett kiértékelés miatt csak a `foreach` végrehajtása közben fog az adatbázishoz fordulni az EF, hiszen csak ekkor van ténylegesen szükség az adatra.
 Nézzük meg a lefuttatott SQL-t is.
-Sikerült az `IQueryable<>`-ben található `Expression`-t SQL utasítássá alakítania.
+Sikerült az `IQueryable<T>`-ben található `Expression`-t SQL utasítássá alakítania.
 
 A fenti példában az úgynevezett query syntax-t használtuk, de ugyanezt megtehetjük a method vagy fluent syntax-sal is:
 
@@ -497,11 +512,11 @@ Figyeljük meg a konzolon a generált SQL-t: a projekciós részbe bekerült az 
 ### Vegyes kiértékelés
 
 A fák sem nőnek az égig, az EF sem tud minden C# függvényt SQL-lé fordítani.
-Próbáljuk ki úgy, hogy a `Contains`-t karakterrel hívjuk meg a szűrésben.
+Próbáljuk ki úgy, hogy a where-ben `ToUpperInvariant`-t is hívunk a string-en (sok értelme ennek itt nincs csak a demonstráció céljából tegyük meg).
 
 ``` csharp
 var q = ctx.Products
-    .Where(p => p.Name.Contains('ö'))
+    .Where(p => p.Name.ToUpperInvariant().Contains("ö"))
     .Select(p => p.Name.ToUpper());
 ```
 
@@ -512,7 +527,7 @@ Próbáljuk ki - mivel a szűrést nem sikerült átfordítani, a szűrés elé 
 ``` csharp hl_lines="2"
 var q = ctx.Products
     .AsEnumerable()
-    .Where(p => p.Name.Contains('ö'))
+    .Where(p => p.Name.Contains("ö"))
     .Select(p => p.Name.ToUpper());
 ```
 
@@ -520,10 +535,10 @@ Ez működik, de a konzolon megjelenő SQL utasításon látszik, hogy a **telje
 
 Az `AsEnumerable` jelentése: a lekérdezés innentől LINQ-to-Objects-ként épül tovább, a lekérdezés eddigi részének memóriabeli reprezentációja lesz az adatforrás, tehát a szűrés és a projekció már memóriában fut le.
 Mivel a teljes lekérdezés egy része LINQ-to-Entities (adatbázis értékeli ki), a másik része LINQ-to-Objects (a .NET runtime értékeli ki), az ilyen lekérdezéseket ún. vegyes kiértékelésűnek (*mixed evaluation*), a LINQ-to-Objects részt kliensoldali kiértékelésűnek (*client evaluation*) nevezik.
-A `q` típusa ebben az esetben már nem `IQueryable<>`, csak `IEnumerable<>`.
+A `q` típusa ebben az esetben már nem `IQueryable<T>`, csak `IEnumerable<T>`.
 
 !!! tip "IEnumerable és IQueryable különbségének felderítése"
-    Érdemes összevetni a `Where` függvény definícióját (kurzorral ráállva ++f12++ vagy menu:jobbklikk\[Go To Definition\]) a két változatnál. Az első esetben `IQueryable` az adatforrás és `Expression` a feltétel, a másodiknál `IEnumerable` az adatforrás és sima delegate a feltétel.
+    Érdemes összevetni a `Where` függvény definícióját (kurzorral ráállva ++f12++ vagy *jobbklikk / Go To Definition*) a két változatnál. Az első esetben `IQueryable<T>` az adatforrás és `Expression` a feltétel, a másodiknál `IEnumerable<T>` az adatforrás és sima delegate a feltétel.
 
 !!! warning "Vegyes kiértékelés veszélyei"
     A vegyes kiértékelés veszélyes lehet, mert a szűrés és a projekció már memóriában fut le, azaz az adatbázisban lévő adatokat a memóriába kell olvasni, ami nagy adatmennyiség esetén lassú és erőforrásigényes lehet.
@@ -585,7 +600,7 @@ var order = new Order { OrderDate = DateTime.Now };
 foreach (var p in products)
 {
     order.OrderItems.Add(
-        new OrderItem { Product = p, Order = order, Quantity = 2 }
+        new() { Product = p, Order = order, Quantity = 2, UnitPrice = p.UnitPrice }
     );
 }
 
@@ -711,13 +726,13 @@ Bonyolultnak tűnik, de inkább csak hosszú, míg mind a 9 érintett property s
 Mindennek nem szabadna adatbázis változást okoznia, hiszen nem lett több kapcsolat, csak egy logikai útrövidítést vettünk fel. Ellenőrizzük le:
 
 ``` powershell
-Add-Migration NxN
+dotnet ef migrations add MxNDirectNavigation
 ```
 
 Ha mindent jól csináltunk, ennek egy üres migrációt kell generálnia. Töröljük is.
 
 ``` powershell
-Remove-Migration
+dotnet ef migrations remove
 ```
 
 Ezután a korábbi lekérdezésünknél elhagyhatjuk az `OrderItem` betöltését.
@@ -805,28 +820,28 @@ A törölt `Order`-t és a szükséges kapcsoló rekordokat vegyük fel migráci
 
 ``` csharp
 modelBuilder.Entity<Order>().HasData(
-     new Order { Id = 1, OrderDate = new DateTime(2019, 02, 01) }
+     new() { Id = 1, OrderDate = new DateTime(2019, 02, 01) }
 );
 
 modelBuilder.Entity<OrderItem>().HasData(
-    new OrderItem { Id = 1, OrderId = 1, ProductId = 1 },
-    new OrderItem { Id = 2, OrderId = 1, ProductId = 2 }
+    new() { Id = 1, OrderId = 1, ProductId = 1, UnitPrice = 50 },
+    new() { Id = 2, OrderId = 1, ProductId = 2, UnitPrice = 550 }
 );
 ```
 
 Fordítás után ne felejtsük el migrációval átvezetni az adatbázis sémájába is a változásokat, mivel a kaszkád törlés egy MSSQL funkció nem EF viselkedés.
 
 ``` powershell
-Add-Migration ProductOrderRestrictDelete
-Update-Database 0
-Update-Database
+dotnet ef migrations add ProductOrderRestrictDelete
+dotnet ef database update 0
+dotnet ef database update
 ```
 
 Futtassuk újra a törlő kódot - kivételt kapunk, mivel az `OrderItem` rekord nem törlődött kaszkád módon, így az egy már nem létező `Order`-re hivatkozik, viszont ez a külső kulcs kényszert megsérti.
 Emiatt az egész törlési művelet meghiúsul.
 
 !!! tip "Soft delete"
-    Adatkezelő alkalmazásokban az adatbázisbeli törlés (SQL `DELETE` utasítás) helyett gyakran inkább logikai törlést ([*soft delete*](https://www.thereformedprogrammer.net/ef-core-in-depth-soft-deleting-data-with-global-query-filters/)) alkalmaznak. A logikai törlés megvalósításával ezen gyakorlat keretében nem foglalkozunk, de egyszerűen megvalósítható a SaveChanges felüldefiniálásával, abban a change tracker figyelésével és lekérdezéskor Global Query Filter használatával.
+    Adatkezelő alkalmazásokban az adatbázisbeli törlés (SQL `DELETE` utasítás) helyett gyakran inkább logikai törlést ([*soft delete*](https://www.thereformedprogrammer.net/ef-core-in-depth-soft-deleting-data-with-global-query-filters/)) alkalmaznak. A logikai törlés megvalósításával ezen gyakorlat keretében nem foglalkozunk, de egyszerűen megvalósítható a `SaveChanges` felüldefiniálásával, abban a change tracker figyelésével és lekérdezéskor Global Query Filter használatával.
 
 ## Felsorolt típus, értékkonvertálók
 
@@ -855,7 +870,7 @@ Módosítsuk és bővítsük a kezdeti `Product`-ok listáját szállítási inf
 
 ``` csharp hl_lines="8 18-27"
 modelBuilder.Entity<Product>().HasData(
-    new Product()
+    new()
     {
         Id = 1,
         Name = "Sör",
@@ -863,9 +878,9 @@ modelBuilder.Entity<Product>().HasData(
         CategoryId = 1,
         ShipmentRegion = ShipmentRegion.Asia
     },
-    new Product() { Id = 2, Name = "Bor", UnitPrice = 550, CategoryId = 1 },
-    new Product() { Id = 3, Name = "Tej", UnitPrice = 260, CategoryId = 1 },
-    new Product()
+    new() { Id = 2, Name = "Bor", UnitPrice = 550, CategoryId = 1 },
+    new() { Id = 3, Name = "Tej", UnitPrice = 260, CategoryId = 1 },
+    new()
     {
         Id = 4,
         Name = "Whiskey",
@@ -873,7 +888,7 @@ modelBuilder.Entity<Product>().HasData(
         CategoryId = 1,
         ShipmentRegion = ShipmentRegion.Australia
     },
-    new Product()
+    new()
     {
         Id = 5,
         Name = "Rum"
@@ -889,8 +904,8 @@ Figyeljük meg a generált migrációban, hogy milyen ügyesen lekezeli az EF a 
 Változott a modell, frissítsük az adatbázist.
 
 ``` powershell
-Add-Migration ProductShipmentRegion
-Update-Database
+dotnet ef migrations add ProductShipmentRegion
+dotnet ef database update
 ```
 
 Figyeljük meg, hogy az új oszlop egész számként tárolja a felsorolt típus értékeit.
@@ -908,8 +923,8 @@ modelBuilder
 Változott a modell, frissítsük az adatbázist.
 
 ``` powershell
-Add-Migration ProductShipmentRegionAsString
-Update-Database
+dotnet ef migrations add ProductShipmentRegionAsString
+dotnet ef database update
 ```
 
 !!! warning "Migrációk helyességének ellenőrzése"
@@ -938,24 +953,15 @@ Nézzünk példát a tranzakciókezelésre. Szúrjunk be több terméket az adat
 int cid = ctx.Categories.First().Id;
 try
 {
-    using (var transaction = ctx.Database.BeginTransaction())
-    {
-        ctx.Products.Add(new Product()
-        {
-            CategoryId = cid,
-            Name = "Coca Cola",
-        });
-        ctx.SaveChanges();
+    using var transaction = ctx.Database.BeginTransaction();
 
-        ctx.Products.Add(new Product()
-        {
-            CategoryId = cid,
-            Name = "Pepsi",
-        });
-        ctx.SaveChanges();
+    ctx.Products.Add(new() { CategoryId = cid, Name = "Coca Cola", });
+    ctx.SaveChanges();
 
-        transaction.Commit();
-    }
+    ctx.Products.Add(new() { CategoryId = cid, Name = "Pepsi", });
+    ctx.SaveChanges();
+
+    transaction.Commit();
 }
 catch (Exception)
 {
@@ -976,23 +982,24 @@ Próbáljuk ki! Ezesetben helyesen fut le a beszúrásunk. Figyeljük meg a konz
 
 Teszteljük a hibás ágat is azáltal, hogy a második terméket egy nem létező kategóriába próbáljuk meg beszúrni.
 
-``` csharp hl_lines="5 11 12"
-using (var transaction = ctx.Database.BeginTransaction())
+``` csharp hl_lines="6 12-13"
+using var transaction = ctx.Database.BeginTransaction();
+
+ctx.Products.Add(new()
 {
-    ctx.Products.Add(new Product()
-    {
-        Name = "Cider", // új név
-        CategoryId = cid,
-    });
-    ctx.SaveChanges();
-    ctx.Products.Add(new Product()
-    {
-        Name = "Kőműves Actimel", //új név
-        CategoryId = 100, //nem létező CategoryId
-    });
-    ctx.SaveChanges();
-    transaction.Commit();
-}
+    Name = "Cider", // új név
+    CategoryId = cid,
+});
+ctx.SaveChanges();
+
+ctx.Products.Add(new()
+{
+    Name = "Kőműves Actimel", //új név
+    CategoryId = 100, //nem létező CategoryId
+});
+ctx.SaveChanges();
+
+transaction.Commit();
 ```
 
 Figyeljük meg, hogy ilyenkor nem kerül beszúrásra az első termék sem. Úgyszintén figyeljük meg a konzolon a tranzakciókezeléssel kapcsolatos üzeneteket.
