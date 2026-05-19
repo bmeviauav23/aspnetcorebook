@@ -16,7 +16,7 @@
 <link href="../../../css/timeago.css" rel="stylesheet">
 <link href="../../../extra-material-theme.css" rel="stylesheet">
 <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-<link href="../../../assets/stylesheets/extra-style.i0x8qsp8.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+<link href="../../../assets/stylesheets/extra-style.dn4kgjtx.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -558,6 +558,15 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#muveletenkenti-dto-tipusok">
+<span class="md-ellipsis">
+      
+        Műveletenkénti DTO típusok
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#hibakezeles">
 <span class="md-ellipsis">
       
@@ -602,15 +611,6 @@
 <span class="md-ellipsis">
       
         Aszinkron műveletek
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#vegallapot">
-<span class="md-ellipsis">
-      
-        Végállapot
       
     </span>
 </a>
@@ -945,6 +945,15 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#muveletenkenti-dto-tipusok">
+<span class="md-ellipsis">
+      
+        Műveletenkénti DTO típusok
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#hibakezeles">
 <span class="md-ellipsis">
       
@@ -989,15 +998,6 @@
 <span class="md-ellipsis">
       
         Aszinkron műveletek
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#vegallapot">
-<span class="md-ellipsis">
-      
-        Végállapot
       
     </span>
 </a>
@@ -1449,6 +1449,70 @@ Ilyesfajta válasz előállításához is van segédfüggvény, illetve elég cs
 </code></pre></div>
 <p>Próbáljuk kitörölni az újonnan felvett terméket Swaggerből/Fiddler-ből/Postman-ből (<em>DELETE</em> igés kérés az <code>api/products/&lt;új id&gt;</code> címre, üres törzzsel).
 Sikerülnie kell, mert még nincs rá idegen kulcs hivatkozás.</p>
+<h2 id="muveletenkenti-dto-tipusok">Műveletenkénti DTO típusok<a class="headerlink" href="#muveletenkenti-dto-tipusok" title="Permanent link">¶</a></h2>
+<p>Ahogy korábban is említettük, gyakori, hogy külön DTO-kat hozunk létre művelet típusonként, pl. <code>CreateProductRequest</code>, <code>UpdateProductRequest</code> stb., amik a műveletek igényei szerint tartalmazzák az adatokat.
+Ezzel elkerülhető az a helyzet, hogy egy művelet számára irreleváns adatok is bekerüljenek a DTO-ba, illetve hogy egy művelet véletlenül módosíthatóvá tegye azokat az adatokat, amiket egy másik műveletnek szántunk.</p>
+<p>Továbbá az is megfontolandó, hogy használunk-e egyáltalán AutoMappert a DTO -&gt; Entitás leképezéshez, vagy inkább kézzel írjuk meg a leképező kódot, hogy explicit látszódjon minden értékadás, és ne legyenek rejtett leképezési logikák.</p>
+<p>Vezessünk be egy <code>ProductRequest</code> DTO-t, amiben csak a létrehozáshoz és módosításhoz szükséges adatok vannak meg, majd használjuk ezt a DTO-t a <code>Post</code> és <code>Put</code> műveletekben.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">record</span><span class="w"> </span><span class="n">ProductRequest</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Required(ErrorMessage = "Product name is required.", AllowEmptyStrings = false)]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="na">[Range(1, int.MaxValue, ErrorMessage = "Unit price must be higher than 0.")]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="kt">decimal</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="n">ShipmentRegion</span><span class="w"> </span><span class="n">ShipmentRegion</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">CategoryId</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A korábbi <code>Product</code> DTO-ból így már kitörölhetjük a validációs attribútumokat.</p>
+<p>A <code>ProductController</code>-ben a <code>Post</code> és <code>Put</code> műveletekben cseréljük le a <code>Product</code> típusú paramétert <code>ProductRequest</code>-re, majd a <code>ProductService</code>-ben és az <code>IProductService</code>-ben az <code>InsertProduct</code> és <code>UpdateProduct</code> függvényekben végezzük el a leképezést a <code>ProductRequest</code> DTO-ról a <code>Product</code> DTO-ra.</p>
+<div class="highlight"><span class="filename">IProductService.cs</span><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="nf">InsertProduct</span><span class="p">(</span><span class="n">ProductRequest</span><span class="w"> </span><span class="n">newProduct</span><span class="p">);</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="nf">UpdateProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">,</span><span class="w"> </span><span class="n">ProductRequest</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">ProductService.cs</span><pre><span></span><code><span class="hll"><span class="k">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="nf">InsertProduct</span><span class="p">(</span><span class="n">ProductRequest</span><span class="w"> </span><span class="n">newProduct</span><span class="p">)</span>
+</span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span>
+</span><span class="hll"><span class="w">    </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newProduct</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newProduct</span><span class="p">.</span><span class="n">UnitPrice</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="n">ShipmentRegion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newProduct</span><span class="p">.</span><span class="n">ShipmentRegion</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="n">CategoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newProduct</span><span class="p">.</span><span class="n">CategoryId</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="p">};</span>
+</span><span class="hll"><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">efProduct</span><span class="p">);</span>
+</span><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">GetProduct</span><span class="p">(</span><span class="n">efProduct</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="hll">
+</span><span class="k">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="nf">UpdateProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">,</span><span class="w"> </span><span class="n">ProductRequest</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
+<span class="w">        </span><span class="o">??</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EntityNotFoundException</span><span class="p">(</span><span class="s">"Nem található a termék"</span><span class="p">,</span><span class="w"> </span><span class="n">productId</span><span class="p">);</span>
+<span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="n">efProduct</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">.</span><span class="n">Name</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="n">efProduct</span><span class="p">.</span><span class="n">UnitPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">.</span><span class="n">UnitPrice</span><span class="p">;</span>
+</span><span class="w">    </span><span class="n">efProduct</span><span class="p">.</span><span class="n">ShipmentRegion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">.</span><span class="n">ShipmentRegion</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">GetProduct</span><span class="p">(</span><span class="n">efProduct</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">ProductController.cs</span><pre><span></span><code><span class="na">[HttpPost]</span>
+<span class="hll"><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Post</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">ProductRequest</span><span class="w"> </span><span class="n">product</span><span class="p">)</span>
+</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">InsertProduct</span><span class="p">(</span><span class="n">product</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">CreatedAtAction</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">Get</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">created</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">created</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="na">[HttpPut("{id}")]</span>
+<span class="hll"><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Put</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">ProductRequest</span><span class="w"> </span><span class="n">product</span><span class="p">)</span>
+</span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">UpdateProduct</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Próbáljuk ki a műveleteket Swaggerből/Fiddler-ből/Postman-ből, figyeljük meg a validációs hibákat is.</p>
 <h2 id="hibakezeles">Hibakezelés<a class="headerlink" href="#hibakezeles" title="Permanent link">¶</a></h2>
 <p>Eddig főleg csak a hibamentes ágakat (happy path) néztük.
 A REST konvenciók rendelkeznek arról is, hogy bizonyos hibahelyezetekben milyen <a href="https://httpstatuses.com">HTTP választ</a> illik adni, például ha a kérésben hivatkozott azonosító nem létezik - 404-es hiba a bevett eljárás.
@@ -1547,17 +1611,17 @@ Az általunk megadott üzenetet kell visszakapjuk.</p>
 Ezt az ASP.NET Core 8 óta beépítetten meg tudjuk tenni. Erre a célra több kiterjesztési pontja is van a keretrendszernek <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors?view=aspnetcore-8.0">1</a> <a href="https://timdeschryver.dev/blog/translating-exceptions-into-problem-details-responses">2</a>, de nekünk most elég a legmagasabb szinten a <code>ProblemDetails</code> választ testreszabni.</p>
 <p>Az <code>AddProblemDetails</code> konfigurációjában a saját kivételtípusunkat képezzük le 404-es hibakódra és a válasz tartalmát módosítsuk.</p>
 <div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddProblemDetails</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
-<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">CustomizeProblemDetails</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">CustomizeProblemDetails</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">HttpContext</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">Get</span><span class="o">&lt;</span><span class="n">IExceptionHandlerFeature</span><span class="o">&gt;</span><span class="p">()</span><span class="o">?.</span><span class="n">Error</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">EntityNotFoundException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">HttpContext</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">Get</span><span class="o">&lt;</span><span class="n">IExceptionHandlerFeature</span><span class="o">&gt;</span><span class="p">()</span><span class="o">?.</span><span class="n">Error</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">EntityNotFoundException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span>
-<span class="w">            </span><span class="p">{</span>
-<span class="w">                </span><span class="n">context</span><span class="p">.</span><span class="n">HttpContext</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">StatusCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StatusCodes</span><span class="p">.</span><span class="n">Status404NotFound</span><span class="p">;</span>
-<span class="w">                </span><span class="n">context</span><span class="p">.</span><span class="n">ProblemDetails</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Invalid ID"</span><span class="p">;</span>
-<span class="w">                </span><span class="n">context</span><span class="p">.</span><span class="n">ProblemDetails</span><span class="p">.</span><span class="n">Status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StatusCodes</span><span class="p">.</span><span class="n">Status404NotFound</span><span class="p">;</span>
-<span class="w">                </span><span class="n">context</span><span class="p">.</span><span class="n">ProblemDetails</span><span class="p">.</span><span class="n">Detail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$"No product with ID {ex.Id}"</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">context</span><span class="p">.</span><span class="n">HttpContext</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">StatusCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StatusCodes</span><span class="p">.</span><span class="n">Status404NotFound</span><span class="p">;</span>
+<span class="w">            </span><span class="n">context</span><span class="p">.</span><span class="n">ProblemDetails</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Invalid ID"</span><span class="p">;</span>
+<span class="w">            </span><span class="n">context</span><span class="p">.</span><span class="n">ProblemDetails</span><span class="p">.</span><span class="n">Status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StatusCodes</span><span class="p">.</span><span class="n">Status404NotFound</span><span class="p">;</span>
+<span class="w">            </span><span class="n">context</span><span class="p">.</span><span class="n">ProblemDetails</span><span class="p">.</span><span class="n">Detail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$"No product with ID {ex.Id}"</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">);</span>
 </code></pre></div>
 <p>A middleware pipeline-ba az alábbi beépített middleware-eket kell felvenni a csővezeték elejére:</p>
 <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="n">Build</span><span class="p">();</span>
@@ -1618,8 +1682,6 @@ Ha aszinkronból szinkronba váltunk, csökkentjük a hatékonyságot, rosszabb 
 <p>Az <em>Async</em> végződés alkalmazása kontroller műveletek nevében jelenleg nem ajánlott, mert könnyen <a href="https://github.com/dotnet/aspnetcore/issues/8998">hibákba futhatunk</a>.</p>
 </div>
 <p>Próbáljuk ki, hogy továbbra is működik a módosított művelet.</p>
-<h2 id="vegallapot">Végállapot<a class="headerlink" href="#vegallapot" title="Permanent link">¶</a></h2>
-<p>A végállapot elérhető a kapcsolódó GitHub repo <a href="https://github.com/bmeviauav24/WebApiLab-kiindulo/tree/megoldas">megoldas ágán</a> is.</p>
 <hr>
 <div class="md-source-file">
 <span class="md-source-file__fact"> <span class="md-icon" title="Utolsó frissítés"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1627,8 +1689,8 @@ Ha aszinkronból szinkronba váltunk, csökkentjük a hatékonyságot, rosszabb 
 </path>
 </svg>
 </span>
-<span title="2026. május 19. 13:14:55">
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026. május 19. 13:14:55 CEST"><span class="timeago" datetime="2026-05-19T13:14:55+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026. május 19. 13:14:55 CEST">2026-05-19</span>
+<span title="2026. május 19. 13:58:36">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026. május 19. 13:58:36 CEST"><span class="timeago" datetime="2026-05-19T13:58:36+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026. május 19. 13:58:36 CEST">2026-05-19</span>
 </span>
 </span>
 <span class="md-source-file__fact">
