@@ -16,7 +16,7 @@
 <link href="../../../css/timeago.css" rel="stylesheet">
 <link href="../../../extra-material-theme.css" rel="stylesheet">
 <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-<link href="../../../assets/stylesheets/extra-style.88j10k8k.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+<link href="../../../assets/stylesheets/extra-style.i0x8qsp8.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -427,6 +427,37 @@
       
     </span>
 </a>
+<nav aria-label="DTO osztályok" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#automapper-konfiguracio">
+<span class="md-ellipsis">
+      
+        AutoMapper konfiguráció
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#map-hasznalata">
+<span class="md-ellipsis">
+      
+        Map használata
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#projectto-hasznalata">
+<span class="md-ellipsis">
+      
+        ProjectTo használata
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#bll-funkciok-implementacioja">
@@ -783,6 +814,37 @@
       
     </span>
 </a>
+<nav aria-label="DTO osztályok" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#automapper-konfiguracio">
+<span class="md-ellipsis">
+      
+        AutoMapper konfiguráció
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#map-hasznalata">
+<span class="md-ellipsis">
+      
+        Map használata
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#projectto-hasznalata">
+<span class="md-ellipsis">
+      
+        ProjectTo használata
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#bll-funkciok-implementacioja">
@@ -973,16 +1035,16 @@
 </li>
 </ul>
 <p>Adjunk hozzá a solution-höz egy új C# nyelvű web API projektet (ASP.NET Core Web <strong>API</strong>, nem pedig Web App), a neve legyen <code>WebApiLab.Api</code>.</p>
-<p>A következő dialógusablakban válasszuk ki a <em>.NET 8</em> opciót. Az extrák közül <strong>ne</strong> kérjük ezeket: HTTPS, Docker, authentikáció. Viszont hagyjuk bepipálva a Controller és az OpenAPI támogatást. A generált projektből törölhetjük a minta API fájljait, azaz a <code>Weather</code> kezdetű fájlokat a projekt gyökeréből és a <code>Controllers</code> mappából.</p>
+<p>A következő dialógusablakban válasszuk ki a <em>.NET 10</em> opciót. Az extrák közül <strong>ne</strong> kérjük ezeket: HTTPS, Docker, authentikáció. Viszont hagyjuk bepipálva a Controller és az OpenAPI támogatást.
+A generált projektből törölhetjük a minta API fájljait, azaz a <code>Weather</code> kezdetű fájlokat a projekt gyökeréből és a <code>Controllers</code> mappából.</p>
 <p>Adjuk hozzá függőségként:</p>
 <ul>
-<li>a <em>BLL</em> projektet (menu:projekten jobbklikk[Dependencies &gt; Add Project Reference…])</li>
-<li>a <em>Microsoft.EntityFrameworkCore.Tools</em> NuGet csomagot. Válasszunk olyan verziót, ami egyezik a DAL projekt Entity Framework Core függőségének verziójával.</li>
+<li>a <em>BLL</em> projektet (<em>Api projekt Dependencies jobb gomb / Add Project Reference…</em>)</li>
 </ul>
 <div class="admonition warning microsoft csomagok verziózása">
 <p class="admonition-title">Warning</p>
 <p>Olyan csomagoknál, ahol a verziószámozás követi az alap keretrendszer verziószámozását, törekedjünk arra, hogy a csomagok verziói konzisztensek legyenek egymással és a keretrendszer verziójával is - akkor is, ha egyébként a függőségi szabályok engednék a verziók keverését.
-Ha a projektünk például .NET 8-os keretrendszert használ, akkor az Entity Framework Core és egyéb extra ASP.NET Core csomagok közül is olyan verziót válasszunk, ahol legalább a főverzió egyezik, tehát valamilyen 8.x verziót. Ez nem azt jelenti, hogy az inkonzisztens verziók mindig hibát eredményeznek, inkább a projekt általában stabilabb, ha a főverziók közötti váltást egyszerre, külön migrációs folyamat (<a href="https://learn.microsoft.com/en-us/aspnet/core/migration/31-to-60">példa</a>) keretében végezzük.</p>
+Ha a projektünk például .NET 10-es keretrendszert használ, akkor az Entity Framework Core és egyéb extra ASP.NET Core csomagok közül is olyan verziót válasszunk, ahol legalább a főverzió egyezik, tehát valamilyen 10.x verziót. Ez nem azt jelenti, hogy az inkonzisztens verziók mindig hibát eredményeznek, inkább a projekt általában stabilabb, ha a főverziók közötti váltást egyszerre, külön migrációs folyamat (<a href="https://learn.microsoft.com/en-us/aspnet/core/migration/31-to-60">példa</a>) keretében végezzük.</p>
 </div>
 <h2 id="az-ef-bekotese-az-aspnet-core-di-naplozo-konfiguralo-rendszereibe">Az EF bekötése az ASP.NET Core DI, naplózó, konfiguráló rendszereibe<a class="headerlink" href="#az-ef-bekotese-az-aspnet-core-di-naplozo-konfiguralo-rendszereibe" title="Permanent link">¶</a></h2>
 <p>A kontext konfigurálása az EF gyakorlat során - mivel ott egy sima konzol alkalmazást írtunk - a kontext <code>OnConfiguring</code> függvényében történt.
@@ -1000,7 +1062,7 @@ Viszont egy új kontext konstruktorra lesz szükségünk, ami <code>DbContextOpt
 <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Az Entity Framework gyakorlat alapján hozzunk létre egy új LocalDB adatbázist egy választott névvel, pl. neptun kód, northwind, stb. Az SQL Server Object Explorer-ből a connection string-et lopjuk el. (menu:nyissuk le az adatbáziskapcsolatot[jobbklikk az adatbázison &gt; Properties &gt; a Properties ablakból a <em>Connection String</em> értéke]).</p>
+<p>Az Entity Framework gyakorlat alapján hozzunk létre egy új LocalDB adatbázist egy választott névvel, pl. neptun kód. Az SQL Server Object Explorer-ből a connection string-et lopjuk el. (<em>nyissuk le az adatbáziskapcsolatot / jobbklikk az adatbázison / Properties / a Properties ablakból a Connection String értéke</em>).</p>
 <p>Az <em>appsettings.Development.json</em>-ba vegyük fel a connection string-et és a generált SQL megfigyeléséhez a <em>Microsoft</em> kategóriájú naplók minimum szintjét csökkentsük <em>Information</em>-re.</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">"Logging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1021,29 +1083,21 @@ Viszont egy új kontext konstruktorra lesz szükségünk, ami <code>DbContextOpt
 <p>Az adatbáziskapcsolatot azért kellhet lenyitni, hogy az SQL Server Object Explorer csatlakozzon is az új adatbázishoz, ezután tudjuk megszerezni a connection stringet.</p>
 </div>
 <h3 id="adatbazis-inicializalasa-code-first-migracioval">Adatbázis inicializálása Code-First migrációval<a class="headerlink" href="#adatbazis-inicializalasa-code-first-migracioval" title="Permanent link">¶</a></h3>
-<p>Fordítsuk a teljes solution-t, állítsuk be indítandó (startup) projektnek az új Web API projektet (menu:jobbklikk a projekten[Set as Startup Project]).
-A <em>Package Manager Console</em>-t nyissuk meg, és állítsuk be Default Project-ként a DAL projektet.</p>
-<p>.NET 8-ban a migrációk csak akkor <a href="https://github.com/dotnet/SqlClient/issues/2239">működnek rendesen</a>, ha az API projekten kikapcsoljuk az InvariantGlobalization beállítást. Ezt a <em>WebApiLab.Api.csproj</em> fájlban tehetjük meg:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;InvariantGlobalization&gt;</span>false<span class="nt">&lt;/InvariantGlobalization&gt;</span>
-</code></pre></div>
-<p>Készíttessük el a migrációt és futtassuk is le:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">Add-Migration</span> <span class="n">Init</span>
-<span class="nb">Update-Database</span>
+<p>Fordítsuk a teljes solution-t, állítsuk be indítandó (startup) projektnek az új Web API projektet (<em>jobbklikk a projekten / Set as Startup Project</em>).
+Nyissunk egy terminált a solution gyökerében, és navigáljunk el a <code>WebApiLab.DAL</code> könyvtárba, majd készítsünk egy migrációt és futtassuk le.
+Szükséges megadni a <code>-s</code> kapcsolóval az API projekt helyét, hogy a migrációs eszköz a futtatható projektből kiolvashassa a connection stringet.</p>
+<div class="highlight"><pre><span></span><code>dotnet ef migrations add Init -s ..\WebApiLab.Api\
+dotnet ef database update -s ..\WebApiLab.Api\
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Projektek a migrációhoz</p>
-<p>Fontos, hogy a fenti parancs két projektet ismerjen: azt, amelyikben a kontext van, ill. a kontextet használó futtatható projektet.
-A VS Package Manager Console-jában futtatva alapértelmezésben az előbbit a Default Project értéke adja meg, utóbbit az indítandó projekt.
-Továbbá ezeket a projekteket meg lehet adni <a href="https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/powershell#common-parameters">paraméterként</a> is.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Migráció során lefut a Program.cs is?</p>
-<p>Igen, itt mutatkozik meg, hogy a migráció lényegében egy teljes alkalmazásindítást jelent a <code>Program</code> osztályon keresztül: inicializálódik a DI konténer, a konfigurációs objektum stb.</p>
+<p>Fontos, hogy a fenti parancs két projektet ismerjen: azt, amelyikben a kontext van, ill. a kontextet használó futtatható projektet.</p>
+<p>Itt mutatkozik meg, hogy a migráció lényegében egy teljes alkalmazásindítást jelent a <code>Program</code> osztályon keresztül: inicializálódik a DI konténer, a konfigurációs objektum stb.</p>
 </div>
 <p>Ellenőrizzük az SQL Server Object Explorer-ben, hogy rendben lefutott-e a migráció, létrejöttek-e az adatbázis objektumok, feltöltődtek-e a táblák.</p>
 <h2 id="ef-entitasok-hasznalata-az-api-feluleten">EF entitások használata az API felületen<a class="headerlink" href="#ef-entitasok-hasznalata-az-api-feluleten" title="Permanent link">¶</a></h2>
 <p>Bár architektúra szempontból nem a legszebb, a BLL réteget gyakorlatilag mellőzve közvetlenül is használhatjuk az EF entitásokat a kontrollerek megvalósításánál. Ehhez használhatjuk a Visual Studio Entity Framework-ös Controller sablonjait, amit most csak azért használunk, hogy gyorsan legyen egy működő API felületünk.</p>
-<p>Adjunk hozzá egy új Controllert a <em>Controllers</em> mappába (menu:Add[Controller &gt; bal fában Common &gt; API &gt; jobb oldalon API Controller with read/write actions]) <code>EFProductController</code> néven.</p>
+<p>Adjunk hozzá egy új Controllert a <em>Controllers</em> mappába (<em>Add / Controller / bal fában Common / API / jobb oldalon API Controller with read/write actions</em>) <code>EFProductController</code> néven.</p>
 <figure>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/new-ef-controller1.png"><img alt="new ef controller" src="../images/new-ef-controller1.png"></a></p>
 </figure>
@@ -1055,10 +1109,24 @@ Továbbá ezeket a projekteket meg lehet adni <a href="https://docs.microsoft.co
 <p class="admonition-title">névterek</p>
 <p>Figyeljünk rá, hogy <strong>ne</strong> a <code>Dtos</code> névtérből adjuk meg a DTO típust a tényleges entitástípus helyett.</p>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Generálás hibára fut</p>
+<details class="warning">
+<summary>Generálás hibára fut</summary>
 <p>A generálás során <em>Unable to create an object of type <code>AppDbContext</code>.</em> hibát kaphatunk. A hiba a kódgeneráló eszközben keresendő, a <a href="https://github.com/dotnet/Scaffolding/issues/1875">kapcsolódó GitHub issue-ban</a> találunk egy lehetséges megoldást is a problémára, ami elő van készítve a kiinduló projektben is.</p>
-</div>
+</details>
+<p>A swagger használatához szükséges még egy swagger ui implementációt behúznunk a projektbe, mivel jelenleg csak az openapi leíró publikálása van beállítva alapértelmezetten a projektben. Legyen ez a csomag az <code>NSwag.AspNetCore</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">"NSwag.AspNetCore"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"14.7.1"</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<p>A swagger ui-t pedig egy plusz middleware segítségével engedélyezhetjük, de előtte sajnos vissza kell állnunk 3.0-as verzióra, mert a 3.1-es verzióban egyelőre nem működik a swagger ui megjelenítése.</p>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddOpenApi</span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">OpenApiVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Microsoft</span><span class="p">.</span><span class="n">OpenApi</span><span class="p">.</span><span class="n">OpenApiSpecVersion</span><span class="p">.</span><span class="n">OpenApi3_0</span><span class="p">);</span>
+</span>
+<span class="c1">//...</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">Environment</span><span class="p">.</span><span class="n">IsDevelopment</span><span class="p">())</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">MapOpenApi</span><span class="p">();</span>
+<span class="hll"><span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">UseSwaggerUi</span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">DocumentPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"/openapi/v1.json"</span><span class="p">);</span>
+</span><span class="p">}</span>
+</code></pre></div>
 <p>A legenerálódó kontroller már használható is. Állítsuk át a zöld nyíl mellett az indítási konfigurációt a projektnevesre, hogy ne IIS Express induljon és így lássuk a konzolon a naplót.
 Indítsuk a projektet és próbáljuk például lekérni az összes terméket az <strong>api/efproduct</strong> címről vagy a Swagger felületről.</p>
 <figure>
@@ -1068,35 +1136,23 @@ Indítsuk a projektet és próbáljuk például lekérni az összes terméket az
 <p class="admonition-title">Böngésző választása debugoláshoz</p>
 <p>Érdemes a zöld nyíl melletti lenyíló menüben olyan böngészőt megadni (Chrome, Firefox), ami értelmes formában meg tudja jeleníteni a nyers JSON adatokat, ha nem Swagger felületről tesztelünk.</p>
 </div>
-<div class="admonition tip">
-<p class="admonition-title">Alapértelmezett URL útvonal</p>
-<p>Az alapértelmezésben megnyitandó URL útvonalat a projekt tulajdonságok között adhatjuk meg: menu:zöld nyíl melletti legördülő menü[\&lt;Projektnév&gt; Debug Properties].
-Ide egy a gyökércímhez képesti relatív útvonalrészt kell beírni. (pl. <em>api/efproduct</em>)</p>
-</div>
 <p>Figyeljük meg, hogy a controller a konstruktorban igényli meg a DI-tól az EF kontextet, amit a szokásos módon osztályváltozóban tárol el.</p>
 <h2 id="koztes-reteg-alkalmazasa">Köztes réteg alkalmazása<a class="headerlink" href="#koztes-reteg-alkalmazasa" title="Permanent link">¶</a></h2>
 <p>A rétegezett architektúra elveit követve gyakori eljárás, hogy a kontroller nem éri el közvetlenül az EF kontextet, hanem csak egy extra rétegen keresztül. A kontroller projekt így függetleníthető az EF modelltől.</p>
-<p>Ehhez a megoldáshoz készítsünk külön kontroller változatot. A <em>Controllers</em> mappába hozzunk létre egy kontrollert (menu:Add[Controller &gt; bal fában Common &gt; API &gt; jobb oldalon API Controller with read/write actions]) <code>ProductsController</code> néven.</p>
+<p>Ehhez a megoldáshoz készítsünk külön kontroller változatot. A <em>Controllers</em> mappába hozzunk létre egy kontrollert (<em>Add / Controller / bal fában Common / API / jobb oldalon API Controller with read/write actions</em>) <code>ProductController</code> néven.</p>
 <p>A BLL projekt Services mappájába hozzunk létre egy új osztályt <code>ProductService</code> néven.
 Az új osztály kontroller számára nyújtandó funkcióit az <code>IProductService</code> adja meg.</p>
 <p>Implementáljuk ezt az interfészt, a kiinduló implementációt generáltassuk a Visual Studio-val.
 Konstruktorban várja a függőségként a kontextet.
 A kontext segítségével implementáljuk normálisan a <code>GetProducts</code> függvényt.
 Eager Loading* használatával az egyes termékekhez a kapcsolódó kategóriát és megrendeléseket is adjuk vissza.</p>
-<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ProductService</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IProductService</span>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nf">ProductService</span><span class="p">(</span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IProductService</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">_context</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">ProductService</span><span class="p">(</span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">_context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetProducts</span><span class="p">()</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span>
 <span class="w">            </span><span class="p">.</span><span class="n">Include</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Category</span><span class="p">)</span>
-<span class="w">            </span><span class="p">.</span><span class="n">Include</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ProductOrders</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">Include</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">OrderItems</span><span class="p">)</span>
 <span class="w">                </span><span class="p">.</span><span class="n">ThenInclude</span><span class="p">(</span><span class="n">po</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">po</span><span class="p">.</span><span class="n">Order</span><span class="p">)</span>
 <span class="w">            </span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
 
@@ -1105,13 +1161,8 @@ Eager Loading* használatával az egyes termékekhez a kapcsolódó kategóriát
 <span class="w">    </span><span class="cm">/*Többi függvény generált implementációja*/</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Injektáljunk <code>IProductService</code>-t a <code>ProductsController</code>-be.</p>
-<div class="highlight"><pre><span></span><code><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IProductService</span><span class="w"> </span><span class="n">_productService</span><span class="p">;</span>
-
-<span class="k">public</span><span class="w"> </span><span class="nf">ProductsController</span><span class="p">(</span><span class="n">IProductService</span><span class="w"> </span><span class="n">productService</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">_productService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">productService</span><span class="p">;</span>
-<span class="p">}</span>
+<p>Injektáljunk <code>IProductService</code>-t a <code>ProductController</code>-be.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nf">ProductController</span><span class="p">(</span><span class="n">IProductService</span><span class="w"> </span><span class="n">productService</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span>
 </code></pre></div>
 <p>Adjuk meg a DI alrendszernek, hogy hogyan kell egy <code>IProductService</code> típusú függőséget létrehozni. A legfelső szintű kódba:</p>
 <div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddTransient</span><span class="o">&lt;</span><span class="n">IProductService</span><span class="p">,</span><span class="w"> </span><span class="n">ProductService</span><span class="o">&gt;</span><span class="p">();</span>
@@ -1129,11 +1180,11 @@ Egyrészt nem kötelező interfészt megadni egy osztály beregisztrálásához,
 <li><strong>Scoped</strong>: HTTP kérésenként egy példány kerül létrehozásra és a kérésen belül mindenkinek ez lesz injektálva</li>
 <li><strong>Singleton</strong>: mindenkinek ugyanaz az egy példány kerül átadásra kéréstől függetlenül</li>
 </ul>
-<p>Írjunk új <code>Get()</code> változatot az eredeti helyett a <code>ProductsController</code>-be az <code>IProductService</code> függőséget felhasználva:</p>
+<p>Írjunk új <code>Get()</code> változatot az eredeti helyett a <code>ProductController</code>-be az <code>IProductService</code> függőséget felhasználva:</p>
 <div class="highlight"><pre><span></span><code><span class="na">[HttpGet]</span>
 <span class="k">public</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProducts</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">GetProducts</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Próbáljuk ki (<code>api/products</code>).</p>
@@ -1158,6 +1209,7 @@ A kliensoldal számára érdemes külön modellt megalkotni, egy ún. DTO (<em>D
 <li>nincs benne a kapcsolótáblát reprezentáló entitás</li>
 <li>a termékből közvetlenül elérhetők a megrendelések</li>
 </ul>
+<h3 id="automapper-konfiguracio">AutoMapper konfiguráció<a class="headerlink" href="#automapper-konfiguracio" title="Permanent link">¶</a></h3>
 <p>A különféle modellek közötti leképezésnél jól jönnek az ún. <em>object mapper</em>-ek, melyek segítenek elkerülni a leképezésnél nagyon gyakori repetitív kódokat, mint amilyen az <code>x.Prop = y.Prop</code> jellegű propertyérték-másolgatás.</p>
 <p>Adjuk hozzá az API és a BLL projekthez az <em>AutoMapper</em> csomagot.</p>
 <div class="admonition tip">
@@ -1165,16 +1217,16 @@ A kliensoldal számára érdemes külön modellt megalkotni, egy ún. DTO (<em>D
 <p>Alap esetben elég lenne csak a BLL projekthez felvenni a nuget csomagot, mivel az API projekt hivatkozik a BLL-re, az az ott behivatkozott csomagokat is láthatja (mint ahogy az EF-et is hivatkoztuk fentebbi rétegekből).
 Az AutoMapper-t viszont explicit be kell hivatkoznunk az API projektbe is, mert a BLL-ben behivatkozott, class library-val kompatibilis csomag nem tartalmazza az ASP.NET Core-hez szükséges konfigurációs függvényeket.</p>
 </div>
-<p>A leképezési konfigurációkat profilokba szervezve adhatjuk meg. Adjunk hozzá a BLL projekthez egy új osztályt <code>WebApiProfile</code> néven a <em>Dtos</em> mappába.
+<p>A leképezési konfigurációkat profilokba szervezve adhatjuk meg. Adjunk hozzá a BLL projekthez egy új osztályt <code>MappingProfile</code> néven a <em>Dtos</em> mappába.
 Az AutoMapper konvenció alapon működik, tehát a DTO-entitás párokon kívül nem kell megadni például egyesével a property- vagy konstruktorparaméter-leképezéseket, ha a nevek alapján a leképezés kikövetkeztethető.
 Külön konfigurálásra csak a nem-triviális esetekben van szükség.</p>
 <div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">AutoMapper</span><span class="p">;</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">WebApiLab.Bll.Dtos</span><span class="p">;</span>
 
-<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">WebApiProfile</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Profile</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MappingProfile</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Profile</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">WebApiProfile</span><span class="p">()</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">MappingProfile</span><span class="p">()</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="n">CreateMap</span><span class="o">&lt;</span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span><span class="p">,</span><span class="w"> </span><span class="n">Product</span><span class="o">&gt;</span><span class="p">().</span><span class="n">ReverseMap</span><span class="p">();</span>
 <span class="w">        </span><span class="n">CreateMap</span><span class="o">&lt;</span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Order</span><span class="p">,</span><span class="w"> </span><span class="n">Order</span><span class="o">&gt;</span><span class="p">().</span><span class="n">ReverseMap</span><span class="p">();</span>
@@ -1183,34 +1235,19 @@ Külön konfigurálásra csak a nem-triviális esetekben van szükség.</p>
 <span class="p">}</span>
 </code></pre></div>
 <p>A DI konténerhez adjuk hozzá és konfiguráljuk a leképezési szolgáltatást.</p>
-<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddAutoMapper</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">WebApiProfile</span><span class="p">));</span>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddAutoMapper</span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="k">typeof</span><span class="p">(</span><span class="n">MappingProfile</span><span class="p">).</span><span class="n">Assembly</span><span class="p">);</span>
 </code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">Típusparaméter</p>
-<p>Az AutoMapper az <code>AddAutoMapper</code> paramétereként megadott típust definiáló szerelvényben fogja a profilt keresni. A konkrét típusnak nincs más jelentősége, nem kell feltétlenül profilnak lenni.</p>
-</div>
+<p>Az AutoMapper-t konfigurálhatjuk az átadott lambda kifejezéssel vagy megadhatunk assemblyket, amikből automatikusan beregisztrákja a profilokat.</p>
+<h3 id="map-hasznalata">Map használata<a class="headerlink" href="#map-hasznalata" title="Permanent link">¶</a></h3>
 <p>Injektáéjuk be a leképzőt reprezentáló <code>IMapper</code> típusú objektumot a <code>ProductService</code>-be.</p>
-<div class="highlight"><pre><span></span><code><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">_context</span><span class="p">;</span>
-<span class="hll"><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IMapper</span><span class="w"> </span><span class="n">_mapper</span><span class="p">;</span>
-</span>
-<span class="hll"><span class="k">public</span><span class="w"> </span><span class="nf">ProductService</span><span class="p">(</span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">IMapper</span><span class="w"> </span><span class="n">mapper</span><span class="p">)</span>
-</span><span class="p">{</span>
-<span class="w">    </span><span class="n">_context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">;</span>
-<span class="hll"><span class="w">    </span><span class="n">_mapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapper</span><span class="p">;</span>
-</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nf">ProductService</span><span class="p">(</span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">IMapper</span><span class="w"> </span><span class="n">mapper</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IProductService</span>
 </code></pre></div>
-<p>A <code>ProductsController</code>-ben, az <code>IProductService</code>-ben és a <code>ProductService</code>-ben az entitásokra mutató névteret cseréljük ki a DTO-kra mutatóra:</p>
+<p>A <code>ProductController</code>-ben, az <code>IProductService</code>-ben és a <code>ProductService</code>-ben az entitásokra mutató névteret cseréljük ki a DTO-kra mutatóra:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">//using WebApiLab.Dal.Entities;</span>
 <span class="k">using</span><span class="w"> </span><span class="nn">WebApiLab.Bll.Dtos</span><span class="p">;</span>
 </code></pre></div>
-<p>Írjuk át a lekérdezést a <code>ProductService</code>-ben a leképzőt alkalmazva:</p>
-<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetProducts</span><span class="p">()</span>
-<span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span>
-</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">ProjectTo</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_mapper</span><span class="p">.</span><span class="n">ConfigurationProvider</span><span class="p">)</span>
-</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
-</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">products</span><span class="p">;</span>
-<span class="p">}</span>
+<p>Írjuk át a product service-ben a <code>GetProducts</code> függvényt, hogy a DTO-kat adja vissza.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mapper</span><span class="p">.</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">products</span><span class="p">);</span>
 </code></pre></div>
 <p>Hogy ne zavarjanak be a Swaggernek az <code>EFProductController</code>-ben használt entitás osztályok, töröljük ki a Controllers mappából az <code>EFProductController</code>-t!</p>
 <p>Próbáljuk ismét meghívni böngészőből, figyeljük meg a naplóban, hogy milyen SQL lekérdezés fut le.</p>
@@ -1219,8 +1256,18 @@ Külön konfigurálásra csak a nem-triviális esetekben van szükség.</p>
 <p>A többrétegű architektúránál elméletben minden rétegnek külön objektummodellje kellene, hogy legyen DAL: EF entitások, BLL: <a href="https://en.wikipedia.org/wiki/Domain_model">domain objektumok</a>,
 Kontroller: DTO-k, viszont ha a domain objektumok nem visznek plusz funkciót a rendszerbe, akkor el szoktuk hagyni.</p>
 </div>
-<p>A DTO leképezést más rétegben is végezhetnénk. Egyes megközelítések szerint a kontroller réteg feladata lenne, azonban, ha az EF lekérdezésekkel összevonva végezzük a leképezést, akkor kiaknázhatjuk a <em>query result shaping</em> előnyeit, azaz csak azt kérdezzük le az adatbázisból, amire a leképezésnek szüksége van. Az AutoMapper <code>ProjectTo</code> függvénye ráadásul mindezt el is intézi helyettünk a leképezési konfiguráció alapján.</p>
+<h3 id="projectto-hasznalata">ProjectTo használata<a class="headerlink" href="#projectto-hasznalata" title="Permanent link">¶</a></h3>
+<p>Van lehetőségünk AutoMapperrel az SQL lekérdezésbe is belefordítani a mappelési logikát, ez a <code>ProjectTo</code> függvény használatával érhető el.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetProducts</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">ProjectTo</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mapper</span><span class="p">.</span><span class="n">ConfigurationProvider</span><span class="p">)</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">products</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>A <code>ProjectTo</code> metódust felfoghatjuk a továbbiakban egy LINQ-s <code>Select()</code> operátornak, annyi különbséggel, hogy az AutoMapper generálja azt az <code>Expression</code>-t, ami alapján előáll majd az eredmény.</p>
+<p>A DTO leképezést más rétegben is végezhetnénk. Egyes megközelítések szerint a kontroller réteg feladata lenne, azonban, ha az EF lekérdezésekkel összevonva végezzük a leképezést, akkor kiaknázhatjuk a <em>query result shaping</em> előnyeit, azaz csak azt kérdezzük le az adatbázisból, amire a leképezésnek szüksége van. Az AutoMapper <code>ProjectTo</code> függvénye ráadásul mindezt el is intézi helyettünk a leképezési konfiguráció alapján.</p>
 <div class="admonition tip">
 <p class="admonition-title">ProjectTo</p>
 <p>A <code>ProjectTo</code> speciálisan <code>IQueryable</code>-en működik.
@@ -1233,8 +1280,8 @@ A <code>ProjectTo</code> ezt is elintézi helyettünk.</p>
 <p>Valósítsunk meg további interfész által előírt funkciókat a <code>ProductService</code> osztályban:</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="nf">GetProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span>
-</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">ProjectTo</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_mapper</span><span class="p">.</span><span class="n">ConfigurationProvider</span><span class="p">)</span>
+<span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">ProjectTo</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mapper</span><span class="p">.</span><span class="n">ConfigurationProvider</span><span class="p">)</span>
 </span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
 </span><span class="hll"><span class="w">        </span><span class="o">??</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EntityNotFoundException</span><span class="p">(</span><span class="s">"Nem található a termék"</span><span class="p">,</span><span class="w"> </span><span class="n">productId</span><span class="p">);</span>
 </span><span class="p">}</span>
@@ -1251,9 +1298,9 @@ Ha több elemet is várható egy lekérdezés eredményeként, de biztosak vagyu
 A <code>SaveChanges</code> hívás után a kulcs értéke már ki lesz töltve (adatbázis osztja ki a kulcsot).</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="nf">InsertProduct</span><span class="p">(</span><span class="n">Product</span><span class="w"> </span><span class="n">newProduct</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_mapper</span><span class="p">.</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">newProduct</span><span class="p">);</span>
-</span><span class="hll"><span class="w">    </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">efProduct</span><span class="p">);</span>
-</span><span class="hll"><span class="w">    </span><span class="n">_context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapper</span><span class="p">.</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">newProduct</span><span class="p">);</span>
+</span><span class="hll"><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">efProduct</span><span class="p">);</span>
+</span><span class="hll"><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
 </span><span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">GetProduct</span><span class="p">(</span><span class="n">efProduct</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
 </span><span class="p">}</span>
 </code></pre></div>
@@ -1262,10 +1309,10 @@ A <code>SaveChanges</code> hívás után a kulcs értéke már ki lesz töltve (
 Mentés után pedig visszaadjuk a módosított elemet.</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="nf">UpdateProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">,</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
+<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
 </span><span class="hll"><span class="w">        </span><span class="o">??</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EntityNotFoundException</span><span class="p">(</span><span class="s">"Nem található a termék"</span><span class="p">,</span><span class="w"> </span><span class="n">productId</span><span class="p">);</span>
-</span><span class="hll"><span class="w">    </span><span class="n">_mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">(</span><span class="n">updatedProduct</span><span class="p">,</span><span class="w"> </span><span class="n">efProduct</span><span class="p">);</span>
-</span><span class="hll"><span class="w">    </span><span class="n">_context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+</span><span class="hll"><span class="w">    </span><span class="n">mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">(</span><span class="n">updatedProduct</span><span class="p">,</span><span class="w"> </span><span class="n">efProduct</span><span class="p">);</span>
+</span><span class="hll"><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
 </span><span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">GetProduct</span><span class="p">(</span><span class="n">efProduct</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
 </span><span class="p">}</span><span class="w">        </span>
 </code></pre></div>
@@ -1278,10 +1325,10 @@ Ilyenkor spórolunk egy lekérdezést, de a SaveChanges hibával térhet vissza 
 <p>Hasonlóan az előzőekhez, csak itt a <code>Remove</code> függvényt hívjuk meg a kontextuson.</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">DeleteProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
+<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">efProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
 </span><span class="hll"><span class="w">        </span><span class="o">??</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EntityNotFoundException</span><span class="p">(</span><span class="s">"Nem található a termék"</span><span class="p">,</span><span class="w"> </span><span class="n">productId</span><span class="p">);</span>
-</span><span class="hll"><span class="w">    </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">efProduct</span><span class="p">);</span>
-</span><span class="hll"><span class="w">    </span><span class="n">_context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+</span><span class="hll"><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">efProduct</span><span class="p">);</span>
+</span><span class="hll"><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
 </span><span class="p">}</span>
 </code></pre></div>
 <div class="admonition tip">
@@ -1289,8 +1336,8 @@ Ilyenkor spórolunk egy lekérdezést, de a SaveChanges hibával térhet vissza 
 <p>Egy trükkel elkerülhetjük, hogy le kelljen kérdezni a törlendő terméket. Az azonosító alapján előállítunk memóriában egy példányt a megfelelő kulccsal, majd <code>Remove</code> függvénnyel hozzáadjuk a kontexthez. A <code>Remove</code> törlendőnek jelöli a példányt, de itt is hibaágakra kell készülni, ha nem létező elemet próbálunk törölni.</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">DeleteProduct</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span><span class="p">(</span><span class="k">null</span><span class="o">!</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">productId</span><span class="w"> </span><span class="p">});</span>
-<span class="w">    </span><span class="n">_context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Dal</span><span class="p">.</span><span class="n">Entities</span><span class="p">.</span><span class="n">Product</span><span class="p">(</span><span class="k">null</span><span class="o">!</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">productId</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
 </div>
@@ -1311,18 +1358,18 @@ Emellett, ha egy teljesértékű HTTP kliensre van szükségünk, amivel példá
 A Fiddler mint proxy megoldás egy Windows gépen folyó HTTP kommunikáció megfigyelésére is alkalmas.</p>
 </div>
 <p>Első körben a két lekérdező függvényt írjuk át úgy, hogy a HTTP válaszkódokat explicit megadjuk.
-A jelenlegi ajánlás ehhez az <code>ActionResult&lt;&gt;</code> használata. Elég <code>T</code>-t visszaadnunk a függvényben, automatikusan <code>ActionResult&lt;T&gt;</code> típussá konvertálódik.</p>
+A jelenlegi ajánlás ehhez az <code>ActionResult&lt;T&gt;</code> használata. Elég <code>T</code>-t visszaadnunk a függvényben, automatikusan <code>ActionResult&lt;T&gt;</code> típussá konvertálódik.</p>
 <div class="highlight"><pre><span></span><code><span class="na">[HttpGet]</span>
 <span class="hll"><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">()</span>
 </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProducts</span><span class="p">();</span><span class="w"> </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">GetProducts</span><span class="p">();</span><span class="w"> </span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Írjuk meg ugyanígy a másik <code>Get</code> függvényt is:</p>
 <div class="highlight"><pre><span></span><code><span class="na">[HttpGet("{id}")]</span>
 <span class="hll"><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
 </span><span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProduct</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">GetProduct</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
 </span><span class="p">}</span>
 </code></pre></div>
 <p>Próbáljuk ki mindkét kontroller függvényt (<em>api/products</em>, <em>api/products/1</em>), ellenőrizzük a státuszkódokat is.</p>
@@ -1333,7 +1380,7 @@ A logikánk most még nagyon egyszerű, csak a hibamentes ágat kezeltük, így 
 <div class="highlight"><pre><span></span><code><span class="na">[HttpPost]</span>
 <span class="hll"><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Post</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">product</span><span class="p">)</span>
 </span><span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">InsertProduct</span><span class="p">(</span><span class="n">product</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">InsertProduct</span><span class="p">(</span><span class="n">product</span><span class="p">);</span>
 </span><span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">CreatedAtAction</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">Get</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">created</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">created</span><span class="p">);</span>
 </span><span class="p">}</span>
 </code></pre></div>
@@ -1350,6 +1397,10 @@ Most ideiglenesen tegyük nullozhatóvá ezt a két propertyt.</p>
 <div class="highlight"><span class="filename">Product.cs</span><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="n">Category</span><span class="o">?</span><span class="w"> </span><span class="n">Category</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">//? módosító bekerült</span>
 <span class="k">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;?</span><span class="w"> </span><span class="n">Orders</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">//? módosító bekerült</span>
 </code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">DTO-k létrehozása művelet típusonként</p>
+<p>Gyakori, hogy külön DTO-kat hozunk létre művelet típusonként, pl. <code>CreateProductRequest</code>, <code>UpdateProductRequest</code> stb., amik a műveletek igényei szerint tartalmazzák az adatokat.</p>
+</div>
 <p>Próbáljuk ki a műveletet Swagger felületről. Egy <code>Product</code>-ot kell felküldenünk. Erre egy példa érték:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">"Name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Pálinka"</span><span class="p">,</span>
@@ -1372,7 +1423,7 @@ Most ideiglenesen tegyük nullozhatóvá ezt a két propertyt.</p>
 <div class="highlight"><pre><span></span><code><span class="na">[HttpPut("{id}")]</span>
 <span class="hll"><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Put</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">product</span><span class="p">)</span>
 </span><span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">UpdateProduct</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">UpdateProduct</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p">);</span>
 </span><span class="p">}</span>
 </code></pre></div>
 <div class="admonition tip">
@@ -1392,7 +1443,7 @@ Ilyesfajta válasz előállításához is van segédfüggvény, illetve elég cs
 <div class="highlight"><pre><span></span><code><span class="na">[HttpDelete("{id}")]</span>
 <span class="hll"><span class="k">public</span><span class="w"> </span><span class="n">ActionResult</span><span class="w"> </span><span class="nf">Delete</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
 </span><span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="n">_productService</span><span class="p">.</span><span class="n">DeleteProduct</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="n">productService</span><span class="p">.</span><span class="n">DeleteProduct</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
 </span><span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">NoContent</span><span class="p">();</span>
 </span><span class="p">}</span>
 </code></pre></div>
@@ -1576,8 +1627,8 @@ Ha aszinkronból szinkronba váltunk, csökkentjük a hatékonyságot, rosszabb 
 </path>
 </svg>
 </span>
-<span title="2024. április 15. 13:51:28">
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2024. április 15. 13:51:28 CEST"><span class="timeago" datetime="2024-04-15T13:51:28+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2024. április 15. 13:51:28 CEST">2024-04-15</span>
+<span title="2026. május 19. 13:14:55">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026. május 19. 13:14:55 CEST"><span class="timeago" datetime="2026-05-19T13:14:55+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026. május 19. 13:14:55 CEST">2026-05-19</span>
 </span>
 </span>
 <span class="md-source-file__fact">
