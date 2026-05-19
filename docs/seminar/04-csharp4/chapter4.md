@@ -1,8 +1,8 @@
 # C# alapok IV.
 
 Ezen a gyakorlaton több különféle nyelvi konstrukciót tekintünk át, vegyesfelvágott jelleggel.
-Az egyes fő témaköröket külön projektként dolgozzuk ki. A projekteket hozzáadhatjuk az elsőként létrehozott projekt solutionjéhez (menu:jobbklikk a solution-ön\[Add \> New project\]).
-Hozzáadás után ne felejtsük el átállítani a futtatandó projektet: menu:jobbklikk a projekten\[Set as Startup Project\].
+Az egyes fő témaköröket külön projektként dolgozzuk ki. A projekteket hozzáadhatjuk az elsőként létrehozott projekt solutionjéhez (*jobbklikk a solution-ön / Add / New project*).
+Hozzáadás után ne felejtsük el átállítani a futtatandó projektet: *jobbklikk a projekten / Set as Startup Project*.
 
 ## Bejárási problémák
 
@@ -29,22 +29,24 @@ A kollekciót bejárás közben szerettük volna módosítani, viszont ez könny
 Oldjuk meg a problémát: nem módosíthatjuk a forrás objektumot bejárás közben, tehát ne azt a kollekciót járjuk be, másoljuk le!
 
 ``` csharp hl_lines="1"
-foreach (var p in numbers.ToList()) // a ToList bekerült
+foreach (var p in numbers.ToList()) // (1)
 {
     // ...
 }
 ```
 
+1. A `ToList` bekerült
+
 Ez megoldja a problémát, sikerül eltávolítani az elemeket a kollekcióból. De miért?
-A `ToList` `IEnumerable` bővítő, tehát bejárhatja a kollekciót, ezután pedig egy **másik** `List<>` objektumban tárolja az elemeket.
+A `ToList` `IEnumerable` bővítő, tehát bejárhatja a kollekciót, ezután pedig egy **másik** `List<T>` objektumban tárolja az elemeket.
 Így tehát két listánk lesz (a `numbers` és a `numbers.ToList` visszatérési értéke), amik kezdetben egymás klónjai, menet közben az egyikből veszünk ki, a másikon pedig iterálunk.
 
 !!! tip "Kivételek"
-    Bár a fenti az általános szabály, bizonyos kollekciók bizonyos módosító műveletei mégsem dobnak kivételt, ilyen például a `Dictionary<,>` `Remove` és `Clear` műveletei.
+    Bár a fenti az általános szabály, bizonyos kollekciók bizonyos módosító műveletei mégsem dobnak kivételt, ilyen például a `Dictionary<K,V>` `Remove` és `Clear` műveletei.
 
 ### Azonnali és késleltetett kiértékelés
 
-Amennyiben egy metódus generátor (`IEnumerable` vagy `IEnumerable<>` visszatérési értékű), az egyes elemeken történő iteráció a generátorok egymásba ágyazását jelenti, azaz az egyes generátorokban a `yield return` által visszaadott értéket fogja az enumerátor `MoveNext` metódusa visszaadni.
+Amennyiben egy metódus generátor (`IEnumerable` vagy `IEnumerable<T>` visszatérési értékű), az egyes elemeken történő iteráció a generátorok egymásba ágyazását jelenti, azaz az egyes generátorokban a `yield return` által visszaadott értéket fogja az enumerátor `MoveNext` metódusa visszaadni.
 Amíg az `IEnumerable`-re van referenciánk, és nem járjuk azt közvetlenül be, addig *késleltetett kiértékelésről* beszélünk.
 
 Az eddigiek alá:
@@ -123,7 +125,7 @@ Akár létre is hozhatunk egy `Task`-ot, amit egy lokális változóban tárolun
 **async:** Ha await-elni akarunk, akkor muszáj `async`-nak lennie a tartalmazó metódusnak, mert ilyenkor építi fel a fordító az aszinkron végrehajtáshoz szükséges állapotgépet.
 
 Debuggoljuk ki! Minden `Console`, `async` sorra tegyünk töréspontot, debuggolás során (++f5++) kövessük végig, milyen sorrendben éri el őket a végrehajtás.
-Nézzük meg, melyik rész milyen szálon fut le (debug közben menu:Debug\[Windows \> Threads\]).
+Nézzük meg, melyik rész milyen szálon fut le (debug közben: *Debug menü / Windows / Threads*).
 A `LoadWebPageAsync` utáni rész előbb fog lefutni, mint az első `await` utáni rész.
 Az `await` utáni rész nem a *Main Thread*-en fut.
 Figyeljük meg azt is, hogy az *Ez a vége* szöveg hamarabb kiíródik, mint a HTML oldal letöltése.
@@ -142,16 +144,20 @@ Ez akkor jó például, ha a letöltés után valamit még szeretnék elvégezni
 Módosítsuk a `LoadWebPageAsync` fejlécét, hogy taszkot adjon vissza:
 
 ``` csharp
-public static async Task LoadWebPageAsync() //void helyett Task
+public static async Task LoadWebPageAsync() // (1)!
 ```
+
+1. `void` helyett `Task`
 
 Várjuk be az aszinkron művelet végét a legfelső szintű kódban.
 
 ``` csharp hl_lines="1"
-await LoadWebPageAsync(); //await bekerült
+await LoadWebPageAsync(); // (1)!
 Console.WriteLine("Ez a vége");
 /*Console.ReadKey();*/
 ```
+
+1. `await` bekerült
 
 Figyeljük meg, hogy így már az *Ez a vége* felirat már a letöltés után jelenik meg.
 
@@ -173,7 +179,7 @@ var content = await LoadWebPageAsync();
 Console.WriteLine(content);
 Console.WriteLine("Ez a vége");
 Console.ReadKey();
-static async Task<string> LoadWebPageAsync() //generikus paraméter
+static async Task<string> LoadWebPageAsync() // (1)!
 {
     using var client = new HttpClient();
 
@@ -184,6 +190,8 @@ static async Task<string> LoadWebPageAsync() //generikus paraméter
     return new string(content.Take(1000).ToArray());
 }
 ```
+
+1. generikus `Task` visszatérési érték
 
 A `return` valójában ezen `Task` eredményét állítja be `async` metódusok esetében, és nem egy nemgenerikus `Task` objektummal kell visszatérjünk.
 
@@ -234,7 +242,7 @@ public Person(string fname, string lname, string? mname)
 
 !!! warning "Rebuild"
     Ha biztosan látni akarjuk az összes figyelmeztetést, akkor sima Build művelet helyett használjuk a Rebuild-et.
-    
+
 Ezzel meg is oldottunk minden figyelmeztetést.
 
 !!! warning "Konstruktorok"
@@ -332,18 +340,20 @@ Javítsuk ki a `GetAnotherPerson` hívás miatti fals pozitív esetet az `M(Pers
 
 ``` csharp hl_lines="2"
 p = GetAnotherPerson();
-WriteLine(p.MiddleName!.Length); //bekerült egy '!'
+WriteLine(p.MiddleName!.Length); // (1)! 
 ```
+
+1. bekerült egy `!`
 
 Figyeljük meg, ahogy a figyelmeztetés eltűnik.
 
 Ha igazán elkötelezettek vagyunk a `null` kiirtása mellett, akkor bekapcsolhatjuk, hogy minden, a `null` kezelés miatti, fordító által detektált figyelmeztetés legyen hiba.
-A projekt beállítási között (menu:a projekten jobbklikk\[Properties\]), a *Build* lapon adjuk meg a *Treat specific warnings as errors* opciónak a `nullable` értéket.
+A projekt beállítási között (*a projekten jobbklikk / Properties*), a *Build* lapon adjuk meg a *Treat specific warnings as errors* opciónak a `nullable` értéket.
 (Ha több értéket akarunk megadni, akkor a `;` elválasztót alkalmazhatjuk.)
 
 Ellenőrizzük, hogy tényleg hibaként jelennek-e meg az eddigi `null` kezelés miatti figyelmeztetések.
 
-Mivel ez csak egy példakód, ne javítsuk ki a hibákat, csak távolítsuk el a projektet a solutionből (menu:a projekten jobbklikk\[Remove\]).
+Mivel ez csak egy példakód, ne javítsuk ki a hibákat, csak távolítsuk el a projektet a solutionből (*a projekten jobbklikk / Remove*).
 
 ## Tuple nyelvi szinten, lokális függvények, Dispose minta
 
