@@ -16,7 +16,7 @@
 <link href="../../../css/timeago.css" rel="stylesheet">
 <link href="../../../extra-material-theme.css" rel="stylesheet">
 <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-<link href="../../../assets/stylesheets/extra-style.99nzd7qb.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+<link href="../../../assets/stylesheets/extra-style.gwlrm0y7.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -353,10 +353,41 @@
 <a class="md-nav__link" href="#ienumerablet-bovito-metodusok">
 <span class="md-ellipsis">
       
-        IEnumerable\&lt;T&gt; bővítő metódusok
+        IEnumerable&lt;T&gt; bővítő metódusok
       
     </span>
 </a>
+<nav aria-label="IEnumerable&lt;T&gt; bővítő metódusok" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#segedosztaly">
+<span class="md-ellipsis">
+      
+        Segédosztály
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#segedosztalyok-helyett-bovito-metodusok">
+<span class="md-ellipsis">
+      
+        Segédosztályok helyett bővítő metódusok
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#extension-members">
+<span class="md-ellipsis">
+      
+        Extension members
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#gyakori-lekerdezo-muveletek-yield-return">
@@ -389,11 +420,11 @@
 <a class="md-nav__link" href="#kitekinto-expression-linq-providerek">
 <span class="md-ellipsis">
       
-        Kitekintő: Expression\&lt;&gt;, LINQ providerek
+        Kitekintő: Expression&lt;&gt;, LINQ providerek
       
     </span>
 </a>
-<nav aria-label="Kitekintő: Expression\&lt;&gt;, LINQ providerek" class="md-nav">
+<nav aria-label="Kitekintő: Expression&lt;&gt;, LINQ providerek" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#a-linq-providerek-altalanos-mukodese">
@@ -628,10 +659,41 @@
 <a class="md-nav__link" href="#ienumerablet-bovito-metodusok">
 <span class="md-ellipsis">
       
-        IEnumerable\&lt;T&gt; bővítő metódusok
+        IEnumerable&lt;T&gt; bővítő metódusok
       
     </span>
 </a>
+<nav aria-label="IEnumerable&lt;T&gt; bővítő metódusok" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#segedosztaly">
+<span class="md-ellipsis">
+      
+        Segédosztály
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#segedosztalyok-helyett-bovito-metodusok">
+<span class="md-ellipsis">
+      
+        Segédosztályok helyett bővítő metódusok
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#extension-members">
+<span class="md-ellipsis">
+      
+        Extension members
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#gyakori-lekerdezo-muveletek-yield-return">
@@ -664,11 +726,11 @@
 <a class="md-nav__link" href="#kitekinto-expression-linq-providerek">
 <span class="md-ellipsis">
       
-        Kitekintő: Expression\&lt;&gt;, LINQ providerek
+        Kitekintő: Expression&lt;&gt;, LINQ providerek
       
     </span>
 </a>
-<nav aria-label="Kitekintő: Expression\&lt;&gt;, LINQ providerek" class="md-nav">
+<nav aria-label="Kitekintő: Expression&lt;&gt;, LINQ providerek" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#a-linq-providerek-altalanos-mukodese">
@@ -697,19 +759,21 @@
 <p>A gyakorlat kezdetén klónozzuk le a <a href="https://github.com/bmeviauav23/Linq-lab">kiinduló projektet</a> az alábbi paranccsal:</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/bmeviauav23/Linq-lab.git
 </code></pre></div>
-<p>Nyissuk meg Visual Studio-ban a <em>HelloLinq.sln</em> solution fájlt.</p>
+<p>Nyissuk meg Visual Studio-ban a <em>HelloLinq.slnx</em> solution fájlt.</p>
 <p>Megnyitás után tekintsük át a kiinduló projektben levő fájlokat:</p>
 <ul>
-<li><strong>Program.cs</strong>: a legfelső szintű kódot tartalmazó osztály. Található benne egy <code>Dogs</code> változó, ami a <code>Dog</code> osztály statikus <code>Repository</code> tulajdonságába hív át.</li>
+<li><strong>Program.cs</strong>: a legfelső szintű kódot tartalmazó osztály. Található benne egy <code>Dogs</code> változó, ami a <code>DogRepository</code> osztály statikus <code>Dogs</code> tulajdonságába hív át.</li>
 <li><strong>Dog.cs</strong>: a korábbi gyakorlatokon használt adatmodell (apróbb módosításokkal).<ul>
-<li>Bekerült egy <code>Siblings</code> tulajdonság, a <code>ToString</code> pedig kiírja a kutyához tartozó testvérek számát is (ehhez a <code>TrimPad</code> bővítő metódust használja).</li>
+<li>Bekerült egy <code>Siblings</code> tulajdonság, a <code>ToString</code> pedig kiírja a kutyához tartozó testvérek számát is.</li>
+</ul>
+</li>
+<li><strong>DogRepository.cs</strong>: a kutyák adatait tároló osztály. A <code>Repository</code> tulajdonság egy <code>Dictionary&lt;int, Dog&gt;</code> típusú adattároló, ahol a kulcs a kutya azonosítója, az érték pedig maga a kutya objektum.<ul>
 <li>A statikus <code>Repository</code> tulajdonság mögött egy lustán inicializált <code>Lazy&lt;T&gt; RepositoryHolder</code> található, ami egy megfelelően formázott bemeneti CSV fájlból elkészíti számunkra az adatmodellt, amivel a későbbiekben dolgozunk. Ennek implementációját elég a gyakorlat végén megnézni. Az <code>Import</code> és <code>Export</code> függvények a kutyák sorosítását végzik el mindkét irányban.</li>
 </ul>
 </li>
-<li><strong>Extensions/StringExtensions.cs</strong>: ez az osztály tartalmaz egy segédmetódust a formázott kiíráshoz. A <code>Dog</code> <code>ToString</code> metódusa használja fel. A bővítő metódusos részben lesz jelentősége.</li>
 <li><strong>dogs.csv</strong>: egy pontosvesszővel tagolt adathalmaz, amelyben 100 darab előre felvett kutya adata található. Innen puskázhatunk, ha ellenőrizni akarjuk, hogy helyesek-e a programunk eredményei.</li>
 </ul>
-<p>A kiinduló projektben a globális implicit névtérhivatkozások ki vannak kapcsolva. A <strong>csproj</strong> fájlban megnézhetjük (menu:jobb klikk a projekten[Edit Project File]):</p>
+<p>A kiinduló projektben a globális implicit névtérhivatkozások ki vannak kapcsolva. A <strong>csproj</strong> fájlban megnézhetjük:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;ImplicitUsings&gt;</span>disable<span class="nt">&lt;/ImplicitUsings&gt;</span>
 </code></pre></div>
 <h2 id="lambda-kifejezesek-delegatok">Lambda kifejezések, delegátok<a class="headerlink" href="#lambda-kifejezesek-delegatok" title="Permanent link">¶</a></h2>
@@ -817,11 +881,12 @@ A kódunk azért működik, mert a delegát megadásakor a <code>searchText</cod
 <span class="w">    </span><span class="p">(</span><span class="n">Dog</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="n">searchText</span><span class="p">,</span><span class="w"> </span><span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">);</span>
 </code></pre></div>
 <p>Debugger-rel ellenőrizhetjük, hogy a <code>dogFunc</code> valódi típusa <code>Func&lt;Dog, bool&gt;</code> lesz.</p>
-<h2 id="ienumerablet-bovito-metodusok">IEnumerable\&lt;T&gt; bővítő metódusok<a class="headerlink" href="#ienumerablet-bovito-metodusok" title="Permanent link">¶</a></h2>
+<h2 id="ienumerablet-bovito-metodusok"><code>IEnumerable&lt;T&gt;</code> bővítő metódusok<a class="headerlink" href="#ienumerablet-bovito-metodusok" title="Permanent link">¶</a></h2>
+<h3 id="segedosztaly">Segédosztály<a class="headerlink" href="#segedosztaly" title="Permanent link">¶</a></h3>
 <p>Vigyük tovább az általánosítást.
 Írjunk olyan logikákat, mely nem csak kutyák listájára, hanem bármilyen felsorolható (enumerálható) kollekcióra működik.
 Írjunk <code>IEnumerable&lt;T&gt;</code> típuson működő segédfüggvényeket.</p>
-<p>Hozzunk létre egy <code>EnumerableExtensions</code> (I betű nélkül, az ugyanis interfészre utal) nevű fájlt az <code>Extensions</code> mappában!
+<p>Hozzunk létre egy <code>Extensions</code> nevű mappát a projektünkben, majd ebben egy <code>EnumerableExtensions.cs</code> fájlt (I betű nélkül, az ugyanis interfészre utal).
 Elsőként valósítsuk meg az összegző logikát.</p>
 <div class="highlight"><pre><span></span><code><span class="k">namespace</span><span class="w"> </span><span class="nn">HelloLinq.Extensions.Enumerable</span><span class="p">;</span>
 
@@ -853,6 +918,7 @@ Elsőként valósítsuk meg az összegző logikát.</p>
 </span>
 <span class="kt">string</span><span class="w"> </span><span class="n">searchText</span><span class="p">;</span>
 </code></pre></div>
+<h3 id="segedosztalyok-helyett-bovito-metodusok">Segédosztályok helyett bővítő metódusok<a class="headerlink" href="#segedosztalyok-helyett-bovito-metodusok" title="Permanent link">¶</a></h3>
 <p>A segédfüggvények hátránya, hogy ismernünk kell a segédosztály nevét.
 Továbbá jobb lenne, ha a kollekción közvetlenül hívhatnánk az összegző függvényt.
 Erre megoldás a bővítő metódus.</p>
@@ -863,9 +929,9 @@ Erre megoldás a bővítő metódus.</p>
 <li>első paramétere előtt <code>this</code> jelöli, hogy melyik típust bővítik</li>
 </ul>
 <p>Az első paraméter elé tegyük be a <code>this</code> jelölőt.</p>
-<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Sum</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span>
-<span class="hll"><span class="w">    </span><span class="k">this</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w">  </span><span class="n">source</span><span class="p">,</span>
-</span><span class="w">    </span><span class="n">Func</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w">  </span><span class="n">sumSelector</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Sum</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="hll"><span class="w">    </span><span class="k">this</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">source</span><span class="p">,</span>
+</span><span class="w">    </span><span class="n">Func</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sumSelector</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="p">}</span>
@@ -926,30 +992,59 @@ Egy próba erejéig kommentezzük ki a <code>using HelloLinq.Extensions.Enumerab
 <span class="w">    </span><span class="s">$"Minimum-maximum életkor: "</span><span class="w"> </span><span class="o">+</span>
 <span class="w">    </span><span class="s">$"{Dogs.Min(d =&gt; d.Age ?? 0)} | {Dogs.Max(d =&gt; d.Age ?? 0)}"</span><span class="p">);</span>
 </code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">StringExtensions.cs</p>
-<p>A <code>StringExtensions</code> osztályban egy lambdaként megvalósított bővítő metódust láthatunk, ami egy szöveget adott hosszra (szélességre) egészít ki szóközökkel. A függvényt a <code>Dog</code> <code>ToString</code> metódusa használja fel.</p>
-</div>
-<h2 id="gyakori-lekerdezo-muveletek-yield-return">Gyakori lekérdező műveletek, yield return<a class="headerlink" href="#gyakori-lekerdezo-muveletek-yield-return" title="Permanent link">¶</a></h2>
-<p>Gyakran előfordul, hogy egy listát szűrni vagy projektálni szeretnénk. Írjunk saját generátort ezekhez a műveletekhez is az <code>EnumerableExtensions</code>-be:</p>
-<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Where</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span>
-<span class="w">    </span><span class="k">this</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w">  </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w">  </span><span class="n">predicate</span><span class="p">)</span>
+<h3 id="extension-members">Extension members<a class="headerlink" href="#extension-members" title="Permanent link">¶</a></h3>
+<p>C# 14 verziótól kezdve a bővítő metódusok mellett bővítő property-ket és operátorokat is definiálhatunk <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension members</a> szintaxis segítségével. Sőt az osztályok statikus tagjait is bővíthetjük, nem csak példánytagokat.</p>
+<p>A bővítő metódus <code>static</code> módosítója és a paraméter <code>this</code> módosító kombinációja helyett extension member-t definiálhatunk a következő szintaxissal egy statikus osztályban:</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">EnumerableExtensions</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">elem</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">predicate</span><span class="p">(</span><span class="n">elem</span><span class="p">))</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">elem</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="n">extension</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"> </span><span class="c1">//(1)</span>
+</span><span class="w">    </span><span class="p">{</span>
+<span class="hll"><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">Sum</span><span class="p">(</span><span class="n">Func</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sumSelector</span><span class="p">)</span><span class="w"> </span><span class="c1">//(2)</span>
+</span><span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">elem</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">result</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">sumSelector</span><span class="p">(</span><span class="n">elem</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-
-<span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">TValue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Select</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">TValue</span><span class="o">&gt;</span><span class="p">(</span>
-<span class="w">    </span><span class="k">this</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w">  </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">Func</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">TValue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">selector</span><span class="p">)</span>
+</code></pre></div>
+<ol>
+<li>Az <code>extension&lt;T&gt;(IEnumerable&lt;T&gt; source)</code> jelöli, hogy a <code>source</code> paraméterrel rendelkező <code>IEnumerable&lt;T&gt;</code> típuson definiálunk extension member-eket, ahol <code>T</code> egy általános típusparaméter.</li>
+<li>Az <code>extension</code> blokkban definiált <code>Sum</code> metódus egy extension member, amely a <code>source</code> paraméterként megadott <code>IEnumerable&lt;T&gt;</code> típusú objektumon lesz elérhető.<ul>
+<li>Vegyük észre, hogy nincs szükség már <code>static</code> módosítóra a <code>Sum</code> metódusnál</li>
+<li>a <code>source</code> paraméter sem <code>this</code>-el van jelölve, mivel az extension member-ek esetén ez implicit módon értendő.</li>
+</ul>
+</li>
+</ol>
+<p>Ezzel az <code>extension</code> blokk szintaxissal egyszerűbbé válik a bővítő tagok definiálása, és már nem csak metódusokat, hanem property-ket és operátorokat vagy statikus tagokat is létrehozhatunk extension member-ként.</p>
+<h2 id="gyakori-lekerdezo-muveletek-yield-return">Gyakori lekérdező műveletek, yield return<a class="headerlink" href="#gyakori-lekerdezo-muveletek-yield-return" title="Permanent link">¶</a></h2>
+<p>Gyakran előfordul, hogy egy listát szűrni vagy projektálni szeretnénk. Írjunk saját generátort ezekhez a műveletekhez is az <code>EnumerableExtensions</code>-be:</p>
+<div class="highlight"><pre><span></span><code><span class="n">extension</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">elem</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//...</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Where</span><span class="p">(</span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">predicate</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nf">selector</span><span class="p">(</span><span class="n">elem</span><span class="p">);</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">elem</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">predicate</span><span class="p">(</span><span class="n">elem</span><span class="p">))</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">elem</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">TValue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Select</span><span class="o">&lt;</span><span class="n">TValue</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Func</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">TValue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">selector</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">elem</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nf">selector</span><span class="p">(</span><span class="n">elem</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -963,10 +1058,17 @@ Egy próba erejéig kommentezzük ki a <code>using HelloLinq.Extensions.Enumerab
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">A yield return haszna</p>
-<p>A <code>yield return</code> egy hasznos eszköz, ha IEnumerable-t kell produkálnunk visszatérési értékként. Segítségével mindig csak akkor állítjuk elő a következő elemet, amikor a hívó kéri. A működését debuggerrel is figyeljük meg: tegyünk breakpointot a két <code>yield return</code> sorra, majd <span class="keys"><kbd class="key-f10">F10</kbd></span>-zel kövessük végig, ahogy a <code>foreach</code> elkéri a <code>Select</code>-től a következő elemet, ami emiatt elkéri a <code>Where</code>-től, majd újraindul a ciklus. A hívások állapotgépként működnek, a következő meghíváskor onnan folytatódnak, ahonnan az előző <code>yield return</code>-nél kiléptünk.</p>
+<p>A <code>yield return</code> egy hasznos eszköz, ha <code>IEnumerable</code>-t kell produkálnunk visszatérési értékként.
+Segítségével mindig csak akkor állítjuk elő a következő elemet, amikor a hívó kéri.
+A működését debuggerrel is figyeljük meg: tegyünk breakpointot a két <code>yield return</code> sorra, majd <span class="keys"><kbd class="key-f10">F10</kbd></span>-zel kövessük végig, ahogy a <code>foreach</code> elkéri a <code>Select</code>-től a következő elemet, ami emiatt elkéri a <code>Where</code>-től, majd újraindul a ciklus.
+A hívások állapotgépként működnek, a következő meghíváskor onnan folytatódnak, ahonnan az előző <code>yield return</code>-nél kiléptünk.</p>
 </div>
-<p>Nem nagy meglepetés, hogy az általunk megírt <code>Sum</code>, <code>Average</code> (melyek egyedi visszatérésűek), <code>Select</code> és <code>Where</code> (amik szekvenciális visszatérésűek, generátorok) metódusok mind a .NET keretrendszer részét képezik (a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable"><code>System.Linq.Enumerable</code></a> statikus osztályban definiált bővítő metódusok). A <strong>LINQ</strong> — **L**anguage **IN**tegrated **Q**uery — ezeket a műveleteket teszi lehetővé <code>IEnumerable</code> interfészt megvalósító objektumokon. A LINQ függvények bővítő metódusként lettek hozzáadva meglevő funkcionalitáshoz (kollekciókhoz, lekérdezésekhez), sőt, külső library-k is adnak saját LINQ bővítő metódusokat.</p>
-<p>Cseréljük le a <code>Program.cs</code>-ben a <code>using HelloLinq.Extensions.Enumerable</code> hivatkozást <code>using System.Linq</code>-re: az általunk megírt kód továbbra is ugyanazt az eredményt produkálja! Nézzük meg, hogy hol vannak definiálva ezek a függvények a keretrendszeren belül: a kurzort tegyük a kódban oda, ahol valamelyik korábban megírt függvényünket hívnánk, majd nyomjunk <span class="keys"><kbd class="key-f12">F12</kbd></span>-t. Próbáljuk ki, hogy továbbra is az elvárt módon működik-e a programunk.</p>
+<p>Nem nagy meglepetés, hogy az általunk megírt <code>Sum</code>, <code>Average</code> (melyek egyedi visszatérésűek), <code>Select</code> és <code>Where</code> (amik szekvenciális visszatérésűek, generátorok) metódusok mind a .NET keretrendszer részét képezik (a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable"><code>System.Linq.Enumerable</code></a> statikus osztályban definiált bővítő metódusok).
+A <strong>LINQ</strong> — **L**anguage **IN**tegrated **Q**uery — ezeket a műveleteket teszi lehetővé <code>IEnumerable</code> interfészt megvalósító objektumokon.
+A LINQ függvények bővítő metódusként lettek hozzáadva meglevő funkcionalitáshoz (kollekciókhoz, lekérdezésekhez), sőt, külső library-k is adnak saját LINQ bővítő metódusokat.</p>
+<p>Cseréljük le a <code>Program.cs</code>-ben a <code>using HelloLinq.Extensions.Enumerable</code> hivatkozást <code>using System.Linq</code>-re: az általunk megírt kód továbbra is ugyanazt az eredményt produkálja!
+Nézzük meg, hogy hol vannak definiálva ezek a függvények a keretrendszeren belül: a kurzort tegyük a kódban oda, ahol valamelyik korábban megírt függvényünket hívnánk, majd nyomjunk <span class="keys"><kbd class="key-f12">F12</kbd></span>-t.</p>
+<p>Próbáljuk ki, hogy továbbra is az elvárt módon működik-e a programunk.</p>
 <div class="admonition tip">
 <p class="admonition-title">Implicit usings</p>
 <p>A névtércsere helyett bekapcsolhatjuk a globális implicit névtér funkciót, mert a <code>System.Linq</code> névtér is egy implicit hivatkozott névtér. Ehhez a projektfájlban az <code>&lt;ImplicitUsings&gt;disable&lt;/ImplicitUsings&gt;</code> beállítást írjuk át <code>enable</code>-re, majd a <code>using HelloLinq</code> -en kívül minden névtérhivatkozást töröljünk a <code>Program.cs</code>-ből.</p>
@@ -1041,7 +1143,7 @@ A két szintaxist szokás ötvözni is, jellemzően akkor, ha query szintaxisban
 </div>
 <p>Ezen az órán memóriabeli adatforrásokkal dolgoztunk (konkrétan a <code>Dogs</code> nevű <code>Dictionary&lt;,&gt;</code> típusú változóval), a LINQ operátorok közül a memóriabeli listákon dolgozókat használtuk, melyeket az <code>IEnumerable&lt;&gt;</code> interfészre biggyesztettek rá bővítő metódusként.
 Ezt a LINQ API-t teljes nevén *LINQ-to-Objects*nek hívják, de gyakran csak LINQ-ként hivatkozzák.</p>
-<h2 id="kitekinto-expression-linq-providerek">Kitekintő: Expression\&lt;&gt;, LINQ providerek<a class="headerlink" href="#kitekinto-expression-linq-providerek" title="Permanent link">¶</a></h2>
+<h2 id="kitekinto-expression-linq-providerek">Kitekintő: <code>Expression&lt;&gt;</code>, LINQ providerek<a class="headerlink" href="#kitekinto-expression-linq-providerek" title="Permanent link">¶</a></h2>
 <p>Vegyük az alábbi nagyon egyszerű delegate-et és ennek <code>Expression&lt;&gt;</code>-ös párját.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w">  </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="n">Expression</span><span class="o">&lt;</span><span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
@@ -1068,8 +1170,8 @@ Ez utóbbiak teszik lehetővé, hogy ne csak .NET kódot generáljanak a lambda 
 </path>
 </svg>
 </span>
-<span title="2025. március 28. 11:46:02">
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2025. március 28. 11:46:02 CET"><span class="timeago" datetime="2025-03-28T11:46:02+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025. március 28. 11:46:02 CET">2025-03-28</span>
+<span title="2026. május 19. 08:44:17">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026. május 19. 08:44:17 CEST"><span class="timeago" datetime="2026-05-19T08:44:17+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026. május 19. 08:44:17 CEST">2026-05-19</span>
 </span>
 </span>
 <span class="md-source-file__fact">
