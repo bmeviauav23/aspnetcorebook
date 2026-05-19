@@ -7,19 +7,19 @@ Ezen a gyakorlaton nem a beépített API projektsablont fogjuk felhasználni, ha
 ### Generálás
 
 Hozzunk létre a Visual Studioban egy új, C# nyelvű projektet az *ASP.NET Core Empty* sablonnal, a neve legyen *HelloAspNetCore*.
-Megcélzott keretrendszerként adjuk meg a *.NET 8*-at.
+Megcélzott keretrendszerként adjuk meg a *.NET 10*-at.
 Minden extra opció legyen kikapcsolva, a docker és a HTTPS is (a laborgépek miatt).
 
 ??? note "Kitérő: NuGet és a keretrendszert alkotó komponensek helye"
 
-    A .NET 8 és az ASP.NET Core gyakorlatilag teljes mértékben publikusan elérhető komponensekből épül fel.
+    A .NET 10 és az ASP.NET Core gyakorlatilag teljes mértékben publikusan elérhető komponensekből épül fel.
     A komponensek kezelésének infrastruktúráját a NuGet csomagkezelő szolgáltatja.
-    A csomagkezelőn keresztül elérhető csomagokat a [nuget.org](https://www.nuget.org/) listázza és igény esetén a NuGet kliens, illetve a .NET Core eszközök (dotnet.exe, Visual Studio) is innen töltik le.
+    A csomagkezelőn keresztül elérhető csomagokat a [nuget.org](https://www.nuget.org/) listázza és igény esetén a NuGet kliens, illetve a .NET eszközök (dotnet.exe, Visual Studio) is innen töltik le.
     
-    A fejlesztőknek teljesítményszempontból nem érné meg az alap keretrendszert alkotó csomagokat állandóan letöltögetni, így a klasszikus keretrendszerekhez hasonlóan a .NET 8 telepítésekor egy könyvtárba (Windows-on ide: **C:\Program Files (x86)\dotnet**, illetve **C:\Program Files\dotnet**) bekerülnek az alap keretrendszert alkotó komponensek - lényegében egy csomó .dll különböző alkönyvtárakban.
+    A fejlesztőknek teljesítményszempontból nem érné meg az alap keretrendszert alkotó csomagokat állandóan letöltögetni, így a klasszikus keretrendszerekhez hasonlóan a .NET 10 telepítésekor egy könyvtárba (Windows-on ide: **C:\Program Files (x86)\dotnet**, illetve **C:\Program Files\dotnet**) bekerülnek az alap keretrendszert alkotó komponensek - lényegében egy csomó .dll különböző alkönyvtárakban.
     
     A futtatáshoz szükséges szerelvények a **shared** alkönyvtárba települnek, ezek az ún. **Shared Framework**-ök.
-    A gépen futó különböző .NET Core/8 alkalmazások közösen használhatják ezeket.
+    A gépen futó különböző .NET 10 alkalmazások közösen használhatják ezeket.
     
     A fejlesztéshez az alapvető függőségeket a **packs** alkönyvtárból hivatkozhatjuk.
 
@@ -29,15 +29,15 @@ Minden extra opció legyen kikapcsolva, a docker és a HTTPS is (a laborgépek m
 
 Nézzük meg, milyen projekt generálódott:
 
-* **.csproj**: (menu:Projekten jobb gomb\[Edit Project File\]) a projekt fordításához szükséges beállításokat tartalmazza. Előző verziókhoz képest itt erősen építenek az alapértelmezett értékekre, hogy minél karcsúbbra tudják fogni ezt az állományt.
+* **.csproj**: a projekt fordításához szükséges beállításokat tartalmazza. Előző verziókhoz képest itt erősen építenek az alapértelmezett értékekre, hogy minél karcsúbbra tudják fogni ezt az állományt.
     * **Project SDK**: projekt típusa ([Microsoft.NET.Sdk.Web](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/web-sdk)), az eszközkészlet funkcióit szabályozza, meghatározza a futtatáshoz használatos shared framework-öt, illetve meghatározza a megcélzott keretrendszert is(lásd lentebb).
-    * **TargetFramework**: *net8.0*. Ezzel jelezzük, hogy .NET 8-os API-kat használunk az alkalmazásban.
+    * **TargetFramework**: *net10.0*. Ezzel jelezzük, hogy .NET 10-es API-kat használunk az alkalmazásban.
 * **Connected Services**: külső szolgáltatások, amiket használ a projektünk, most nincs ilyenünk.
 * **Dependencies**: a keretrendszer alapfüggőségei és egyéb NuGet csomagfüggőségek szerepelnek itt. Egyelőre csak keretrendszer függőségeink vannak.
     * **Frameworks**: két alkönyvtárat (Microsoft.AspNetCore.App, Microsoft.NETCore.App) hivatkozunk a .NET SDK **packs** alkönyvtárából. Ezek a függőségek külső NuGet csomagként is elérhetőek, de ahogy fentebb jeleztük, nem érdemes úgy hivatkozni őket.
     * **Analyzers**: speciális komponensek, amik kódanalízist végzenek, de egyébként ugyanúgy külső függőségként (NuGet csomag) kezelhetjük őket. Ha kibontjuk az egyes analizátorokat, akkor láthatjuk, hogy miket ellenőriznek. Ezek a függőségek a futáshoz nem szükségesek.
 * **Properties**: duplakattra előjön a klasszikus projektbeállító felület.
-    - **launchSettings.json:** a különböző indítási konfigurációkhoz tartozó beállítások (lásd később).
+    * **launchSettings.json:** a különböző indítási konfigurációkhoz tartozó beállítások (lásd később).
 * **appsettings.json**: futásidejű beállítások helye. Kibontható, kibontva a különböző környezetekre specifikus konfigurációk találhatóak (lásd később).
 
 #### Legfelső szintű kód, minimál API
@@ -138,7 +138,7 @@ Figyeljük meg, hogy most **Development** konfigurációban fut az alkalmazás (
 Ezt az információt a keretrendszer környezeti változó alapján állapítja meg.
 Ha a **lauchSettings.json** állományt megnézzük, akkor láthatjuk, hogy az `ASPNETCORE_ENVIRONMENT` környezeti változó `Development`-re van állítva.
 
-Próbáljuk ki Visual Studio-n kívülről futtatni. menu:Projekten jobb klikk\[Open Folder in File Explorer\].
+Próbáljuk ki Visual Studio-n kívülről futtatni. *Projekten jobb klikk / Open Folder in File Explorer*.
 Ezután a címsorba mindent kijelölve `cmd` + ++enter++, a parancssorba `dotnet run`.
 
 Ugyanúgy fog indulni, mint VS-ből, mert az újabb .NET verziókban már a *dotnet run* is figyelembe veszi a **launchSettings.json**-t.
@@ -203,7 +203,7 @@ Oka: nincs **appsettings.Production.json**, így az általános **appsettings.js
 
 ### Statikus fájl MW
 
-Hozzunk létre a projekt gyökerébe egy `wwwroot` nevű mappát (menu:jobbklikk a projekten\[Add \> New Folder\]) és tegyünk egy képfájlt bele. (Ellophatjuk pl. a <http://www.bme.hu> honlap bal felső sarkából a logo-t)
+Hozzunk létre a projekt gyökerébe egy `wwwroot` nevű mappát (*jobbklikk a projekten / Add / New Folder*) és tegyünk egy képfájlt bele. (Ellophatjuk pl. a <http://www.bme.hu> honlap bal felső sarkából a logo-t)
 
 A statikus fájlkezelést a teljes modularitás jegyében egy külön middleware-ként implementálták a *Microsoft.AspNetCore.StaticFiles* osztálykönyvtárban (az AspNetCore.App már függőségként tartalmazza, így nem kell külön hivatkoznunk), csak hozzá kell adnunk a pipeline-hoz.
 
@@ -227,10 +227,10 @@ Minden API-nál nagyon magas szinten az a cél, hogy egy kérés hatására egy 
 ASP.NET Core-ban a Minimap API megközelítés mellett alkalmazható az MVC keretrendszer is, ahol a kódrészleteket függvényekbe írjuk, a függvények pedig ún. *kontrollerek*-be kerülnek.
 Egy controller általában az egy erőforrástípushoz kapcsolódó műveleteket fogja össze. Összességében tehát a cél, hogy a webes kérés hatására egy kontroller egy függvénye meghívódjon.
 
-### DummyController
+### TestController
 
 Hozzunk létre egy új mappát *Controllers* néven.
-A mappába hozzunk létre egy kontrollert (menu:jobbklikk a Controllers mappán\[Add \> Controller… \> a bal oldali fában Common \> API \> jobb oldalon API Controller with read/write actions\]) `DummyController` néven.
+A mappába hozzunk létre egy kontrollert (*jobbklikk a Controllers mappán / Add / Controller... / a bal oldali fában Common / API / jobb oldalon API Controller with read/write actions*) `TestController` néven.
 A generált kontrollerünk a *Microsoft.AspNetCore.Mvc.Core* csomagban található `ControllerBase` osztályból származik.
 (Ezt a csomagot sem kell feltennünk, mivel az **AspNetCore.App** függősége)
 
@@ -238,14 +238,18 @@ Adjuk hozzá a szolgáltatásokhoz a kontrollertámogatás szolgáltatást, és 
 Az egysoros MW-t kommentezzük ki.
 Így néz ki a teljes legfelső szintű kód:
 
-``` csharp hl_lines="2 4 6"
+``` csharp hl_lines="3 5 10"
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllers(); // (1)!
+
 var app = builder.Build();
 /*var app = WebApplication.Create();*/ // (2)!
+
 app.UseStaticFiles();
 /*app.MapGet("/", () => "Hello World!");*/ // (3)!
 app.MapControllers();
+
 app.Run();
 ```
 
@@ -255,12 +259,12 @@ app.Run();
 
 Próbáljuk ki.
 
-Az alapoldal üres, viszont ha az `/api/Dummy` címre hívunk, akkor megjelenik a `DummyController.Get` által visszaadott érték.
+Az alapoldal üres, viszont ha az `/api/Test` címre hívunk, akkor megjelenik a `TestController.Get` által visszaadott érték.
 A routing szabályok szabályozzák, hogy hogyan jut el a HTTP kérés alapján a végrehajtás a függvényig.
 Itt attribútum alapú routing-ot használunk, azaz a kontroller osztályra és a függvényeire biggyesztett attribútumok határozzák meg, hogy a HTTP kérés adata (pl. URL) alapján melyik függvény hívódik meg.
 
-A `DummyController` osztályon lévő `Route` attribútum az `"api/[controller]"` útvonalat definiálja, melyből a `[controller]` úgynevezett token, ami jelen esetben a controller nevére cserélődik.
-Ezzel összességében megadtuk, hogy az `api/Dummy` útvonal a `DummyController`-t választja ki, de még nem tudjuk, hogy a függvényei közül melyiket kell meghívni - ez a függvényekre tett attribútumokból következik.
+A `TestController` osztályon lévő `Route` attribútum az `"api/[controller]"` útvonalat definiálja, melyből a `[controller]` úgynevezett token, ami jelen esetben a controller nevére cserélődik.
+Ezzel összességében megadtuk, hogy az `api/Test` útvonal a `TestController`-t választja ki, de még nem tudjuk, hogy a függvényei közül melyiket kell meghívni - ez a függvényekre tett attribútumokból következik.
 A `Get` függvényen levő `HttpGet` mutatja, hogy ez a függvény akkor hívandó, ha a GET kérés URL-je nem folytatódik - ellentétben a `Get(int id)` függvénnyel, ami az URL-ben még egy további szegmenst vár (ezért van egy `"{id}"` paraméter megadva az attribútum konstruktorban), amit az `id` nevű függvényparaméterként használ fel.
 
 !!! tip "Routing lehetőségek"
@@ -268,11 +272,11 @@ A `Get` függvényen levő `HttpGet` mutatja, hogy ez a függvény akkor hívand
     Bővebben a témakörről általánosan [itt](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing), illetve specifikusan webes API-k vonatkozásában [itt](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing#attribute-routing-for-rest-apis) lehet olvasni.
     A dokumentáció mennyiségéből látható, hogy a routing alrendszer nagyon szofisztikált és sokat tud, szerencsére az alap működés elég egyszerű és gyorsan megszokható.
 
-Ha van időnk, próbáljuk ki az `/api/Dummy/[egész szám]` címet is. A `Get(int id)` függvény kódjának megfelelően, bármit adunk meg, az eredmény a *value* szöveg lesz.
+Ha van időnk, próbáljuk ki az `/api/Test/[egész szám]` címet is. A `Get(int id)` függvény kódjának megfelelően, bármit adunk meg, az eredmény a *value* szöveg lesz.
 
 ## Konfigurációs beállítások, Dependency Injection
 
-Bővítsük az *appsettings.json*-t egy saját beállításcsoporttal (`DummySettings`):
+Bővítsük az *appsettings.json*-t egy saját beállításcsoporttal (`MySettings`):
 
 ``` json hl_lines="9-14"
 {
@@ -284,15 +288,15 @@ Bővítsük az *appsettings.json*-t egy saját beállításcsoporttal (`DummySet
     }
   },
   "AllowedHosts": "*", // a sor végére bekerült egy vessző
-  "DummySettings": {
-    "DefaultString": "My Value",
-    "DefaultInt": 23,
+  "MySettings": {
+    "MyString": "My Value",
+    "MyInt": 23,
     "SuperSecret":  "Spoiler Alert!!!"
   }
 }
 ```
 
-Kérjük le a beállításokat a `DummyController`-ben, a `Get` függvényekben írjuk ki a `DefaultString` és `DefaultInt` értékét.
+Kérjük le a beállításokat a `TestController`-ben, a `Get` függvényekben írjuk ki a `MyString` és `MyInt` értékét.
 
 Ehhez viszont el kell kérjük a `IConfiguration` interfészt a konstruktorban a Dependency Injection (DI) mechanizmuson keresztül a DI konténertől.
 Ez többek között lehetővé teszi, hogy az alkalmazáson belül konstruktorban paraméterként igényeljük a szolgáltatást.
@@ -301,7 +305,7 @@ A paraméter értékét a DI alrendszer automatikusan tölti ki a regisztrált s
 ``` csharp
 private readonly IConfiguration _configuration;
 
-public DummyController(IConfiguration configuration)
+public TestController(IConfiguration configuration)
 {
     _configuration = configuration;
 }
@@ -309,9 +313,9 @@ public DummyController(IConfiguration configuration)
 [HttpGet]
 public string Get()
 {
-    return $"string: {_configuration.GetValue<string>("DummySettings:DefaultString")}" +
-           $"int: {_configuration.GetValue<int>("DummySettings:DefaultInt")}" +
-           $"secret: {_configuration.GetValue<string>("DummySettings:SuperSecret")}";
+    return $"string: {_configuration.GetValue<string>("MySettings:MyString")}" +
+        $"int: {_configuration.GetValue<int>("MySettings:MyInt")}" +
+        $"secret: {_configuration.GetValue<string>("MySettings:SuperSecret")}";
 }
 ```
 
@@ -320,39 +324,38 @@ public string Get()
     Ez nagyban hozzájárul a komponensek közötti laza csatolás és a jobb tesztelhetőség eléréséhez.
     Bővebb információ az ASP.NET Core DI alrendszeréről a [dokumentációban](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection) található.
 
-
 ## Típusos beállítások, `IOptions<T>`
 
 Fentebb láttuk, hogy a konfigurációt ki tudtuk olvasni az `IConfiguration` interfészen keresztül, de még jobb lenne, ha csoportosítva és csoportonként külön C# osztályokon keresztül látnánk őket.
 
 Hozzunk létre egy új mappát `Options` néven.
 
-A mappába hozzunk létre egy sima osztályt `DummySettings` néven, a szerkezete feleljen meg a JSON-ben leírt beállításcsoportnak:
+A mappába hozzunk létre egy sima osztályt `MySettings` néven, a szerkezete feleljen meg a JSON-ben leírt beállításcsoportnak:
 
 ``` csharp
-public class DummySettings
+public class MySettings
 {
-    public string? DefaultString { get; set; }
-    public int DefaultInt { get; set; }
+    public string? MyString { get; set; }
+    public int MyInt { get; set; }
     public string? SuperSecret { get; set; }
 }
 ```
 
-Regisztráljuk szolgáltatásként a `DummySettings` kezelését, és adjuk meg, hogy a példányt mi alapján kell inicializálni - a konfiguráció megfelelő szekciójára hivatkozzunk:
+Regisztráljuk szolgáltatásként a `MySettings` kezelését, és adjuk meg, hogy a példányt mi alapján kell inicializálni - a konfiguráció megfelelő szekciójára hivatkozzunk:
 
 ``` csharp
-builder.Services.Configure<DummySettings>(
-    builder.Configuration.GetSection(nameof(DummySettings)));
+builder.Services.Configure<MySettings>(
+    builder.Configuration.GetSection(nameof(MySettings)));
 ```
 
 A `builder.Services`-ben regisztrált szolgáltatások valójában egy dependency injection (DI) konténerbe kerülnek regisztrálásra.
 
-Igényeljünk `DummySettings`-t a `DummyController` konstruktorban az `IConfiguration` helyett:
+Igényeljünk `MySettings`-t a `MyController` konstruktorban az `IConfiguration` helyett:
 
 ``` csharp
-private readonly DummySettings _options;
+private readonly MySettings _options;
 
-public DummyController(IOptions<DummySettings> options)
+public MyController(IOptions<MySettings> options)
 {
     _options = options.Value;
 }
@@ -368,8 +371,8 @@ Az egész számot váró `Get` változatban használjuk fel az értékeket:
 [HttpGet]
 public string Get()
 {
-    return $"string: {_options.DefaultString}" +
-           $"int: {_options.DefaultInt}" +
+    return $"string: {_options.MyString}" +
+           $"int: {_options.MyInt}" +
            $"secret: {_options.SuperSecret}";
 }
 ```
@@ -396,7 +399,7 @@ Vegyünk fel egy új beállítást a **secrets.json**-ba, ami a `SuperSecret` é
 
 ``` json
 {
-  "DummySettings": {
+  "MySettings": {
     "SuperSecret": "SECRET"
   }
 }
@@ -405,8 +408,8 @@ Vegyünk fel egy új beállítást a **secrets.json**-ba, ami a `SuperSecret` é
 !!! tip "Részleges felülírás"
     A **secrets.json**-ban csak azokat a json levél elemeket kell felvenni, amiket felül akarunk írni. Ez a módszer működik a sima **appsettings.json** környezetfüggő változóira is.
 
-Töréspontot letéve (pl. a `DummyController` konstruktorának végén) ellenőrizzük, hogy a titkos érték melyik fájlból jön.
-Ehhez meg kell hívnunk böngészőből az `api/dummy` címet.
+Töréspontot letéve (pl. a `TestController` konstruktorának végén) ellenőrizzük, hogy a titkos érték melyik fájlból jön.
+Ehhez meg kell hívnunk böngészőből az `api/Test` címet.
 
 !!! warning "User Secrets csak Development módban"
     Fontos tudni, hogy a *User Secrets* tároló csak **Development** mód esetén jut érvényre, így figyeljünk rá, hogy a megfelelő módot indítsuk és a környezeti változók is jól legyenek beállítva.
