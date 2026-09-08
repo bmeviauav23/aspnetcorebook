@@ -16,7 +16,7 @@
 <link href="../../../css/timeago.css" rel="stylesheet">
 <link href="../../../extra-material-theme.css" rel="stylesheet">
 <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-<link href="../../../assets/stylesheets/extra-style.dn4kgjtx.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+<link href="../../../assets/stylesheets/extra-style.1re13a3p.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -505,8 +505,8 @@
 <li><a href="https://www.getpostman.com/">Postman</a> HTTP kérések küldéséhez</li>
 </ul>
 <h2 id="kiindulo-projektek-beuzemelese">Kiinduló projektek beüzemelése<a class="headerlink" href="#kiindulo-projektek-beuzemelese" title="Permanent link">¶</a></h2>
-<p>Klónozzuk le a kiinduló projekt <code>lab-kiindulo-240502</code> ágát, ez az előző gyakorlat folytatása - a kódot ismerjük. Ha nincs már meg az adatbázisunk, akkor az előző gyakorlat alapján hozzuk létre az adatbázist Code-First migrációval (<code>Update-Database</code>).</p>
-<div class="highlight"><pre><span></span><code>git clone https://github.com/bmeviauav23/WebApiLab-kiindulo -b lab-kiindulo-240502
+<p>Klónozzuk le a kiinduló projekt <code>lab-kiindulo-260504</code> ágát, ez az előző gyakorlat folytatása - a kódot ismerjük. Ha nincs már meg az adatbázisunk, akkor az előző gyakorlat alapján hozzuk létre az adatbázist Code-First migrációval (<code>dotnet ef databse update</code>).</p>
+<div class="highlight"><pre><span></span><code>git clone https://github.com/bmeviauav23/WebApiLab-kiindulo -b lab-kiindulo-260504
 </code></pre></div>
 <h2 id="egyszeru-kliens">Egyszerű kliens<a class="headerlink" href="#egyszeru-kliens" title="Permanent link">¶</a></h2>
 <p>A tárgy tematikájának ugyan nem része a kliensoldal, de demonstrációs céllal egy egyszerű kliensoldalról indított hívást implementálunk.
@@ -518,7 +518,7 @@ A webes API-khoz nagyon sokféle technikával írhatunk klienst, mivel gyakorlat
 <p>A fentiekhez szinte minden manapság használt kliensoldali technológia ad támogatást. Mi most egy sima, .NET alapú konzol alkalmazást írunk kliens gyanánt.</p>
 <p>A két képességet könnyen lefedhetjük a <strong>System.Net.Http</strong> (HTTP kommunikáció) és a <strong>System.Text.Json</strong> (JSON sorosítás) csomagokkal.
 Mindkettő a <strong>Microsoft.NetCore.App</strong> shared framework része, így általában nem kell külön beszereznünk őket.</p>
-<p>Adjunk a solution-höz egy konzolos projektet (Console App (.NET 8), <strong>nem .NET Framework!</strong>) <em>WebApiLab.Client</em> néven.
+<p>Adjunk a solution-höz egy konzolos projektet (Console App (.NET 10), <strong>nem .NET Framework!</strong>) <em>WebApiLab.Client</em> néven.
 A <em>Program.cs</em>-ben írjuk meg az egy terméket lekérdező függvényt (<code>GetProductAsync</code>) és hívjuk meg.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">"ProductId: "</span><span class="p">);</span>
 <span class="kt">var</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
@@ -534,7 +534,7 @@ A <em>Program.cs</em>-ben írjuk meg az egy terméket lekérdező függvényt (<
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">();</span>
 
 <span class="w">    </span><span class="c1">// Ha eltér, a portot írjuk át a szervernek megfelelően</span>
-<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="s">$"http://localhost:5184/api/Products/{id}"</span><span class="p">));</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="s">$"http://localhost:5007/api/Product/{id}"</span><span class="p">));</span>
 <span class="w">    </span><span class="n">response</span><span class="p">.</span><span class="n">EnsureSuccessStatusCode</span><span class="p">();</span>
 <span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">jsonStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStreamAsync</span><span class="p">();</span>
 <span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">JsonDocument</span><span class="p">.</span><span class="n">ParseAsync</span><span class="p">(</span><span class="n">jsonStream</span><span class="p">);</span>
@@ -544,7 +544,7 @@ A <em>Program.cs</em>-ben írjuk meg az egy terméket lekérdező függvényt (<
 <span class="p">}</span>
 </code></pre></div>
 <p>Ez most jelenleg csak egy egyszerű példa DTO osztályok nélkül, a későbbiekben egyszerűsíteni fogjuk a JSON feldolgozást.</p>
-<p>!!! tip .NET 8 kliensen is
+<p>!!! tip .NET 10 kliensen is
     Az elterjedtebb .NET alapú kliensek, a WinForms, WPF alkalmazások a legutóbbi időkig .NET Framework alapúak voltak, viszont már egy ideje a .NET 6-os verziótól felfelé is támogatja a WinForms, WPF, WinUI, MAUI (régi Xamarin) alkalmazásokat. Célszerű ezeket választani a régi .NET Framework alapú változatok helyett.</p>
 <p>Állítsuk be, hogy a szerver és a kliensoldal is elinduljon (menu:solutionön jobbklikk[Set startup projects…]), majd próbáljuk ki, hogy a megadott azonosítójú termék neve és ára megjelenik-e a konzolon.</p>
 <p>Jelenleg csak alapszintű (nem típusos) JSON sorosítást alkalmazunk.
@@ -577,17 +577,16 @@ Ugyanakkor készültek kifejezetten a .NET-hez is OpenAPI eszközök, ezek köz�
 </ul>
 <h3 id="leiro-generalas">Leíró generálás<a class="headerlink" href="#leiro-generalas" title="Permanent link">¶</a></h3>
 <p>Első lépésként a szerveroldali kódunk alapján Swagger leírást generálunk <em>NSwag</em> segítségével.</p>
-<p>Adjuk hozzá a projekthez az <strong>NSwag.AspNetCore</strong> csomagot a <code>Package Manager Console</code>-ból vagy az API projekt Manage NuGet packages UI-on, és töröljük ki a <strong>Swashbuckle.AspNetCore</strong> csomagot.</p>
+<p>A kiinduló projekt jelenleg a beépített <strong>Microsoft.AspNetCore.OpenApi</strong> csomaggal (<code>AddOpenApi</code>/<code>MapOpenApi</code>) állítja elő az OpenAPI leírót, a dokumentációs felületet pedig a <strong>Swashbuckle.AspNetCore.SwaggerUI</strong> csomag szolgálja ki. Cseréljük le mindkettőt <em>NSwag</em>-re: adjuk hozzá a projekthez az <strong>NSwag.AspNetCore</strong> csomagot a <code>Package Manager Console</code>-ból vagy az API projekt Manage NuGet packages UI-on, és töröljük ki a <strong>Swashbuckle.AspNetCore.SwaggerUI</strong> csomagot.</p>
 <p>Konfiguráljuk a szükséges szolgáltatásokat a DI rendszerbe.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">//builder.Services.AddEndpointsApiExplorer();</span>
-<span class="c1">//builder.Services.AddSwaggerGen();</span>
+<div class="highlight"><pre><span></span><code><span class="c1">//builder.Services.AddOpenApi();</span>
 <span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddOpenApiDocument</span><span class="p">();</span>
 </code></pre></div>
-<p>Az OpenAPI leíró, illetve a dokumentációs felület kiszolgálására regisztráljunk egy-egy NSwag middleware-t az <strong>Endpoint MW elé</strong>. Az eddigi Swagger támogatással kapcsolatos kódok törölhetők.</p>
+<p>Az OpenAPI leíró, illetve a dokumentációs felület kiszolgálására regisztráljunk egy-egy NSwag middleware-t az <strong>Endpoint MW elé</strong>. Az eddigi OpenAPI/Swagger támogatással kapcsolatos kódok törölhetők.</p>
 <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">Environment</span><span class="p">.</span><span class="n">IsDevelopment</span><span class="p">())</span>
 <span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="c1">//app.UseSwagger();</span>
-</span><span class="hll"><span class="w">    </span><span class="c1">//app.UseSwaggerUI();</span>
+<span class="hll"><span class="w">    </span><span class="c1">//app.MapOpenApi();</span>
+</span><span class="hll"><span class="w">    </span><span class="c1">//app.UseSwaggerUI(options =&gt; options.SwaggerEndpoint("/openapi/v1.json", "v1"));</span>
 </span><span class="hll"><span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">UseOpenApi</span><span class="p">();</span>
 </span><span class="hll"><span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">UseSwaggerUi</span><span class="p">();</span>
 </span><span class="p">}</span>
@@ -601,13 +600,12 @@ Próbáljuk ki, hogy működik-e a dokumentációs felület a <strong>/swagger</
 <h3 id="testreszabas-xml-kommentek">Testreszabás - XML kommentek<a class="headerlink" href="#testreszabas-xml-kommentek" title="Permanent link">¶</a></h3>
 <p>Az NSwag képes a kódunk <a href="https://docs.microsoft.com/en-us/dotnet/csharp/codedoc">XML kommentjeit</a> hasznosítani a dokumentációs felületen. Írjuk meg egy művelet XML kommentjét.</p>
 <div class="highlight"><pre><span></span><code><span class="hll"><span class="c1">/// &lt;summary&gt;</span>
-</span><span class="hll"><span class="c1">/// Get a specific product with the given identifier</span>
+</span><span class="hll"><span class="c1">/// Termék adatainak lekérdezése adott azonosítóval</span>
 </span><span class="hll"><span class="c1">/// &lt;/summary&gt;</span>
-</span><span class="hll"><span class="c1">/// &lt;param name="id"&gt;Product's identifier&lt;/param&gt;</span>
-</span><span class="hll"><span class="c1">/// &lt;returns&gt;Returns a specific product with the given identifier&lt;/returns&gt;</span>
-</span><span class="hll"><span class="c1">/// &lt;response code="200"&gt;Listing successful&lt;/response&gt;</span>
+</span><span class="hll"><span class="c1">/// &lt;param name="id"&gt;A lekérdezendő termék azonosítója&lt;/param&gt;</span>
+</span><span class="hll"><span class="c1">/// &lt;returns&gt;A lekérdezett termék&lt;/returns&gt;</span>
 </span><span class="na">[HttpGet("{id}")]</span>
-<span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">){</span><span class="cm">/*...*/</span><span class="p">}</span>
+<span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">){</span><span class="cm">/*...*/</span><span class="p">}</span>
 </code></pre></div>
 <p>A Swagger komponensünk az XML kommenteket nem a forráskódból, hanem egy generált állományból képes kiolvasni.
 Állítsuk be ennek a generálását a projekt build beállításai között ( menu:Build[XML documentation file]).
@@ -629,14 +627,13 @@ Az alatta lévő textbox-ot üresen hagyhatjuk.</p>
 <p>Gyakori testreszabási feladat, hogy az egyes műveletek esetén a válasz pontos HTTP státuszkódját is dokumentálni szeretnénk, illetve ha több különböző kódú válasz is lehetséges, akkor mindegyiket.</p>
 <p>Ehhez elég egy (vagy több) <code>ProducesResponseType</code> attribútumot felrakni a műveletre.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">/// &lt;summary&gt;</span>
-<span class="c1">/// Creates a new product</span>
 <span class="c1">/// &lt;/summary&gt;</span>
-<span class="c1">/// &lt;param name="product"&gt;The product to create&lt;/param&gt;</span>
-<span class="c1">/// &lt;returns&gt;Returns the product inserted&lt;/returns&gt;</span>
-<span class="hll"><span class="c1">/// &lt;response code="201"&gt;Insert successful&lt;/response&gt;</span>
-</span><span class="na">[HttpPost]</span>
-<span class="hll"><span class="na">[ProducesResponseType(StatusCodes.Status201Created)]</span>
-</span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Post</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">product</span><span class="p">)</span>
+<span class="c1">/// &lt;param name="newProduct"&gt;&lt;/param&gt;</span>
+<span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+<span class="c1">/// &lt;response code="201"&gt;Insert Successful&lt;/response&gt;</span>
+<span class="na">[HttpPost]</span>
+<span class="hll"><span class="na">[ProducesResponseType&lt;Product&gt;(StatusCodes.Status201Created)]</span>
+</span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Post</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">NewProductRequest</span><span class="w"> </span><span class="n">newProduct</span><span class="p">)</span>
 <span class="p">{</span><span class="cm">/*...*/</span><span class="p">}</span>
 
 <span class="na">[HttpDelete("{id}")]</span>
@@ -645,72 +642,69 @@ Az alatta lévő textbox-ot üresen hagyhatjuk.</p>
 <span class="p">{</span><span class="cm">/*...*/</span><span class="p">}</span>
 </code></pre></div>
 <p>Ellenőrizzük, hogy a dokumentációs felületen a fentieknek megfelelő státuszkódok jelennek-e meg.</p>
-<p>A hibaágakra is felvehetjük a megfelelő <code>ProducesResponseType</code> attribútumot, ahol annak generikus paramétere a hiba típusa.</p>
-<div class="highlight"><pre><span></span><code><span class="na">[HttpGet]</span>
-<span class="hll"><span class="na">[ProducesResponseType(StatusCodes.Status200OK)]</span>
-</span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">()</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProductsAsync</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="na">[HttpGet("{id}")]</span>
-<span class="hll"><span class="na">[ProducesResponseType(StatusCodes.Status200OK)]</span>
-</span><span class="hll"><span class="na">[ProducesResponseType&lt;ProblemDetails&gt;(StatusCodes.Status404NotFound)]</span>
-</span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">GetProductAsync</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="na">[HttpPost]</span>
-<span class="hll"><span class="na">[ProducesResponseType(StatusCodes.Status201Created)]</span>
-</span><span class="hll"><span class="na">[ProducesResponseType&lt;ProblemDetails&gt;(StatusCodes.Status404NotFound)]</span>
+<p>A hibaágakra is felvehetjük a megfelelő <code>ProducesResponseType</code> attribútumot, ahol annak generikus paramétere a hiba típusa. Mivel a 404, 400 és 500 hibaágak szinte minden műveletnél előfordulhatnak, ezeket érdemesebb egyszer, a kontrolleren felvenni az egyes műveletek helyett:</p>
+<div class="highlight"><pre><span></span><code><span class="na">[Route("api/[controller]</span><span class="s">")]</span>
+<span class="na">[ApiController]</span>
+<span class="hll"><span class="na">[ProducesResponseType&lt;ProblemDetails&gt;(StatusCodes.Status404NotFound)]</span>
 </span><span class="hll"><span class="na">[ProducesResponseType&lt;ValidationProblemDetails&gt;(StatusCodes.Status400BadRequest)]</span>
-</span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Post</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">product</span><span class="p">)</span>
+</span><span class="hll"><span class="na">[ProducesResponseType&lt;ProblemDetails&gt;(StatusCodes.Status500InternalServerError)]</span>
+</span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nf">ProductController</span><span class="p">(</span><span class="n">IProductService</span><span class="w"> </span><span class="n">productService</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">InsertProductAsync</span><span class="p">(</span><span class="n">product</span><span class="p">);</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">CreatedAtAction</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">Get</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">created</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">created</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="na">[HttpGet]</span>
+<span class="hll"><span class="w">    </span><span class="na">[ProducesResponseType&lt;IEnumerable&lt;Product&gt;&gt;(StatusCodes.Status200OK)]</span>
+</span><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">GetProductsAsync</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="na">[HttpPut("{id}")]</span>
-<span class="hll"><span class="na">[ProducesResponseType(StatusCodes.Status200OK)]</span>
-</span><span class="hll"><span class="na">[ProducesResponseType&lt;ProblemDetails&gt;(StatusCodes.Status404NotFound)]</span>
-</span><span class="hll"><span class="na">[ProducesResponseType&lt;ValidationProblemDetails&gt;(StatusCodes.Status400BadRequest)]</span>
-</span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Put</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">product</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">UpdateProductAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="na">[HttpGet("{id}")]</span>
+<span class="hll"><span class="w">    </span><span class="na">[ProducesResponseType&lt;Product&gt;(StatusCodes.Status200OK)]</span>
+</span><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">GetProductAsync</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="na">[HttpDelete("{id}")]</span>
-<span class="hll"><span class="na">[ProducesResponseType(StatusCodes.Status204NoContent)]</span>
-</span><span class="hll"><span class="na">[ProducesResponseType&lt;ProblemDetails&gt;(StatusCodes.Status404NotFound)]</span>
-</span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Delete</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="n">_productService</span><span class="p">.</span><span class="n">DeleteProductAsync</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">NoContent</span><span class="p">();</span>
+<span class="w">    </span><span class="na">[HttpPost]</span>
+<span class="w">    </span><span class="na">[ProducesResponseType&lt;Product&gt;(StatusCodes.Status201Created)]</span>
+<span class="hll"><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Post</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">NewProductRequest</span><span class="w"> </span><span class="n">newProduct</span><span class="p">)</span>
+</span><span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">InsertProductAsync</span><span class="p">(</span><span class="n">newProduct</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">CreatedAtAction</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">Get</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">p</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="na">[HttpPut("{id}")]</span>
+<span class="w">    </span><span class="na">[ProducesResponseType&lt;Product&gt;(StatusCodes.Status200OK)]</span>
+<span class="hll"><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Put</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">NewProductRequest</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
+</span><span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">UpdateProductAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="na">[HttpDelete("{id}")]</span>
+<span class="w">    </span><span class="na">[ProducesResponseType(StatusCodes.Status204NoContent)]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Delete</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">DeleteProductAsync</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">NoContent</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Vegyük észre az alábbiakat:</p>
 <ul>
-<li>Ha nem adunk meg a <code>ProducesResponseType</code> attribútumnak típus paramétert, akkor a metódus visszatérési értékéből próbálja kitalálni a modellt.</li>
-<li>Amíg nem adtunk meg semmilyen <code>ProducesResponseType</code> attribútumot, addig a Swagger UI az egyenes ágra mindig 200-as státuszkódot fog feltételezni</li>
-<li>Ezt a feltételezést elveszítjük, ha bármilyen <code>ProducesResponseType</code> attribútumot felvesszük pl.: <code>ProducesResponseType(StatusCodes.Status404NotFound)</code> esetében szükséges már kiírni a 200-as státuszkódot is, ha az is lehetséges válasz.</li>
-<li>A hibaeseteket akár közössé is tehetnénk, ha a <code>ProducesResponseType</code> attribútumokat nem a metódusra, hanem a kontrollerre raknánk. Ilyenkor viszont hibásan a listás végpontra is azt nyilatkoznánk, hogy jöhet 404-es státuszkód, pedig ez nem igaz.</li>
+<li>Ha megadjuk a <code>ProducesResponseType</code> attribútum generíkus típusparaméterét (pl. <code>ProducesResponseType&lt;Product&gt;</code>), azzal explicit módon jelöljük a válasz típusát; megadása nélkül a metódus visszatérési értékéből próbálja kitalálni a modellt.</li>
+<li>Amíg nem adtunk meg semmilyen <code>ProducesResponseType</code> attribútumot, addig a Swagger UI az egyenes ágra mindig 200-as státuszkódot fog feltételezni.</li>
+<li>Ezt a feltételezést elveszítjük, ha bármilyen <code>ProducesResponseType</code> attribútumot felvesszük, ezért az egyenes ági (2xx) válaszokat is dokumentálnunk kell explicit módon.</li>
+<li>A gyakori hibaágakat (jelen esetben 404, 400, 500) érdemes a kontrollerre felvenni az egyes műveletek helyett, így elkerülhető az ismétlődés. Ennek ára, hogy néhány művelet esetében (pl. a listázásnál a 404-es válasz) pontatlan lesz a dokumentáció, de ez a legtöbb esetben elfogadható kompromisszum.</li>
 </ul>
 <h2 id="openapiswagger-kliensoldal">OpenAPI/Swagger kliensoldal<a class="headerlink" href="#openapiswagger-kliensoldal" title="Permanent link">¶</a></h2>
-<p>A kliensoldalt az <em>NSwag Studio</em> eszközzel generáltatjuk. Ez a generátor egy egyszerűen használható, de mégis sok beállítást támogató eszköz, azonban van pár hiányossága:</p>
+<p>A kliensoldalt az <em>NSwag Studio</em> eszközzel generáltatjuk. Ez a generátor egy egyszerűen használható, de mégis sok beállítást támogató eszköz, azonban van egy hiányossága:</p>
 <ul>
 <li>egyetlen fájlt <a href="https://github.com/RicoSuter/NSwag/issues/1398">generál</a></li>
-<li>csak részlegesen támogatja az új JSON sorosítót, csak a <a href="https://github.com/RicoSuter/NSwag/issues/2243">régebbit</a></li>
 </ul>
-<p>Előkészítésként adjuk a Client projekthez az alábbiakat:</p>
-<ul>
-<li><em>Newtonsoft.Json</em> NuGet csomagot</li>
-<li>egy osztályt <code>ApiClients</code> néven</li>
-</ul>
+<p>Előkészítésként adjuk a Client projekthez egy üres osztályt <code>ApiClient</code> néven, ebbe fogjuk majd bemásolni a generált kódot.</p>
 <p>Indítsuk el a projektünket (a szerveroldalra lesz most szükség) és az NSwag Studio-t, és adjuk meg az alábbi beállításokat:</p>
 <ul>
-<li>Input rész (bal oldal): válasszuk az <em>OpenAPI/Swagger Specification</em> fület és adjuk meg a OpenAPI leírónk címét (pl.: <a href="http://localhost:5000/swagger/v1/swagger.json">http://localhost:5000/swagger/v1/swagger.json</a>). Nyomjuk meg a <strong>Create local Copy</strong> gombot.</li>
-<li>Input rész (bal oldal) - Runtime: Net80</li>
+<li>Input rész (bal oldal): válasszuk az <em>OpenAPI/Swagger Specification</em> fület és adjuk meg a OpenAPI leírónk címét (pl.: <a href="http://localhost:5007/swagger/v1/swagger.json">http://localhost:5007/swagger/v1/swagger.json</a>). Nyomjuk meg a <strong>Create local Copy</strong> gombot.</li>
+<li>Input rész (bal oldal) - Runtime: Net10</li>
 <li>Output rész (jobb oldal) - jelöljük be a <em>CSharp Client</em> jelölőt</li>
 <li>Output rész (jobb oldal) - <em>CSharp Client</em> fül - Settings alfül: fölül a <em>Namespace</em> mezőben adjunk meg egy névteret, pl. <em>WebApiLab.Client.Api</em>, lentebb a <em>Use the base URL for the request</em> ne legyen bepipálva</li>
 </ul>
@@ -719,12 +713,12 @@ Az alatta lévő textbox-ot üresen hagyhatjuk.</p>
 <figcaption aria-hidden="true">NSwag Studio beállítások</figcaption>
 </figure>
 <p>Jobb oldalt alul a <em>Generate Outputs</em> gombbal generáltathatjuk a kliensoldali kódot.</p>
-<p>A generált kóddal írjuk felül az <em>ApiClients.cs</em> tartalmát (ehhez le kell állítani a futtatást). Ezután a projektnek fordulnia kell. Írjuk meg a <em>Program.cs</em>-ben a <code>GetProduct</code> új változatát:</p>
+<p>A generált kóddal írjuk felül az <em>ApiClient.cs</em> tartalmát (ehhez le kell állítani a futtatást). Ezután a projektnek fordulnia kell. Írjuk meg a <em>Program.cs</em>-ben a <code>GetProduct</code> új változatát:</p>
 <div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetProduct2Async</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">httpClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">()</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">BaseAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="s">"http://localhost:5184/"</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
-<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProductsClient</span><span class="p">(</span><span class="n">httpClient</span><span class="p">);</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">BaseAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="s">"http://localhost:5007/"</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProductClient</span><span class="p">(</span><span class="n">httpClient</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -754,13 +748,14 @@ Jelöljünk ki egy kitüntetett mezőt (<code>RowVersion</code>), amit minden up
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Product</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">//...</span>
-<span class="hll"><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">RowVersion</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="o">!</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">RowVersion</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </span><span class="p">}</span>
 </code></pre></div>
 <p>Állítsuk be az EF kontextben (<code>OnModelCreating</code>), hogy minden módosításnál frissítse ezt a mezőt és ez legyen a konkurenciatoken, az <code>IsRowVersion</code> függvény ezt egyben el is intézi:</p>
 <div class="highlight"><pre><span></span><code><span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="w">    </span><span class="p">.</span><span class="n">Property</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">RowVersion</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="n">IsRowVersion</span><span class="p">();</span>
+<span class="w">    </span><span class="p">.</span><span class="n">IsRowVersion</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="n">IsConcurrencyToken</span><span class="p">();</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Mi történik a háttérben?</p>
@@ -772,14 +767,31 @@ Ne felejtsük el a szokásos módon beállítani a Default Project-et a DAL-ra a
 <div class="highlight"><pre><span></span><code><span class="nb">Add-Migration</span> <span class="n">ProductRowVersion</span>
 <span class="nb">Update-Database</span>
 </code></pre></div>
-<p>Még a <code>Product</code> DTO osztályba is fel kell vegyük a <code>RowVersion</code> tulajdonságot és legyen ez is kötelező.</p>
-<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">record</span><span class="w"> </span><span class="n">Product</span>
+<p>Még a <code>NewProductRequest</code> DTO osztályba is fel kell vegyük a <code>RowVersion</code> tulajdonságot és legyen ez is kötelező - ez a DTO szolgál mind a létrehozás (POST), mind a módosítás (PUT) bemeneteként.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">record</span><span class="w"> </span><span class="n">NewProductRequest</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">//...</span>
-<span class="hll"><span class="w">    </span><span class="na">[Required(ErrorMessage = "RowVersion is required")]</span>
-</span><span class="hll"><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">RowVersion</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="o">!</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="na">[Required]</span>
+</span><span class="hll"><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">RowVersion</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </span><span class="p">}</span>
 </code></pre></div>
+<p>A módosítást végző service metódusban (<code>ProductService.UpdateProductAsync</code>) egy könnyen elnézhető, de kritikus lépésre van szükség, különben a konkurenciaellenőrzésünk hatástalan marad:</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">UpdateProductAsync</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">productId</span><span class="p">,</span><span class="w"> </span><span class="n">NewProductRequest</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">SingleOrDefaultAsync</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span>
+<span class="w">        </span><span class="o">??</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EntityNotFoundException</span><span class="p">(</span><span class="s">"Nem található a termék"</span><span class="p">,</span><span class="w"> </span><span class="n">productId</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="n">mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">(</span><span class="n">updatedProduct</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">);</span>
+</span><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">p</span><span class="p">).</span><span class="n">Property</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">RowVersion</span><span class="p">).</span><span class="n">OriginalValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">updatedProduct</span><span class="p">.</span><span class="n">RowVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">SaveChangesAsync</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nf">GetProductAsync</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Miért kell külön beállítani az OriginalValue-t?</p>
+<p>Az EF change tracker minden property-hez két értéket tart nyilván: <strong>OriginalValue</strong> (amit az adatbázisból olvasott ki) és <strong>CurrentValue</strong> (amire módosítjuk). A <code>mapper.Map(updatedProduct, p)</code> hívás csak a CurrentValue-kat írja felül - az OriginalValue változatlanul az imént, ugyanebben a kérésben frissen lekérdezett érték marad.</p>
+<p>A generált UPDATE utasítás WHERE feltétele viszont az <strong>OriginalValue</strong>-t használja, nem a CurrentValue-t. Mivel ezt az OriginalValue-t épp most, a metóduson belül olvastuk ki az adatbázisból, a feltétel <em>mindig</em> teljesülni fog - hiszen önmagával hasonlítjuk össze a DB aktuális állapotát. A konkurenciaellenőrzés lényege viszont az lenne, hogy azt vizsgáljuk: amit a <strong>kliens legutóbb látott</strong> (amikor lekérte az adatot), az még mindig egyezik-e azzal, ami most az adatbázisban van.</p>
+<p>Ezért explicit módon felül kell írnunk az entitás OriginalValue-ját a kliens által küldött (esetleg már elavult) <code>RowVersion</code> értékre. Enélkül a <code>DbUpdateConcurrencyException</code> soha nem keletkezik, hiába állítottuk be helyesen a konkurenciatokent az entitáson.</p>
+</div>
 <p>Konkurenciahelyzet esetén a 409-es hibakóddal szokás visszatérni, illetve <strong>PUT</strong> művelet során a válasz azt is tartalmazhatja, hogy melyek voltak az ütköző mezők. Az ütközés feloldása tipikusan nem feladatunk ilyenkor.</p>
 <p>Készítsünk egy saját <code>ProblemDetails</code> leszármazottat. Hozzunk létre egy új mappát <strong>ErrorHandling</strong> néven az <strong>Api</strong> projektben és bele egy új osztályt <code>ConcurrencyProblemDetails</code> néven, az alábbi implementációval:</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">record</span><span class="w"> </span><span class="nf">Conflict</span><span class="p">(</span><span class="kt">object?</span><span class="w"> </span><span class="n">CurrentValue</span><span class="p">,</span><span class="w"> </span><span class="kt">object?</span><span class="w"> </span><span class="n">SentValue</span><span class="p">);</span>
@@ -825,13 +837,29 @@ Ne felejtsük el a szokásos módon beállítani a Default Project-et a DAL-ra a
 <span class="w">        </span><span class="p">}</span>
 <span class="hll"><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">HttpContext</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">Get</span><span class="o">&lt;</span><span class="n">IExceptionHandlerFeature</span><span class="o">&gt;</span><span class="p">()</span><span class="o">?.</span><span class="n">Error</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DbUpdateConcurrencyException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span>
 </span><span class="hll"><span class="w">        </span><span class="p">{</span>
+</span><span class="hll"><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">concurrencyProblem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConcurrencyProblemDetails</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span>
 </span><span class="hll"><span class="w">            </span><span class="n">context</span><span class="p">.</span><span class="n">HttpContext</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">StatusCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StatusCodes</span><span class="p">.</span><span class="n">Status409Conflict</span><span class="p">;</span>
-</span><span class="hll"><span class="w">            </span><span class="n">context</span><span class="p">.</span><span class="n">ProblemDetails</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConcurrencyProblemDetails</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span>
-</span><span class="hll"><span class="w">        </span><span class="p">}</span>
-</span><span class="w">    </span><span class="p">}</span>
+</span><span class="hll"><span class="w">            </span><span class="n">context</span><span class="p">.</span><span class="n">ProblemDetails</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Concurrency conflict"</span><span class="p">;</span>
+</span><span class="w">            </span><span class="n">context</span><span class="p">.</span><span class="n">ProblemDetails</span><span class="p">.</span><span class="n">Status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StatusCodes</span><span class="p">.</span><span class="n">Status409Conflict</span><span class="p">;</span>
+<span class="w">            </span><span class="n">context</span><span class="p">.</span><span class="n">ProblemDetails</span><span class="p">.</span><span class="n">Extensions</span><span class="p">[</span><span class="s">"conflicts"</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">concurrencyProblem</span><span class="p">.</span><span class="n">Conflicts</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
-<p>Ezzel kész is az implementációnk, amit Postman-ből fogjuk kipróbálni. A kész kód elérhető a <a href="https://github.com/bmeviauav23/WebApiLab-kiindulo/tree/net6-client-megoldas"><em>net8-client-megoldas</em></a> ágon.</p>
+<div class="admonition warning">
+<p class="admonition-title">A <code>ProblemDetails</code> cseréje nem működik</p>
+<p>A <code>context.ProblemDetails = new ConcurrencyProblemDetails(ex);</code> sor (a teljes objektum lecserélése) <strong>nem</strong> jut el ténylegesen a válaszba - a <code>context.HttpContext.Response.StatusCode</code> beállítása igen érvényesül, de a törzs továbbra is az eredeti (alapértelmezett) <code>ProblemDetails</code> példányt fogja tartalmazni. Ehelyett a <strong>meglévő</strong> <code>context.ProblemDetails</code> példányt kell módosítani (ahogy a 404-es ágnál is tettük), a plusz adatokat pedig az erre szolgáló <code>Extensions</code> szótárba kell betenni - ez fog megjelenni <code>conflicts</code> néven a JSON válaszban.</p>
+</div>
+<p>Dokumentáljuk a Swaggerben is a lehetséges 409-es választ a <strong>PUT</strong> műveleten:</p>
+<div class="highlight"><pre><span></span><code><span class="na">[HttpPut("{id}")]</span>
+<span class="na">[ProducesResponseType&lt;Product&gt;(StatusCodes.Status200OK)]</span>
+<span class="hll"><span class="na">[ProducesResponseType&lt;ConcurrencyProblemDetails&gt;(StatusCodes.Status409Conflict)]</span>
+</span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Put</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">NewProductRequest</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">productService</span><span class="p">.</span><span class="n">UpdateProductAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ezzel kész is az implementációnk, amit Postman-ből fogjuk kipróbálni. A kész kód elérhető a <a href="https://github.com/bmeviauav23/WebApiLab-kiindulo/tree/lab-megoldas-260504"><em>lab-megoldas-260504</em></a> ágon.</p>
 <div class="admonition warning">
 <p class="admonition-title">Konkurencia mező beszúrás esetében</p>
 <p>A kötelezően kitöltendő konkurencia mező beszúrásnál kellemetlen, hiszen kliensoldalon még nem tudható a token kezdeti értéke. Ilyenkor használhatunk bármilyen értéket, az adatbázis fogja a kezdeti token értéket beállítani.</p>
@@ -894,10 +922,10 @@ Mappákat a kollekció extra menüjén (a kollekció neve mellett a <strong>…<
 <p>A négy API hívást klónozzuk (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-d">D</kbd></span>) a generált példahívásokból.
 Egy adott hívásra csináljunk egy klónt (jobbklikk → <strong>Duplicate</strong>), drag-and-drop-pal húzzuk rá az új mappánkra, végül nevezzük át (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-e">E</kbd></span>). Ezekre a hívásokra csináljuk meg:</p>
 <ul>
-<li>összes termék lekérdezése (módosítás előtt), azaz <strong>Products Get All</strong> példahívás, nevezzük át erre: <strong>[U1]GetAllProductsBefore</strong></li>
-<li>egy termék adatainak lekérdezése, azaz az <code>{id}</code> mappán belüli <strong>Get a specific product with the given identifier</strong> példahívás, nevezzük át erre <strong>[U1]GetTejDetails</strong></li>
-<li>adott termék módosítása, azaz az <code>{id}</code> mappán belüli <strong>Products Put</strong> példahívás, nevezzük át erre <strong>[U1]UpdateTej</strong></li>
-<li>összes termék lekérdezése (módosítás után), azaz <strong>Products Get All</strong> példahívás, nevezzük át erre: <strong>[U1]GetAllProductsAfter</strong></li>
+<li>összes termék lekérdezése (módosítás előtt), azaz <strong>Product_GetAll</strong> példahívás, nevezzük át erre: <strong>[U1]GetAllProductsBefore</strong></li>
+<li>egy termék adatainak lekérdezése, azaz az <code>{id}</code> mappán belüli <strong>Termék adatainak lekérdezése adott azonosítóval</strong> példahívás, nevezzük át erre <strong>[U1]GetTejDetails</strong></li>
+<li>adott termék módosítása, azaz az <code>{id}</code> mappán belüli <strong>Product_Put</strong> példahívás, nevezzük át erre <strong>[U1]UpdateTej</strong></li>
+<li>összes termék lekérdezése (módosítás után), azaz <strong>Product_GetAll</strong> példahívás, nevezzük át erre: <strong>[U1]GetAllProductsAfter</strong></li>
 </ul>
 <figure>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../images/aspnetcoreclient-postman-reqs1user.png"><img alt="Postman hívások - egy felhasználó" src="../images/aspnetcoreclient-postman-reqs1user.png"></a></p>
@@ -1065,8 +1093,8 @@ Szerencsére az adatelérési kódunkban ezeknek a problémáknak a nagy részé
 </path>
 </svg>
 </span>
-<span title="2024. június 24. 10:23:08">
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2024. június 24. 10:23:08 CEST"><span class="timeago" datetime="2024-06-24T10:23:08+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2024. június 24. 10:23:08 CEST">2024-06-24</span>
+<span title="2026. szeptember 8. 13:50:20">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026. szeptember 8. 13:50:20 CEST"><span class="timeago" datetime="2026-09-08T13:50:20+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026. szeptember 8. 13:50:20 CEST">2026-09-08</span>
 </span>
 </span>
 <span class="md-source-file__fact">
