@@ -4,6 +4,15 @@
 
 - kapcsolódó GitHub repo: <https://github.com/bmeviauav23/WebApiLab-kiindulo>
 
+## Kiinduló projekt beüzemelése
+
+Ez a labor az előző (kliens, OpenAPI, konkurenciakezelés) folytatása.
+Ha még nincs meg a kódunk, klónozzuk a `lab-kiindulo-260518` ágat.
+
+```cmd
+git clone https://github.com/bmeviauav23/WebApiLab-kiindulo -b lab-kiindulo-260518
+```
+
 ## Bevezetés
 
 Az automatizált tesztelés az alkalmazásfejlesztés egyik fontos lépése, mivel ezzel tudunk meggyőződni arról, hogy egy-egy funkció akkor is helyesen működik, ha az alkalmazás egy másik részén valamit módosítunk.
@@ -28,8 +37,11 @@ A legelterjedtebbek a [**Moq**](https://github.com/moq) és az [**NSubstitute**]
 Gyakran szükséges funkció, hogy a bemenő adatok előállítása során szeretnénk a valóságra hasonlító véletlenszerű/generált példaadatokat megadni.
 Ehhez egy bevált osztálykönyvtár a [**Bogus**](https://github.com/bchavez/Bogus).
 
-A tesztesetek elvárt eredményének a vizsgálatát asszertálásnak nevezzük (*assert*), aminek az írásához nagy segítséget tud nyújtani a [**Fluent Assertions**](https://fluentassertions.com) könyvtár.
+A tesztesetek elvárt eredményének a vizsgálatát asszertálásnak nevezzük (*assert*), aminek az írásához nagy segítséget tud nyújtani az [**AwesomeAssertions**](https://awesomeassertions.org) könyvtár.
 Ez nem csak a szintaktikát teszi olvashatóbbá fluent szintakszissal, hanem több olyan beépített segédlogikát tartalmaz, amivel tömörebbé tehető az *assert* logika (pl.: objektumok mélységi összehasonlítása érték szerint).
+
+!!! tip "AwesomeAssertions vs. Fluent Assertions"
+    A könyvtár eredetileg *Fluent Assertions* néven futott, viszont a *Fluent Assertions* 8-as verziójától kezdve a licensz kereskedelmi felhasználás esetén fizetőssé vált. Az *AwesomeAssertions* ennek a könyvtárnak egy közösség által fenntartott, továbbra is ingyenes (Apache 2.0 licenszű) folytatása, gyakorlatilag azonos API-val - csak a névtér lett `AwesomeAssertions`-re átnevezve.
 
 ## Integrációs tesztelés
 
@@ -37,17 +49,17 @@ Ezen gyakorlat keretében csak integrációs teszteket fogunk készíteni.
 
 ### Teszt projekt
 
-Vegyünk fel a solutionbe egy új xUnit (.NET 8) típusú projektet `WebApiLab.Tests` néven. A létrejövő tesztosztályt és fájlját nevezzük át `ProductControllerTests` névre. Ide fogjuk a `ProductController`-hez kapcsolódó műveletekre vonatkozó integrációs teszteket készíteni.
+Vegyünk fel a solutionbe egy új xUnit (.NET 10) típusú projektet `WebApiLab.Tests` néven. A létrejövő tesztosztályt és fájlját nevezzük át `ProductControllerTests` névre. Ide fogjuk a `ProductController`-hez kapcsolódó műveletekre vonatkozó integrációs teszteket készíteni.
 
 Vegyük fel az alábbi NuGet csomagokat a teszt projektbe.
-A *Bogus*ról és a *Fluent Assertions*ről már volt szó.
+A *Bogus*ról és az *AwesomeAssertions*ről már volt szó.
 A *Microsoft.AspNetCore.Mvc.Testing* csomag olyan segédszolgáltatásokat nyújt, amivel integrációs tesztekhez egy in-process teszt szervert tudunk futtatni, és ennek a meghívásában is segítséget nyújt.
 A projektfájlban a többi `PackageReference` mellé (menu:a projekten jobbklikk\[Edit Project File\]):
 
 ``` xml
-<PackageReference Include="Bogus" Version="35.5.1" />
-<PackageReference Include="FluentAssertions" Version="6.12.0" />
-<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.4" />
+<PackageReference Include="AwesomeAssertions" Version="9.6.0" />
+<PackageReference Include="Bogus" Version="35.6.5" />
+<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.11" />
 ```
 
 Vegyük fel az **Api** projektet projekt referenciaként a teszt projektbe. A projektfájlban egy másik `ItemGroup` mellé:
@@ -129,19 +141,19 @@ public partial class ProductControllerTests : IClassFixture<CustomWebApplication
     Csak azok a konstruktorparaméterek töltődnek ki, amelyek a dokumentációban megtalálhatók.
     A `CustomWebApplicationFactory` típusú paraméter azért töltődik ki, mert az osztály az interfészében jelzi, hogy megosztott kontextusként `CustomWebApplicationFactory`-t vár.
 
-Hozzunk létre a Bogus könyvtárral egy olyan `Faker<Product>` objektumot, amivel az API-nak küldendő DTO objektum generálását végezzük el.
-Azonosítóként küldjünk 0 értéket, mivel a létrehozás műveletet fogjuk tesztelni, kategória esetében pedig az 1-et, mivel a migráció által létrehozott 1-es kategóriát fogjuk tudni csak használni.
+Hozzunk létre a Bogus könyvtárral egy olyan `Faker<NewProductRequest>` objektumot, amivel az API-nak küldendő DTO objektum generálását végezzük el.
+Ez a DTO szolgál a `ProductController` `Post` és `Put` műveleteinek bemeneteként is - a visszaadott `Product` DTO ettől eltérő alakú (van pl. `Id`, `Category`, `Orders` mezője).
+Kategória esetében az 1-et küldjük, mivel a migráció által létrehozott 1-es kategóriát fogjuk tudni csak használni, a `RowVersion` mezőt pedig azért kell kitöltenünk, mert az kötelező a DTO-n (lásd a konkurenciakezelésről szóló fejezetet) - beszúráskor az itt küldött érték úgyis figyelmen kívül marad, a szerver generálja le a valódit.
 A többi esetben használjuk a Bogus beépített lehetőségeit a név és a szám értékek random generálásához.
 
 ``` csharp
 // ...
-private readonly Faker<Product> _dtoFaker;
+private readonly Faker<NewProductRequest> _dtoFaker;
 
 public ProductControllerTests(CustomWebApplicationFactory appFactory)
 {
     // ...
-    _dtoFaker = new Faker<Product>()
-        .RuleFor(p => p.Id, 0)
+    _dtoFaker = new Faker<NewProductRequest>()
         .RuleFor(p => p.Name, f => f.Commerce.Product())
         .RuleFor(p => p.UnitPrice, f => f.Random.Int(200, 20000))
         .RuleFor(p => p.ShipmentRegion,
@@ -246,26 +258,24 @@ Az *Act* fázisban küldjünk el egy POST kérést a megfelelő végpontra a meg
 
 ``` csharp
 // Act
-var response = await client.PostAsJsonAsync("/api/products", dto, _serializerOptions);
+var response = await client.PostAsJsonAsync("/api/Product", dto, _serializerOptions);
 var p = await response.Content.ReadFromJsonAsync<Product>(_serializerOptions);
 ```
 
-Az *Assert* fázisban pedig fogalmazzuk meg a FluentValidation könyvtár segítségével az elvárt eredmény szabályait.
-Gondoljunk arra is, hogy a `Category`, `Order`, `Id` és `RowVersion` property-k esetében nem az az elvárt válasz, amit felküldünk a szerverre, ezért ezeket szűrjük le az összehasonlításból és vizsgáljuk őket külön szabállyal.
+Az *Assert* fázisban pedig fogalmazzuk meg az AwesomeAssertions könyvtár segítségével az elvárt eredmény szabályait.
+Mivel a bemenetként küldött `NewProductRequest` és a válaszban kapott `Product` két különböző alakú DTO (a `Product`-on található pl. `Category`, `Orders`, `Id` mező is), a struktúrális összehasonlításnál az `ExcludingMissingMembers()` beállítással jelezzük, hogy csak a két típuson egyaránt meglévő mezőket (pl.: `Name`, `UnitPrice`) hasonlítsa össze. A `RowVersion` mezőt külön ki kell zárnunk ebből is, hiszen beszúráskor a szerver által generált érték biztosan eltér az általunk küldött (álcázott) értéktől.
 
 ``` csharp
 // Assert
 response.StatusCode.Should().Be(HttpStatusCode.Created);
 response.Headers.Location
     .Should().Be(
-        new Uri(_appFactory.Server.BaseAddress, $"/api/Products/{p.Id}")
+        new Uri(_appFactory.Server.BaseAddress, $"/api/Product/{p.Id}")
     );
 
 p.Should().BeEquivalentTo(
     dto,
-    opt => opt.Excluding(x => x.Category)
-        .Excluding(x => x.Orders)
-        .Excluding(x => x.Id)
+    opt => opt.ExcludingMissingMembers()
         .Excluding(x => x.RowVersion));
 p.Category.Should().NotBeNull();
 p.Category.Id.Should().Be(dto.CategoryId);
@@ -274,8 +284,8 @@ p.Id.Should().BeGreaterThan(0);
 p.RowVersion.Should().NotBeEmpty();
 ```
 
-!!! warning "Fluent Assertions és Nullable Reference Types"
-    A Fluent Assertions (nem preview verziója) [jelenleg még nem működik együtt](https://github.com/fluentassertions/fluentassertions/issues/1115) a nem nullozható referencia típusokkal kapcsolatos ellenőrzési logikákkal, így az *Assert* részen kaphatunk ennek kapcsán figyelmeztetéseket `Should().NotBeNull()` hívások után is.
+!!! warning "AwesomeAssertions és Nullable Reference Types"
+    Az AwesomeAssertions (a Fluent Assertionsből örökölt viselkedés miatt) jelenleg nem minden esetben működik teljesen együtt a nem nullozható referencia típusokkal kapcsolatos ellenőrzési logikákkal, így az *Assert* részen kaphatunk ennek kapcsán figyelmeztetéseket `Should().NotBeNull()` hívások után is.
 
 A POST művelet megváltoztatná az adatbázis állapotát, amit célszerű lenne elkerülni.
 Ezt legegyszerűbben úgy érhetjük el, hogy nyitunk egy tranzakciót a tesztben, amit nem commitolunk a teszt lefutása során. Ehhez vegyük fel az alábbi utasításokat az *Arrange* fázisban.
@@ -306,9 +316,9 @@ Esetünkben a név hibás értékeit várjuk első paraméterként, második par
 
 ``` csharp
 [Theory]
-[InlineData("", "Product name is required.")]
-[InlineData(null, "Product name is required.")]
-public async Task Should_Fail_When_Name_Is_Invalid(string name, string expectedError)
+[InlineData("", "Product name is required")]
+[InlineData(null, "Product name is required")]
+public async Task Should_Fail_When_Name_Is_Invalid(string? name, string expectedError)
 {
     // Arrange
 
@@ -326,14 +336,14 @@ Bár elvileg nem lenne szükséges tranzakciókezelés, hiszen nem szabadna adat
  _appFactory.Server.PreserveExecutionContext = true;
 using var tran = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 var client = _appFactory.CreateClient();
-var dto = _dtoFaker.RuleFor(x => x.Name, name).Generate();
+var dto = _dtoFaker.RuleFor(x => x.Name, name!).Generate();
 ```
 
 Az *Act* fázisban annyi a különbség, hogy most `ValidationProblemDetails` objektumot várunk a válaszban.
 
 ``` csharp
 // Act
-var response = await client.PostAsJsonAsync("/api/products", dto, _serializerOptions);
+var response = await client.PostAsJsonAsync("/api/Product", dto, _serializerOptions);
 var p = await response.Content
     .ReadFromJsonAsync<ValidationProblemDetails>(_serializerOptions);
 ```
@@ -346,8 +356,8 @@ response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
 p.Status.Should().Be(400);
 p.Errors.Should().HaveCount(1);
-p.Errors.Should().ContainKey(nameof(Product.Name));
-p.Errors[nameof(Product.Name)].Should().ContainSingle(expectedError);
+p.Errors.Should().ContainKey(nameof(NewProductRequest.Name));
+p.Errors[nameof(NewProductRequest.Name)].Should().ContainSingle(expectedError);
 ```
 
 Próbáljuk ki a menu:Test\[Run All Test\] menüpont segítségével.
@@ -393,7 +403,7 @@ Ugyanerre a kimenetre kössük rá a szerveroldali naplózást, hogy a tesztek l
 Ehhez telepítsünk egy segédcsomagot a tesztprojektbe.
 
 ``` xml
-<PackageReference Include="MartinCostello.Logging.XUnit" Version="0.3.0" />
+<PackageReference Include="MartinCostello.Logging.XUnit" Version="0.7.1" />
 ```
 
 A `ProductControllerTests` konstruktorában kössük össze a két paramétert, a `CustomWebApplicationFactory` és az `ITestOutputHelper` példányt a fenti segédcsomag (`AddXUnit` metódus) segítségével.
