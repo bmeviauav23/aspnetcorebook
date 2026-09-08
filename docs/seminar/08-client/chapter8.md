@@ -8,10 +8,10 @@
 
 ## Kiinduló projektek beüzemelése
 
-Klónozzuk le a kiinduló projekt `lab-kiindulo-240502` ágát, ez az előző gyakorlat folytatása - a kódot ismerjük. Ha nincs már meg az adatbázisunk, akkor az előző gyakorlat alapján hozzuk létre az adatbázist Code-First migrációval (`Update-Database`).
+Klónozzuk le a kiinduló projekt `lab-kiindulo-260504` ágát, ez az előző gyakorlat folytatása - a kódot ismerjük. Ha nincs már meg az adatbázisunk, akkor az előző gyakorlat alapján hozzuk létre az adatbázist Code-First migrációval (`dotnet ef databse update`).
 
 ```cmd
-git clone https://github.com/bmeviauav23/WebApiLab-kiindulo -b lab-kiindulo-240502
+git clone https://github.com/bmeviauav23/WebApiLab-kiindulo -b lab-kiindulo-260504
 ```
 
 ## Egyszerű kliens
@@ -27,7 +27,7 @@ A fentiekhez szinte minden manapság használt kliensoldali technológia ad tám
 A két képességet könnyen lefedhetjük a **System.Net.Http** (HTTP kommunikáció) és a **System.Text.Json** (JSON sorosítás) csomagokkal.
 Mindkettő a **Microsoft.NetCore.App** shared framework része, így általában nem kell külön beszereznünk őket.
 
-Adjunk a solution-höz egy konzolos projektet (Console App (.NET 8), **nem .NET Framework!**) *WebApiLab.Client* néven.
+Adjunk a solution-höz egy konzolos projektet (Console App (.NET 10), **nem .NET Framework!**) *WebApiLab.Client* néven.
 A *Program.cs*-ben írjuk meg az egy terméket lekérdező függvényt (`GetProductAsync`) és hívjuk meg.
 
 ``` csharp
@@ -45,7 +45,7 @@ static async Task GetProductAsync(int id)
     using var client = new HttpClient();
 
     // Ha eltér, a portot írjuk át a szervernek megfelelően
-    var response = await client.GetAsync(new Uri($"http://localhost:5184/api/Products/{id}"));
+    var response = await client.GetAsync(new Uri($"http://localhost:5007/api/Product/{id}"));
     response.EnsureSuccessStatusCode();
     var jsonStream = await response.Content.ReadAsStreamAsync();
     var json = await JsonDocument.ParseAsync(jsonStream);
@@ -57,7 +57,7 @@ static async Task GetProductAsync(int id)
 
 Ez most jelenleg csak egy egyszerű példa DTO osztályok nélkül, a későbbiekben egyszerűsíteni fogjuk a JSON feldolgozást.
 
-!!! tip .NET 8 kliensen is
+!!! tip .NET 10 kliensen is
     Az elterjedtebb .NET alapú kliensek, a WinForms, WPF alkalmazások a legutóbbi időkig .NET Framework alapúak voltak, viszont már egy ideje a .NET 6-os verziótól felfelé is támogatja a WinForms, WPF, WinUI, MAUI (régi Xamarin) alkalmazásokat. Célszerű ezeket választani a régi .NET Framework alapú változatok helyett.
 
 Állítsuk be, hogy a szerver és a kliensoldal is elinduljon (menu:solutionön jobbklikk\[Set startup projects…\]), majd próbáljuk ki, hogy a megadott azonosítójú termék neve és ára megjelenik-e a konzolon.
@@ -95,23 +95,22 @@ Ugyanakkor készültek kifejezetten a .NET-hez is OpenAPI eszközök, ezek köz�
 
 Első lépésként a szerveroldali kódunk alapján Swagger leírást generálunk *NSwag* segítségével.
 
-Adjuk hozzá a projekthez az **NSwag.AspNetCore** csomagot a `Package Manager Console`-ból vagy az API projekt Manage NuGet packages UI-on, és töröljük ki a **Swashbuckle.AspNetCore** csomagot.
+A kiinduló projekt jelenleg a beépített **Microsoft.AspNetCore.OpenApi** csomaggal (`AddOpenApi`/`MapOpenApi`) állítja elő az OpenAPI leírót, a dokumentációs felületet pedig a **Swashbuckle.AspNetCore.SwaggerUI** csomag szolgálja ki. Cseréljük le mindkettőt *NSwag*-re: adjuk hozzá a projekthez az **NSwag.AspNetCore** csomagot a `Package Manager Console`-ból vagy az API projekt Manage NuGet packages UI-on, és töröljük ki a **Swashbuckle.AspNetCore.SwaggerUI** csomagot.
 
 Konfiguráljuk a szükséges szolgáltatásokat a DI rendszerbe.
 
 ``` csharp
-//builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+//builder.Services.AddOpenApi();
 builder.Services.AddOpenApiDocument();
 ```
 
-Az OpenAPI leíró, illetve a dokumentációs felület kiszolgálására regisztráljunk egy-egy NSwag middleware-t az **Endpoint MW elé**. Az eddigi Swagger támogatással kapcsolatos kódok törölhetők.
+Az OpenAPI leíró, illetve a dokumentációs felület kiszolgálására regisztráljunk egy-egy NSwag middleware-t az **Endpoint MW elé**. Az eddigi OpenAPI/Swagger támogatással kapcsolatos kódok törölhetők.
 
 ``` csharp hl_lines="3-6"
 if (app.Environment.IsDevelopment())
 {
-    //app.UseSwagger();
-    //app.UseSwaggerUI();
+    //app.MapOpenApi();
+    //app.UseSwaggerUI(options => options.SwaggerEndpoint("/openapi/v1.json", "v1"));
     app.UseOpenApi();
     app.UseSwaggerUi();
 }
@@ -127,15 +126,14 @@ Próbáljuk ki, hogy működik-e a dokumentációs felület a **/swagger** útvo
 
 Az NSwag képes a kódunk [XML kommentjeit](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc) hasznosítani a dokumentációs felületen. Írjuk meg egy művelet XML kommentjét.
 
-``` csharp hl_lines="1-6"
+``` csharp hl_lines="1-5"
 /// <summary>
-/// Get a specific product with the given identifier
+/// Termék adatainak lekérdezése adott azonosítóval
 /// </summary>
-/// <param name="id">Product's identifier</param>
-/// <returns>Returns a specific product with the given identifier</returns>
-/// <response code="200">Listing successful</response>
+/// <param name="id">A lekérdezendő termék azonosítója</param>
+/// <returns>A lekérdezett termék</returns>
 [HttpGet("{id}")]
-public async Task<ActionResult<Product>> Get(int id){/*...*/}
+public async Task<Product> Get(int id){/*...*/}
 ```
 
 A Swagger komponensünk az XML kommenteket nem a forráskódból, hanem egy generált állományból képes kiolvasni.
@@ -167,16 +165,15 @@ Gyakori testreszabási feladat, hogy az egyes műveletek esetén a válasz ponto
 
 Ehhez elég egy (vagy több) `ProducesResponseType` attribútumot felrakni a műveletre.
 
-``` csharp hl_lines="6 8 13 18"
+``` csharp hl_lines="7 12"
 /// <summary>
-/// Creates a new product
 /// </summary>
-/// <param name="product">The product to create</param>
-/// <returns>Returns the product inserted</returns>
-/// <response code="201">Insert successful</response>
+/// <param name="newProduct"></param>
+/// <returns></returns>
+/// <response code="201">Insert Successful</response>
 [HttpPost]
-[ProducesResponseType(StatusCodes.Status201Created)]
-public async Task<ActionResult<Product>> Post([FromBody] Product product)
+[ProducesResponseType<Product>(StatusCodes.Status201Created)]
+public async Task<ActionResult<Product>> Post([FromBody] NewProductRequest newProduct)
 {/*...*/}
 
 [HttpDelete("{id}")]
@@ -187,76 +184,74 @@ public async Task<ActionResult> Delete(int id)
 
 Ellenőrizzük, hogy a dokumentációs felületen a fentieknek megfelelő státuszkódok jelennek-e meg.
 
-A hibaágakra is felvehetjük a megfelelő `ProducesResponseType` attribútumot, ahol annak generikus paramétere a hiba típusa.
+A hibaágakra is felvehetjük a megfelelő `ProducesResponseType` attribútumot, ahol annak generikus paramétere a hiba típusa. Mivel a 404, 400 és 500 hibaágak szinte minden műveletnél előfordulhatnak, ezeket érdemesebb egyszer, a kontrolleren felvenni az egyes műveletek helyett:
 
-``` csharp hl_lines="2 9-10 17-19 27-29 36-37"
-[HttpGet]
-[ProducesResponseType(StatusCodes.Status200OK)]
-public async Task<ActionResult<IEnumerable<Product>>> Get()
-{
-    return await _productService.GetProductsAsync();
-}
-
-[HttpGet("{id}")]
-[ProducesResponseType(StatusCodes.Status200OK)]
-[ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
-public async Task<ActionResult<Product>> Get(int id)
-{
-    return await _productService.GetProductAsync(id);
-}
-
-[HttpPost]
-[ProducesResponseType(StatusCodes.Status201Created)]
+``` csharp hl_lines="3-5 9 16 24 32"
+[Route("api/[controller]")]
+[ApiController]
 [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
 [ProducesResponseType<ValidationProblemDetails>(StatusCodes.Status400BadRequest)]
-public async Task<ActionResult<Product>> Post([FromBody] Product product)
+[ProducesResponseType<ProblemDetails>(StatusCodes.Status500InternalServerError)]
+public class ProductController(IProductService productService) : ControllerBase
 {
-    var created = await _productService.InsertProductAsync(product);
-    return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
-}
+    [HttpGet]
+    [ProducesResponseType<IEnumerable<Product>>(StatusCodes.Status200OK)]
+    public async Task<IEnumerable<Product>> Get()
+    {
+        return await productService.GetProductsAsync();
+    }
 
-[HttpPut("{id}")]
-[ProducesResponseType(StatusCodes.Status200OK)]
-[ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
-[ProducesResponseType<ValidationProblemDetails>(StatusCodes.Status400BadRequest)]
-public async Task<ActionResult<Product>> Put(int id, [FromBody] Product product)
-{
-    return await _productService.UpdateProductAsync(id, product);
-}
+    [HttpGet("{id}")]
+    [ProducesResponseType<Product>(StatusCodes.Status200OK)]
+    public async Task<Product> Get(int id)
+    {
+        return await productService.GetProductAsync(id);
+    }
 
-[HttpDelete("{id}")]
-[ProducesResponseType(StatusCodes.Status204NoContent)]
-[ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
-public async Task<ActionResult> Delete(int id)
-{
-    await _productService.DeleteProductAsync(id);
-    return NoContent();
+    [HttpPost]
+    [ProducesResponseType<Product>(StatusCodes.Status201Created)]
+    public async Task<ActionResult<Product>> Post([FromBody] NewProductRequest newProduct)
+    {
+        var p = await productService.InsertProductAsync(newProduct);
+        return CreatedAtAction(nameof(Get), new { id = p.Id }, p);
+    }
+
+    [HttpPut("{id}")]
+    [ProducesResponseType<Product>(StatusCodes.Status200OK)]
+    public async Task<Product> Put(int id, [FromBody] NewProductRequest p)
+    {
+        return await productService.UpdateProductAsync(id, p);
+    }
+
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<ActionResult> Delete(int id)
+    {
+        await productService.DeleteProductAsync(id);
+        return NoContent();
+    }
 }
 ```
 
 Vegyük észre az alábbiakat:
 
-- Ha nem adunk meg a `ProducesResponseType` attribútumnak típus paramétert, akkor a metódus visszatérési értékéből próbálja kitalálni a modellt.
-- Amíg nem adtunk meg semmilyen `ProducesResponseType` attribútumot, addig a Swagger UI az egyenes ágra mindig 200-as státuszkódot fog feltételezni
-- Ezt a feltételezést elveszítjük, ha bármilyen `ProducesResponseType` attribútumot felvesszük pl.: `ProducesResponseType(StatusCodes.Status404NotFound)` esetében szükséges már kiírni a 200-as státuszkódot is, ha az is lehetséges válasz.
-- A hibaeseteket akár közössé is tehetnénk, ha a `ProducesResponseType` attribútumokat nem a metódusra, hanem a kontrollerre raknánk. Ilyenkor viszont hibásan a listás végpontra is azt nyilatkoznánk, hogy jöhet 404-es státuszkód, pedig ez nem igaz.
+- Ha megadjuk a `ProducesResponseType` attribútum generíkus típusparaméterét (pl. `ProducesResponseType<Product>`), azzal explicit módon jelöljük a válasz típusát; megadása nélkül a metódus visszatérési értékéből próbálja kitalálni a modellt.
+- Amíg nem adtunk meg semmilyen `ProducesResponseType` attribútumot, addig a Swagger UI az egyenes ágra mindig 200-as státuszkódot fog feltételezni.
+- Ezt a feltételezést elveszítjük, ha bármilyen `ProducesResponseType` attribútumot felvesszük, ezért az egyenes ági (2xx) válaszokat is dokumentálnunk kell explicit módon.
+- A gyakori hibaágakat (jelen esetben 404, 400, 500) érdemes a kontrollerre felvenni az egyes műveletek helyett, így elkerülhető az ismétlődés. Ennek ára, hogy néhány művelet esetében (pl. a listázásnál a 404-es válasz) pontatlan lesz a dokumentáció, de ez a legtöbb esetben elfogadható kompromisszum.
 
 ## OpenAPI/Swagger kliensoldal
 
-A kliensoldalt az *NSwag Studio* eszközzel generáltatjuk. Ez a generátor egy egyszerűen használható, de mégis sok beállítást támogató eszköz, azonban van pár hiányossága:
+A kliensoldalt az *NSwag Studio* eszközzel generáltatjuk. Ez a generátor egy egyszerűen használható, de mégis sok beállítást támogató eszköz, azonban van egy hiányossága:
 
 - egyetlen fájlt [generál](https://github.com/RicoSuter/NSwag/issues/1398)
-- csak részlegesen támogatja az új JSON sorosítót, csak a [régebbit](https://github.com/RicoSuter/NSwag/issues/2243)
 
-Előkészítésként adjuk a Client projekthez az alábbiakat:
-
-- *Newtonsoft.Json* NuGet csomagot
-- egy osztályt `ApiClients` néven
+Előkészítésként adjuk a Client projekthez egy üres osztályt `ApiClient` néven, ebbe fogjuk majd bemásolni a generált kódot.
 
 Indítsuk el a projektünket (a szerveroldalra lesz most szükség) és az NSwag Studio-t, és adjuk meg az alábbi beállításokat:
 
-- Input rész (bal oldal): válasszuk az *OpenAPI/Swagger Specification* fület és adjuk meg a OpenAPI leírónk címét (pl.: <http://localhost:5000/swagger/v1/swagger.json>). Nyomjuk meg a **Create local Copy** gombot.
-- Input rész (bal oldal) - Runtime: Net80
+- Input rész (bal oldal): válasszuk az *OpenAPI/Swagger Specification* fület és adjuk meg a OpenAPI leírónk címét (pl.: <http://localhost:5007/swagger/v1/swagger.json>). Nyomjuk meg a **Create local Copy** gombot.
+- Input rész (bal oldal) - Runtime: Net10
 - Output rész (jobb oldal) - jelöljük be a *CSharp Client* jelölőt
 - Output rész (jobb oldal) - *CSharp Client* fül - Settings alfül: fölül a *Namespace* mezőben adjunk meg egy névteret, pl. *WebApiLab.Client.Api*, lentebb a *Use the base URL for the request* ne legyen bepipálva
 
@@ -267,14 +262,14 @@ Indítsuk el a projektünket (a szerveroldalra lesz most szükség) és az NSwag
 
 Jobb oldalt alul a *Generate Outputs* gombbal generáltathatjuk a kliensoldali kódot.
 
-A generált kóddal írjuk felül az *ApiClients.cs* tartalmát (ehhez le kell állítani a futtatást). Ezután a projektnek fordulnia kell. Írjuk meg a *Program.cs*-ben a `GetProduct` új változatát:
+A generált kóddal írjuk felül az *ApiClient.cs* tartalmát (ehhez le kell állítani a futtatást). Ezután a projektnek fordulnia kell. Írjuk meg a *Program.cs*-ben a `GetProduct` új változatát:
 
 ``` csharp
 static async Task<Product> GetProduct2Async(int id)
 {
     using var httpClient = new HttpClient()
-        { BaseAddress = new Uri("http://localhost:5184/") };
-    var client = new ProductsClient(httpClient);
+        { BaseAddress = new Uri("http://localhost:5007/") };
+    var client = new ProductClient(httpClient);
     return await client.GetAsync(id);
 }
 ```
@@ -313,7 +308,7 @@ Ehhez vegyünk fel egy `byte[]`-t a `Product` entitás osztályba `RowVersion` n
 public class Product
 {
     //...
-    public byte[] RowVersion { get; set; } = null!;
+    public byte[] RowVersion { get; set; }
 }
 ```
 
@@ -322,7 +317,8 @@ public class Product
 ``` csharp
 modelBuilder.Entity<Product>()
     .Property(p => p.RowVersion)
-    .IsRowVersion();
+    .IsRowVersion()
+    .IsConcurrencyToken();
 ```
 
 !!! tip "Mi történik a háttérben?"
@@ -337,16 +333,37 @@ Add-Migration ProductRowVersion
 Update-Database
 ```
 
-Még a `Product` DTO osztályba is fel kell vegyük a `RowVersion` tulajdonságot és legyen ez is kötelező.
+Még a `NewProductRequest` DTO osztályba is fel kell vegyük a `RowVersion` tulajdonságot és legyen ez is kötelező - ez a DTO szolgál mind a létrehozás (POST), mind a módosítás (PUT) bemeneteként.
 
 ``` csharp hl_lines="4-5"
-public record Product
+public record NewProductRequest
 {
     //...
-    [Required(ErrorMessage = "RowVersion is required")]
-    public byte[] RowVersion { get; init; } = null!;
+    [Required]
+    public byte[] RowVersion { get; set; }
 }
 ```
+
+A módosítást végző service metódusban (`ProductService.UpdateProductAsync`) egy könnyen elnézhető, de kritikus lépésre van szükség, különben a konkurenciaellenőrzésünk hatástalan marad:
+
+``` csharp hl_lines="5"
+public async Task<Product> UpdateProductAsync(int productId, NewProductRequest updatedProduct)
+{
+    var p = await context.Products.SingleOrDefaultAsync(p => p.Id == productId)
+        ?? throw new EntityNotFoundException("Nem található a termék", productId);
+    mapper.Map(updatedProduct, p);
+    context.Entry(p).Property(x => x.RowVersion).OriginalValue = updatedProduct.RowVersion;
+    await context.SaveChangesAsync();
+    return await GetProductAsync(p.Id);
+}
+```
+
+!!! warning "Miért kell külön beállítani az OriginalValue-t?"
+    Az EF change tracker minden property-hez két értéket tart nyilván: **OriginalValue** (amit az adatbázisból olvasott ki) és **CurrentValue** (amire módosítjuk). A `mapper.Map(updatedProduct, p)` hívás csak a CurrentValue-kat írja felül - az OriginalValue változatlanul az imént, ugyanebben a kérésben frissen lekérdezett érték marad.
+
+    A generált UPDATE utasítás WHERE feltétele viszont az **OriginalValue**-t használja, nem a CurrentValue-t. Mivel ezt az OriginalValue-t épp most, a metóduson belül olvastuk ki az adatbázisból, a feltétel *mindig* teljesülni fog - hiszen önmagával hasonlítjuk össze a DB aktuális állapotát. A konkurenciaellenőrzés lényege viszont az lenne, hogy azt vizsgáljuk: amit a **kliens legutóbb látott** (amikor lekérte az adatot), az még mindig egyezik-e azzal, ami most az adatbázisban van.
+
+    Ezért explicit módon felül kell írnunk az entitás OriginalValue-ját a kliens által küldött (esetleg már elavult) `RowVersion` értékre. Enélkül a `DbUpdateConcurrencyException` soha nem keletkezik, hiába állítottuk be helyesen a konkurenciatokent az entitáson.
 
 Konkurenciahelyzet esetén a 409-es hibakóddal szokás visszatérni, illetve **PUT** művelet során a válasz azt is tartalmazhatja, hogy melyek voltak az ütköző mezők. Az ütközés feloldása tipikusan nem feladatunk ilyenkor.
 
@@ -400,14 +417,32 @@ builder.Services.AddProblemDetails(options =>
         }
         else if (context.HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error is DbUpdateConcurrencyException ex)
         {
+            var concurrencyProblem = new ConcurrencyProblemDetails(ex);
             context.HttpContext.Response.StatusCode = StatusCodes.Status409Conflict;
-            context.ProblemDetails = new ConcurrencyProblemDetails(ex);
+            context.ProblemDetails.Title = "Concurrency conflict";
+            context.ProblemDetails.Status = StatusCodes.Status409Conflict;
+            context.ProblemDetails.Extensions["conflicts"] = concurrencyProblem.Conflicts;
         }
     }
 );
 ```
 
-Ezzel kész is az implementációnk, amit Postman-ből fogjuk kipróbálni. A kész kód elérhető a [*net8-client-megoldas*](https://github.com/bmeviauav23/WebApiLab-kiindulo/tree/net6-client-megoldas) ágon.
+!!! warning "A `ProblemDetails` cseréje nem működik"
+    A `context.ProblemDetails = new ConcurrencyProblemDetails(ex);` sor (a teljes objektum lecserélése) **nem** jut el ténylegesen a válaszba - a `context.HttpContext.Response.StatusCode` beállítása igen érvényesül, de a törzs továbbra is az eredeti (alapértelmezett) `ProblemDetails` példányt fogja tartalmazni. Ehelyett a **meglévő** `context.ProblemDetails` példányt kell módosítani (ahogy a 404-es ágnál is tettük), a plusz adatokat pedig az erre szolgáló `Extensions` szótárba kell betenni - ez fog megjelenni `conflicts` néven a JSON válaszban.
+
+Dokumentáljuk a Swaggerben is a lehetséges 409-es választ a **PUT** műveleten:
+
+``` csharp hl_lines="3"
+[HttpPut("{id}")]
+[ProducesResponseType<Product>(StatusCodes.Status200OK)]
+[ProducesResponseType<ConcurrencyProblemDetails>(StatusCodes.Status409Conflict)]
+public async Task<Product> Put(int id, [FromBody] NewProductRequest p)
+{
+    return await productService.UpdateProductAsync(id, p);
+}
+```
+
+Ezzel kész is az implementációnk, amit Postman-ből fogjuk kipróbálni. A kész kód elérhető a [*lab-megoldas-260504*](https://github.com/bmeviauav23/WebApiLab-kiindulo/tree/lab-megoldas-260504) ágon.
 
 !!! warning "Konkurencia mező beszúrás esetében"
     A kötelezően kitöltendő konkurencia mező beszúrásnál kellemetlen, hiszen kliensoldalon még nem tudható a token kezdeti értéke. Ilyenkor használhatunk bármilyen értéket, az adatbázis fogja a kezdeti token értéket beállítani.
@@ -480,10 +515,10 @@ Egy tipikus módosító folyamat felhasználói szempontból az alábbi lépése
 A négy API hívást klónozzuk (++ctrl+d++) a generált példahívásokból.
 Egy adott hívásra csináljunk egy klónt (jobbklikk → **Duplicate**), drag-and-drop-pal húzzuk rá az új mappánkra, végül nevezzük át (++ctrl+e++). Ezekre a hívásokra csináljuk meg:
 
-- összes termék lekérdezése (módosítás előtt), azaz **Products Get All** példahívás, nevezzük át erre: **\[U1\]GetAllProductsBefore**
-- egy termék adatainak lekérdezése, azaz az `{id}` mappán belüli **Get a specific product with the given identifier** példahívás, nevezzük át erre **\[U1\]GetTejDetails**
-- adott termék módosítása, azaz az `{id}` mappán belüli **Products Put** példahívás, nevezzük át erre **\[U1\]UpdateTej**
-- összes termék lekérdezése (módosítás után), azaz **Products Get All** példahívás, nevezzük át erre: **\[U1\]GetAllProductsAfter**
+- összes termék lekérdezése (módosítás előtt), azaz **Product_GetAll** példahívás, nevezzük át erre: **\[U1\]GetAllProductsBefore**
+- egy termék adatainak lekérdezése, azaz az `{id}` mappán belüli **Termék adatainak lekérdezése adott azonosítóval** példahívás, nevezzük át erre **\[U1\]GetTejDetails**
+- adott termék módosítása, azaz az `{id}` mappán belüli **Product_Put** példahívás, nevezzük át erre **\[U1\]UpdateTej**
+- összes termék lekérdezése (módosítás után), azaz **Product_GetAll** példahívás, nevezzük át erre: **\[U1\]GetAllProductsAfter**
 
 <figure markdown>
 ![Postman hívások - egy felhasználó](images/aspnetcoreclient-postman-reqs1user.png)
