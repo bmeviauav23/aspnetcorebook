@@ -16,7 +16,7 @@
 <link href="../../../css/timeago.css" rel="stylesheet">
 <link href="../../../extra-material-theme.css" rel="stylesheet">
 <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-<link href="../../../assets/stylesheets/extra-style.1re13a3p.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+<link href="../../../assets/stylesheets/extra-style.coh7fo28.min.css" rel="stylesheet"><link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -404,6 +404,15 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#kiindulo-projekt-beuzemelese">
+<span class="md-ellipsis">
+      
+        Kiinduló projekt beüzemelése
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#bevezetes">
 <span class="md-ellipsis">
       
@@ -616,6 +625,15 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#kiindulo-projekt-beuzemelese">
+<span class="md-ellipsis">
+      
+        Kiinduló projekt beüzemelése
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#bevezetes">
 <span class="md-ellipsis">
       
@@ -715,6 +733,11 @@
 <ul>
 <li>kapcsolódó GitHub repo: <a href="https://github.com/bmeviauav23/WebApiLab-kiindulo">https://github.com/bmeviauav23/WebApiLab-kiindulo</a></li>
 </ul>
+<h2 id="kiindulo-projekt-beuzemelese">Kiinduló projekt beüzemelése<a class="headerlink" href="#kiindulo-projekt-beuzemelese" title="Permanent link">¶</a></h2>
+<p>Ez a labor az előző (kliens, OpenAPI, konkurenciakezelés) folytatása.
+Ha még nincs meg a kódunk, klónozzuk a <code>lab-kiindulo-260518</code> ágat.</p>
+<div class="highlight"><pre><span></span><code>git clone https://github.com/bmeviauav23/WebApiLab-kiindulo -b lab-kiindulo-260518
+</code></pre></div>
 <h2 id="bevezetes">Bevezetés<a class="headerlink" href="#bevezetes" title="Permanent link">¶</a></h2>
 <p>Az automatizált tesztelés az alkalmazásfejlesztés egyik fontos lépése, mivel ezzel tudunk meggyőződni arról, hogy egy-egy funkció akkor is helyesen működik, ha az alkalmazás egy másik részén valamit módosítunk.
 Hogy ezt az ellenőrzést ne kelljen minden egyes alkalommal manuálisan végrehajtani az alkalmazáson, programozott teszteket szoktunk írni, amelyek futtatását CI/CD folyamatokban automatizálhatjuk.</p>
@@ -732,19 +755,23 @@ Ebben a keretrendszerben lehetőségünk van tesztesetek definiálására, akár
 A legelterjedtebbek a <a href="https://github.com/moq"><strong>Moq</strong></a> és az <a href="https://nsubstitute.github.io/"><strong>NSubstitute</strong></a>.</p>
 <p>Gyakran szükséges funkció, hogy a bemenő adatok előállítása során szeretnénk a valóságra hasonlító véletlenszerű/generált példaadatokat megadni.
 Ehhez egy bevált osztálykönyvtár a <a href="https://github.com/bchavez/Bogus"><strong>Bogus</strong></a>.</p>
-<p>A tesztesetek elvárt eredményének a vizsgálatát asszertálásnak nevezzük (<em>assert</em>), aminek az írásához nagy segítséget tud nyújtani a <a href="https://fluentassertions.com"><strong>Fluent Assertions</strong></a> könyvtár.
+<p>A tesztesetek elvárt eredményének a vizsgálatát asszertálásnak nevezzük (<em>assert</em>), aminek az írásához nagy segítséget tud nyújtani az <a href="https://awesomeassertions.org"><strong>AwesomeAssertions</strong></a> könyvtár.
 Ez nem csak a szintaktikát teszi olvashatóbbá fluent szintakszissal, hanem több olyan beépített segédlogikát tartalmaz, amivel tömörebbé tehető az <em>assert</em> logika (pl.: objektumok mélységi összehasonlítása érték szerint).</p>
+<div class="admonition tip">
+<p class="admonition-title">AwesomeAssertions vs. Fluent Assertions</p>
+<p>A könyvtár eredetileg <em>Fluent Assertions</em> néven futott, viszont a <em>Fluent Assertions</em> 8-as verziójától kezdve a licensz kereskedelmi felhasználás esetén fizetőssé vált. Az <em>AwesomeAssertions</em> ennek a könyvtárnak egy közösség által fenntartott, továbbra is ingyenes (Apache 2.0 licenszű) folytatása, gyakorlatilag azonos API-val - csak a névtér lett <code>AwesomeAssertions</code>-re átnevezve.</p>
+</div>
 <h2 id="integracios-teszteles">Integrációs tesztelés<a class="headerlink" href="#integracios-teszteles" title="Permanent link">¶</a></h2>
 <p>Ezen gyakorlat keretében csak integrációs teszteket fogunk készíteni.</p>
 <h3 id="teszt-projekt">Teszt projekt<a class="headerlink" href="#teszt-projekt" title="Permanent link">¶</a></h3>
-<p>Vegyünk fel a solutionbe egy új xUnit (.NET 8) típusú projektet <code>WebApiLab.Tests</code> néven. A létrejövő tesztosztályt és fájlját nevezzük át <code>ProductControllerTests</code> névre. Ide fogjuk a <code>ProductController</code>-hez kapcsolódó műveletekre vonatkozó integrációs teszteket készíteni.</p>
+<p>Vegyünk fel a solutionbe egy új xUnit (.NET 10) típusú projektet <code>WebApiLab.Tests</code> néven. A létrejövő tesztosztályt és fájlját nevezzük át <code>ProductControllerTests</code> névre. Ide fogjuk a <code>ProductController</code>-hez kapcsolódó műveletekre vonatkozó integrációs teszteket készíteni.</p>
 <p>Vegyük fel az alábbi NuGet csomagokat a teszt projektbe.
-A <em>Bogus*ról és a *Fluent Assertions*ről már volt szó.
+A <em>Bogus*ról és az *AwesomeAssertions*ről már volt szó.
 A *Microsoft.AspNetCore.Mvc.Testing</em> csomag olyan segédszolgáltatásokat nyújt, amivel integrációs tesztekhez egy in-process teszt szervert tudunk futtatni, és ennek a meghívásában is segítséget nyújt.
 A projektfájlban a többi <code>PackageReference</code> mellé (menu:a projekten jobbklikk[Edit Project File]):</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">"Bogus"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"35.5.1"</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">"FluentAssertions"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"6.12.0"</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">"Microsoft.AspNetCore.Mvc.Testing"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"8.0.4"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">"AwesomeAssertions"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"9.6.0"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">"Bogus"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"35.6.5"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">"Microsoft.AspNetCore.Mvc.Testing"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"10.0.11"</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div>
 <p>Vegyük fel az <strong>Api</strong> projektet projekt referenciaként a teszt projektbe. A projektfájlban egy másik <code>ItemGroup</code> mellé:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;ItemGroup&gt;</span>
@@ -811,17 +838,17 @@ Az osztály valósítsa meg az <code>IClassFixture&lt;CustomWebApplicationFactor
 Csak azok a konstruktorparaméterek töltődnek ki, amelyek a dokumentációban megtalálhatók.
 A <code>CustomWebApplicationFactory</code> típusú paraméter azért töltődik ki, mert az osztály az interfészében jelzi, hogy megosztott kontextusként <code>CustomWebApplicationFactory</code>-t vár.</p>
 </div>
-<p>Hozzunk létre a Bogus könyvtárral egy olyan <code>Faker&lt;Product&gt;</code> objektumot, amivel az API-nak küldendő DTO objektum generálását végezzük el.
-Azonosítóként küldjünk 0 értéket, mivel a létrehozás műveletet fogjuk tesztelni, kategória esetében pedig az 1-et, mivel a migráció által létrehozott 1-es kategóriát fogjuk tudni csak használni.
+<p>Hozzunk létre a Bogus könyvtárral egy olyan <code>Faker&lt;NewProductRequest&gt;</code> objektumot, amivel az API-nak küldendő DTO objektum generálását végezzük el.
+Ez a DTO szolgál a <code>ProductController</code> <code>Post</code> és <code>Put</code> műveleteinek bemeneteként is - a visszaadott <code>Product</code> DTO ettől eltérő alakú (van pl. <code>Id</code>, <code>Category</code>, <code>Orders</code> mezője).
+Kategória esetében az 1-et küldjük, mivel a migráció által létrehozott 1-es kategóriát fogjuk tudni csak használni, a <code>RowVersion</code> mezőt pedig azért kell kitöltenünk, mert az kötelező a DTO-n (lásd a konkurenciakezelésről szóló fejezetet) - beszúráskor az itt küldött érték úgyis figyelmen kívül marad, a szerver generálja le a valódit.
 A többi esetben használjuk a Bogus beépített lehetőségeit a név és a szám értékek random generálásához.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// ...</span>
-<span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">Faker</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_dtoFaker</span><span class="p">;</span>
+<span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">Faker</span><span class="o">&lt;</span><span class="n">NewProductRequest</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_dtoFaker</span><span class="p">;</span>
 
 <span class="k">public</span><span class="w"> </span><span class="nf">ProductControllerTests</span><span class="p">(</span><span class="n">CustomWebApplicationFactory</span><span class="w"> </span><span class="n">appFactory</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="n">_dtoFaker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Faker</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">()</span>
-<span class="w">        </span><span class="p">.</span><span class="n">RuleFor</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">_dtoFaker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Faker</span><span class="o">&lt;</span><span class="n">NewProductRequest</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="w">        </span><span class="p">.</span><span class="n">RuleFor</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">Commerce</span><span class="p">.</span><span class="n">Product</span><span class="p">())</span>
 <span class="w">        </span><span class="p">.</span><span class="n">RuleFor</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">UnitPrice</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">Random</span><span class="p">.</span><span class="n">Int</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">20000</span><span class="p">))</span>
 <span class="w">        </span><span class="p">.</span><span class="n">RuleFor</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ShipmentRegion</span><span class="p">,</span>
@@ -908,23 +935,21 @@ Hozzunk létre egy függvényt <code>Fact</code> attribútummal <code>Should_Suc
 </code></pre></div>
 <p>Az <em>Act</em> fázisban küldjünk el egy POST kérést a megfelelő végpontra a megfelelő sorosítási beállításokkal és olvassuk ki a választ.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Act</span>
-<span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">PostAsJsonAsync</span><span class="p">(</span><span class="s">"/api/products"</span><span class="p">,</span><span class="w"> </span><span class="n">dto</span><span class="p">,</span><span class="w"> </span><span class="n">_serializerOptions</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">PostAsJsonAsync</span><span class="p">(</span><span class="s">"/api/Product"</span><span class="p">,</span><span class="w"> </span><span class="n">dto</span><span class="p">,</span><span class="w"> </span><span class="n">_serializerOptions</span><span class="p">);</span>
 <span class="kt">var</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadFromJsonAsync</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_serializerOptions</span><span class="p">);</span>
 </code></pre></div>
-<p>Az <em>Assert</em> fázisban pedig fogalmazzuk meg a FluentValidation könyvtár segítségével az elvárt eredmény szabályait.
-Gondoljunk arra is, hogy a <code>Category</code>, <code>Order</code>, <code>Id</code> és <code>RowVersion</code> property-k esetében nem az az elvárt válasz, amit felküldünk a szerverre, ezért ezeket szűrjük le az összehasonlításból és vizsgáljuk őket külön szabállyal.</p>
+<p>Az <em>Assert</em> fázisban pedig fogalmazzuk meg az AwesomeAssertions könyvtár segítségével az elvárt eredmény szabályait.
+Mivel a bemenetként küldött <code>NewProductRequest</code> és a válaszban kapott <code>Product</code> két különböző alakú DTO (a <code>Product</code>-on található pl. <code>Category</code>, <code>Orders</code>, <code>Id</code> mező is), a struktúrális összehasonlításnál az <code>ExcludingMissingMembers()</code> beállítással jelezzük, hogy csak a két típuson egyaránt meglévő mezőket (pl.: <code>Name</code>, <code>UnitPrice</code>) hasonlítsa össze. A <code>RowVersion</code> mezőt külön ki kell zárnunk ebből is, hiszen beszúráskor a szerver által generált érték biztosan eltér az általunk küldött (álcázott) értéktől.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Assert</span>
 <span class="n">response</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">Created</span><span class="p">);</span>
 <span class="n">response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Location</span>
 <span class="w">    </span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">Uri</span><span class="p">(</span><span class="n">_appFactory</span><span class="p">.</span><span class="n">Server</span><span class="p">.</span><span class="n">BaseAddress</span><span class="p">,</span><span class="w"> </span><span class="s">$"/api/Products/{p.Id}"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">Uri</span><span class="p">(</span><span class="n">_appFactory</span><span class="p">.</span><span class="n">Server</span><span class="p">.</span><span class="n">BaseAddress</span><span class="p">,</span><span class="w"> </span><span class="s">$"/api/Product/{p.Id}"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">);</span>
 
 <span class="n">p</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">BeEquivalentTo</span><span class="p">(</span>
 <span class="w">    </span><span class="n">dto</span><span class="p">,</span>
-<span class="w">    </span><span class="n">opt</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="n">Excluding</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">Category</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">Excluding</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">Orders</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">Excluding</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">Id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">opt</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="n">ExcludingMissingMembers</span><span class="p">()</span>
 <span class="w">        </span><span class="p">.</span><span class="n">Excluding</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">RowVersion</span><span class="p">));</span>
 <span class="n">p</span><span class="p">.</span><span class="n">Category</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">NotBeNull</span><span class="p">();</span>
 <span class="n">p</span><span class="p">.</span><span class="n">Category</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="n">CategoryId</span><span class="p">);</span>
@@ -933,8 +958,8 @@ Gondoljunk arra is, hogy a <code>Category</code>, <code>Order</code>, <code>Id</
 <span class="n">p</span><span class="p">.</span><span class="n">RowVersion</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">NotBeEmpty</span><span class="p">();</span>
 </code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title">Fluent Assertions és Nullable Reference Types</p>
-<p>A Fluent Assertions (nem preview verziója) <a href="https://github.com/fluentassertions/fluentassertions/issues/1115">jelenleg még nem működik együtt</a> a nem nullozható referencia típusokkal kapcsolatos ellenőrzési logikákkal, így az <em>Assert</em> részen kaphatunk ennek kapcsán figyelmeztetéseket <code>Should().NotBeNull()</code> hívások után is.</p>
+<p class="admonition-title">AwesomeAssertions és Nullable Reference Types</p>
+<p>Az AwesomeAssertions (a Fluent Assertionsből örökölt viselkedés miatt) jelenleg nem minden esetben működik teljesen együtt a nem nullozható referencia típusokkal kapcsolatos ellenőrzési logikákkal, így az <em>Assert</em> részen kaphatunk ennek kapcsán figyelmeztetéseket <code>Should().NotBeNull()</code> hívások után is.</p>
 </div>
 <p>A POST művelet megváltoztatná az adatbázis állapotát, amit célszerű lenne elkerülni.
 Ezt legegyszerűbben úgy érhetjük el, hogy nyitunk egy tranzakciót a tesztben, amit nem commitolunk a teszt lefutása során. Ehhez vegyük fel az alábbi utasításokat az <em>Arrange</em> fázisban.</p>
@@ -957,9 +982,9 @@ Mi most válasszuk az <code>InlineData</code> megközelítést, ahol attribútum
 Ilyen esetben az attribútumban megadott értékeket a teszt metódus paraméterlistáján kell elkérjük.
 Esetünkben a név hibás értékeit várjuk első paraméterként, második paraméterként pedig az elvárt hibaüzenetet.</p>
 <div class="highlight"><pre><span></span><code><span class="na">[Theory]</span>
-<span class="na">[InlineData("", "Product name is required.")]</span>
-<span class="na">[InlineData(null, "Product name is required.")]</span>
-<span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Should_Fail_When_Name_Is_Invalid</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">expectedError</span><span class="p">)</span>
+<span class="na">[InlineData("", "Product name is required")]</span>
+<span class="na">[InlineData(null, "Product name is required")]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Should_Fail_When_Name_Is_Invalid</span><span class="p">(</span><span class="kt">string?</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">expectedError</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Arrange</span>
 
@@ -974,11 +999,11 @@ Bár elvileg nem lenne szükséges tranzakciókezelés, hiszen nem szabadna adat
 <span class="w"> </span><span class="n">_appFactory</span><span class="p">.</span><span class="n">Server</span><span class="p">.</span><span class="n">PreserveExecutionContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">tran</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TransactionScope</span><span class="p">(</span><span class="n">TransactionScopeAsyncFlowOption</span><span class="p">.</span><span class="n">Enabled</span><span class="p">);</span>
 <span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_appFactory</span><span class="p">.</span><span class="n">CreateClient</span><span class="p">();</span>
-<span class="kt">var</span><span class="w"> </span><span class="n">dto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_dtoFaker</span><span class="p">.</span><span class="n">RuleFor</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">).</span><span class="n">Generate</span><span class="p">();</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">dto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_dtoFaker</span><span class="p">.</span><span class="n">RuleFor</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="o">!</span><span class="p">).</span><span class="n">Generate</span><span class="p">();</span>
 </code></pre></div>
 <p>Az <em>Act</em> fázisban annyi a különbség, hogy most <code>ValidationProblemDetails</code> objektumot várunk a válaszban.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Act</span>
-<span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">PostAsJsonAsync</span><span class="p">(</span><span class="s">"/api/products"</span><span class="p">,</span><span class="w"> </span><span class="n">dto</span><span class="p">,</span><span class="w"> </span><span class="n">_serializerOptions</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">PostAsJsonAsync</span><span class="p">(</span><span class="s">"/api/Product"</span><span class="p">,</span><span class="w"> </span><span class="n">dto</span><span class="p">,</span><span class="w"> </span><span class="n">_serializerOptions</span><span class="p">);</span>
 <span class="kt">var</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">Content</span>
 <span class="w">    </span><span class="p">.</span><span class="n">ReadFromJsonAsync</span><span class="o">&lt;</span><span class="n">ValidationProblemDetails</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_serializerOptions</span><span class="p">);</span>
 </code></pre></div>
@@ -988,8 +1013,8 @@ Bár elvileg nem lenne szükséges tranzakciókezelés, hiszen nem szabadna adat
 
 <span class="n">p</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="mi">400</span><span class="p">);</span>
 <span class="n">p</span><span class="p">.</span><span class="n">Errors</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">HaveCount</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<span class="n">p</span><span class="p">.</span><span class="n">Errors</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">ContainKey</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">Product</span><span class="p">.</span><span class="n">Name</span><span class="p">));</span>
-<span class="n">p</span><span class="p">.</span><span class="n">Errors</span><span class="p">[</span><span class="k">nameof</span><span class="p">(</span><span class="n">Product</span><span class="p">.</span><span class="n">Name</span><span class="p">)].</span><span class="n">Should</span><span class="p">().</span><span class="n">ContainSingle</span><span class="p">(</span><span class="n">expectedError</span><span class="p">);</span>
+<span class="n">p</span><span class="p">.</span><span class="n">Errors</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">ContainKey</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">NewProductRequest</span><span class="p">.</span><span class="n">Name</span><span class="p">));</span>
+<span class="n">p</span><span class="p">.</span><span class="n">Errors</span><span class="p">[</span><span class="k">nameof</span><span class="p">(</span><span class="n">NewProductRequest</span><span class="p">.</span><span class="n">Name</span><span class="p">)].</span><span class="n">Should</span><span class="p">().</span><span class="n">ContainSingle</span><span class="p">(</span><span class="n">expectedError</span><span class="p">);</span>
 </code></pre></div>
 <p>Próbáljuk ki a menu:Test[Run All Test] menüpont segítségével.
 Figyeljük meg a tesztek hierarchiáját is, a POST művelethez kapcsolódó tesztek egy csoportba lettek összefogva a beágyazott osztály mentén.</p>
@@ -1022,7 +1047,7 @@ Vezessük be az új konstruktorparamétert a tesztosztályban és az ősosztály
 Ebből láthatjuk, hogy minden tesztfüggvény, sőt minden tesztfüggvény változat (a <em>Theory</em> minden bemeneti adatsora egy külön változat) meghívásakor lefut a konstruktor.</p>
 <p>Ugyanerre a kimenetre kössük rá a szerveroldali naplózást, hogy a tesztek lefutása mellett ezek a naplóüzenetek is megjelenjenek.
 Ehhez telepítsünk egy segédcsomagot a tesztprojektbe.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">"MartinCostello.Logging.XUnit"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"0.3.0"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">"MartinCostello.Logging.XUnit"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"0.7.1"</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div>
 <p>A <code>ProductControllerTests</code> konstruktorában kössük össze a két paramétert, a <code>CustomWebApplicationFactory</code> és az <code>ITestOutputHelper</code> példányt a fenti segédcsomag (<code>AddXUnit</code> metódus) segítségével.
 A tesztszerver naplózó alrendszerének adjuk meg kimenetként az xUnit tesztkimenetét.</p>
@@ -1045,8 +1070,8 @@ A tesztszerver naplózó alrendszerének adjuk meg kimenetként az xUnit tesztki
 </path>
 </svg>
 </span>
-<span title="2024. június 25. 10:38:05">
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2024. június 25. 10:38:05 CEST"><span class="timeago" datetime="2024-06-25T10:38:05+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2024. június 25. 10:38:05 CEST">2024-06-25</span>
+<span title="2026. szeptember 8. 14:09:20">
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026. szeptember 8. 14:09:20 CEST"><span class="timeago" datetime="2026-09-08T14:09:20+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026. szeptember 8. 14:09:20 CEST">2026-09-08</span>
 </span>
 </span>
 <span class="md-source-file__fact">
